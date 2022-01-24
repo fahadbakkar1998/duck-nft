@@ -39,6 +39,7 @@ function App() {
   return (
     <div className="App">
       <Canvas
+      style={{ height: '100%', width: '100%' }}
         camera={{position: [10, 10, 10]}}
       >
         <pointLight position={[15, 15, 15]} />
