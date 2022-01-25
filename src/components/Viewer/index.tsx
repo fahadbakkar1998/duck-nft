@@ -51,6 +51,17 @@ export const Viewer = () => {
         setIsViewerOpen(false);
     };
 
+    const getImageIndex = () => {
+        let index = 0;
+        switch(currentMode) {
+            case "Shopping": index = 0; break;
+            case "CustomDuck": index = 1; break;
+            case "Admin": index = 2; break;
+            default: break;
+        }
+        return index;
+    }
+
    
     return (
         <div>
@@ -62,22 +73,24 @@ export const Viewer = () => {
                 <section style = {{display: "flex"}}>
                     <div>
                         <img
-                        src={'http://placeimg.com/1200/800/nature'}
-                        onClick={() => openImageViewer(0)}
-                        width="300"
-                        key={0}
-                        style={{ margin: "2px" }}
-                        alt=""
+                            src={images[getImageIndex()]}
+                            onClick={() => openImageViewer(getImageIndex())}
+                            width="300px"
+                            height="300px"
+                            key={getImageIndex()}
+                            style={{ margin: "2px" }}
+                            alt=""
                         />
                     </div>
                     <div> 
                         <img
-                        src={'http://placeimg.com/1200/800/nature'}
-                        onClick={() => openImageViewer(0)}
-                        width="500"
-                        key={0}
-                        style={{ margin: "2px" }}
-                        alt=""
+                            src={images[getImageIndex()]}
+                            onClick={() => openImageViewer(getImageIndex())}
+                            width="400px"
+                            height="400px"
+                            key={getImageIndex()}
+                            style={{ margin: "2px" }}
+                            alt=""
                         />
                         
                         {isViewerOpen && (
