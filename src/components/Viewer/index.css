@@ -15,3 +15,8 @@
     width: 30%;
     align-items: center
 }
+
+.view {
+    display: flex;
+    justify-content: center;
+}

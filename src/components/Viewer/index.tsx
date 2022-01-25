@@ -35,63 +35,65 @@ export const Viewer = () => {
     }
 
     const [currentImage, setCurrentImage] = useState(0);
-  const [isViewerOpen, setIsViewerOpen] = useState(false);
-  const images = [
-    "http://placeimg.com/1200/800/nature",
-    "http://placeimg.com/800/1200/nature"
-  ];
+    const [isViewerOpen, setIsViewerOpen] = useState(false);
+    const images = [
+        "http://placeimg.com/1200/800/nature",
+        "http://placeimg.com/800/1200/nature"
+    ];
 
-  const openImageViewer = useCallback((index) => {
-    setCurrentImage(index);
-    setIsViewerOpen(true);
-  }, []);
+    const openImageViewer = useCallback((index) => {
+        setCurrentImage(index);
+        setIsViewerOpen(true);
+    }, []);
 
-  const closeImageViewer = () => {
-    setCurrentImage(0);
-    setIsViewerOpen(false);
-  };
+    const closeImageViewer = () => {
+        setCurrentImage(0);
+        setIsViewerOpen(false);
+    };
 
    
     return (
         <div>
             <h1 className = "currentMode">                
-                    Machine Mode:  {currentMode}                 
+                Machine Mode:  {currentMode}                 
             </h1>
             <button className = "changeModeBtn" onClick={() => changeMode()}>Change Mode</button>
-            <div style = {{display: "flex", alignItems: "center"}}>
-                <div style = {{display: "flex"}}>
-                    <img
-                    src={'http://placeimg.com/1200/800/nature'}
-                    onClick={() => openImageViewer(0)}
-                    width="300"
-                    key={0}
-                    style={{ margin: "2px" }}
-                    alt=""
-                    />
-                </div>
-                <div style = {{display: "flex"}}> 
-                    <img
-                    src={'http://placeimg.com/1200/800/nature'}
-                    onClick={() => openImageViewer(0)}
-                    width="500"
-                    key={0}
-                    style={{ margin: "2px" }}
-                    alt=""
-                    />
-                    
-                    {isViewerOpen && (
-                        <ImageViewer
-                        src={images}
-                        currentIndex={currentImage}
-                        onClose={closeImageViewer}
-                        disableScroll={false}
-                        backgroundStyle={{
-                            backgroundColor: "rgba(0,0,0,0.9)"
-                        }}
-                        closeOnClickOutside={true}
+            <div className="view">
+                <section style = {{display: "flex"}}>
+                    <div>
+                        <img
+                        src={'http://placeimg.com/1200/800/nature'}
+                        onClick={() => openImageViewer(0)}
+                        width="300"
+                        key={0}
+                        style={{ margin: "2px" }}
+                        alt=""
                         />
-                    )}
-                </div>
+                    </div>
+                    <div> 
+                        <img
+                        src={'http://placeimg.com/1200/800/nature'}
+                        onClick={() => openImageViewer(0)}
+                        width="500"
+                        key={0}
+                        style={{ margin: "2px" }}
+                        alt=""
+                        />
+                        
+                        {isViewerOpen && (
+                            <ImageViewer
+                            src={images}
+                            currentIndex={currentImage}
+                            onClose={closeImageViewer}
+                            disableScroll={false}
+                            backgroundStyle={{
+                                backgroundColor: "rgba(0,0,0,0.9)"
+                            }}
+                            closeOnClickOutside={true}
+                            />
+                        )}
+                    </div>
+                </section>
             </div>
             
         </div>
