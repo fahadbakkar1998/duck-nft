@@ -57,9 +57,9 @@ export const Viewer = () => {
             <h1 className = "currentMode">                
                     Machine Mode:  {currentMode}                 
             </h1>
-            <div>
-                <button className = "changeModeBtn" onClick={() => changeMode()}>Change Mode</button>
-                <div>
+            <button className = "changeModeBtn" onClick={() => changeMode()}>Change Mode</button>
+            <div style = {{display: "flex", alignItems: "center"}}>
+                <div style = {{display: "flex"}}>
                     <img
                     src={'http://placeimg.com/1200/800/nature'}
                     onClick={() => openImageViewer(0)}
@@ -68,6 +68,8 @@ export const Viewer = () => {
                     style={{ margin: "2px" }}
                     alt=""
                     />
+                </div>
+                <div style = {{display: "flex"}}> 
                     <img
                     src={'http://placeimg.com/1200/800/nature'}
                     onClick={() => openImageViewer(0)}
