@@ -12,50 +12,44 @@ import { useEffect } from "react";
 
 
 export const Viewer = () => {
-   //const font = useLoader(FontLoader, './assets/font/Roboto_Regular.json');
+    const currentMachineMode = useMachineStore(state => state.currentMode);
+    const setCurrentMachineMode = useMachineStore(state => state.setCurrentMode);
 
-    const currentShopping = useMachineStore(state => state.shopping);
-    const setCurrentShopping = useMachineStore(state => state.updateShopping);
+    const currentDuckID = useMachineStore(state => state.currentDuckID);
+    const setCurrentDuckID = useMachineStore(state => state.setCurrentDuckID)
 
-    const currentCustomDuck = useMachineStore(state => state.currentDuck);
-    const setCurrentCustomDuck = useMachineStore(state => state.updateCurrentDuck)
 
-    const currentAdmin = useMachineStore(state => state.admin);
-    const setCurrentAdmin = useMachineStore(state => state.updateAdmin);
-    
-    const [ currentMode, setCurrentMode ] = useState("Shopping");
+    enum MachineMode {
+        Shopping,
+        Customization,
+        Admin
+    }
 
-    const changeMode= (label: string) => {
-        console.log('changeMode');
-        const currentInfo = { ...currentCustomDuck };
+    const changeMode= () => {
+        console.log('changeMode');        
 
-        switch(currentMode) {
-            case "Shopping": 
+        switch(currentMachineMode) {
+            case 0: 
             {
-                setCurrentMode("CustomDuck");
-                if( letters.indexOf(label) != -1 ) {
-                    currentInfo.letter = label;
-                 } else if( numbers.indexOf(label) != -1 ) {
-                    currentInfo.number = label;
-                 }
-                setCurrentCustomDuck(currentInfo); 
+                setCurrentMachineMode(1);
+                setCurrentDuckID(0);
                 break;
             }
-            case "CustomDuck": 
+            case 1: 
             {
-                setCurrentMode("Admin"); 
-                setCurrentAdmin("");
+                setCurrentMachineMode(2); 
+                setCurrentDuckID(0);
                 break;
             }
-            case "Admin": 
+            case 2: 
             {
-                setCurrentMode("Shopping"); 
-                setCurrentShopping("");
+                setCurrentMachineMode(0); 
+                setCurrentDuckID(0);
                 break;
             }
             default: break;
         }
-        return currentMode;
+        return currentMachineMode;
     }
 
     const [currentImage, setCurrentImage] = useState(0);
@@ -77,10 +71,10 @@ export const Viewer = () => {
 
     const getImageIndex = () => {
         let index = 0;
-        switch(currentMode) {
-            case "Shopping": index = 0; break;
-            case "CustomDuck": index = 1; break;
-            case "Admin": index = 2; break;
+        switch(currentMachineMode) {
+            case 0: index = 0; break;
+            case 1: index = 1; break;
+            case 2: index = 2; break;
             default: break;
         }
         return index;
@@ -90,9 +84,9 @@ export const Viewer = () => {
     return (
         <div>
             <h1 className = "currentMode">                
-                Machine Mode:  {currentMode}                 
+                Machine Mode:  {MachineMode[currentMachineMode]}                 
             </h1>
-            <button className = "changeModeBtn" onClick={() => changeMode("")}>Change Mode</button>
+            <button className = "changeModeBtn" onClick={() => changeMode()}>Change Mode</button>
             <div className="view">
                 <section style = {{display: "flex"}}>
                     <div>

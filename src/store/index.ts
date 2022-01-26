@@ -1,29 +1,28 @@
 import create, { SetState, GetState } from 'zustand';
 
+
+enum MachineMode {
+    Shopping,
+    Customization,
+    Admin
+}
+
 type MachineStore = {
-    shopping: any;
-    updateShopping: (value: any) => void;
-    currentDuck: any;
-    updateCurrentDuck: (value : any) => void;
-    admin: any;
-    updateAdmin: (value: any) => void;
+    currentMode: MachineMode;
+    setCurrentMode: (mode: MachineMode) => void;
+    currentDuckID: number;
+    setCurrentDuckID: (id: number) => void;
 };
 
+
 export const useMachineStore = create<MachineStore>((set: SetState<MachineStore>) => ({
-    shopping: 0,
-    updateShopping: (value: any): void => {
-        set({ shopping: value });
+    currentMode: 0,
+    setCurrentMode: (mode: MachineMode): void => {
+        set({currentMode: mode});
     },
-    currentDuck: {
-        letter: '',
-        number: '',
-    },
-    updateCurrentDuck: (value: any) : void => {
-        set({ currentDuck: value });
-    },
-    admin: true,
-    updateAdmin: (value: any) : void => {
-        set({ admin: value });
+    currentDuckID: 0,
+    setCurrentDuckID: (id:number) : void => {
+        set({ currentDuckID: id});
     }
 }))
 
