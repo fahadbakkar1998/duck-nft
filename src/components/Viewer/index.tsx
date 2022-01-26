@@ -2,6 +2,8 @@ import { useLoader, useThree } from "@react-three/fiber";
 import React, { useState, useCallback } from "react";
 import { a, useSpring } from '@react-spring/three';
 import useMachineStore from "../../store";
+import { letters, numbers } from "../../utils/constants";
+
 import './index.css';
 import ImageViewer from "react-simple-image-viewer";
 
@@ -23,12 +25,34 @@ export const Viewer = () => {
     
     const [ currentMode, setCurrentMode ] = useState("Shopping");
 
-    const changeMode= () => {
+    const changeMode= (label: string) => {
         console.log('changeMode');
+        const currentInfo = { ...currentCustomDuck };
+
         switch(currentMode) {
-            case "Shopping": setCurrentMode("CustomDuck"); break;
-            case "CustomDuck": setCurrentMode("Admin"); break;
-            case "Admin": setCurrentMode("Shopping"); break;
+            case "Shopping": 
+            {
+                setCurrentMode("CustomDuck");
+                if( letters.indexOf(label) != -1 ) {
+                    currentInfo.letter = label;
+                 } else if( numbers.indexOf(label) != -1 ) {
+                    currentInfo.number = label;
+                 }
+                setCurrentCustomDuck(currentInfo); 
+                break;
+            }
+            case "CustomDuck": 
+            {
+                setCurrentMode("Admin"); 
+                setCurrentAdmin("");
+                break;
+            }
+            case "Admin": 
+            {
+                setCurrentMode("Shopping"); 
+                setCurrentShopping("");
+                break;
+            }
             default: break;
         }
         return currentMode;
@@ -68,7 +92,7 @@ export const Viewer = () => {
             <h1 className = "currentMode">                
                 Machine Mode:  {currentMode}                 
             </h1>
-            <button className = "changeModeBtn" onClick={() => changeMode()}>Change Mode</button>
+            <button className = "changeModeBtn" onClick={() => changeMode("")}>Change Mode</button>
             <div className="view">
                 <section style = {{display: "flex"}}>
                     <div>
