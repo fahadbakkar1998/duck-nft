@@ -1,5 +1,22 @@
+html,body,#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  background-color: black;
+  background-image: url('./assets/img/brick.jpg');
+	background-size: cover;	
+	background-position: 0 -500px;
+  position: fixed;
+}
+
 .App {
   text-align: center;
+  width: 100%;
+  height: 100%;
 }
 
 .App-logo {
@@ -22,6 +39,11 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+canvas {
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
 }
 
 .App-link {

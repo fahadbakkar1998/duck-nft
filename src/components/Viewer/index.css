@@ -1,0 +1,22 @@
+.changeModeBtn {
+    background-color: rgb(153, 149, 149);
+    color: rgb(37, 36, 36);
+    font-size: 14px;
+    padding: 8px 11px;
+    border-radius: 5px;
+    margin: 10px 0px;
+    cursor: pointer;
+  }
+
+.currentMode {
+    background-color: rgb(219, 223, 16);
+    font-size: 16px;
+    margin: 10px 15px;
+    width: 30%;
+    align-items: center
+}
+
+.view {
+    display: flex;
+    justify-content: center;
+}

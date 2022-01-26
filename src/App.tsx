@@ -1,24 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
+import * as THREE from "three";
+import React, { useEffect, useRef, useState }  from 'react';
+import { Canvas, useFrame, useThree } from "react-three-fiber";
+import { Stats, OrbitControls } from "@react-three/drei";
 import './App.css';
+import { SmallBox, Wall, Box, Ball, Ground } from "./scene";
+import Viewer from './components/Viewer';
+
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Viewer/>      
     </div>
   );
 }
