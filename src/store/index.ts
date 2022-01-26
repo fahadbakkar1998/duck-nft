@@ -1,11 +1,7 @@
 import create, { SetState, GetState } from 'zustand';
+import { MachineMode } from "../types/types";
 
 
-enum MachineMode {
-    Shopping,
-    Customization,
-    Admin
-}
 
 type MachineStore = {
     currentMode: MachineMode;

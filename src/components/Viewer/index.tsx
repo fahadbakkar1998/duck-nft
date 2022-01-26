@@ -8,7 +8,7 @@ import './index.css';
 import ImageViewer from "react-simple-image-viewer";
 
 import { useEffect } from "react";
-
+import { MachineMode } from "../../types/types";
 
 
 export const Viewer = () => {
@@ -18,12 +18,6 @@ export const Viewer = () => {
     const currentDuckID = useMachineStore(state => state.currentDuckID);
     const setCurrentDuckID = useMachineStore(state => state.setCurrentDuckID)
 
-
-    enum MachineMode {
-        Shopping,
-        Customization,
-        Admin
-    }
 
     const changeMode= () => {
         console.log('changeMode');        
