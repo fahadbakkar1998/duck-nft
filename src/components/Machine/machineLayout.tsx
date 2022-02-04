@@ -9,7 +9,6 @@ import { filterProps } from 'framer-motion';
 
 export const MachineLayout = ( ) => {
 
-
     const texture = useLoader(THREE.TextureLoader, img)
     return(
         <group  >
