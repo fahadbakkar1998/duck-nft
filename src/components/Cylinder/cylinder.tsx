@@ -1,7 +1,6 @@
 import { Cylinder } from "@react-three/drei"
 import { useState } from 'react';
 import { a, useSpring, config } from '@react-spring/three';
-import { useGesture, useWheel, useDrag } from 'react-use-gesture';
 
 export const DuckCylinder = ( ) =>{
 

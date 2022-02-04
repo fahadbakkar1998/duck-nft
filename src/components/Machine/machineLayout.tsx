@@ -2,7 +2,6 @@ import img from '../../../src/assets/img/duck-base-holepunch.png'
 import { Canvas, useLoader } from 'react-three-fiber'
 import * as THREE from 'three'
 import { a, useSpring, config } from '@react-spring/three';
-import { useGesture, useWheel, useDrag } from 'react-use-gesture';
 import { DuckCylinder } from '../Cylinder/cylinder'
 import { useState } from 'react';
 import { filterProps } from 'framer-motion';
