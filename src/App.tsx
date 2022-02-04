@@ -11,7 +11,7 @@ import { MachineLayout } from "./components/Machine/machineLayout";
 function App() {
   return (
     <div className="App">
-      <Canvas orthographic camera={{ zoom: 100, position: [0, 0, 100] }} shadows>
+      <Canvas orthographic camera={{ zoom: 135, position: [0, 0, 100] }} shadows>
         <Suspense fallback={null}>
           {/* <OrbitControls/> */}
               <MachineLayout />
