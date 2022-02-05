@@ -14,11 +14,12 @@ $bgcolor : #6fe5de;
   }
 
   .main-canvas{
-	  width: 400px;
-	  position :absolute;
-	  left: calc(50% - 200px);
-	  top : 100px;
-	  image-rendering: pixelated;
+	width: 400px;
+	position :absolute;
+	//left: calc(50% - 200px);
+	left: 540px;
+	top : 100px;
+	image-rendering: pixelated;
   }
   .interactive-texture{
 	  background-position: center center;

@@ -68,5 +68,6 @@ canvas {
   cursor: pointer;
   z-index: 99;
   position: absolute ;
+  left: 50%;
 }
 

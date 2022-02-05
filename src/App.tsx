@@ -42,7 +42,7 @@ function App() {
       {currentMachineMode === 1 && (
         <>
           <Screen />
-          <NumPad />
+          {/* <NumPad /> */}
         </>
       )}
       {currentMachineMode === 2 && (
