@@ -8,6 +8,7 @@ import Viewer from "./components/Viewer";
 import { MachineLayout } from "./components/Machine/machineLayout";
 import Screen from "./components/Screen/Screen";
 import NumPad from "./components/Pad/Pad";
+import DrawingTool from './components/DrawingTool/DrawingTool';
 import useMachineStore from "./store";
 
 function App() {
@@ -15,29 +16,37 @@ function App() {
   const setCurrentMachineMode = useMachineStore(
     (state) => state.setCurrentMode
   );
-  let mode = 1;
+  // let mode = 1;
+  const [mode, setMode] = useState(1)
+
   const changeMode = () => {
-    mode == 4 ? (mode = 1) : (mode = mode);
-    setCurrentMachineMode(mode);
-    mode++;
+    const nextMode = (mode + 1) % 3 + 1
+    setMode(nextMode)
+    setCurrentMachineMode(nextMode)
   };
+
   return (
     <div className="App">
       <button className="changeModeBtn" onClick={() => changeMode()}>
         Change Mode
       </button>
-      {currentMachineMode === 1 && (
+      {mode === 1 && (
         <Canvas camera={{ fov: 20, position: [0, 0, 15] }} shadows>
           <Suspense fallback={null}>
-            <OrbitControls />
+            {/* <OrbitControls /> */}
             <MachineLayout />
           </Suspense>
         </Canvas>
       )}
-      {currentMachineMode === 2 && (
+      {mode === 2 && (
         <>
           <Screen />
           <NumPad />
+        </>
+      )}
+      {mode === 3 && (
+        <>
+          <DrawingTool/>
         </>
       )}
     </div>
