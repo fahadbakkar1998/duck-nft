@@ -22,7 +22,7 @@ export const useMachineStore = create<MachineStore>((set: SetState<MachineStore>
     setCurrentDuckID: (id:number) : void => {
         set({ currentDuckID: id});
     },
-    currentMachineMode: 1,
+    currentMachineMode: 0,
     setCurrentMachineMode: (id:number) : void => {
         set({ currentMachineMode: id});
     }

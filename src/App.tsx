@@ -8,7 +8,7 @@ import Viewer from "./components/Viewer";
 import { MachineLayout } from "./components/Machine/machineLayout";
 import Screen from "./components/Screen/Screen";
 import NumPad from "./components/Pad/Pad";
-import DrawingTool from './components/DrawingTool/DrawingTool';
+import DrawingTool from "./components/DrawingTool/DrawingTool";
 import useMachineStore from "./store";
 
 function App() {
@@ -17,12 +17,13 @@ function App() {
     (state) => state.setCurrentMode
   );
   // let mode = 1;
-  const [mode, setMode] = useState(1)
+  const [mode, setMode] = useState(1);
 
   const changeMode = () => {
-    const nextMode = (mode + 1) % 3 + 1
-    setMode(nextMode)
-    setCurrentMachineMode(nextMode)
+    const nextMode = currentMachineMode === 2 ? 0 : currentMachineMode + 1;
+    setMode(nextMode);
+    setCurrentMachineMode(nextMode);
+    console.log(currentMachineMode)
   };
 
   return (
@@ -30,7 +31,7 @@ function App() {
       <button className="changeModeBtn" onClick={() => changeMode()}>
         Change Mode
       </button>
-      {mode === 1 && (
+      {currentMachineMode === 0 && (
         <Canvas camera={{ fov: 20, position: [0, 0, 15] }} shadows>
           <Suspense fallback={null}>
             {/* <OrbitControls /> */}
@@ -38,15 +39,15 @@ function App() {
           </Suspense>
         </Canvas>
       )}
-      {mode === 2 && (
+      {currentMachineMode === 1 && (
         <>
           <Screen />
           <NumPad />
         </>
       )}
-      {mode === 3 && (
+      {currentMachineMode === 2 && (
         <>
-          <DrawingTool/>
+          <DrawingTool />
         </>
       )}
     </div>
