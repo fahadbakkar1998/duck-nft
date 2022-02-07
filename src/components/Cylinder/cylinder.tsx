@@ -1,13 +1,17 @@
 import { Cylinder } from "@react-three/drei"
 import { useState } from 'react';
-import { a, useSpring, config } from '@react-spring/three';
+import { a, useSpring, config, easings } from '@react-spring/three';
 
 export const DuckCylinder = ( ) =>{
 
     
     const [spring, set] = useSpring(() => ({ 
         rotation:  [0, 0, 0], 
-        config : config.molasses
+        // config : config.slow
+        config: {
+            duration: 2000,
+            easing: easings.easeInOutElastic,
+          }
     }));
     let count : number = 0;
     const handelOnClick = () => {

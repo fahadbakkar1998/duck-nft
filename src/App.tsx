@@ -32,9 +32,9 @@ function App() {
         Change Mode
       </button>
       {currentMachineMode === 0 && (
-        <Canvas camera={{ fov: 20, position: [0, 0, 15] }} shadows>
-          <Suspense fallback={null}>
-            {/* <OrbitControls /> */}
+      <Canvas orthographic camera={{ zoom: 135, position: [0, 0, 100] }} shadows>
+      <Suspense fallback={null}>
+            <OrbitControls />
             <MachineLayout />
           </Suspense>
         </Canvas>
@@ -42,7 +42,6 @@ function App() {
       {currentMachineMode === 1 && (
         <>
           <Screen />
-          {/* <NumPad /> */}
         </>
       )}
       {currentMachineMode === 2 && (
