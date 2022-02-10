@@ -4,11 +4,11 @@ import Select from "react-select";
 import DuckCard from "../DuckCard/DuckCard";
 import duckData from "../../utils/duck-data.json";
 import Scrollbar from "smooth-scrollbar";
-import "./Screen.scss";
+import "./style.scss";
 import { useScreenStore } from "../store";
 import { stringify } from "querystring";
 import NumPad from "../Pad/Pad";
-import CardImageSection from "../CardImageSection/CardImageSection";
+import { Html } from "@react-three/drei";
 const options = [
   { value: "all", label: "All" },
   { value: "available", label: "Available (not sold)" },
@@ -23,9 +23,10 @@ const scrollOption = {
   // continuousScrolling : true
 };
 
-const Screen = () => {
+const CardImageSection = () => {
   const [scroll, setScroll] = useState(Object);
   const [filter, setFilter] = useState(String);
+  const container = useRef(null);
 
   const currentDuck = useScreenStore((state) => state.currentDuck);
 
@@ -71,64 +72,37 @@ const Screen = () => {
   }, [currentDuck]);
 
   return (
-    <div className="Shopping">
-      <div className="Screen">
-        <div className="main">
-          {/* <div className="mainScreen scanlines" id="mainScreen">
-            <div className="imgContainer">
-              {duckData.map((item: any, index: any) => {
-                let img = require("../../assets/img/ducks/crypto_duck_" +
-                  item.id +
-                  ".svg");
-                // let img = require(item.img);
-                return (
-                  <DuckCard
-                    key={item.id}
-                    img={img}
-                    number={item.id}
-                    attribute={item}
-                  />
-                );
-              })}
-            </div>
-          </div> */}
-          <CardImageSection/>
-          <div className="control">
-            <Select
-              className="dropbox"
-              options={options}
-              placeholder={"Filter By"}
-              onChange={(event) => {
-                updateFilterVal(event?.value);
-              }}
-            />
-            <div className="buttons">
-              <button
-                className="gridButton"
-                onClick={() => setCurrentGrid("3x")}
-              >
-                3x3
-              </button>
-              <button
-                className="gridButton"
-                onClick={() => setCurrentGrid("4x")}
-              >
-                4x4
-              </button>
-            </div>
-          </div>
+    <Html 
+    ref={container}
+    style={{pointerEvents: 'auto'}}
+    distanceFactor={ 2.4 }
+    position={[ -0.2, -0.1, 0.0 ]}
+    rotation={[ -Math.PI/2, -Math.PI, -Math.PI/2]}
+    transform
+    occlude
+    >
+    <div className="main">
+        <div className="mainScreen scanlines" id="mainScreen">
+        <div className="imgContainer">
+            {duckData.map((item: any, index: any) => {
+            let img = require("../../assets/img/ducks/crypto_duck_" +
+                item.id +
+                ".svg");
+            // let img = require(item.img);
+            return (
+                <DuckCard
+                key={item.id}
+                img={img}
+                number={item.id}
+                attribute={item}
+                />
+            );
+            })}
         </div>
-        <div className="sideControl">
-          <button className="sideButton" onClick={sideControlUp}></button>
-          <button
-            className="sideButton down"
-            onClick={sideControlDown}
-          ></button>
         </div>
-      </div>
-      <NumPad />
     </div>
+  </Html>
   );
 };
 
-export default Screen;
+export default CardImageSection;

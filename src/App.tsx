@@ -1,22 +1,24 @@
 import * as THREE from "three";
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "react-three-fiber";
 import { Stats, OrbitControls } from "@react-three/drei";
 import "./App.css";
 import { SmallBox, Wall, Box, Ball, Ground } from "./scene";
 import Viewer from "./components/Viewer";
 import { MachineLayout } from "./components/Machine/machineLayout";
-import Screen from "./components/Screen/Screen";
+// import Screen from "./components/Screen/Screen";
 import NumPad from "./components/Pad/Pad";
 import DrawingTool from "./components/DrawingTool/DrawingTool";
 import useMachineStore from "./store";
+import CardImageSection from "./components/CardImageSection/CardImageSection";
 
 function App() {
   const currentMachineMode = useMachineStore((state) => state.currentMode);
   const setCurrentMachineMode = useMachineStore(
     (state) => state.setCurrentMode
   );
-  // let mode = 1;
+
+  const cam = useRef()
   const [mode, setMode] = useState(1);
 
   const changeMode = () => {
@@ -28,25 +30,25 @@ function App() {
 
   return (
     <div className="App">
-      <button className="changeModeBtn" onClick={() => changeMode()}>
+      {/* <button className="changeModeBtn" onClick={() => changeMode()}>
         Change Mode
-      </button>
+      </button> */}
       {currentMachineMode === 0 && (
-      <Canvas orthographic camera={{ zoom: 135, position: [0, 0, 100] }} shadows>
-      <Suspense fallback={null}>
-            <OrbitControls />
+      <Canvas orthographic camera={{ zoom: 115, position: [0, 0, 100] }} shadows>
+          <Suspense fallback={null}>
+            <OrbitControls/>
             <MachineLayout />
           </Suspense>
         </Canvas>
       )}
       {currentMachineMode === 1 && (
         <>
-          <Screen />
+          {/* <Screen /> */}
         </>
       )}
       {currentMachineMode === 2 && (
         <>
-          <DrawingTool />
+          {/* <CardImageSection /> */}
         </>
       )}
     </div>

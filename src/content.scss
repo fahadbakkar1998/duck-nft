@@ -1,4 +1,6 @@
 $bgcolor : #6fe5de;
+$left : 510px;
+$top : 300px;
 * {
 	box-sizing: border-box;
 	-webkit-user-select: none; /* Safari */        
@@ -17,14 +19,14 @@ $bgcolor : #6fe5de;
 	width: 400px;
 	position :absolute;
 	//left: calc(50% - 200px);
-	left: 540px;
-	top : 100px;
+	// left: 540px;
+	// top : 100px;
 	image-rendering: pixelated;
   }
   .interactive-texture{
 	  background-position: center center;
-	  width: 1456px;
-	  height: 1018px;
+	  width: 400px;
+	  height: 400px;
 	  z-index:-2;
 	  .tv-wrapper{
 		  width: 100%;
@@ -69,8 +71,8 @@ $bgcolor : #6fe5de;
 	  }
 	  .current-color{
 		  position: absolute;
-		  top : 320px;
-		  left: 550px;
+		  top : $top;
+		//   left: 550px;
 		  border-radius: 100%;
 		  width: 100px;
 		  height: 100px;
@@ -80,7 +82,7 @@ $bgcolor : #6fe5de;
 	  }
 	  .eraser{
 	      position: absolute;
-		  left: 950px;
+		  left: $left;
 		  top : 100px;
 		  width: 100px;
 		  height: 100px;
@@ -96,8 +98,8 @@ $bgcolor : #6fe5de;
 	  .clear{
 		  border-radius: 100%;
 		  position: absolute;
-		  top:320px;
-		  left:660px;
+		  top:$top;
+		  left:120px;
 		  width: 80px;
 		  height: 80px;
 		  margin-top: 8px;
@@ -110,10 +112,10 @@ $bgcolor : #6fe5de;
 	  }
 	  .savewebp{
 		  position: absolute;
-		  left: 950px;
+		  left: $left;
 		  width: 100px;
 		  height: 30px;
-		  top: 350px;
+		  top:  $top + 25px;
 		  background-color:#FEF446;
 		  border-radius: 10%;
 		  font-size: 1em;
@@ -148,8 +150,8 @@ $bgcolor : #6fe5de;
 	//   left: 150px;
 	  .ts-bar{
 			position: absolute;
-			top: 150px;
-			left: 950px;
+			top: 50px;
+			left: $left;
 			display: flex;
 			flex-wrap: wrap;
 			flex-direction: column;
@@ -171,12 +173,12 @@ $bgcolor : #6fe5de;
   
   .undoredo{
 	  position: absolute;
-	  bottom: -190px;
-	  left: 150px;
+	  top: $top - 120px;
+	  left: 220px;
 	  .ur-bar{
 		  position: absolute;
 		  top : 350px;
-		  left: 600px;
+		//   left: 120px;
 		  display: flex;
 		  flex-wrap: nowrap;
 		  flex-direction: row;
