@@ -46,12 +46,12 @@ const CardImageSection = () => {
   };
 
   useEffect(() => {
-    let scrollbar = Scrollbar.init(
-      document.querySelector("#mainScreen")!,
-      scrollOption
-    );
-    scrollbar.track.yAxis.element.remove();
-    setScroll(scrollbar);
+    // let scrollbar = Scrollbar.init(
+    //   document.querySelector("#mainScreen")!,
+    //   scrollOption
+    // );
+    // scrollbar.track.yAxis.element.remove();
+    // setScroll(scrollbar);
   });
 
   useEffect(() => {
@@ -82,8 +82,8 @@ const CardImageSection = () => {
     occlude
     >
     <div className="main">
-        <div className="mainScreen scanlines" id="mainScreen">
-        <div className="imgContainer">
+        <div className="mainScreen " id="mainScreen">
+        <div className="imgContainer scanlines">
             {duckData.map((item: any, index: any) => {
             let img = require("../../assets/img/ducks/crypto_duck_" +
                 item.id +
