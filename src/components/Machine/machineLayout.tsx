@@ -8,12 +8,14 @@ import { filterProps } from 'framer-motion';
 
 export const MachineLayout = ( ) => {
     const { viewport } = useThree()
+    const aspectRatio = 16/9;
+  
     const texture = useLoader(THREE.TextureLoader, img)
     return(
         <group  >
             <mesh position={[0.00, 0.0, -2.0]}>
                 {/* <planeBufferGeometry attach="geometry" args={[11, 6.5]} /> */}
-                <planeBufferGeometry attach="geometry" args={[viewport.width, viewport.height]} />
+                <planeBufferGeometry attach="geometry" args={[viewport.width, viewport.width * 1/aspectRatio]} />
 
                 <meshBasicMaterial attach="material" map={texture} toneMapped={false}/>
             </mesh>

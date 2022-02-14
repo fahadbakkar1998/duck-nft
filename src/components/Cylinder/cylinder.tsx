@@ -9,6 +9,8 @@ export const DuckCylinder = ( ) =>{
     const { viewport } = useThree();
 
     const [flag, setFlag] = useState(false);
+    const aspectRatio = 16/9;
+
     const currentMachineMode = useMachineStore((state) => state.currentMode);
     const setCurrentMachineMode = useMachineStore(
         (state) => state.setCurrentMode
@@ -18,7 +20,6 @@ export const DuckCylinder = ( ) =>{
         setFlag(true)
         // console.log(group)
     })
-    console.log(viewport.aspect,viewport);
     const [spring, set] = useSpring(() => ({ 
         rotation:  [0, 0, 0], 
         position : [0, 0, 0],
@@ -38,9 +39,9 @@ export const DuckCylinder = ( ) =>{
         <a.group {...spring as any} onClick={handelOnClick}>
             
             <group 
-                scale={[viewport.height/6, viewport.width/10, viewport.width/11]}
+                scale={[viewport.width/6/ aspectRatio, viewport.width/10, viewport.width/11]}
                 rotation={[0,  Math.PI /2, Math.PI /2]}
-                position={[viewport.width/12, viewport.height/100* viewport.aspect , 0.0]}
+                position={[viewport.width/12, 0. , 0.0]}
             >   
                 <Cylinder args = {[1.8, 1.8, 0.1, 50]}  >
                     {/* <meshNormalMaterial attach="material" /> */}
