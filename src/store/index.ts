@@ -8,6 +8,8 @@ type MachineStore = {
     setCurrentMode: (mode: MachineMode) => void;
     currentDuckID: number;
     setCurrentDuckID: (id: number) => void;
+    currentMachineMode: number;
+    setCurrentMachineMode: (id: number) => void;
 };
 
 
@@ -19,6 +21,10 @@ export const useMachineStore = create<MachineStore>((set: SetState<MachineStore>
     currentDuckID: 0,
     setCurrentDuckID: (id:number) : void => {
         set({ currentDuckID: id});
+    },
+    currentMachineMode: 0,
+    setCurrentMachineMode: (id:number) : void => {
+        set({ currentMachineMode: id});
     }
 }))
 
