@@ -31,13 +31,13 @@ function App() {
 
   return (
     <div className="App">
-      <button className="changeModeBtn" onClick={() => changeMode()}>
+      {/* <button className="changeModeBtn" onClick={() => changeMode()}>
         Change Mode
-      </button>
+      </button> */}
       {currentMachineMode === 0 && (
       <Canvas orthographic camera={{ zoom: 115, position: [0, 0, 100] }} shadows>
           <Suspense fallback={null}>
-            <OrbitControls/>
+            {/* <OrbitControls/> */}
             <MachineLayout />
           </Suspense>
         </Canvas>

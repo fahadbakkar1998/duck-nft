@@ -2,6 +2,7 @@
 import './DuckCard.scss'
 import { useEffect, useRef, useState } from 'react';
 import { useScreenStore } from "../store";
+import { displayPartsToString } from 'typescript';
 
 
 const DuckCard = (props : any) => {
@@ -80,7 +81,6 @@ const DuckCard = (props : any) => {
     const transformNumber = ( num: any ) => num.length === 1 ? '00' + num : num.length === 2 ? '0' + num : num;
 
     const myNumber = transformNumber( props.number + '' );
-
 
     return (
         <div

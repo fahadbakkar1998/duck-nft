@@ -101,7 +101,7 @@ const CardImageSection = () => {
         </div>
         </div>
     </div>
-  </Html>
+   </Html>
   );
 };
 
