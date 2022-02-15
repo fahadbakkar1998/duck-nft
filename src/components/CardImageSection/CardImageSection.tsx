@@ -9,6 +9,8 @@ import { useScreenStore } from "../store";
 import { stringify } from "querystring";
 import NumPad from "../Pad/Pad";
 import { Html } from "@react-three/drei";
+import useMachineStore from "../../store";
+
 const options = [
   { value: "all", label: "All" },
   { value: "available", label: "Available (not sold)" },
@@ -20,13 +22,15 @@ const scrollOption = {
   speed: 0.5,
   damping: 0.01,
   renderByPixels: true,
-  // continuousScrolling : true
 };
 
 const CardImageSection = () => {
   const [scroll, setScroll] = useState(Object);
   const [filter, setFilter] = useState(String);
+  const mainScreen = useRef<HTMLDivElement>(null);
   const container = useRef(null);
+  
+  const currentMachineMode = useMachineStore((state) => state.currentMode);
 
   const currentDuck = useScreenStore((state) => state.currentDuck);
 
@@ -45,7 +49,12 @@ const CardImageSection = () => {
     scroll.scrollTo(0, pos.y + 200, 1000);
   };
 
+  const setOverflow = (flag : any) => {
+    flag ?  mainScreen.current!.style!.overflow = 'auto' :  mainScreen.current!.style!.overflow = 'hidden'
+  }
+
   useEffect(() => {
+
     // let scrollbar = Scrollbar.init(
     //   document.querySelector("#mainScreen")!,
     //   scrollOption
@@ -82,7 +91,7 @@ const CardImageSection = () => {
     occlude
     >
     <div className="main">
-        <div className="mainScreen " id="mainScreen">
+        <div className="mainScreen" ref={mainScreen} id="mainScreen" onMouseEnter={() => setOverflow(true)} onMouseLeave={() => setOverflow(false)} >
         <div className="imgContainer scanlines">
             {duckData.map((item: any, index: any) => {
             let img = require("../../assets/img/ducks/crypto_duck_" +

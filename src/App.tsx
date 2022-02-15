@@ -34,24 +34,24 @@ function App() {
       {/* <button className="changeModeBtn" onClick={() => changeMode()}>
         Change Mode
       </button> */}
-      {currentMachineMode === 0 && (
+      {/* {currentMachineMode === 0 && ( */}
       <Canvas orthographic camera={{ zoom: 115, position: [0, 0, 100] }} shadows>
           <Suspense fallback={null}>
             {/* <OrbitControls/> */}
             <MachineLayout />
           </Suspense>
         </Canvas>
-      )}
-      {currentMachineMode === 2 && (
+      {/* )} */}
+      {/* {currentMachineMode === 2 && (
         <>
-          {/* <Screen /> */}
+          <Screen />
         </>
       )}
       {currentMachineMode === 1 && (
         <>
-          {/* <CardImageSection /> */}
+          <CardImageSection />
         </>
-      )}
+      )} */}
     </div>
   );
 }
