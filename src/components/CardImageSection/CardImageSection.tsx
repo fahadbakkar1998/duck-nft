@@ -9,6 +9,8 @@ import { useScreenStore } from "../store";
 import { stringify } from "querystring";
 import NumPad from "../Pad/Pad";
 import { Html } from "@react-three/drei";
+import useMachineStore from "../../store";
+
 const options = [
   { value: "all", label: "All" },
   { value: "available", label: "Available (not sold)" },
@@ -20,13 +22,15 @@ const scrollOption = {
   speed: 0.5,
   damping: 0.01,
   renderByPixels: true,
-  // continuousScrolling : true
 };
 
 const CardImageSection = () => {
   const [scroll, setScroll] = useState(Object);
   const [filter, setFilter] = useState(String);
+  const mainScreen = useRef<HTMLDivElement>(null);
   const container = useRef(null);
+  
+  const currentMachineMode = useMachineStore((state) => state.currentMode);
 
   const currentDuck = useScreenStore((state) => state.currentDuck);
 
@@ -45,13 +49,18 @@ const CardImageSection = () => {
     scroll.scrollTo(0, pos.y + 200, 1000);
   };
 
+  const setOverflow = (flag : any) => {
+    flag ?  mainScreen.current!.style!.overflow = 'auto' :  mainScreen.current!.style!.overflow = 'hidden'
+  }
+
   useEffect(() => {
-    let scrollbar = Scrollbar.init(
-      document.querySelector("#mainScreen")!,
-      scrollOption
-    );
-    scrollbar.track.yAxis.element.remove();
-    setScroll(scrollbar);
+
+    // let scrollbar = Scrollbar.init(
+    //   document.querySelector("#mainScreen")!,
+    //   scrollOption
+    // );
+    // scrollbar.track.yAxis.element.remove();
+    // setScroll(scrollbar);
   });
 
   useEffect(() => {
@@ -76,14 +85,14 @@ const CardImageSection = () => {
     ref={container}
     style={{pointerEvents: 'auto'}}
     distanceFactor={ 2.4 }
-    position={[ -0.2, -0.1, 0.0 ]}
-    rotation={[ -Math.PI/2, -Math.PI, -Math.PI/2]}
+    position={[ 0.0, 0.1, 0.0 ]}
+    rotation={[ Math.PI/2, Math.PI, Math.PI/2]}
     transform
     occlude
     >
     <div className="main">
-        <div className="mainScreen scanlines" id="mainScreen">
-        <div className="imgContainer">
+        <div className="mainScreen" ref={mainScreen} id="mainScreen" onMouseEnter={() => setOverflow(true)} onMouseLeave={() => setOverflow(false)} >
+        <div className="imgContainer scanlines">
             {duckData.map((item: any, index: any) => {
             let img = require("../../assets/img/ducks/crypto_duck_" +
                 item.id +
@@ -101,7 +110,7 @@ const CardImageSection = () => {
         </div>
         </div>
     </div>
-  </Html>
+   </Html>
   );
 };
 

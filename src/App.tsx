@@ -11,6 +11,7 @@ import NumPad from "./components/Pad/Pad";
 import DrawingTool from "./components/DrawingTool/DrawingTool";
 import useMachineStore from "./store";
 import CardImageSection from "./components/CardImageSection/CardImageSection";
+import Screen from "./components/Screen/Screen";
 
 function App() {
   const currentMachineMode = useMachineStore((state) => state.currentMode);
@@ -33,24 +34,24 @@ function App() {
       {/* <button className="changeModeBtn" onClick={() => changeMode()}>
         Change Mode
       </button> */}
-      {currentMachineMode === 0 && (
+      {/* {currentMachineMode === 0 && ( */}
       <Canvas orthographic camera={{ zoom: 115, position: [0, 0, 100] }} shadows>
           <Suspense fallback={null}>
-            <OrbitControls/>
+            {/* <OrbitControls/> */}
             <MachineLayout />
           </Suspense>
         </Canvas>
+      {/* )} */}
+      {/* {currentMachineMode === 2 && (
+        <>
+          <Screen />
+        </>
       )}
       {currentMachineMode === 1 && (
         <>
-          {/* <Screen /> */}
+          <CardImageSection />
         </>
-      )}
-      {currentMachineMode === 2 && (
-        <>
-          {/* <CardImageSection /> */}
-        </>
-      )}
+      )} */}
     </div>
   );
 }

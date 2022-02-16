@@ -13,7 +13,7 @@ $scan-opacity: 0.75;
 
     
     .main {
-      padding-top: 10vh;
+      // padding-top: 10vh;
       // margin-left: 40vw;
       width: 400px;
       display: flex;
@@ -26,7 +26,7 @@ $scan-opacity: 0.75;
       border-radius: 1em;
       height: 400px;
       background-color: white;
-      overflow: auto;
+      overflow: hidden;
       .imgContainer {
         display: flex;
         justify-content: center;
@@ -43,7 +43,6 @@ $scan-opacity: 0.75;
     .dropbox {
       width: 40%;
       font-size: 80%;
-  
 }
 //******************** scanlines effect css start ********************//
 
