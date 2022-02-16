@@ -2,7 +2,7 @@ import * as THREE from "three";
 import React, { Suspense, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "react-three-fiber";
 import { Stats, OrbitControls } from "@react-three/drei";
-import "./App.css";
+import "./App.scss";
 import { SmallBox, Wall, Box, Ball, Ground } from "./scene";
 import Viewer from "./components/Viewer";
 import { MachineLayout } from "./components/Machine/machineLayout";
@@ -12,6 +12,7 @@ import DrawingTool from "./components/DrawingTool/DrawingTool";
 import useMachineStore from "./store";
 import CardImageSection from "./components/CardImageSection/CardImageSection";
 import Screen from "./components/Screen/Screen";
+import AdminMain from "./components/AdminMain/AdminMain";
 
 function App() {
   const currentMachineMode = useMachineStore((state) => state.currentMode);
@@ -31,27 +32,12 @@ function App() {
 
   return (
     <div className="App">
-      {/* <button className="changeModeBtn" onClick={() => changeMode()}>
-        Change Mode
-      </button> */}
-      {/* {currentMachineMode === 0 && ( */}
       <Canvas orthographic camera={{ zoom: 115, position: [0, 0, 100] }} shadows>
           <Suspense fallback={null}>
-            {/* <OrbitControls/> */}
+            <OrbitControls/>
             <MachineLayout />
           </Suspense>
         </Canvas>
-      {/* )} */}
-      {/* {currentMachineMode === 2 && (
-        <>
-          <Screen />
-        </>
-      )}
-      {currentMachineMode === 1 && (
-        <>
-          <CardImageSection />
-        </>
-      )} */}
     </div>
   );
 }

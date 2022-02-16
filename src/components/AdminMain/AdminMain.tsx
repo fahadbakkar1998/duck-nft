@@ -8,16 +8,16 @@ const AdminMain = () => {
   const container = useRef(null);
 
   return (
-    <Html
-    ref={container}
-    style={{pointerEvents: 'auto'}}
-    distanceFactor={ 2.4 }
-    position={[ 0.0, 0.1, 0.0 ]}
-    rotation={[ Math.PI/2, Math.PI, Math.PI/2]}
-    transform
-    occlude
-    >
-    <div className="adminMain scanlines">
+    // <Html
+    // ref={container}
+    // style={{pointerEvents: 'auto'}}
+    // distanceFactor={ 2.4 }
+    // position={[ 0.0, 0.1, 0.0 ]}
+    // rotation={[ Math.PI/2, Math.PI, Math.PI/2]}
+    // transform
+    // occlude
+    // >
+    <div className="main">
       <div className="title">Admin Stuff</div>
       <div className="tozzi">
         <div className="tozziMinting">
@@ -92,7 +92,7 @@ const AdminMain = () => {
        </div>
        <button className="but">Submit</button>
     </div>
-  </Html>
+  // </Html>
   );
 };
 
