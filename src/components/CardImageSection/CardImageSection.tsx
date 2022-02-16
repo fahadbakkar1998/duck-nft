@@ -85,7 +85,7 @@ const CardImageSection = () => {
     ref={container}
     style={{pointerEvents: 'auto'}}
     distanceFactor={ 2.4 }
-    position={[ 0.0, 0.1, 0.0 ]}
+    position={[ 0.0, 0.2, 0.0 ]}
     rotation={[ Math.PI/2, Math.PI, Math.PI/2]}
     transform
     occlude

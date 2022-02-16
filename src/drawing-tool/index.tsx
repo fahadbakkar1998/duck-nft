@@ -91,7 +91,7 @@ const DTool: () => JSX.Element = () => {
     }, [])
 
     return (
-        <div>
+        <div >
             <canvas className="main-canvas" id="dtool-canvas"></canvas>
             <div className="toolbar">
             <ColorPicker colors={colors} 

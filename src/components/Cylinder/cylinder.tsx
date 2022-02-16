@@ -5,11 +5,12 @@ import DrawingTool from "../DrawingTool/DrawingTool";
 import useMachineStore from "../../store";
 import { useThree } from "react-three-fiber";
 import CardImageSection from "../CardImageSection/CardImageSection";
+import AdminMain from "../AdminMain/AdminMain";
 export const DuckCylinder = () => {
   const { viewport } = useThree();
   const cylinderGroup = useRef<any>();
-  const [flag, setFlag] = useState(false);
   const [roundCount, setRoundCount] = useState(0);
+  const [mode, setMode] = useState(1);
   const aspectRatio = 16 / 9;
 
   const currentMachineMode = useMachineStore((state) => state.currentMode);
@@ -17,12 +18,7 @@ export const DuckCylinder = () => {
     (state) => state.setCurrentMode
   );
 
-  useEffect(() => {
-    setFlag(true);
-    console.log(cylinderGroup.current!.rotation.x);
-
-  });
-
+  useEffect(() => {});
 
   const [spring, set] = useSpring(() => ({
     rotation: [0, 0, 0],
@@ -33,11 +29,18 @@ export const DuckCylinder = () => {
       easing: easings.easeInOutElastic,
     },
   }));
+  const changeMode = () => {
+    const nextMode = currentMachineMode === 2 ? 0 : currentMachineMode + 1;
+    setMode(nextMode);
+    setCurrentMachineMode(nextMode);
+    console.log(currentMachineMode);
+  };
 
   const handelOnClick = () => {
-    currentMachineMode == 0
-      ? setCurrentMachineMode(1)
-      : setCurrentMachineMode(0);
+    // currentMachineMode == 0
+    //   ? setCurrentMachineMode(1)
+    //   : setCurrentMachineMode(0);
+    changeMode();
     let count = roundCount;
     setRoundCount(++count);
     set({ rotation: [Math.PI * count, 0, 0] });
@@ -58,8 +61,12 @@ export const DuckCylinder = () => {
           {/* <meshNormalMaterial attach="material" /> */}
           <meshBasicMaterial attach="material" color="#6C6C6C" />
         </Cylinder>
-        <DrawingTool />
+        <DrawingTool/>
+        <AdminMain />
         <CardImageSection />
+        {/* {currentMachineMode == 1 && <DrawingTool />}
+        {currentMachineMode == 2 && <AdminMain />}
+        {currentMachineMode == 0 && <CardImageSection />} */}
       </group>
     </a.group>
   );
