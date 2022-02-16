@@ -1,0 +1,116 @@
+$basiColor: #12cdd4;
+$backgroundColor : #484848;
+$elementBack : #1a1a1a;
+$divPadding : 10px;
+
+.main {
+  // padding-top: 10vh;
+  // margin-left: 40vw;
+  width: 25em;
+  height: 25em;
+  border-radius: 10%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color : $backgroundColor;
+  // text-align: center;
+  padding: 20px;
+  color: $basiColor;
+  text-align: left;
+  .title {
+    padding-left: 0.5em;
+    width: 100%;
+    font-size: 2em;
+    border-bottom: solid 2px $basiColor;
+  }
+  .tozzi {
+    padding: $divPadding;
+    padding-top: 0px;
+    border-bottom: solid 1px $basiColor;
+    .tozziMinting {
+      text-align: left;
+      color: $basiColor;
+      display: flex;
+      justify-content: space-between;
+    }
+    .tozziPrice {
+      display: flex;
+      justify-content: space-between;
+  
+    }
+  }
+  .customDuck{
+    padding:$divPadding;
+    padding-top: 0px;
+    border-bottom: solid 1px $basiColor;
+    .customMinting{
+      display: flex;
+      justify-content: space-between;
+    }
+
+  }
+  .balance{
+    padding: $divPadding;
+    padding-top: 0px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    &-withdraw {
+      display: flex;
+      column-gap: 10px;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+  }
+}
+.textGroup {
+  display: flex;
+  justify-content: space-between;
+}
+.priceInput{
+  width: 80px;
+  height: 22px;
+  background-color: $elementBack ;
+}
+.radioGroup{
+  display: flex;
+}
+.radio-custom {
+  opacity: 0;
+  position: absolute; 
+}
+
+.radio-custom, .radio-custom-label {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.checkbox-custom-label, .radio-custom-label {
+  position: relative;
+}
+
+.radio-custom + .radio-custom-label:before {
+  content: '';
+  background: $elementBack;
+  display: flex;
+  width: 1.2em;
+  height:1.2em;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.radio-custom:checked + .radio-custom-label:before {
+  background: $basiColor;
+}
+.but{
+  background-color: $basiColor;
+  color:black;
+  border-radius: 5px;
+  position: relative;
+  left: 65%;
+  width:100px;
+  margin : 10px;
+}
