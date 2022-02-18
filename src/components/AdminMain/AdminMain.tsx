@@ -45,7 +45,10 @@ const AdminMain = () => {
           </div>
           <div className="textGroup">
             Tozzi Duck Price
-            <input type="text" className="priceInput"></input>
+            <div className="price-container">
+              <input type="text" className="price-input" />
+              <div className="price-right">ETH</div>
+            </div>
           </div>
         </div>
 
@@ -75,22 +78,35 @@ const AdminMain = () => {
           </div>
           <div className="textGroup">
             Custom Duck Price
-            <input type="text" className="priceInput"></input>
+            <div className="price-container">
+              <input type="text" className="price-input" />
+              <div className="price-right">ETH</div>
+            </div>
           </div>
           <div className="textGroup">
             Custom Duck Price
-            <input type="text" className="priceInput"></input>
+            <div className="price-container">
+              <input type="text" className="price-input" />
+              <div className="price-right">ETH</div>
+            </div>
           </div>
-          <button className="but"> Update </button>
+          <div className="u-row">
+            <button className="but">Update</button>
+          </div>
         </div>
         <div className="balance">
           <div className="balance-text">Balance : 125ETH </div>
           <div className="balance-withdraw">
             <div>Withdraw :</div>
-            <input type="text" className="priceInput"></input>
+            <div className="price-container">
+              <input type="text" className="price-input" />
+              <div className="price-right">ETH</div>
+            </div>
           </div>
         </div>
-        <button className="but">Submit</button>
+        <div className="u-row">
+          <button className="but-submit">Submit</button>
+        </div>
       </div>
     </Html>
   );

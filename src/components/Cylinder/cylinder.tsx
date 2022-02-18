@@ -11,6 +11,7 @@ export const DuckCylinder = () => {
   const cylinderGroup = useRef<any>();
   const [flag, setFlag] = useState(false);
   const [roundCount, setRoundCount] = useState(0);
+
   const aspectRatio = 16 / 9;
 
   const currentMachineMode = useMachineStore(
@@ -22,7 +23,7 @@ export const DuckCylinder = () => {
 
   useEffect(() => {
     setFlag(true);
-    console.log(cylinderGroup.current!.rotation.x);
+    // console.log(cylinderGroup.current!.rotation.x);
   });
 
   const [spring, set] = useSpring(() => ({
@@ -33,12 +34,12 @@ export const DuckCylinder = () => {
       duration: 3000,
       easing: easings.easeInOutElastic,
     },
+    onRest: () => {
+      console.log('ksksk')
+    },
   }));
 
   const handelOnClick = () => {
-    currentMachineMode == 0
-      ? setCurrentMachineMode(1)
-      : setCurrentMachineMode(0);
     let count = roundCount;
     setRoundCount(++count);
     set({ rotation: [Math.PI * count, 0, 0] });
@@ -60,7 +61,7 @@ export const DuckCylinder = () => {
           <meshBasicMaterial attach="material" color="#6C6C6C" />
         </Cylinder>
         <DrawingTool />
-        // <CardImageSection />
+        <CardImageSection />
         <AdminMain />
       </group>
     </a.group>

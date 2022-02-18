@@ -19,7 +19,7 @@ export const Viewer = () => {
 
 
     const changeMode= () => {
-        console.log('changeMode');        
+        // console.log('changeMode');        
 
         switch(currentMachineMode) {
             case 0: 
