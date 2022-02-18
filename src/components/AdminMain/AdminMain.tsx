@@ -4,7 +4,7 @@ import Select from "react-select";
 import "./style.scss";
 import { Html } from "@react-three/drei";
 
-const AdminMain = () => {
+const AdminMain = (props: any) => {
   const container = useRef(null);
 
   return (
@@ -12,12 +12,16 @@ const AdminMain = () => {
       ref={container}
       style={{ pointerEvents: "auto" }}
       distanceFactor={2.4}
-      position={[0.0, 0.1, 0.0]}
-      rotation={[Math.PI / 2, Math.PI, Math.PI / 2]}
+      position={props.isFront ? [0.0, 0.1, 0.0] : [0.0, -0.1, 0.0]}
+      rotation={
+        props.isFront
+          ? [Math.PI / 2, Math.PI, Math.PI / 2]
+          : [Math.PI / 2, -Math.PI * 2, Math.PI / 2]
+      }
       transform
       occlude
     >
-      <div className="main scanlines">
+      <div className="AdminMain scanlines">
         <div className="title">Admin Stuff</div>
         <div className="tozzi">
           <div className="tozziMinting">
@@ -51,7 +55,6 @@ const AdminMain = () => {
             </div>
           </div>
         </div>
-
         <div className="customDuck">
           <div className="customMinting">
             Custom Duck Minting

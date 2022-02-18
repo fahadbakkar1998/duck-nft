@@ -1,14 +1,14 @@
-import DTool from './drawing-tool'
-import './content.scss'
+import DTool from "./drawing-tool";
+import "./content.scss";
 
 const InteractiveTextureContent: () => JSX.Element = () => {
   return (
     <div className="interactive-texture">
       <div className="tv-wrapper">
-        <DTool/>
+        <DTool />
       </div>
     </div>
-  )
-}
- 
-export default InteractiveTextureContent
+  );
+};
+
+export default InteractiveTextureContent;

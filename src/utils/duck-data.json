@@ -1,1402 +1,1402 @@
 [
-    {
-        "id" : 1,
-        "img": "../../assets/img/ducks/crypto_duck_1.svg",
-        "owner": "Ron",
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 2,
-        "img": "../../assets/img/ducks/crypto_duck_2.svg",
-        "owner": null,
-        "isCustom": true,
-        "isMine": false
-    },
-    {
-        "id" : 3,
-        "img":"../../assets/img/ducks/crypto_duck_3.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 4,
-        "img": "../../assets/img/ducks/crypto_duck_4.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 5,
-        "img": "../../assets/img/ducks/crypto_duck_5.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 6,
-        "img": "../../assets/img/ducks/crypto_duck_6.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 7,
-        "img": "../../assets/img/ducks/crypto_duck_7.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 8,
-        "img": "../../assets/img/ducks/crypto_duck_8.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 9,
-        "img": "../../assets/img/ducks/crypto_duck_9.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 10,
-        "img": "../../assets/img/ducks/crypto_duck_10.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 11,
-        "img": "../../assets/img/ducks/crypto_duck_11.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 12,
-        "img": "../../assets/img/ducks/crypto_duck_12.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    } ,
-    {
-        "id" : 13,
-        "img": "../../assets/img/ducks/crypto_duck_13.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    } ,
-    {
-        "id" : 14,
-        "img": "../../assets/img/ducks/crypto_duck_14.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    } ,
-    {
-        "id" : 15,
-        "img": "../../assets/img/ducks/crypto_duck_15.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    } ,
-    {
-        "id" : 16,
-        "img": "../../assets/img/ducks/crypto_duck_16.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    } ,
-    {
-        "id" : 17,
-        "img": "../../assets/img/ducks/crypto_duck_17.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    } ,
-    {
-        "id" : 18,
-        "img": "../../assets/img/ducks/crypto_duck_18.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    } ,
-    {
-        "id" : 19,
-        "img": "../../assets/img/ducks/crypto_duck_19.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    } ,
-    {
-        "id" : 20,
-        "img": "../../assets/img/ducks/crypto_duck_20.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 21,
-        "img": "../../assets/img/ducks/crypto_duck_21.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 22,
-        "img": "../../assets/img/ducks/crypto_duck_22.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 23,
-        "img": "../../assets/img/ducks/crypto_duck_23.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 24,
-        "img": "../../assets/img/ducks/crypto_duck_24.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 25,
-        "img": "../../assets/img/ducks/crypto_duck_25.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 26,
-        "img": "../../assets/img/ducks/crypto_duck_26.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 27,
-        "img": "../../assets/img/ducks/crypto_duck_27.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 28,
-        "img": "../../assets/img/ducks/crypto_duck_28.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 29,
-        "img": "../../assets/img/ducks/crypto_duck_29.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 30,
-        "img": "../../assets/img/ducks/crypto_duck_30.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 31,
-        "img": "../../assets/img/ducks/crypto_duck_31.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 32,
-        "img": "../../assets/img/ducks/crypto_duck_32.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 33,
-        "img": "../../assets/img/ducks/crypto_duck_33.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 34,
-        "img": "../../assets/img/ducks/crypto_duck_34.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 35,
-        "img": "../../assets/img/ducks/crypto_duck_35.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 36,
-        "img": "../../assets/img/ducks/crypto_duck_36.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 37,
-        "img": "../../assets/img/ducks/crypto_duck_37.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 38,
-        "img": "../../assets/img/ducks/crypto_duck_38.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 39,
-        "img": "../../assets/img/ducks/crypto_duck_39.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 40,
-        "img": "../../assets/img/ducks/crypto_duck_40.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 41,
-        "img": "../../assets/img/ducks/crypto_duck_41.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 42,
-        "img": "../../assets/img/ducks/crypto_duck_42.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 43,
-        "img": "../../assets/img/ducks/crypto_duck_43.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 44,
-        "img": "../../assets/img/ducks/crypto_duck_44.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 45,
-        "img": "../../assets/img/ducks/crypto_duck_45.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 46,
-        "img": "../../assets/img/ducks/crypto_duck_46.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 47,
-        "img": "../../assets/img/ducks/crypto_duck_47.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 48,
-        "img": "../../assets/img/ducks/crypto_duck_48.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 49,
-        "img": "../../assets/img/ducks/crypto_duck_49.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 50,
-        "img": "../../assets/img/ducks/crypto_duck_50.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 51,
-        "img": "../../assets/img/ducks/crypto_duck_51.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 52,
-        "img": "../../assets/img/ducks/crypto_duck_52.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 53,
-        "img": "../../assets/img/ducks/crypto_duck_53.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 54,
-        "img": "../../assets/img/ducks/crypto_duck_54.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 55,
-        "img": "../../assets/img/ducks/crypto_duck_55.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 56,
-        "img": "../../assets/img/ducks/crypto_duck_56.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 57,
-        "img": "../../assets/img/ducks/crypto_duck_57.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 58,
-        "img": "../../assets/img/ducks/crypto_duck_58.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 59,
-        "img": "../../assets/img/ducks/crypto_duck_59.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 60,
-        "img": "../../assets/img/ducks/crypto_duck_60.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 61,
-        "img": "../../assets/img/ducks/crypto_duck_61.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 62,
-        "img": "../../assets/img/ducks/crypto_duck_62.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 63,
-        "img": "../../assets/img/ducks/crypto_duck_63.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 64,
-        "img": "../../assets/img/ducks/crypto_duck_64.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 65,
-        "img": "../../assets/img/ducks/crypto_duck_65.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 66,
-        "img": "../../assets/img/ducks/crypto_duck_66.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 67,
-        "img": "../../assets/img/ducks/crypto_duck_67.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 68,
-        "img": "../../assets/img/ducks/crypto_duck_68.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 69,
-        "img": "../../assets/img/ducks/crypto_duck_69.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 70,
-        "img": "../../assets/img/ducks/crypto_duck_70.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 71,
-        "img": "../../assets/img/ducks/crypto_duck_71.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 72,
-        "img": "../../assets/img/ducks/crypto_duck_72.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 73,
-        "img": "../../assets/img/ducks/crypto_duck_73.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 74,
-        "img": "../../assets/img/ducks/crypto_duck_74.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 75,
-        "img": "../../assets/img/ducks/crypto_duck_75.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 76,
-        "img": "../../assets/img/ducks/crypto_duck_76.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 77,
-        "img": "../../assets/img/ducks/crypto_duck_77.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 78,
-        "img": "../../assets/img/ducks/crypto_duck_78.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 79,
-        "img": "../../assets/img/ducks/crypto_duck_79.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 80,
-        "img": "../../assets/img/ducks/crypto_duck_80.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 81,
-        "img": "../../assets/img/ducks/crypto_duck_81.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 82,
-        "img": "../../assets/img/ducks/crypto_duck_82.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 83,
-        "img": "../../assets/img/ducks/crypto_duck_83.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 84,
-        "img": "../../assets/img/ducks/crypto_duck_84.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 85,
-        "img": "../../assets/img/ducks/crypto_duck_85.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 86,
-        "img": "../../assets/img/ducks/crypto_duck_86.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 87,
-        "img": "../../assets/img/ducks/crypto_duck_87.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 88,
-        "img": "../../assets/img/ducks/crypto_duck_88.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 89,
-        "img": "../../assets/img/ducks/crypto_duck_89.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 90,
-        "img": "../../assets/img/ducks/crypto_duck_90.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 91,
-        "img": "../../assets/img/ducks/crypto_duck_91.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 92,
-        "img": "../../assets/img/ducks/crypto_duck_92.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 93,
-        "img": "../../assets/img/ducks/crypto_duck_93.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 94,
-        "img": "../../assets/img/ducks/crypto_duck_94.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 95,
-        "img": "../../assets/img/ducks/crypto_duck_95.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 96,
-        "img": "../../assets/img/ducks/crypto_duck_96.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 97,
-        "img": "../../assets/img/ducks/crypto_duck_97.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 98,
-        "img": "../../assets/img/ducks/crypto_duck_98.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 99,
-        "img": "../../assets/img/ducks/crypto_duck_99.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 100,
-        "img": "../../assets/img/ducks/crypto_duck_100.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 101,
-        "img": "../../assets/img/ducks/crypto_duck_101.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 102,
-        "img": "../../assets/img/ducks/crypto_duck_102.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 103,
-        "img": "../../assets/img/ducks/crypto_duck_103.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 104,
-        "img": "../../assets/img/ducks/crypto_duck_104.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 105,
-        "img": "../../assets/img/ducks/crypto_duck_105.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 106,
-        "img": "../../assets/img/ducks/crypto_duck_106.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 107,
-        "img": "../../assets/img/ducks/crypto_duck_107.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 108,
-        "img": "../../assets/img/ducks/crypto_duck_108.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 109,
-        "img": "../../assets/img/ducks/crypto_duck_109.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 110,
-        "img": "../../assets/img/ducks/crypto_duck_110.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 111,
-        "img": "../../assets/img/ducks/crypto_duck_111.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 112,
-        "img": "../../assets/img/ducks/crypto_duck_112.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    } ,
-    {
-        "id" : 113,
-        "img": "../../assets/img/ducks/crypto_duck_113.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    } ,
-    {
-        "id" : 114,
-        "img": "../../assets/img/ducks/crypto_duck_114.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    } ,
-    {
-        "id" : 115,
-        "img": "../../assets/img/ducks/crypto_duck_115.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    } ,
-    {
-        "id" : 116,
-        "img": "../../assets/img/ducks/crypto_duck_116.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    } ,
-    {
-        "id" : 117,
-        "img": "../../assets/img/ducks/crypto_duck_117.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    } ,
-    {
-        "id" : 118,
-        "img": "../../assets/img/ducks/crypto_duck_118.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    } ,
-    {
-        "id" : 119,
-        "img": "../../assets/img/ducks/crypto_duck_119.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    } ,
-    {
-        "id" : 120,
-        "img": "../../assets/img/ducks/crypto_duck_120.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 121,
-        "img": "../../assets/img/ducks/crypto_duck_121.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 122,
-        "img": "../../assets/img/ducks/crypto_duck_122.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 123,
-        "img": "../../assets/img/ducks/crypto_duck_123.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 124,
-        "img": "../../assets/img/ducks/crypto_duck_124.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 125,
-        "img": "../../assets/img/ducks/crypto_duck_125.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 126,
-        "img": "../../assets/img/ducks/crypto_duck_126.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 127,
-        "img": "../../assets/img/ducks/crypto_duck_127.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 128,
-        "img": "../../assets/img/ducks/crypto_duck_128.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 129,
-        "img": "../../assets/img/ducks/crypto_duck_129.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 130,
-        "img": "../../assets/img/ducks/crypto_duck_130.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 131,
-        "img": "../../assets/img/ducks/crypto_duck_131.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 132,
-        "img": "../../assets/img/ducks/crypto_duck_132.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 133,
-        "img": "../../assets/img/ducks/crypto_duck_133.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 134,
-        "img": "../../assets/img/ducks/crypto_duck_134.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 135,
-        "img": "../../assets/img/ducks/crypto_duck_135.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 136,
-        "img": "../../assets/img/ducks/crypto_duck_136.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 137,
-        "img": "../../assets/img/ducks/crypto_duck_137.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 138,
-        "img": "../../assets/img/ducks/crypto_duck_138.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 139,
-        "img": "../../assets/img/ducks/crypto_duck_139.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 140,
-        "img": "../../assets/img/ducks/crypto_duck_140.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 141,
-        "img": "../../assets/img/ducks/crypto_duck_141.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 142,
-        "img": "../../assets/img/ducks/crypto_duck_142.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 143,
-        "img": "../../assets/img/ducks/crypto_duck_143.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 144,
-        "img": "../../assets/img/ducks/crypto_duck_144.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 145,
-        "img": "../../assets/img/ducks/crypto_duck_145.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 146,
-        "img": "../../assets/img/ducks/crypto_duck_146.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 147,
-        "img": "../../assets/img/ducks/crypto_duck_147.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 148,
-        "img": "../../assets/img/ducks/crypto_duck_148.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 149,
-        "img": "../../assets/img/ducks/crypto_duck_149.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 150,
-        "img": "../../assets/img/ducks/crypto_duck_150.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 151,
-        "img": "../../assets/img/ducks/crypto_duck_151.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 152,
-        "img": "../../assets/img/ducks/crypto_duck_152.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 153,
-        "img": "../../assets/img/ducks/crypto_duck_153.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 154,
-        "img": "../../assets/img/ducks/crypto_duck_154.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 155,
-        "img": "../../assets/img/ducks/crypto_duck_155.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 156,
-        "img": "../../assets/img/ducks/crypto_duck_156.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 157,
-        "img": "../../assets/img/ducks/crypto_duck_157.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 158,
-        "img": "../../assets/img/ducks/crypto_duck_158.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 159,
-        "img": "../../assets/img/ducks/crypto_duck_159.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 160,
-        "img": "../../assets/img/ducks/crypto_duck_160.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 161,
-        "img": "../../assets/img/ducks/crypto_duck_161.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 162,
-        "img": "../../assets/img/ducks/crypto_duck_162.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 163,
-        "img": "../../assets/img/ducks/crypto_duck_163.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 164,
-        "img": "../../assets/img/ducks/crypto_duck_164.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 165,
-        "img": "../../assets/img/ducks/crypto_duck_165.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 166,
-        "img": "../../assets/img/ducks/crypto_duck_166.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 167,
-        "img": "../../assets/img/ducks/crypto_duck_167.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 168,
-        "img": "../../assets/img/ducks/crypto_duck_168.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 169,
-        "img": "../../assets/img/ducks/crypto_duck_169.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 170,
-        "img": "../../assets/img/ducks/crypto_duck_170.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 171,
-        "img": "../../assets/img/ducks/crypto_duck_171.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 172,
-        "img": "../../assets/img/ducks/crypto_duck_172.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 173,
-        "img": "../../assets/img/ducks/crypto_duck_173.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 174,
-        "img": "../../assets/img/ducks/crypto_duck_174.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 175,
-        "img": "../../assets/img/ducks/crypto_duck_175.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 176,
-        "img": "../../assets/img/ducks/crypto_duck_176.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 177,
-        "img": "../../assets/img/ducks/crypto_duck_177.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 178,
-        "img": "../../assets/img/ducks/crypto_duck_178.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 179,
-        "img": "../../assets/img/ducks/crypto_duck_179.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 180,
-        "img": "../../assets/img/ducks/crypto_duck_180.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 181,
-        "img": "../../assets/img/ducks/crypto_duck_181.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 182,
-        "img": "../../assets/img/ducks/crypto_duck_182.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 183,
-        "img": "../../assets/img/ducks/crypto_duck_183.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 184,
-        "img": "../../assets/img/ducks/crypto_duck_184.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 185,
-        "img": "../../assets/img/ducks/crypto_duck_185.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 186,
-        "img": "../../assets/img/ducks/crypto_duck_186.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 187,
-        "img": "../../assets/img/ducks/crypto_duck_187.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 188,
-        "img": "../../assets/img/ducks/crypto_duck_188.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 189,
-        "img": "../../assets/img/ducks/crypto_duck_189.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 190,
-        "img": "../../assets/img/ducks/crypto_duck_190.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 191,
-        "img": "../../assets/img/ducks/crypto_duck_191.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 192,
-        "img": "../../assets/img/ducks/crypto_duck_192.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 193,
-        "img": "../../assets/img/ducks/crypto_duck_193.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 194,
-        "img": "../../assets/img/ducks/crypto_duck_194.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 195,
-        "img": "../../assets/img/ducks/crypto_duck_195.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 196,
-        "img": "../../assets/img/ducks/crypto_duck_196.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 197,
-        "img": "../../assets/img/ducks/crypto_duck_197.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 198,
-        "img": "../../assets/img/ducks/crypto_duck_198.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 199,
-        "img": "../../assets/img/ducks/crypto_duck_199.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    },
-    {
-        "id" : 200,
-        "img": "../../assets/img/ducks/crypto_duck_200.svg",
-        "owner": null,
-        "isCustom": false,
-        "isMine": false
-    } 
+  {
+    "id": 1,
+    "img": "../../assets/img/ducks/crypto_duck_1.svg",
+    "owner": "Ron",
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 2,
+    "img": "../../assets/img/ducks/crypto_duck_2.svg",
+    "owner": null,
+    "isCustom": true,
+    "isMine": false
+  },
+  {
+    "id": 3,
+    "img": "../../assets/img/ducks/crypto_duck_3.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 4,
+    "img": "../../assets/img/ducks/crypto_duck_4.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 5,
+    "img": "../../assets/img/ducks/crypto_duck_5.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 6,
+    "img": "../../assets/img/ducks/crypto_duck_6.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 7,
+    "img": "../../assets/img/ducks/crypto_duck_7.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 8,
+    "img": "../../assets/img/ducks/crypto_duck_8.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 9,
+    "img": "../../assets/img/ducks/crypto_duck_9.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 10,
+    "img": "../../assets/img/ducks/crypto_duck_10.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 11,
+    "img": "../../assets/img/ducks/crypto_duck_11.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 12,
+    "img": "../../assets/img/ducks/crypto_duck_12.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 13,
+    "img": "../../assets/img/ducks/crypto_duck_13.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 14,
+    "img": "../../assets/img/ducks/crypto_duck_14.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 15,
+    "img": "../../assets/img/ducks/crypto_duck_15.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 16,
+    "img": "../../assets/img/ducks/crypto_duck_16.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 17,
+    "img": "../../assets/img/ducks/crypto_duck_17.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 18,
+    "img": "../../assets/img/ducks/crypto_duck_18.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 19,
+    "img": "../../assets/img/ducks/crypto_duck_19.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 20,
+    "img": "../../assets/img/ducks/crypto_duck_20.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 21,
+    "img": "../../assets/img/ducks/crypto_duck_21.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 22,
+    "img": "../../assets/img/ducks/crypto_duck_22.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 23,
+    "img": "../../assets/img/ducks/crypto_duck_23.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 24,
+    "img": "../../assets/img/ducks/crypto_duck_24.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 25,
+    "img": "../../assets/img/ducks/crypto_duck_25.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 26,
+    "img": "../../assets/img/ducks/crypto_duck_26.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 27,
+    "img": "../../assets/img/ducks/crypto_duck_27.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 28,
+    "img": "../../assets/img/ducks/crypto_duck_28.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 29,
+    "img": "../../assets/img/ducks/crypto_duck_29.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 30,
+    "img": "../../assets/img/ducks/crypto_duck_30.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 31,
+    "img": "../../assets/img/ducks/crypto_duck_31.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 32,
+    "img": "../../assets/img/ducks/crypto_duck_32.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 33,
+    "img": "../../assets/img/ducks/crypto_duck_33.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 34,
+    "img": "../../assets/img/ducks/crypto_duck_34.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 35,
+    "img": "../../assets/img/ducks/crypto_duck_35.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 36,
+    "img": "../../assets/img/ducks/crypto_duck_36.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 37,
+    "img": "../../assets/img/ducks/crypto_duck_37.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 38,
+    "img": "../../assets/img/ducks/crypto_duck_38.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 39,
+    "img": "../../assets/img/ducks/crypto_duck_39.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 40,
+    "img": "../../assets/img/ducks/crypto_duck_40.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 41,
+    "img": "../../assets/img/ducks/crypto_duck_41.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 42,
+    "img": "../../assets/img/ducks/crypto_duck_42.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 43,
+    "img": "../../assets/img/ducks/crypto_duck_43.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 44,
+    "img": "../../assets/img/ducks/crypto_duck_44.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 45,
+    "img": "../../assets/img/ducks/crypto_duck_45.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 46,
+    "img": "../../assets/img/ducks/crypto_duck_46.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 47,
+    "img": "../../assets/img/ducks/crypto_duck_47.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 48,
+    "img": "../../assets/img/ducks/crypto_duck_48.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 49,
+    "img": "../../assets/img/ducks/crypto_duck_49.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 50,
+    "img": "../../assets/img/ducks/crypto_duck_50.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 51,
+    "img": "../../assets/img/ducks/crypto_duck_51.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 52,
+    "img": "../../assets/img/ducks/crypto_duck_52.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 53,
+    "img": "../../assets/img/ducks/crypto_duck_53.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 54,
+    "img": "../../assets/img/ducks/crypto_duck_54.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 55,
+    "img": "../../assets/img/ducks/crypto_duck_55.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 56,
+    "img": "../../assets/img/ducks/crypto_duck_56.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 57,
+    "img": "../../assets/img/ducks/crypto_duck_57.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 58,
+    "img": "../../assets/img/ducks/crypto_duck_58.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 59,
+    "img": "../../assets/img/ducks/crypto_duck_59.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 60,
+    "img": "../../assets/img/ducks/crypto_duck_60.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 61,
+    "img": "../../assets/img/ducks/crypto_duck_61.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 62,
+    "img": "../../assets/img/ducks/crypto_duck_62.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 63,
+    "img": "../../assets/img/ducks/crypto_duck_63.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 64,
+    "img": "../../assets/img/ducks/crypto_duck_64.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 65,
+    "img": "../../assets/img/ducks/crypto_duck_65.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 66,
+    "img": "../../assets/img/ducks/crypto_duck_66.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 67,
+    "img": "../../assets/img/ducks/crypto_duck_67.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 68,
+    "img": "../../assets/img/ducks/crypto_duck_68.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 69,
+    "img": "../../assets/img/ducks/crypto_duck_69.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 70,
+    "img": "../../assets/img/ducks/crypto_duck_70.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 71,
+    "img": "../../assets/img/ducks/crypto_duck_71.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 72,
+    "img": "../../assets/img/ducks/crypto_duck_72.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 73,
+    "img": "../../assets/img/ducks/crypto_duck_73.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 74,
+    "img": "../../assets/img/ducks/crypto_duck_74.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 75,
+    "img": "../../assets/img/ducks/crypto_duck_75.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 76,
+    "img": "../../assets/img/ducks/crypto_duck_76.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 77,
+    "img": "../../assets/img/ducks/crypto_duck_77.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 78,
+    "img": "../../assets/img/ducks/crypto_duck_78.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 79,
+    "img": "../../assets/img/ducks/crypto_duck_79.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 80,
+    "img": "../../assets/img/ducks/crypto_duck_80.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 81,
+    "img": "../../assets/img/ducks/crypto_duck_81.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 82,
+    "img": "../../assets/img/ducks/crypto_duck_82.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 83,
+    "img": "../../assets/img/ducks/crypto_duck_83.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 84,
+    "img": "../../assets/img/ducks/crypto_duck_84.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 85,
+    "img": "../../assets/img/ducks/crypto_duck_85.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 86,
+    "img": "../../assets/img/ducks/crypto_duck_86.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 87,
+    "img": "../../assets/img/ducks/crypto_duck_87.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 88,
+    "img": "../../assets/img/ducks/crypto_duck_88.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 89,
+    "img": "../../assets/img/ducks/crypto_duck_89.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 90,
+    "img": "../../assets/img/ducks/crypto_duck_90.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 91,
+    "img": "../../assets/img/ducks/crypto_duck_91.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 92,
+    "img": "../../assets/img/ducks/crypto_duck_92.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 93,
+    "img": "../../assets/img/ducks/crypto_duck_93.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 94,
+    "img": "../../assets/img/ducks/crypto_duck_94.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 95,
+    "img": "../../assets/img/ducks/crypto_duck_95.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 96,
+    "img": "../../assets/img/ducks/crypto_duck_96.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 97,
+    "img": "../../assets/img/ducks/crypto_duck_97.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 98,
+    "img": "../../assets/img/ducks/crypto_duck_98.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 99,
+    "img": "../../assets/img/ducks/crypto_duck_99.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 100,
+    "img": "../../assets/img/ducks/crypto_duck_100.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 101,
+    "img": "../../assets/img/ducks/crypto_duck_101.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 102,
+    "img": "../../assets/img/ducks/crypto_duck_102.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 103,
+    "img": "../../assets/img/ducks/crypto_duck_103.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 104,
+    "img": "../../assets/img/ducks/crypto_duck_104.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 105,
+    "img": "../../assets/img/ducks/crypto_duck_105.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 106,
+    "img": "../../assets/img/ducks/crypto_duck_106.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 107,
+    "img": "../../assets/img/ducks/crypto_duck_107.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 108,
+    "img": "../../assets/img/ducks/crypto_duck_108.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 109,
+    "img": "../../assets/img/ducks/crypto_duck_109.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 110,
+    "img": "../../assets/img/ducks/crypto_duck_110.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 111,
+    "img": "../../assets/img/ducks/crypto_duck_111.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 112,
+    "img": "../../assets/img/ducks/crypto_duck_112.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 113,
+    "img": "../../assets/img/ducks/crypto_duck_113.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 114,
+    "img": "../../assets/img/ducks/crypto_duck_114.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 115,
+    "img": "../../assets/img/ducks/crypto_duck_115.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 116,
+    "img": "../../assets/img/ducks/crypto_duck_116.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 117,
+    "img": "../../assets/img/ducks/crypto_duck_117.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 118,
+    "img": "../../assets/img/ducks/crypto_duck_118.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 119,
+    "img": "../../assets/img/ducks/crypto_duck_119.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 120,
+    "img": "../../assets/img/ducks/crypto_duck_120.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 121,
+    "img": "../../assets/img/ducks/crypto_duck_121.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 122,
+    "img": "../../assets/img/ducks/crypto_duck_122.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 123,
+    "img": "../../assets/img/ducks/crypto_duck_123.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 124,
+    "img": "../../assets/img/ducks/crypto_duck_124.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 125,
+    "img": "../../assets/img/ducks/crypto_duck_125.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 126,
+    "img": "../../assets/img/ducks/crypto_duck_126.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 127,
+    "img": "../../assets/img/ducks/crypto_duck_127.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 128,
+    "img": "../../assets/img/ducks/crypto_duck_128.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 129,
+    "img": "../../assets/img/ducks/crypto_duck_129.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 130,
+    "img": "../../assets/img/ducks/crypto_duck_130.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 131,
+    "img": "../../assets/img/ducks/crypto_duck_131.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 132,
+    "img": "../../assets/img/ducks/crypto_duck_132.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 133,
+    "img": "../../assets/img/ducks/crypto_duck_133.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 134,
+    "img": "../../assets/img/ducks/crypto_duck_134.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 135,
+    "img": "../../assets/img/ducks/crypto_duck_135.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 136,
+    "img": "../../assets/img/ducks/crypto_duck_136.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 137,
+    "img": "../../assets/img/ducks/crypto_duck_137.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 138,
+    "img": "../../assets/img/ducks/crypto_duck_138.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 139,
+    "img": "../../assets/img/ducks/crypto_duck_139.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 140,
+    "img": "../../assets/img/ducks/crypto_duck_140.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 141,
+    "img": "../../assets/img/ducks/crypto_duck_141.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 142,
+    "img": "../../assets/img/ducks/crypto_duck_142.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 143,
+    "img": "../../assets/img/ducks/crypto_duck_143.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 144,
+    "img": "../../assets/img/ducks/crypto_duck_144.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 145,
+    "img": "../../assets/img/ducks/crypto_duck_145.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 146,
+    "img": "../../assets/img/ducks/crypto_duck_146.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 147,
+    "img": "../../assets/img/ducks/crypto_duck_147.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 148,
+    "img": "../../assets/img/ducks/crypto_duck_148.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 149,
+    "img": "../../assets/img/ducks/crypto_duck_149.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 150,
+    "img": "../../assets/img/ducks/crypto_duck_150.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 151,
+    "img": "../../assets/img/ducks/crypto_duck_151.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 152,
+    "img": "../../assets/img/ducks/crypto_duck_152.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 153,
+    "img": "../../assets/img/ducks/crypto_duck_153.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 154,
+    "img": "../../assets/img/ducks/crypto_duck_154.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 155,
+    "img": "../../assets/img/ducks/crypto_duck_155.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 156,
+    "img": "../../assets/img/ducks/crypto_duck_156.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 157,
+    "img": "../../assets/img/ducks/crypto_duck_157.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 158,
+    "img": "../../assets/img/ducks/crypto_duck_158.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 159,
+    "img": "../../assets/img/ducks/crypto_duck_159.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 160,
+    "img": "../../assets/img/ducks/crypto_duck_160.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 161,
+    "img": "../../assets/img/ducks/crypto_duck_161.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 162,
+    "img": "../../assets/img/ducks/crypto_duck_162.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 163,
+    "img": "../../assets/img/ducks/crypto_duck_163.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 164,
+    "img": "../../assets/img/ducks/crypto_duck_164.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 165,
+    "img": "../../assets/img/ducks/crypto_duck_165.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 166,
+    "img": "../../assets/img/ducks/crypto_duck_166.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 167,
+    "img": "../../assets/img/ducks/crypto_duck_167.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 168,
+    "img": "../../assets/img/ducks/crypto_duck_168.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 169,
+    "img": "../../assets/img/ducks/crypto_duck_169.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 170,
+    "img": "../../assets/img/ducks/crypto_duck_170.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 171,
+    "img": "../../assets/img/ducks/crypto_duck_171.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 172,
+    "img": "../../assets/img/ducks/crypto_duck_172.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 173,
+    "img": "../../assets/img/ducks/crypto_duck_173.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 174,
+    "img": "../../assets/img/ducks/crypto_duck_174.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 175,
+    "img": "../../assets/img/ducks/crypto_duck_175.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 176,
+    "img": "../../assets/img/ducks/crypto_duck_176.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 177,
+    "img": "../../assets/img/ducks/crypto_duck_177.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 178,
+    "img": "../../assets/img/ducks/crypto_duck_178.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 179,
+    "img": "../../assets/img/ducks/crypto_duck_179.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 180,
+    "img": "../../assets/img/ducks/crypto_duck_180.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 181,
+    "img": "../../assets/img/ducks/crypto_duck_181.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 182,
+    "img": "../../assets/img/ducks/crypto_duck_182.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 183,
+    "img": "../../assets/img/ducks/crypto_duck_183.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 184,
+    "img": "../../assets/img/ducks/crypto_duck_184.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 185,
+    "img": "../../assets/img/ducks/crypto_duck_185.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 186,
+    "img": "../../assets/img/ducks/crypto_duck_186.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 187,
+    "img": "../../assets/img/ducks/crypto_duck_187.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 188,
+    "img": "../../assets/img/ducks/crypto_duck_188.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 189,
+    "img": "../../assets/img/ducks/crypto_duck_189.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 190,
+    "img": "../../assets/img/ducks/crypto_duck_190.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 191,
+    "img": "../../assets/img/ducks/crypto_duck_191.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 192,
+    "img": "../../assets/img/ducks/crypto_duck_192.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 193,
+    "img": "../../assets/img/ducks/crypto_duck_193.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 194,
+    "img": "../../assets/img/ducks/crypto_duck_194.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 195,
+    "img": "../../assets/img/ducks/crypto_duck_195.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 196,
+    "img": "../../assets/img/ducks/crypto_duck_196.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 197,
+    "img": "../../assets/img/ducks/crypto_duck_197.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 198,
+    "img": "../../assets/img/ducks/crypto_duck_198.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 199,
+    "img": "../../assets/img/ducks/crypto_duck_199.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  },
+  {
+    "id": 200,
+    "img": "../../assets/img/ducks/crypto_duck_200.svg",
+    "owner": null,
+    "isCustom": false,
+    "isMine": false
+  }
 ]
