@@ -2,7 +2,6 @@ import { useLoader, useThree } from "@react-three/fiber";
 import React, { useState, useCallback } from "react";
 import { a, useSpring } from '@react-spring/three';
 import useMachineStore from "../../store";
-import { letters, numbers } from "../../utils/constants";
 
 import './index.css';
 import ImageViewer from "react-simple-image-viewer";
