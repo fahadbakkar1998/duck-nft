@@ -5,6 +5,7 @@ import DrawingTool from "../DrawingTool/DrawingTool";
 import useMachineStore from "../../store";
 import { useThree } from "react-three-fiber";
 import CardImageSection from "../CardImageSection/CardImageSection";
+import AdminMain from "../AdminMain/AdminMain";
 export const DuckCylinder = () => {
   const { viewport } = useThree();
   const cylinderGroup = useRef<any>();
@@ -12,7 +13,9 @@ export const DuckCylinder = () => {
   const [roundCount, setRoundCount] = useState(0);
   const aspectRatio = 16 / 9;
 
-  const currentMachineMode = useMachineStore((state) => state.currentMode);
+  const currentMachineMode = useMachineStore(
+    (state) => state.currentMachineMode
+  );
   const setCurrentMachineMode = useMachineStore(
     (state) => state.setCurrentMode
   );
@@ -20,9 +23,7 @@ export const DuckCylinder = () => {
   useEffect(() => {
     setFlag(true);
     console.log(cylinderGroup.current!.rotation.x);
-
   });
-
 
   const [spring, set] = useSpring(() => ({
     rotation: [0, 0, 0],
@@ -59,7 +60,8 @@ export const DuckCylinder = () => {
           <meshBasicMaterial attach="material" color="#6C6C6C" />
         </Cylinder>
         <DrawingTool />
-        <CardImageSection />
+        // <CardImageSection />
+        <AdminMain />
       </group>
     </a.group>
   );
