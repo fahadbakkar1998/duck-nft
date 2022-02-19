@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -26,5 +22,6 @@
   },
   "include": ["src", "react-app-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", "build"],
-  "moduleResolution": ["node_modules", ".next", "node"]
+  "moduleResolution": ["node_modules", ".next", "node"],
+  "typeRoots": ["./types", "./node_modules/@types"]
 }

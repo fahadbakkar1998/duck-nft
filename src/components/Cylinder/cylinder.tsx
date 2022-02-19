@@ -3,10 +3,12 @@ import { useEffect, useRef, useState } from "react";
 import { a, useSpring, easings } from "@react-spring/three";
 import DrawingTool from "../DrawingTool/DrawingTool";
 import useMachineStore from "../../store";
-import { useThree } from "react-three-fiber";
 import CardImageSection from "../CardImageSection/CardImageSection";
 import AdminMain from "../AdminMain/AdminMain";
 import { aspectRatio } from "../../utils/constants";
+import { useLoader, useThree } from "react-three-fiber";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { AxesHelper } from "three";
 
 let globalRoundCount = 0;
 let globalRotating = false;
@@ -14,6 +16,8 @@ let globalRotating = false;
 export const DuckCylinder = () => {
   const { viewport } = useThree();
   const [roundCount, setRoundCount] = useState(0);
+  const gltfDisk = useLoader(GLTFLoader, "assets/models/DuckDisk.glb");
+  const setCurrentMode = useMachineStore((state) => state.setCurrentMode);
 
   const [spring, setSpring] = useSpring(() => ({
     rotation: [0, 0, 0],
@@ -32,13 +36,14 @@ export const DuckCylinder = () => {
     if (globalRotating) return;
     globalRotating = true;
     setSpring({ rotation: [Math.PI * ++globalRoundCount, 0, 0] });
+    setCurrentMode(globalRoundCount % 3);
   };
 
   const restRoundCount = roundCount % 3;
   const isFront = !(roundCount % 2);
 
   return (
-    <a.group {...(spring as any)} onClick={handelOnClick}>
+    <a.group {...(spring as any)} onClick={handelOnClick} position={[0, 15 * viewport.width / 1000, 0]}>
       <group
         scale={[
           viewport.width / 6 / aspectRatio,
@@ -48,9 +53,17 @@ export const DuckCylinder = () => {
         rotation={[0, Math.PI / 2, Math.PI / 2]}
         position={[viewport.width / 12, 0, 0.0]}
       >
-        <Cylinder args={[1.8, 1.8, 0.1, 50]}>
-          <meshBasicMaterial attach="material" color="#6C6C6C" />
-        </Cylinder>
+        {/* <primitive object={new AxesHelper(10)}></primitive> */}
+        <primitive
+          object={gltfDisk.scene}
+          scale={[0.6, 0.6, 0.6]}
+          rotation={[0, 0, Math.PI / 2]}
+        >
+          <Cylinder args={[1.8, 1.8, 0.1, 50]} rotation={[0, 0, Math.PI / 2]}>
+            <meshBasicMaterial attach="material" color="#6C6C6C" />
+          </Cylinder>
+        </primitive>
+
         {(restRoundCount === 0 || restRoundCount === 2) && (
           <CardImageSection
             isFront={restRoundCount === 0 ? isFront : !isFront}

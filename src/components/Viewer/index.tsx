@@ -12,31 +12,29 @@ import { MachineMode } from "../../types/types";
 
 export const Viewer = () => {
     const currentMachineMode = useMachineStore(state => state.currentMode);
-    const setCurrentMachineMode = useMachineStore(state => state.setCurrentMode);
+    const setCurrentMode = useMachineStore(state => state.setCurrentMode);
 
     const currentDuckID = useMachineStore(state => state.currentDuckID);
     const setCurrentDuckID = useMachineStore(state => state.setCurrentDuckID)
 
 
     const changeMode= () => {
-        // console.log('changeMode');        
-
         switch(currentMachineMode) {
             case 0: 
             {
-                setCurrentMachineMode(1);
+                setCurrentMode(1);
                 setCurrentDuckID(0);
                 break;
             }
             case 1: 
             {
-                setCurrentMachineMode(2); 
+                setCurrentMode(2); 
                 setCurrentDuckID(0);
                 break;
             }
             case 2: 
             {
-                setCurrentMachineMode(0); 
+                setCurrentMode(0); 
                 setCurrentDuckID(0);
                 break;
             }

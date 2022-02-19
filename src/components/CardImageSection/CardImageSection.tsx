@@ -11,6 +11,7 @@ import NumPad from "../Pad/Pad";
 import { Html } from "@react-three/drei";
 import useMachineStore from "../../store";
 
+
 const options = [
   { value: "all", label: "All" },
   { value: "available", label: "Available (not sold)" },
@@ -40,6 +41,7 @@ const CardImageSection = (props: any) => {
 
   const gridRow = useScreenStore((state) => state.gridRow);
 
+
   const sideControlUp = (direction: any) => {
     const pos = scroll.offset;
     scroll.scrollTo(0, pos.y - 200, 1000);
@@ -50,7 +52,6 @@ const CardImageSection = (props: any) => {
   };
 
   const setOverflow = (flag: any) => {
-    console.log('setOverflow', flag)
     flag
       ? (mainScreen.current!.style!.overflow = "auto")
       : (mainScreen.current!.style!.overflow = "hidden");

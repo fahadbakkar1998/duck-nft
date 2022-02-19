@@ -1,199 +1,194 @@
-$bgcolor : #6fe5de;
-$left : 510px;
-$top : 300px;
+$bgcolor: #6fe5de;
+$left: 510px;
+$top: 300px;
 * {
-	box-sizing: border-box;
-	-webkit-user-select: none; /* Safari */        
-	  -moz-user-select: none; /* Firefox */
-	  -ms-user-select: none; /* IE10+/Edge */
-	  user-select: none; /* Standard */
-  }
+  box-sizing: border-box;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
 
-  body{
-	background-color: $bgcolor;
-	  background-size: cover;	
-	position: fixed;
-  }
+body {
+  background-color: $bgcolor;
+  background-size: cover;
+  position: fixed;
+}
 
-  .main-canvas{
-	width: 400px;
-	position :absolute;
-	border-radius: 1em;
-	//left: calc(50% - 200px);
-	// left: 540px;
-	// top : 100px;
-	image-rendering: pixelated;
+.main-canvas {
+  width: 430px;
+  position: absolute;
+  border-radius: 100px;
+  image-rendering: pixelated;
+}
+.interactive-texture {
+  background-position: center center;
+  width: 430px;
+  height: 430px;
+  z-index: -2;
+  .tv-wrapper {
+    width: 100%;
+    position: absolute;
   }
-  .interactive-texture{
-	  background-position: center center;
-	  width: 400px;
-	  height: 400px;
-	  z-index:-2;
-	  .tv-wrapper{
-		  width: 100%;
-		  position: absolute;
-	  }
-  }
-  .toolbar{
-	  display: flex;
-	  flex-direction: row;
-	  position: absolute;
-	  top: 0px;
-	//   right: -420px;
-  }
-  .color-picker{
-	  position: absolute;
-	  top: 203px;
-	  left: 0px;
+}
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 0px;
+  //   right: -420px;
+}
+.color-picker {
+  position: absolute;
+  top: 203px;
+  left: 0px;
 
-	  .color-bar{
-		  display: flex;
-		  width: 150px;
-		  height: 700px;
-		  flex-wrap: wrap;
-		  flex-direction: row;
-		  display: none;
+  .color-bar {
+    display: flex;
+    width: 150px;
+    height: 700px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    display: none;
+  }
+  .color-button {
+    width: 60px;
+    height: 60px;
+    margin-top: 4px;
+    cursor: pointer;
+    margin-right: 4px;
+    &.selected {
+      border: rgb(255, 255, 255) solid 6px;
+    }
+  }
+  .color-extra {
+    display: flex;
+    flex-direction: column;
+  }
+  .current-color {
+    position: absolute;
+    top: $top;
+    //   left: 550px;
+    border-radius: 100%;
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    cursor: pointer;
+    z-index: 99;
+  }
+  .eraser {
+    position: absolute;
+    left: $left;
+    top: 100px;
+    width: 100px;
+    height: 100px;
+    margin-top: 8px;
+    background-color: white;
+    font-size: 2em;
+    cursor: pointer;
+    text-align: center;
+    line-height: 100px;
+    color: gray;
+    border: 1px solid black;
+  }
+  .clear {
+    border-radius: 100%;
+    position: absolute;
+    top: $top;
+    left: 120px;
+    width: 80px;
+    height: 80px;
+    margin-top: 8px;
+    font-size: 2em;
+    cursor: pointer;
+    text-align: center;
+    line-height: 80px;
+    color: gray;
+    border: 1px solid black;
+  }
+  .savewebp {
+    position: absolute;
+    left: $left;
+    width: 100px;
+    height: 30px;
+    top: $top + 25px;
+    background-color: #fef446;
+    border-radius: 10%;
+    font-size: 1em;
+  }
+}
 
-	  }
-	  .color-button{
-		  width: 60px;
-		  height: 60px;
-		  margin-top: 4px;
-		  cursor: pointer;
-	      margin-right: 4px;
-		  &.selected{
-			  border: rgb(255, 255, 255) solid 6px;
-		  }
-		  
-	  }
-	  .color-extra{
-		  display: flex;
-		  flex-direction: column;
-	  }
-	  .current-color{
-		  position: absolute;
-		  top : $top;
-		//   left: 550px;
-		  border-radius: 100%;
-		  width: 100px;
-		  height: 100px;
-		  background-color: white;
-		  cursor: pointer;
-		  z-index: 99;
-	  }
-	  .eraser{
-	      position: absolute;
-		  left: $left;
-		  top : 100px;
-		  width: 100px;
-		  height: 100px;
-		  margin-top: 8px;
-		  background-color: white;
-		  font-size: 2em;
-		  cursor: pointer;
-		  text-align: center;
-		  line-height: 100px;
-		  color: gray;
-		  border: 1px solid black;
-	  }
-	  .clear{
-		  border-radius: 100%;
-		  position: absolute;
-		  top:$top;
-		  left:120px;
-		  width: 80px;
-		  height: 80px;
-		  margin-top: 8px;
-		  font-size: 2em;
-		  cursor: pointer;
-		  text-align: center;
-		  line-height: 80px;
-		  color: gray;
-		  border: 1px solid black;
-	  }
-	  .savewebp{
-		  position: absolute;
-		  left: $left;
-		  width: 100px;
-		  height: 30px;
-		  top:  $top + 25px;
-		  background-color:#FEF446;
-		  border-radius: 10%;
-		  font-size: 1em;
-	  }
+.layer-picker {
+  position: absolute;
+  top: 61px;
+  right: -529px;
+  .layer-bar {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
   }
-  
-  .layer-picker{
-	  position: absolute;
-	  top: 61px;
-	  right: -529px;
-	  .layer-bar{
-		  display: flex;
-		  flex-wrap: wrap;
-		  flex-direction: column;
-	  }
-	  .layer-button{
-		  font-size: 2em;
-		  padding: 10px;
-		  cursor: pointer;
-		  border: 1px solid black;
-		  &.selected{
-			  background-color: #1fc8db;
-		  }
-		  &.disabled{
-			  opacity: 0.5;
-		  }
-	  }
+  .layer-button {
+    font-size: 2em;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid black;
+    &.selected {
+      background-color: #1fc8db;
+    }
+    &.disabled {
+      opacity: 0.5;
+    }
   }
-  .tool-switcher{
-	  position: relative;
-	//   bottom: 100px;
-	//   left: 150px;
-	  .ts-bar{
-			position: absolute;
-			top: 50px;
-			left: $left;
-			display: flex;
-			flex-wrap: wrap;
-			flex-direction: column;
-	  }
-	  .ts-button{
-		  margin-bottom: 10px;
-		  font-size: 2em;
-		  padding: 10px;
-		  cursor: pointer;
-		  border: 1px solid black;
-		  &.selected{
-			  background-color: #1fc8db;
-		  }
-		  &.disabled{
-			  opacity: 0.5;
-		  }
-	  }
+}
+.tool-switcher {
+  position: relative;
+  //   bottom: 100px;
+  //   left: 150px;
+  .ts-bar {
+    position: absolute;
+    top: 50px;
+    left: $left;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
   }
-  
-  .undoredo{
-	  position: absolute;
-	  top: $top - 120px;
-	  left: 220px;
-	  .ur-bar{
-		  position: absolute;
-		  top : 350px;
-		//   left: 120px;
-		  display: flex;
-		  flex-wrap: nowrap;
-		  flex-direction: row;
-	  }
-	  .ur-button{
-		  font-size: 2em;
-		  padding: 10px;
-		  cursor: pointer;
-		  border: 1px solid black;
-		  &.selected{
-			  background-color: #1fc8db;
-		  }
-		  &.disabled{
-			  opacity: 0.5;
-		  }
-	  }
+  .ts-button {
+    margin-bottom: 10px;
+    font-size: 2em;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid black;
+    &.selected {
+      background-color: #1fc8db;
+    }
+    &.disabled {
+      opacity: 0.5;
+    }
   }
+}
+
+.undoredo {
+  position: absolute;
+  top: $top - 120px;
+  left: 220px;
+  .ur-bar {
+    position: absolute;
+    top: 350px;
+    //   left: 120px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+  }
+  .ur-button {
+    font-size: 2em;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid black;
+    &.selected {
+      background-color: #1fc8db;
+    }
+    &.disabled {
+      opacity: 0.5;
+    }
+  }
+}
