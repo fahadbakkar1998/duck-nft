@@ -1,30 +1,31 @@
-import create, { SetState, GetState } from 'zustand';
+import create, { SetState, GetState } from "zustand";
 
 type ScreenStore = {
-    gridRow: any;
-    updateGridRow: (value: any) => void;
-    currentDuck: any;
-    updateCurrentDuck: (value : any) => void;
-    filterVal : any;
-    updateFilterVal : (value : any) => void;
+  gridRow: any;
+  updateGridRow: (value: any) => void;
+  currentDuck: any;
+  updateCurrentDuck: (value: any) => void;
+  filterVal: any;
+  updateFilterVal: (value: any) => void;
 };
 
-
-export const useScreenStore = create<ScreenStore>((set: SetState<ScreenStore>) => ({
-    gridRow: '3x',
+export const useScreenStore = create<ScreenStore>(
+  (set: SetState<ScreenStore>) => ({
+    gridRow: "3x",
     updateGridRow: (value: any): void => {
-        set({ gridRow: value });
+      set({ gridRow: value });
     },
     currentDuck: {
-        number: '',
+      number: "001",
     },
-    updateCurrentDuck: (value: any) : void => {
-        set({ currentDuck: value });
+    updateCurrentDuck: (value: any): void => {
+      set({ currentDuck: value });
     },
-    filterVal : {
-        string : '',
+    filterVal: {
+      string: "",
     },
-    updateFilterVal : (value : any) : void =>{
-        set({ filterVal : value});
-    }
-}))
+    updateFilterVal: (value: any): void => {
+      set({ filterVal: value });
+    },
+  })
+);

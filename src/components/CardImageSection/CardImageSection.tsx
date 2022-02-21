@@ -11,6 +11,7 @@ import NumPad from "../Pad/Pad";
 import { Html } from "@react-three/drei";
 import useMachineStore from "../../store";
 
+
 const options = [
   { value: "all", label: "All" },
   { value: "available", label: "Available (not sold)" },
@@ -24,12 +25,12 @@ const scrollOption = {
   renderByPixels: true,
 };
 
-const CardImageSection = () => {
+const CardImageSection = (props: any) => {
   const [scroll, setScroll] = useState(Object);
   const [filter, setFilter] = useState(String);
   const mainScreen = useRef<HTMLDivElement>(null);
   const container = useRef(null);
-  
+
   const currentMachineMode = useMachineStore((state) => state.currentMode);
 
   const currentDuck = useScreenStore((state) => state.currentDuck);
@@ -40,6 +41,7 @@ const CardImageSection = () => {
 
   const gridRow = useScreenStore((state) => state.gridRow);
 
+
   const sideControlUp = (direction: any) => {
     const pos = scroll.offset;
     scroll.scrollTo(0, pos.y - 200, 1000);
@@ -49,12 +51,13 @@ const CardImageSection = () => {
     scroll.scrollTo(0, pos.y + 200, 1000);
   };
 
-  const setOverflow = (flag : any) => {
-    flag ?  mainScreen.current!.style!.overflow = 'auto' :  mainScreen.current!.style!.overflow = 'hidden'
-  }
+  const setOverflow = (flag: any) => {
+    flag
+      ? (mainScreen.current!.style!.overflow = "auto")
+      : (mainScreen.current!.style!.overflow = "hidden");
+  };
 
   useEffect(() => {
-
     // let scrollbar = Scrollbar.init(
     //   document.querySelector("#mainScreen")!,
     //   scrollOption
@@ -81,36 +84,46 @@ const CardImageSection = () => {
   }, [currentDuck]);
 
   return (
-    <Html 
-    ref={container}
-    style={{pointerEvents: 'auto'}}
-    distanceFactor={ 2.4 }
-    position={[ 0.0, 0.1, 0.0 ]}
-    rotation={[ Math.PI/2, Math.PI, Math.PI/2]}
-    transform
-    occlude
+    <Html
+      ref={container}
+      style={{ pointerEvents: "auto" }}
+      distanceFactor={2.4}
+      position={props.isFront ? [0.0, 0.1, 0.0] : [0.0, -0.1, 0.0]}
+      rotation={
+        props.isFront
+          ? [Math.PI / 2, Math.PI, Math.PI / 2]
+          : [Math.PI / 2, -Math.PI * 2, Math.PI / 2]
+      }
+      transform
+      occlude
     >
-    <div className="main">
-        <div className="mainScreen" ref={mainScreen} id="mainScreen" onMouseEnter={() => setOverflow(true)} onMouseLeave={() => setOverflow(false)} >
-        <div className="imgContainer scanlines">
+      <div className="main">
+        <div
+          className="mainScreen"
+          ref={mainScreen}
+          id="mainScreen"
+          onMouseEnter={() => setOverflow(true)}
+          onMouseLeave={() => setOverflow(false)}
+        >
+          <div className="imgContainer scanlines">
             {duckData.map((item: any, index: any) => {
-            let img = require("../../assets/img/ducks/crypto_duck_" +
+              let img = require("../../assets/img/ducks/crypto_duck_" +
                 item.id +
                 ".svg");
-            // let img = require(item.img);
-            return (
+              // let img = require(item.img);
+              return (
                 <DuckCard
-                key={item.id}
-                img={img}
-                number={item.id}
-                attribute={item}
+                  key={item.id}
+                  img={img}
+                  number={item.id}
+                  attribute={item}
                 />
-            );
+              );
             })}
+          </div>
         </div>
-        </div>
-    </div>
-   </Html>
+      </div>
+    </Html>
   );
 };
 

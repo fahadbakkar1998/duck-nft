@@ -1,6 +1,4 @@
-$bgcolor: #6fe5de;
-$buttoncolor: #fef444;
-//******************** scanlines effect variable start ********************//
+/******************** scanlines effect variable start ********************/
 $scan-width: 2px;
 $scan-crt: true;
 $scan-fps: 60;
@@ -8,43 +6,85 @@ $scan-color: rgba(#000, 0.3);
 $scan-z-index: 2147483648;
 $scan-moving-line: true;
 $scan-opacity: 0.75;
-//******************** scanlines effect variable end ********************//
+/******************** scanlines effect variable end ********************/
 
-
-    
-    .main {
-      // padding-top: 10vh;
-      // margin-left: 40vw;
-      width: 430px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      // text-align: center;
-    }
-
-    .mainScreen {
-      border-radius: 100px;
-      height: 430px;
-      background-color: white;
-      overflow: hidden;
-      .imgContainer {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        overflow: scroll;
-        border-radius: 1em;
-      }
-    }
-    ::-webkit-scrollbar {
-      width: 0px;
-      height: 0px;
-      background: transparent; /* make scrollbar transparent */
-    }
-    .dropbox {
-      width: 40%;
-      font-size: 80%;
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
-//******************** scanlines effect css start ********************//
+
+body {
+  background-color: black;
+  background-size: cover;
+  background-position: 0 -500px;
+  position: fixed;
+}
+
+.App {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+canvas {
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.changeModeBtn {
+  background-color: rgb(153, 149, 149);
+  color: rgb(37, 36, 36);
+  font-size: 14px;
+  padding: 8px 11px;
+  border-radius: 5px;
+  margin: 10px 0px;
+  cursor: pointer;
+  z-index: 99;
+  position: absolute;
+  left: 50%;
+}
+
+/******************** scanlines effect css start ********************/
 
 @mixin scan-crt($scan-crt) {
   @if $scan-crt == true {
@@ -75,18 +115,14 @@ $scan-opacity: 0.75;
   }
 
   &:before {
-    // position: absolute;
-    // bottom: 100%;
     width: 100%;
     height: $scan-width * 1;
     z-index: $scan-z-index + 1;
     background: $scan-color;
     opacity: $scan-opacity;
-    // animation: scanline 6s linear infinite;
     @include scan-moving($scan-moving-line);
   }
 
-  // the scanlines, so!
   &:after {
     top: 0;
     right: 0;
@@ -100,6 +136,7 @@ $scan-opacity: 0.75;
 }
 
 /* ANIMATE UNIQUE SCANLINE */
+
 @keyframes scanline {
   0% {
     transform: translate3d(0, 200000%, 0);
@@ -113,4 +150,5 @@ $scan-opacity: 0.75;
     // bottom: 0%; // to have a continuous scanline move, use this line (here in 0% step) instead of transform and write, in &:before, { position: absolute; bottom: 100%; }
   }
 }
-//******************** scanlines effect css end ********************//
+
+/******************** scanlines effect css end ********************/
