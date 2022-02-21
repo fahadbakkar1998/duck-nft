@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 
 import ColorPicker from "./color-picker";
 import CanvasDraw from "./canvas-draw";
@@ -93,25 +93,27 @@ const DTool: () => JSX.Element = () => {
 
   return (
     <div>
-      <canvas className="main-canvas" id="dtool-canvas"></canvas>
-      <div className="toolbar">
-        <ColorPicker
-          colors={colors}
-          selectedColorIndex={selectedColorIndex}
-          selectedColor={selectedColor}
-          onSelected={selectColor}
-          onEraseLayer={eraseLayer}
-          onNoise={noise}
-          onWebp={webp}
-        />
-        {/* <LayerPicker layers={layers} selectedLayerIndex={selectedLayerIndex} onSelected={selectLayer}/> */}
-        <ToolSwitcher selectedTool={selectedTool} onSelected={selectTool} />
-        <UndoRedo
-          undoEnabled={historyButtonsState[0]}
-          redoEnabled={historyButtonsState[1]}
-          onPress={DoUndoRedo}
-        />
-      </div>
+      <Suspense fallback={null}>
+        <canvas className="main-canvas" id="dtool-canvas"></canvas>
+        <div className="toolbar">
+          <ColorPicker
+            colors={colors}
+            selectedColorIndex={selectedColorIndex}
+            selectedColor={selectedColor}
+            onSelected={selectColor}
+            onEraseLayer={eraseLayer}
+            onNoise={noise}
+            onWebp={webp}
+          />
+          {/* <LayerPicker layers={layers} selectedLayerIndex={selectedLayerIndex} onSelected={selectLayer}/> */}
+          <ToolSwitcher selectedTool={selectedTool} onSelected={selectTool} />
+          <UndoRedo
+            undoEnabled={historyButtonsState[0]}
+            redoEnabled={historyButtonsState[1]}
+            onPress={DoUndoRedo}
+          />
+        </div>
+      </Suspense>
     </div>
   );
 };

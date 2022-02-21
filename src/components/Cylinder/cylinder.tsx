@@ -16,7 +16,7 @@ let globalRotating = false;
 export const DuckCylinder = () => {
   const { viewport } = useThree();
   const [roundCount, setRoundCount] = useState(0);
-  const gltfDisk = useLoader(GLTFLoader, "assets/models/DuckDisk.glb");
+  const gltfDisk = useLoader(GLTFLoader, "assets/models/DuckDiskMerged.glb");
   const setCurrentMode = useMachineStore((state) => state.setCurrentMode);
 
   const [spring, setSpring] = useSpring(() => ({
@@ -43,7 +43,11 @@ export const DuckCylinder = () => {
   const isFront = !(roundCount % 2);
 
   return (
-    <a.group {...(spring as any)} onClick={handelOnClick} position={[0, 15 * viewport.width / 1000, 0]}>
+    <a.group
+      {...(spring as any)}
+      onClick={handelOnClick}
+      position={[0, (15 * viewport.width) / 1000, 0]}
+    >
       <group
         scale={[
           viewport.width / 6 / aspectRatio,
@@ -53,7 +57,6 @@ export const DuckCylinder = () => {
         rotation={[0, Math.PI / 2, Math.PI / 2]}
         position={[viewport.width / 12, 0, 0.0]}
       >
-        {/* <primitive object={new AxesHelper(10)}></primitive> */}
         <primitive
           object={gltfDisk.scene}
           scale={[0.6, 0.6, 0.6]}
@@ -63,7 +66,6 @@ export const DuckCylinder = () => {
             <meshBasicMaterial attach="material" color="#6C6C6C" />
           </Cylinder>
         </primitive>
-
         {(restRoundCount === 0 || restRoundCount === 2) && (
           <CardImageSection
             isFront={restRoundCount === 0 ? isFront : !isFront}

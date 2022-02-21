@@ -6,7 +6,7 @@ import { DuckCylinder } from "../Cylinder/Cylinder";
 import { useState } from "react";
 import { filterProps } from "framer-motion";
 import { aspectRatio } from "../../utils/constants";
-import AltScreen from "./AltScreen"
+import AltScreen from "./AltScreen";
 
 export const MachineLayout = () => {
   const { viewport } = useThree();

@@ -1,6 +1,15 @@
+import useMachineStore from "../../../store";
+import { MachineMode } from "../../../types/types";
+
 const Custom: () => JSX.Element = () => {
+  const currentMode = useMachineStore((state) => state.currentMode);
+
   return (
-    <div className="Custom">
+    <div
+      className={`Custom ${
+        currentMode === MachineMode.Customization ? "fadeIn" : "fadeOut"
+      }`}
+    >
       <div className="Custom-title">Create-a-Duck</div>
       <div className="Custom-content">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod

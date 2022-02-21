@@ -11,7 +11,7 @@ type URBProps = {
     
  }
  const tools = [{
-     index:0, label:'pancil'
+     index:0, label:'pencil'
  },{
     index:1, label:'paint'
  }]

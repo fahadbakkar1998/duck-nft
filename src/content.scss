@@ -62,16 +62,19 @@ body {
     }
   }
   .color-extra {
-    display: flex;
-    flex-direction: column;
+    // position: fixed;
+    // width: 100%;
+    // height: 100%;
+    // left: 0;
+    // top: 0;
   }
   .current-color {
     position: absolute;
-    top: $top;
-    //   left: 550px;
+    top: 176px;
+    left: -274px;
     border-radius: 100%;
-    width: 100px;
-    height: 100px;
+    width: 170px;
+    height: 170px;
     background-color: white;
     cursor: pointer;
     z-index: 99;

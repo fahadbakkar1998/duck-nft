@@ -10,7 +10,7 @@ type ToolSwitcherProps = {
     selectedTool: number;
  }
  const tools = [{
-     index:0, label:'pancil'
+     index:0, label:'pencil'
  },{
     index:1, label:'paint'
  }]
