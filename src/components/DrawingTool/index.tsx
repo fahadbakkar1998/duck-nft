@@ -1,43 +1,12 @@
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useState, useLayoutEffect } from "react";
 import { Html } from "@react-three/drei";
-import ColorPicker from "./color-picker";
-import { DToolInst } from "../../store/DTool";
+import { useMachineStore } from "../../store";
+import {
+  colors,
+} from "../../utils/constants";
 import LayerPicker from "./LayerPicker";
-import ToolSwitcher from "./ToolSwitcher";
-import UndoRedo from "./UndoRedo";
 import duckbill from "../../assets/duck-bill.png";
 import "./index.scss";
-
-const colors = [
-  "#000000",
-  "#464646",
-  "#787878",
-  "#b4b4b4",
-  "#dcdcdc",
-  "#ffffff",
-  "#990030",
-  "#9c5a3c",
-  "#ed1c24",
-  "#ffa3b1",
-  "#ff7e00",
-  "#e5aa7a",
-  "#ffc20e",
-  "#f5e49c",
-  "#fff200",
-  "#fff9bd",
-  "#a8e61d",
-  "#d3f9bc",
-  "#22b14c",
-  "#9dbb61",
-  "#00b7ef",
-  "#99d9ea",
-  "#4d6df3",
-  "#709ad1",
-  "#2f3699",
-  "#546d8e",
-  "#6f3198",
-  "#b5a5d5",
-];
 
 let layers: any[] = [
   { label: "Head" },
@@ -45,52 +14,27 @@ let layers: any[] = [
   // {label:'Glasses'},
 ];
 
-const defaultLayerIndex = 0;
-const defaultColorIndex = 0;
-
 const DrawingTool: (props: any) => JSX.Element = (props: any) => {
-  const [selectedLayerIndex, setSelectedLayerIndex] =
-    useState(defaultLayerIndex);
-  const [selectedColorIndex, setSelectedColorIndex] =
-    useState(defaultColorIndex);
-  const [selectedColor, setSelectedColor] = useState<string | null>(
-    colors[defaultLayerIndex]
+  const DToolInst = useMachineStore((state) => state.DToolInst);
+  const selectedColorIndex = useMachineStore(
+    (state) => state.selectedColorIndex
   );
-  const [selectedTool, setSelectedTool] = useState(0);
-  const [historyButtonsState, setHistoryButtonsState] = useState([
-    false,
-    false,
-  ]);
-  function selectLayer(_selectedLayerIndex: number) {
-    DToolInst.selectLayer(_selectedLayerIndex);
-    setSelectedLayerIndex(_selectedLayerIndex);
-  }
-  function selectColor(index: number, _color: string | null) {
-    setSelectedColor(_color);
-    setSelectedColorIndex(index);
-    DToolInst.selectColor(_color);
-  }
-  function selectTool(tool: number) {
-    setSelectedTool(tool);
+  const selectedLayerIndex = useMachineStore(
+    (state) => state.selectedLayerIndex
+  );
+  const setSelectedTool = useMachineStore((state) => state.setSelectedTool);
+  const historyButtonsState = useMachineStore(
+    (state) => state.historyButtonsState
+  );
+  const setHistoryButtonsState = useMachineStore(
+    (state) => state.setHistoryButtonsState
+  );
 
-    DToolInst.selectTool(tool);
-  }
-  function DoUndoRedo(dir: number) {
-    DToolInst.undoredo(dir);
-  }
-  function eraseLayer() {
-    DToolInst.eraseCurrentLayer();
-  }
-  function noise() {
-    DToolInst.noise();
-  }
-  function webp() {
-    DToolInst.saveToWebp();
-  }
   useEffect(() => {
     DToolInst.init(layers, setHistoryButtonsState);
-    DToolInst.selectColor(colors[defaultColorIndex]);
-    DToolInst.selectLayer(defaultLayerIndex);
+    DToolInst.selectColor(colors[selectedColorIndex]);
+    DToolInst.selectLayer(selectedLayerIndex);
+    DToolInst.eraseCurrentLayer();
   }, []);
 
   return (
@@ -109,37 +53,58 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
         <div className="DrawingTool">
           <canvas className="drawing-canvas" id="drawingtool_canvas"></canvas>
           <div className="bottom">
-            <div className="btn clear">cl</div>
-            <div className="btn undo">un</div>
-            <div className="btn redo">re</div>
+            <div
+              className="btn"
+              onClick={() => {
+                DToolInst.eraseCurrentLayer();
+              }}
+            >
+              clear
+            </div>
+            <div
+              className={`btn ${!historyButtonsState[0] && "disabled"}`}
+              onClick={() => {
+                DToolInst.undoredo(-1);
+              }}
+            >
+              undo
+            </div>
+            <div
+              className={`btn ${!historyButtonsState[1] && "disabled"}`}
+              onClick={() => {
+                DToolInst.undoredo(1);
+              }}
+            >
+              redo
+            </div>
           </div>
           <div className="right">
-            <div className="btn pencil">pe</div>
-            <div className="btn paint">pa</div>
-            <div className="btn eraser">er</div>
-          </div>
-
-          <div className="toolbar-old">
-            <ColorPicker
-              colors={colors}
-              selectedColorIndex={selectedColorIndex}
-              selectedColor={selectedColor}
-              onSelected={selectColor}
-              onEraseLayer={eraseLayer}
-              onNoise={noise}
-              onWebp={webp}
-            />
-            <LayerPicker
-              layers={layers}
-              selectedLayerIndex={selectedLayerIndex}
-              onSelected={selectLayer}
-            />
-            <ToolSwitcher selectedTool={selectedTool} onSelected={selectTool} />
-            <UndoRedo
-              undoEnabled={historyButtonsState[0]}
-              redoEnabled={historyButtonsState[1]}
-              onPress={DoUndoRedo}
-            />
+            <div
+              className="btn"
+              onClick={() => {
+                setSelectedTool(0);
+                DToolInst.selectTool(0);
+              }}
+            >
+              pencil
+            </div>
+            <div
+              className="btn"
+              onClick={() => {
+                setSelectedTool(1);
+                DToolInst.selectTool(1);
+              }}
+            >
+              paint
+            </div>
+            <div
+              className="btn"
+              onClick={() => {
+                DToolInst.selectColor(null);
+              }}
+            >
+              eraser
+            </div>
           </div>
         </div>
       </Suspense>

@@ -1,58 +1,18 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { HexColorPicker } from "react-colorful";
-import { useLoader } from "react-three-fiber";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { Html } from "@react-three/drei";
+import { useThree } from "react-three-fiber";
+import { aspectRatio } from "../../utils/constants";
+import useMachineStore from "../../store";
 
-type ColorPickerProps = {
-  colors: string[];
-  selectedColorIndex: number;
-  onSelected: any;
-  onEraseLayer: any;
-  onNoise: any;
-  onWebp: any;
-  selectedColor: string | null;
-};
-
-type ColorButtonProps = {
-  color?: string;
-  onSelected: any;
-  selectedColorIndex: number;
-  index: number;
-};
-
-type CurrentColorProps = {
-  selectedColor: string | null;
-  onSelected: any;
-};
-
-const ColorButton: ({
-  color,
-  index,
-  selectedColorIndex,
-  onSelected,
-}: ColorButtonProps) => JSX.Element = ({
-  color,
-  index,
-  selectedColorIndex,
-  onSelected,
-}) => {
-  return (
-    <div
-      className={
-        "color-button " + (selectedColorIndex === index ? "selected " : "")
-      }
-      onClick={() => onSelected(index, color)}
-      style={{ backgroundColor: color }}
-    ></div>
-  );
-};
-
-const CurrentColor: ({
-  selectedColor,
-  onSelected,
-}: CurrentColorProps) => JSX.Element = ({ selectedColor, onSelected }) => {
-  const bgcolor = selectedColor || "#FFFFFF";
+const ColorPicker: () => JSX.Element = () => {
+  const DToolInst = useMachineStore((state) => state.DToolInst);
+  const selectedColor = useMachineStore((state) => state.selectedColor);
+  const setSelectedColor = useMachineStore((state) => state.setSelectedColor);
+  const { viewport } = useThree();
   const [hexPickerVisible, setHexPickerVisible] = useState(false);
+  const colorPicker = useRef(null);
+  const bgcolor = selectedColor || "#FFFFFF";
 
   const handleCloseHexPicker: any = () => {
     setHexPickerVisible(false);
@@ -68,78 +28,45 @@ const CurrentColor: ({
         .getElementById("hexcolorpicker")
         ?.addEventListener("mouseup", handelClosePrevent);
     }, 100);
-
     document.addEventListener("mouseup", handleCloseHexPicker);
   }
   function handleChange(color: string) {
-    onSelected(-1, color);
+    console.log("ColorPicker color", color);
+    if (!color) return;
+    setSelectedColor(color);
+    DToolInst.selectColor(color);
   }
-  return hexPickerVisible ? (
-    <div className="current-color" style={{ backgroundColor: bgcolor }}>
-      <div style={{ transform: "scale(2)" }} id="hexcolorpicker">
-        <HexColorPicker color={bgcolor} onChange={handleChange} />
-      </div>
-    </div>
-  ) : (
-    <div
-      className="current-color"
-      style={{ backgroundColor: bgcolor }}
-      onClick={handleShowHexPicker}
-    ></div>
-  );
-};
-
-const ColorPicker: ({
-  colors,
-  selectedColorIndex,
-  selectedColor,
-  onSelected,
-  onEraseLayer,
-  onNoise,
-  onWebp,
-}: ColorPickerProps) => JSX.Element = ({
-  colors,
-  selectedColorIndex,
-  selectedColor,
-  onSelected,
-  onEraseLayer,
-  onNoise,
-  onWebp,
-}) => {
-  const gltfEraser = useLoader(GLTFLoader, "assets/models/EraseButton.glb");
-  const gltfClear = useLoader(GLTFLoader, "assets/models/ClearButton.glb");
 
   return (
-    <div className="color-picker">
-      <div className="color-bar">
-        {colors.map((color: string, i) => {
-          return (
-            <ColorButton
-              color={color}
-              index={i}
-              selectedColorIndex={selectedColorIndex}
-              key={i}
-              onSelected={onSelected}
-            />
-          );
-        })}
-      </div>
-      <div className="color-extra">
-        <CurrentColor
-          selectedColor={selectedColor}
-          onSelected={onSelected}
-        ></CurrentColor>
-        <div className="eraser" onClick={() => onSelected(-1, null)}>
-          Eraser
-        </div>
-        <div className="clear" onClick={onEraseLayer}>
-          Clear
-        </div>
-        <div className="savewebp" onClick={onWebp}>
-          Export Webp
+    <Html
+      scale={[
+        viewport.width / 24 / aspectRatio,
+        viewport.width / 40,
+        viewport.width / 44,
+      ]}
+      position={[
+        (-146 * viewport.width) / 1000,
+        (-130 * viewport.width) / 1000,
+        0.2,
+      ]}
+      rotation={[0.0, 0.0, 0.0]}
+      transform
+    >
+      <div
+        className="ColorPicker"
+        style={{ backgroundColor: bgcolor }}
+        onClick={handleShowHexPicker}
+      >
+        <div
+          className={`hex ${!hexPickerVisible && "hidden"}`}
+          style={{ transform: "scale(2)" }}
+          id="hexcolorpicker"
+        >
+          <HexColorPicker color={bgcolor} onChange={handleChange} />
         </div>
       </div>
-    </div>
+    </Html>
   );
 };
+
 export default ColorPicker;

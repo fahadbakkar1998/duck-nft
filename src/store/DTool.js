@@ -22,7 +22,7 @@ function hexToRgb(hex) {
 }
 
 let enableCall = true;
-export class DTool {
+export default class DTool {
   constructor(pixelSize, canvasSize) {
     this.pixelSize = pixelSize;
     this.canvasSize = canvasSize;
@@ -80,11 +80,9 @@ export class DTool {
   }
   undoredo(dir) {
     this.currentHistoryPos -= dir;
-
     if (this.currentHistoryPos <= 0) this.currentHistoryPos = 0;
     if (this.currentHistoryPos >= this.history.length)
       this.currentHistoryPos = this.history.length - 1;
-
     _.each(this.layers, (l, i) => {
       l.ctx.putImageData(this.history[this.currentHistoryPos][i], 0, 0);
     });
@@ -189,11 +187,12 @@ export class DTool {
   }
   mouseDownHandler(e) {
     if (this.selectedTool === 0) {
+      // pencil
       document.addEventListener("mouseup", this.mouseUpHandlerBinded);
       this.c.addEventListener("mousemove", this.mouseMoveHandlerBinded);
       this.mouseMoveHandler(e);
     } else {
-      // fill
+      // paint
       this.fillHandler(e);
       this.draw();
       this.saveHistory();
@@ -231,6 +230,7 @@ export class DTool {
         reader.readAsDataURL(blob);
         reader.onloadend = function () {
           var base64data = reader.result;
+          console.log("base64data", base64data);
         };
       })
       .catch(console.error);
@@ -324,5 +324,3 @@ export class DTool {
     }
   }
 }
-
-export const DToolInst = new DTool(10, 40);

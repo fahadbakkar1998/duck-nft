@@ -7,7 +7,7 @@ import "./index.css";
 import ImageViewer from "react-simple-image-viewer";
 
 import { useEffect } from "react";
-import { MachineMode } from "../../utils/types";
+import { MachineMode } from "../../utils/constants";
 
 export const Viewer = () => {
   const currentMachineMode = useMachineStore((state) => state.currentMode);

@@ -7,6 +7,7 @@ import { useState } from "react";
 import { filterProps } from "framer-motion";
 import { aspectRatio } from "../../utils/constants";
 import AltScreen from "./AltScreen";
+import ColorPicker from "../DrawingTool/ColorPicker";
 
 export const MachineLayout = () => {
   const { viewport } = useThree();
@@ -23,6 +24,7 @@ export const MachineLayout = () => {
       </mesh>
       <DuckCylinder />
       <AltScreen />
+      <ColorPicker></ColorPicker>
     </group>
   );
 };

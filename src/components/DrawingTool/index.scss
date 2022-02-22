@@ -16,6 +16,10 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    &.disabled {
+      background-color: gray;
+      cursor: default;
+    }
   }
   .drawing-canvas {
     width: 420px;
@@ -38,5 +42,22 @@
     flex-direction: column;
     justify-content: center;
     gap: 25px;
+  }
+  .toolbar-old {
+    & .current-color {
+      width: 20px;
+      height: 20px;
+      background-color: green;
+    }
+  }
+}
+
+.ColorPicker {
+  width: 160px;
+  height: 160px;
+  border-radius: 80px;
+  cursor: pointer;
+  .hex.hidden {
+    display: none;
   }
 }

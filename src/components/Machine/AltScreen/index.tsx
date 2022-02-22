@@ -1,15 +1,15 @@
 import { Html } from "@react-three/drei";
 import useMachineStore from "../../../store";
-import { MachineMode } from "../../../utils/types";
+import { MachineMode, aspectRatio } from "../../../utils/constants";
 import Shopping from "./Shopping";
 import Custom from "./Custom";
 import Admin from "./Admin";
 import { useThree } from "react-three-fiber";
-import { aspectRatio } from "../../../utils/constants";
 import "./index.scss";
 
 const AltScreen: () => JSX.Element = () => {
   const currentMode = useMachineStore((state) => state.currentMode);
+  const DToolInst = useMachineStore((state) => state.DToolInst);
   const { viewport } = useThree();
 
   return (
@@ -34,7 +34,9 @@ const AltScreen: () => JSX.Element = () => {
           <Admin></Admin>
         </div>
         <div className="footer">
-          <div className="webp">Export Webp</div>
+          <div className="webp" onClick={() => DToolInst.saveToWebp()}>
+            Export Webp
+          </div>
           <div
             className={`btn bg-info ${
               currentMode === MachineMode.Shopping ? "fadeIn" : "fadeOut"

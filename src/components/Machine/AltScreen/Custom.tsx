@@ -1,5 +1,5 @@
 import useMachineStore from "../../../store";
-import { MachineMode } from "../../../utils/types";
+import { MachineMode } from "../../../utils/constants";
 
 const Custom: () => JSX.Element = () => {
   const currentMode = useMachineStore((state) => state.currentMode);

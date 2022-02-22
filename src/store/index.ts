@@ -1,18 +1,34 @@
 import create, { SetState } from "zustand";
-import { MachineMode } from "../utils/types";
-
-const defaultLayerIndex = 0;
-const defaultColorIndex = 0;
+import {
+  MachineMode,
+  defaultLayerIndex,
+  defaultColorIndex,
+  colors,
+} from "../utils/constants";
+import DTool from "./DTool";
 
 type MachineStore = {
+  // main
   currentMode: MachineMode;
-  setCurrentMode: (mode: MachineMode) => void;
+  setCurrentMode: (val: MachineMode) => void;
   currentDuckId: number;
-  setCurrentDuckId: (id: number) => void;
-  gridRow: any;
-  updateGridRow: (value: any) => void;
+  setCurrentDuckId: (val: number) => void;
+  gridRow: string | null;
+  updateGridRow: (val: string | null) => void;
   filterVal: any;
-  updateFilterVal: (value: any) => void;
+  updateFilterVal: (val: any) => void;
+  // color picker
+  DToolInst: DTool;
+  selectedLayerIndex: number;
+  setSelectedLayerIndex: (val: number) => void;
+  selectedColorIndex: number;
+  setSelectedColorIndex: (val: number) => void;
+  selectedColor: string | null;
+  setSelectedColor: (val: string | null) => void;
+  selectedTool: number;
+  setSelectedTool: (val: number) => void;
+  historyButtonsState: any;
+  setHistoryButtonsState: (val: any) => void;
 };
 
 export const useMachineStore = create<MachineStore>(
@@ -22,14 +38,17 @@ export const useMachineStore = create<MachineStore>(
     setCurrentMode: (mode: MachineMode): void => {
       set({ currentMode: mode });
     },
+
     currentDuckId: 1,
     setCurrentDuckId: (id: number): void => {
       set({ currentDuckId: id });
     },
+
     gridRow: "3x",
     updateGridRow: (value: any): void => {
       set({ gridRow: value });
     },
+
     filterVal: {
       string: "",
     },
@@ -38,6 +57,32 @@ export const useMachineStore = create<MachineStore>(
     },
 
     // color picker
+    DToolInst: new DTool(10, 40),
+
+    selectedLayerIndex: defaultLayerIndex,
+    setSelectedLayerIndex: (val: number): void => {
+      set({ selectedLayerIndex: val });
+    },
+
+    selectedColorIndex: defaultColorIndex,
+    setSelectedColorIndex: (val: number): void => {
+      set({ selectedColorIndex: val });
+    },
+
+    selectedColor: colors[defaultLayerIndex],
+    setSelectedColor: (val: string | null): void => {
+      set({ selectedColor: val });
+    },
+
+    selectedTool: 0,
+    setSelectedTool: (val: number): void => {
+      set({ selectedTool: val });
+    },
+
+    historyButtonsState: [false, false],
+    setHistoryButtonsState: (val: any): void => {
+      set({ historyButtonsState: val });
+    },
   })
 );
 
