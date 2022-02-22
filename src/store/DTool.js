@@ -22,7 +22,7 @@ function hexToRgb(hex) {
 }
 
 let enableCall = true;
-class DTool {
+export class DTool {
   constructor(pixelSize, canvasSize) {
     this.pixelSize = pixelSize;
     this.canvasSize = canvasSize;
@@ -325,6 +325,4 @@ class DTool {
   }
 }
 
-const dtool = new DTool(10, 40);
-
-export default dtool;
+export const DToolInst = new DTool(10, 40);

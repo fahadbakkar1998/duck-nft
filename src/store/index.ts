@@ -1,5 +1,8 @@
-import create, { SetState, GetState } from "zustand";
+import create, { SetState } from "zustand";
 import { MachineMode } from "../utils/types";
+
+const defaultLayerIndex = 0;
+const defaultColorIndex = 0;
 
 type MachineStore = {
   currentMode: MachineMode;
@@ -14,6 +17,7 @@ type MachineStore = {
 
 export const useMachineStore = create<MachineStore>(
   (set: SetState<MachineStore>) => ({
+    // main
     currentMode: MachineMode.Shopping,
     setCurrentMode: (mode: MachineMode): void => {
       set({ currentMode: mode });
@@ -32,6 +36,8 @@ export const useMachineStore = create<MachineStore>(
     updateFilterVal: (value: any): void => {
       set({ filterVal: value });
     },
+
+    // color picker
   })
 );
 

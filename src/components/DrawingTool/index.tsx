@@ -1,10 +1,10 @@
 import { Suspense, useEffect, useState } from "react";
 import { Html } from "@react-three/drei";
 import ColorPicker from "./color-picker";
-import CanvasDraw from "./canvas-draw";
-import LayerPicker from "./layer-picker";
-import ToolSwitcher from "./tool-switcher";
-import UndoRedo from "./undoredo";
+import { DToolInst } from "../../store/DTool";
+import LayerPicker from "./LayerPicker";
+import ToolSwitcher from "./ToolSwitcher";
+import UndoRedo from "./UndoRedo";
 import duckbill from "../../assets/duck-bill.png";
 import "./index.scss";
 
@@ -62,35 +62,35 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
     false,
   ]);
   function selectLayer(_selectedLayerIndex: number) {
-    CanvasDraw.selectLayer(_selectedLayerIndex);
+    DToolInst.selectLayer(_selectedLayerIndex);
     setSelectedLayerIndex(_selectedLayerIndex);
   }
   function selectColor(index: number, _color: string | null) {
     setSelectedColor(_color);
     setSelectedColorIndex(index);
-    CanvasDraw.selectColor(_color);
+    DToolInst.selectColor(_color);
   }
   function selectTool(tool: number) {
     setSelectedTool(tool);
 
-    CanvasDraw.selectTool(tool);
+    DToolInst.selectTool(tool);
   }
   function DoUndoRedo(dir: number) {
-    CanvasDraw.undoredo(dir);
+    DToolInst.undoredo(dir);
   }
   function eraseLayer() {
-    CanvasDraw.eraseCurrentLayer();
+    DToolInst.eraseCurrentLayer();
   }
   function noise() {
-    CanvasDraw.noise();
+    DToolInst.noise();
   }
   function webp() {
-    CanvasDraw.saveToWebp();
+    DToolInst.saveToWebp();
   }
   useEffect(() => {
-    CanvasDraw.init(layers, setHistoryButtonsState);
-    CanvasDraw.selectColor(colors[defaultColorIndex]);
-    CanvasDraw.selectLayer(defaultLayerIndex);
+    DToolInst.init(layers, setHistoryButtonsState);
+    DToolInst.selectColor(colors[defaultColorIndex]);
+    DToolInst.selectLayer(defaultLayerIndex);
   }, []);
 
   return (
@@ -119,7 +119,7 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
             <div className="btn eraser">er</div>
           </div>
 
-          {/* <div className="toolbar-old">
+          <div className="toolbar-old">
             <ColorPicker
               colors={colors}
               selectedColorIndex={selectedColorIndex}
@@ -140,7 +140,7 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
               redoEnabled={historyButtonsState[1]}
               onPress={DoUndoRedo}
             />
-          </div> */}
+          </div>
         </div>
       </Suspense>
     </Html>
