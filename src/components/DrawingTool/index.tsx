@@ -1,9 +1,7 @@
 import { Suspense, useEffect, useState, useLayoutEffect } from "react";
 import { Html } from "@react-three/drei";
 import { useMachineStore } from "../../store";
-import {
-  colors,
-} from "../../utils/constants";
+import { colors } from "../../utils/constants";
 import LayerPicker from "./LayerPicker";
 import duckbill from "../../assets/duck-bill.png";
 import "./index.scss";

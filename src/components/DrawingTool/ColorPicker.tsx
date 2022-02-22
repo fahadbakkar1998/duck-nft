@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useEffect } from "react";
 import { HexColorPicker } from "react-colorful";
 import { Html } from "@react-three/drei";
 import { useThree } from "react-three-fiber";
@@ -10,32 +10,38 @@ const ColorPicker: () => JSX.Element = () => {
   const selectedColor = useMachineStore((state) => state.selectedColor);
   const setSelectedColor = useMachineStore((state) => state.setSelectedColor);
   const { viewport } = useThree();
-  const [hexPickerVisible, setHexPickerVisible] = useState(false);
-  const colorPicker = useRef(null);
-  const bgcolor = selectedColor || "#FFFFFF";
+  const bgColor = selectedColor || "#FFFFFF";
 
-  const handleCloseHexPicker: any = () => {
-    setHexPickerVisible(false);
-    document.removeEventListener("mouseup", handleCloseHexPicker);
-  };
-  const handelClosePrevent: any = (e: any) => {
-    e.stopPropagation();
-  };
-  function handleShowHexPicker() {
-    setHexPickerVisible(true);
-    setTimeout(() => {
-      document
-        .getElementById("hexcolorpicker")
-        ?.addEventListener("mouseup", handelClosePrevent);
-    }, 100);
-    document.addEventListener("mouseup", handleCloseHexPicker);
-  }
-  function handleChange(color: string) {
-    console.log("ColorPicker color", color);
-    if (!color) return;
-    setSelectedColor(color);
-    DToolInst.selectColor(color);
-  }
+  // const handleCloseHexPicker: any = () => {
+  //   setHexPickerVisible(false);
+  //   document.removeEventListener("mouseup", handleCloseHexPicker);
+  // };
+  // const handelClosePrevent: any = (e: any) => {
+  //   e.stopPropagation();
+  // };
+  // function handleShowHexPicker() {
+  //   setHexPickerVisible(true);
+  //   setTimeout(() => {
+  //     document
+  //       .getElementById("hexcolorpicker")
+  //       ?.addEventListener("mouseup", handelClosePrevent);
+  //   }, 100);
+  //   document.addEventListener("mouseup", handleCloseHexPicker);
+  // }
+
+  useEffect(() => {
+    const satElements = Array.from(
+      document.getElementsByClassName(
+        "react-colorful__saturation"
+      ) as HTMLCollectionOf<HTMLElement>
+    );
+    if (satElements.length) {
+      satElements[0].addEventListener("mouseup", (e) => e.stopPropagation());
+      document.addEventListener("mouseup", (e) => {
+        satElements[0].style.display = "none";
+      });
+    }
+  }, []);
 
   return (
     <Html
@@ -54,16 +60,26 @@ const ColorPicker: () => JSX.Element = () => {
     >
       <div
         className="ColorPicker"
-        style={{ backgroundColor: bgcolor }}
-        onClick={handleShowHexPicker}
+        style={{ backgroundColor: bgColor }}
+        onClick={() => {
+          const satElements = Array.from(
+            document.getElementsByClassName(
+              "react-colorful__saturation"
+            ) as HTMLCollectionOf<HTMLElement>
+          );
+          if (satElements.length) {
+            satElements[0].style.display = "block";
+          }
+        }}
       >
-        <div
-          className={`hex ${!hexPickerVisible && "hidden"}`}
-          style={{ transform: "scale(2)" }}
-          id="hexcolorpicker"
-        >
-          <HexColorPicker color={bgcolor} onChange={handleChange} />
-        </div>
+        <HexColorPicker
+          color={bgColor}
+          onChange={(color) => {
+            if (!color) return;
+            setSelectedColor(color);
+            DToolInst.selectColor(color);
+          }}
+        />
       </div>
     </Html>
   );

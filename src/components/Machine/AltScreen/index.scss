@@ -7,6 +7,7 @@
   & .fadeOut {
     opacity: 0;
     transition: 3s;
+    height: 0 !important;
     transition-timing-function: ease-in-out;
   }
   .content {
@@ -43,7 +44,7 @@
   .footer {
     position: relative;
     margin-top: 40px;
-    .webp {
+    .btn {
       position: absolute;
       top: -6px;
       left: 20px;
@@ -55,24 +56,14 @@
       display: flex;
       justify-content: center;
       cursor: pointer;
-    }
-    .btn {
-      opacity: 0 !important; // temp
-      position: absolute;
-      right: 0;
-      border: 0;
-      border-radius: 12px;
-      text-align: center;
-      align-items: center;
-      background-color: gray;
-      padding: 0 20px;
-      font-size: 40px;
-      cursor: pointer;
       &.bg-info {
         background-color: #6fe5de;
       }
       &.bg-danger {
         background-color: #dc3545;
+      }
+      &.bg-yellow {
+        background-color: yellow;
       }
     }
   }

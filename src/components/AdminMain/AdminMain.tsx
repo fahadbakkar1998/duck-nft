@@ -1,6 +1,4 @@
-import { render } from "react-dom";
-import { useEffect, useRef, useState } from "react";
-import Select from "react-select";
+import { useRef } from "react";
 import "./style.scss";
 import { Html } from "@react-three/drei";
 

@@ -17,6 +17,7 @@ type MachineStore = {
   updateGridRow: (val: string | null) => void;
   filterVal: any;
   updateFilterVal: (val: any) => void;
+
   // color picker
   DToolInst: DTool;
   selectedLayerIndex: number;
@@ -29,6 +30,8 @@ type MachineStore = {
   setSelectedTool: (val: number) => void;
   historyButtonsState: any;
   setHistoryButtonsState: (val: any) => void;
+  customStep: number;
+  setCustomStep: (val: number) => void;
 };
 
 export const useMachineStore = create<MachineStore>(
@@ -82,6 +85,11 @@ export const useMachineStore = create<MachineStore>(
     historyButtonsState: [false, false],
     setHistoryButtonsState: (val: any): void => {
       set({ historyButtonsState: val });
+    },
+
+    customStep: 0,
+    setCustomStep: (val: number): void => {
+      set({ customStep: val });
     },
   })
 );

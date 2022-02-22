@@ -43,13 +43,6 @@
     justify-content: center;
     gap: 25px;
   }
-  .toolbar-old {
-    & .current-color {
-      width: 20px;
-      height: 20px;
-      background-color: green;
-    }
-  }
 }
 
 .ColorPicker {
@@ -57,7 +50,23 @@
   height: 160px;
   border-radius: 80px;
   cursor: pointer;
-  .hex.hidden {
+  & .react-colorful {
+    width: 0;
+    height: 0;
+  }
+  & .react-colorful__saturation {
     display: none;
+    position: fixed;
+    width: 200px;
+    height: 200px;
+    top: -30px;
+    left: -27px;
+  }
+  & .react-colorful__hue {
+    position: fixed;
+    width: 444px;
+    height: 30px;
+    top: 182px;
+    left: 210px;
   }
 }

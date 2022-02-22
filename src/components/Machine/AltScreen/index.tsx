@@ -9,8 +9,11 @@ import "./index.scss";
 
 const AltScreen: () => JSX.Element = () => {
   const currentMode = useMachineStore((state) => state.currentMode);
+  const customStep = useMachineStore((state) => state.customStep);
+  const setCustomStep = useMachineStore((state) => state.setCustomStep);
   const DToolInst = useMachineStore((state) => state.DToolInst);
   const { viewport } = useThree();
+  console.log(customStep)
 
   return (
     <Html
@@ -34,9 +37,6 @@ const AltScreen: () => JSX.Element = () => {
           <Admin></Admin>
         </div>
         <div className="footer">
-          <div className="webp" onClick={() => DToolInst.saveToWebp()}>
-            Export Webp
-          </div>
           <div
             className={`btn bg-info ${
               currentMode === MachineMode.Shopping ? "fadeIn" : "fadeOut"
@@ -45,8 +45,24 @@ const AltScreen: () => JSX.Element = () => {
             Buy Duck
           </div>
           <div
+            className={`btn bg-yellow ${
+              currentMode === MachineMode.Customization && customStep === 0
+                ? "fadeIn"
+                : "fadeOut"
+            }`}
+            onClick={() => {
+              console.log('test')
+              setCustomStep(1);
+              DToolInst.saveToWebp();
+            }}
+          >
+            Export Webp
+          </div>
+          <div
             className={`btn bg-info ${
-              currentMode === MachineMode.Customization ? "fadeIn" : "fadeOut"
+              currentMode === MachineMode.Customization && customStep === 1
+                ? "fadeIn"
+                : "fadeOut"
             }`}
           >
             Mint it

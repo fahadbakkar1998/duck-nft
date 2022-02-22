@@ -230,7 +230,6 @@ export default class DTool {
         reader.readAsDataURL(blob);
         reader.onloadend = function () {
           var base64data = reader.result;
-          console.log("base64data", base64data);
         };
       })
       .catch(console.error);
