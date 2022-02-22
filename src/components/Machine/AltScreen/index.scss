@@ -21,7 +21,7 @@
       height: 100%;
       &-img {
         width: 100%;
-        height: 100%;
+        // height: 100%;
       }
     }
     .Custom {
@@ -43,7 +43,21 @@
   .footer {
     position: relative;
     margin-top: 40px;
+    .webp {
+      position: absolute;
+      top: -6px;
+      left: 20px;
+      width: 168px;
+      height: 40px;
+      background-color: gold;
+      border-radius: 4px;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+    }
     .btn {
+      opacity: 0 !important; // temp
       position: absolute;
       right: 0;
       border: 0;

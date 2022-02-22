@@ -1,9 +1,9 @@
 import useMachineStore from "../../../store";
-import { MachineMode } from "../../../types/types";
+import { MachineMode } from "../../../utils/types";
 
 const Shopping: () => JSX.Element = () => {
   const currentMode = useMachineStore((state) => state.currentMode);
-  const currentDuckID = useMachineStore((state) => state.currentDuckID);
+  const currentDuckId = useMachineStore((state) => state.currentDuckId);
 
   return (
     <div
@@ -11,11 +11,11 @@ const Shopping: () => JSX.Element = () => {
         currentMode === MachineMode.Shopping ? "fadeIn" : "fadeOut"
       }`}
     >
-      {currentDuckID !== 0 && (
+      {currentDuckId !== 0 && (
         <img
           className="Shopping-img"
           alt={""}
-          src={require(`../../../assets/img/ducks/crypto_duck_${currentDuckID}.svg`)}
+          src={require(`../../../assets/img/ducks/crypto_duck_${currentDuckId}.svg`)}
         />
       )}
     </div>

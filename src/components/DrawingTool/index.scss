@@ -1,0 +1,42 @@
+.DrawingTool {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // & * {
+  //   border: 1px solid red;
+  // }
+  & .btn {
+    border: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: aquamarine;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .drawing-canvas {
+    width: 420px;
+    height: 420px;
+    border-radius: 140px;
+  }
+  .bottom {
+    position: fixed;
+    bottom: -55px;
+    left: 25%;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+  }
+  .right {
+    position: fixed;
+    right: -55px;
+    bottom: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+  }
+}

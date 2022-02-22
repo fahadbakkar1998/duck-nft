@@ -1,11 +1,13 @@
-import { useEffect, useState, Suspense } from "react";
-
+import { Suspense, useEffect, useState } from "react";
+import { Html } from "@react-three/drei";
 import ColorPicker from "./color-picker";
 import CanvasDraw from "./canvas-draw";
 import LayerPicker from "./layer-picker";
 import ToolSwitcher from "./tool-switcher";
 import UndoRedo from "./undoredo";
-import duckbill from "../assets/duck-bill.png";
+import duckbill from "../../assets/duck-bill.png";
+import "./index.scss";
+
 const colors = [
   "#000000",
   "#464646",
@@ -42,10 +44,11 @@ let layers: any[] = [
   { label: "Bill", preset: duckbill, disabled: true },
   // {label:'Glasses'},
 ];
+
 const defaultLayerIndex = 0;
 const defaultColorIndex = 0;
 
-const DTool: () => JSX.Element = () => {
+const DrawingTool: (props: any) => JSX.Element = (props: any) => {
   const [selectedLayerIndex, setSelectedLayerIndex] =
     useState(defaultLayerIndex);
   const [selectedColorIndex, setSelectedColorIndex] =
@@ -86,35 +89,61 @@ const DTool: () => JSX.Element = () => {
   }
   useEffect(() => {
     CanvasDraw.init(layers, setHistoryButtonsState);
-
     CanvasDraw.selectColor(colors[defaultColorIndex]);
     CanvasDraw.selectLayer(defaultLayerIndex);
   }, []);
 
   return (
-    <div>
+    <Html
+      distanceFactor={2.5}
+      position={props.isFront ? [0.0, 0.1, 0.0] : [0.0, -0.1, 0.0]}
+      rotation={
+        props.isFront
+          ? [Math.PI / 2, Math.PI, Math.PI / 2]
+          : [Math.PI / 2, -Math.PI * 2, Math.PI / 2]
+      }
+      transform
+      occlude
+    >
       <Suspense fallback={null}>
-        <canvas className="main-canvas" id="dtool-canvas"></canvas>
-        <div className="toolbar">
-          <ColorPicker
-            colors={colors}
-            selectedColorIndex={selectedColorIndex}
-            selectedColor={selectedColor}
-            onSelected={selectColor}
-            onEraseLayer={eraseLayer}
-            onNoise={noise}
-            onWebp={webp}
-          />
-          {/* <LayerPicker layers={layers} selectedLayerIndex={selectedLayerIndex} onSelected={selectLayer}/> */}
-          <ToolSwitcher selectedTool={selectedTool} onSelected={selectTool} />
-          <UndoRedo
-            undoEnabled={historyButtonsState[0]}
-            redoEnabled={historyButtonsState[1]}
-            onPress={DoUndoRedo}
-          />
+        <div className="DrawingTool">
+          <canvas className="drawing-canvas" id="drawingtool_canvas"></canvas>
+          <div className="bottom">
+            <div className="btn clear">cl</div>
+            <div className="btn undo">un</div>
+            <div className="btn redo">re</div>
+          </div>
+          <div className="right">
+            <div className="btn pencil">pe</div>
+            <div className="btn paint">pa</div>
+            <div className="btn eraser">er</div>
+          </div>
+
+          {/* <div className="toolbar-old">
+            <ColorPicker
+              colors={colors}
+              selectedColorIndex={selectedColorIndex}
+              selectedColor={selectedColor}
+              onSelected={selectColor}
+              onEraseLayer={eraseLayer}
+              onNoise={noise}
+              onWebp={webp}
+            />
+            <LayerPicker
+              layers={layers}
+              selectedLayerIndex={selectedLayerIndex}
+              onSelected={selectLayer}
+            />
+            <ToolSwitcher selectedTool={selectedTool} onSelected={selectTool} />
+            <UndoRedo
+              undoEnabled={historyButtonsState[0]}
+              redoEnabled={historyButtonsState[1]}
+              onPress={DoUndoRedo}
+            />
+          </div> */}
         </div>
       </Suspense>
-    </div>
+    </Html>
   );
 };
-export default DTool;
+export default DrawingTool;

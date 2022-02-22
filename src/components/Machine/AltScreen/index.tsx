@@ -1,12 +1,12 @@
 import { Html } from "@react-three/drei";
 import useMachineStore from "../../../store";
-import { MachineMode } from "../../../types/types";
+import { MachineMode } from "../../../utils/types";
 import Shopping from "./Shopping";
 import Custom from "./Custom";
 import Admin from "./Admin";
 import { useThree } from "react-three-fiber";
-import "./index.scss";
 import { aspectRatio } from "../../../utils/constants";
+import "./index.scss";
 
 const AltScreen: () => JSX.Element = () => {
   const currentMode = useMachineStore((state) => state.currentMode);
@@ -34,6 +34,7 @@ const AltScreen: () => JSX.Element = () => {
           <Admin></Admin>
         </div>
         <div className="footer">
+          <div className="webp">Export Webp</div>
           <div
             className={`btn bg-info ${
               currentMode === MachineMode.Shopping ? "fadeIn" : "fadeOut"

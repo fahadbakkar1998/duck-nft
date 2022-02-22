@@ -2,7 +2,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import useMachineStore from "../../../store";
-import { MachineMode } from "../../../types/types";
+import { MachineMode } from "../../../utils/types";
 
 const SampleNextArrow = (props: any) => {
   const { className, style, onClick } = props;

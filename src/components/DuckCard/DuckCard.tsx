@@ -1,33 +1,18 @@
 import "./DuckCard.scss";
 import { useEffect, useRef, useState } from "react";
-import { useScreenStore } from "../store";
 import { useMachineStore } from "../../store";
-import { displayPartsToString } from "typescript";
 
 const DuckCard = (props: any) => {
   const [flag, setFlag] = useState("block");
-  const currentGrid = useScreenStore((state) => state.gridRow);
-
-  const currentDuck = useScreenStore((state) => state.currentDuck);
-
-  const currentFilterVal = useScreenStore((state) => state.filterVal);
-
-  const updateCurrentDuck = useScreenStore((state) => state.updateCurrentDuck);
-
+  const gridRow = useMachineStore((state) => state.gridRow);
+  const currentDuckId = useMachineStore((state) => state.currentDuckId);
+  const currentFilterVal = useMachineStore((state) => state.filterVal);
   const numberRef = useRef<HTMLHeadingElement>(null);
+  const cardRef = useRef<HTMLHeadingElement>(null);
+  const setCurrentDuckId = useMachineStore((state) => state.setCurrentDuckId);
 
-  const cardImages__item = useRef<HTMLHeadingElement>(null);
-
-  const setCurrentDuckID = useMachineStore((state) => state.setCurrentDuckID);
-
-  const isSelected = () => currentDuck.number === myNumber;
-
-  const clickAction = () => {
-    setCurrentDuckID(parseInt(myNumber));
-    updateCurrentDuck({ number: myNumber });
-  };
-  const itemObj = { ...props.attribute };
   useEffect(() => {
+    const itemObj = { ...props.attribute };
     switch (currentFilterVal) {
       case "available":
         setFlag("block");
@@ -35,73 +20,54 @@ const DuckCard = (props: any) => {
           setFlag("none");
         }
         break;
-
       case "all":
         setFlag("block");
         break;
-
       case "custom":
         setFlag("block");
         if (!itemObj.isCustom) {
           setFlag("none");
         }
         break;
-
       case "sold":
         setFlag("block");
         if (!itemObj.owner) {
           setFlag("none");
         }
         break;
-
-      /////////////////////my duck///////////////////
-      // case 'myDuck':
-      //     setFlag('block');
-      //     if(itemObj.owner == currentUser){
-      //         setFlag('none');
-      //     }
-      //     break;
       default:
         break;
     }
-  }, [currentFilterVal]);
+  }, [currentFilterVal, props.attribute]);
 
   useEffect(() => {
-    if (currentGrid == "4x") {
-      cardImages__item.current!.style.width = "25%";
+    if (gridRow === "4x") {
+      cardRef.current!.style.width = "25%";
       numberRef.current!.style.fontSize = "4em";
     } else {
-      cardImages__item.current!.style.width = "33.3%";
+      cardRef.current!.style.width = "33.3%";
       numberRef.current!.style.fontSize = "5em";
     }
   });
 
-  const transformNumber = (num: any) =>
-    num.length === 1 ? "00" + num : num.length === 2 ? "0" + num : num;
-
-  const myNumber = transformNumber(props.number + "");
-
   return (
     <div
-      ref={cardImages__item}
-      id={`card_${myNumber}`}
-      className="cardImages__item"
-      style={{
-        display: flag,
-        //  zIndex: isSelected() ? 100 : 1,
-      }}
-      onClick={clickAction}
+      ref={cardRef}
+      className="DarkCard"
+      style={{ display: flag }}
+      onClick={() => setCurrentDuckId(parseInt(props.number))}
     >
       <div
-        className="cardImages__item__pic"
+        className="DarkCard__pic"
         style={{
-          border: isSelected() ? "10px solid #00fff3" : "unset",
+          border:
+            currentDuckId === props.number ? "10px solid #00fff3" : "unset",
         }}
       >
         <img alt="pic" src={props.img}></img>
       </div>
-      <div ref={numberRef} className="cardImages__item__number">
-        {myNumber}
+      <div ref={numberRef} className="DarkCard__number">
+        {props.number && props.number.toString().padStart(3, '0')}
       </div>
     </div>
   );

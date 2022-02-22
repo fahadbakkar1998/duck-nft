@@ -128,23 +128,6 @@ const ColorPicker: ({
           selectedColor={selectedColor}
           onSelected={onSelected}
         ></CurrentColor>
-        <Canvas
-          orthographic
-          camera={{ zoom: 115, position: [0, 0, 100] }}
-          shadows
-        >
-          <Suspense fallback={null}>
-            {/* <Cylinder args={[1.8, 1.8, 0.1, 50]} rotation={[0, 0, Math.PI / 2]}>
-              <meshBasicMaterial attach="material" color="#6C6C6C" />
-            </Cylinder> */}
-            {/* <primitive
-              object={gltfEraser.scene}
-              scale={[100, 100, 100]}
-              rotation={[0, 0, Math.PI / 2]}
-              position={[0, 0, 0]}
-            ></primitive> */}
-          </Suspense>
-        </Canvas>
         <div className="eraser" onClick={() => onSelected(-1, null)}>
           Eraser
         </div>

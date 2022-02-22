@@ -1,7 +1,7 @@
 import { Cylinder } from "@react-three/drei";
 import { useEffect, useRef, useState } from "react";
 import { a, useSpring, easings } from "@react-spring/three";
-import DrawingTool from "../DrawingTool/DrawingTool";
+import DrawingTool from "../DrawingTool";
 import useMachineStore from "../../store";
 import CardImageSection from "../CardImageSection/CardImageSection";
 import AdminMain from "../AdminMain/AdminMain";
@@ -16,7 +16,7 @@ let globalRotating = false;
 export const DuckCylinder = () => {
   const { viewport } = useThree();
   const [roundCount, setRoundCount] = useState(0);
-  const gltfDisk = useLoader(GLTFLoader, "assets/models/DuckDiskMerged.glb");
+  const gltfDisk = useLoader(GLTFLoader, "assets/models/DuckDisk.glb");
   const setCurrentMode = useMachineStore((state) => state.setCurrentMode);
 
   const [spring, setSpring] = useSpring(() => ({

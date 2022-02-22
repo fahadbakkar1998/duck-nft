@@ -39,7 +39,7 @@ class DTool {
   }
   init(layersSettings, historyChangeCallback) {
     this.historyChangeCallback = historyChangeCallback;
-    const c = document.getElementById("dtool-canvas");
+    const c = document.getElementById("drawingtool_canvas");
     if (!c) {
       setTimeout(() => {
         this.init(layersSettings, historyChangeCallback);

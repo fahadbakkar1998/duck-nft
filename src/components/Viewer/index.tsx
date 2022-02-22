@@ -7,15 +7,15 @@ import './index.css';
 import ImageViewer from "react-simple-image-viewer";
 
 import { useEffect } from "react";
-import { MachineMode } from "../../types/types";
+import { MachineMode } from "../../utils/types";
 
 
 export const Viewer = () => {
     const currentMachineMode = useMachineStore(state => state.currentMode);
     const setCurrentMode = useMachineStore(state => state.setCurrentMode);
 
-    const currentDuckID = useMachineStore(state => state.currentDuckID);
-    const setCurrentDuckID = useMachineStore(state => state.setCurrentDuckID)
+    const currentDuckId = useMachineStore(state => state.currentDuckId);
+    const setCurrentDuckId = useMachineStore(state => state.setCurrentDuckId)
 
 
     const changeMode= () => {
@@ -23,19 +23,19 @@ export const Viewer = () => {
             case 0: 
             {
                 setCurrentMode(1);
-                setCurrentDuckID(0);
+                setCurrentDuckId(0);
                 break;
             }
             case 1: 
             {
                 setCurrentMode(2); 
-                setCurrentDuckID(0);
+                setCurrentDuckId(0);
                 break;
             }
             case 2: 
             {
                 setCurrentMode(0); 
-                setCurrentDuckID(0);
+                setCurrentDuckId(0);
                 break;
             }
             default: break;

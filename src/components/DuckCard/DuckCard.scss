@@ -1,9 +1,9 @@
-.cardImages__item {
+.DarkCard {
   width: 33.3%;
   position: relative;
   z-index: 100;
-  .cardImages__item__number {
-    // display: none;
+  cursor: pointer;
+  .DarkCard__number {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -16,10 +16,10 @@
     background-color: bisque;
     opacity: 0;
     &:hover {
-        opacity: 0.8;
+      opacity: 0.8;
     }
-    &:hover  + .cardImages__item__pic {
-        opacity: 0.0;
+    &:hover + .DarkCard__pic {
+      opacity: 0;
     }
   }
 }
