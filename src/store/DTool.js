@@ -56,6 +56,7 @@ export default class DTool {
     this.ctx.imageSmoothingEnabled = false;
 
     this.initEvents();
+    this.eraseCurrentLayer(); // ron
     this.draw();
   }
   layersInit(layersSettings) {
@@ -79,6 +80,9 @@ export default class DTool {
     }
   }
   undoredo(dir) {
+    const curBtnStates = this.getURButtonsState();
+    if (dir === -1 && !curBtnStates[0]) return;
+    if (dir === 1 && !curBtnStates[1]) return;
     this.currentHistoryPos -= dir;
     if (this.currentHistoryPos <= 0) this.currentHistoryPos = 0;
     if (this.currentHistoryPos >= this.history.length)
@@ -146,8 +150,10 @@ export default class DTool {
   eraseCurrentLayer() {
     const layer = this.layers[this.selectedLayerIndex];
     layer.ctx.clearRect(0, 0, layer.ctx.canvas.width, layer.ctx.canvas.height);
-    this.saveHistory();
     this.draw();
+    this.history = []; // ron
+    this.currentHistoryPos = 0; // ron
+    this.historyChangeCallback(this.getURButtonsState()); // ron
   }
   mouseUpHandler(e) {
     document.removeEventListener("mouseup", this.mouseUpHandlerBinded);

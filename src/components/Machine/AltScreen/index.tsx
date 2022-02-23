@@ -13,7 +13,6 @@ const AltScreen: () => JSX.Element = () => {
   const setCustomStep = useMachineStore((state) => state.setCustomStep);
   const DToolInst = useMachineStore((state) => state.DToolInst);
   const { viewport } = useThree();
-  console.log(customStep)
 
   return (
     <Html
@@ -51,7 +50,6 @@ const AltScreen: () => JSX.Element = () => {
                 : "fadeOut"
             }`}
             onClick={() => {
-              console.log('test')
               setCustomStep(1);
               DToolInst.saveToWebp();
             }}

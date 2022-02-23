@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState, useLayoutEffect } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import { Html } from "@react-three/drei";
 import { useMachineStore } from "../../store";
 import { colors } from "../../utils/constants";
@@ -6,13 +6,14 @@ import LayerPicker from "./LayerPicker";
 import duckbill from "../../assets/duck-bill.png";
 import "./index.scss";
 
-let layers: any[] = [
+const layers: any[] = [
   { label: "Head" },
   { label: "Bill", preset: duckbill, disabled: true },
   // {label:'Glasses'},
 ];
 
 const DrawingTool: (props: any) => JSX.Element = (props: any) => {
+  const drawingCanvas = useRef<HTMLCanvasElement>(null);
   const DToolInst = useMachineStore((state) => state.DToolInst);
   const selectedColorIndex = useMachineStore(
     (state) => state.selectedColorIndex
@@ -32,7 +33,6 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
     DToolInst.init(layers, setHistoryButtonsState);
     DToolInst.selectColor(colors[selectedColorIndex]);
     DToolInst.selectLayer(selectedLayerIndex);
-    DToolInst.eraseCurrentLayer();
   }, []);
 
   return (
@@ -49,7 +49,11 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
     >
       <Suspense fallback={null}>
         <div className="DrawingTool">
-          <canvas className="drawing-canvas" id="drawingtool_canvas"></canvas>
+          <canvas
+            className="drawing-canvas"
+            ref={drawingCanvas}
+            id="drawingtool_canvas"
+          ></canvas>
           <div className="bottom">
             <div
               className="btn"
@@ -65,7 +69,7 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
                 DToolInst.undoredo(-1);
               }}
             >
-              undo
+              <img className="btn-img" alt="" src="/assets/images/undo.png" />
             </div>
             <div
               className={`btn ${!historyButtonsState[1] && "disabled"}`}
@@ -73,7 +77,7 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
                 DToolInst.undoredo(1);
               }}
             >
-              redo
+              <img className="btn-img" alt="" src="/assets/images/redo.png" />
             </div>
           </div>
           <div className="right">
@@ -82,26 +86,36 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
               onClick={() => {
                 setSelectedTool(0);
                 DToolInst.selectTool(0);
+                drawingCanvas.current!.style.cursor =
+                  "url('/assets/images/pencil.png'), default";
               }}
             >
-              pencil
+              <img className="btn-img" alt="" src="/assets/images/pencil.png" />
             </div>
             <div
               className="btn"
               onClick={() => {
                 setSelectedTool(1);
                 DToolInst.selectTool(1);
+                drawingCanvas.current!.style.cursor =
+                  "url('/assets/images/paintbucket.png'), default";
               }}
             >
-              paint
+              <img
+                className="btn-img"
+                alt=""
+                src="/assets/images/paintbucket.png"
+              />
             </div>
             <div
               className="btn"
               onClick={() => {
                 DToolInst.selectColor(null);
+                drawingCanvas.current!.style.cursor =
+                  "url('/assets/images/eraser.png'), default";
               }}
             >
-              eraser
+              <img className="btn-img" alt="" src="/assets/images/eraser.png" />
             </div>
           </div>
         </div>
@@ -109,4 +123,5 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
     </Html>
   );
 };
+
 export default DrawingTool;
