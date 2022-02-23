@@ -2,7 +2,7 @@ import img from "../../../src/assets/img/duck-base-holepunch.png";
 import { useLoader, useThree } from "react-three-fiber";
 import * as THREE from "three";
 import { a, useSpring, config } from "@react-spring/three";
-import { DuckCylinder } from "../Cylinder/Cylinder";
+import { DuckCylinder } from "../Cylinder/cylinder";
 import { useState } from "react";
 import { filterProps } from "framer-motion";
 import { aspectRatio } from "../../utils/constants";
