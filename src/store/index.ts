@@ -32,6 +32,10 @@ type MachineStore = {
   setHistoryButtonsState: (val: any) => void;
   customStep: number;
   setCustomStep: (val: number) => void;
+
+  // wallet
+  address: string | null;
+  setAddress: (val: string | null) => void;
 };
 
 export const useMachineStore = create<MachineStore>(
@@ -90,6 +94,12 @@ export const useMachineStore = create<MachineStore>(
     customStep: 0,
     setCustomStep: (val: number): void => {
       set({ customStep: val });
+    },
+
+    // wallet
+    address: "",
+    setAddress: (val: string | null): void => {
+      set({ address: val });
     },
   })
 );

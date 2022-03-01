@@ -9,6 +9,7 @@ import { aspectRatio } from "../../utils/constants";
 import { useLoader, useThree } from "react-three-fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { AxesHelper } from "three";
+import WalletConnect from "./WalletConnect";
 
 let globalRoundCount = 0;
 let globalRotating = false;
@@ -18,6 +19,7 @@ export const DuckCylinder = () => {
   const [roundCount, setRoundCount] = useState(0);
   const gltfDisk = useLoader(GLTFLoader, "assets/models/DuckDisk.glb");
   const setCurrentMode = useMachineStore((state) => state.setCurrentMode);
+  const address = useMachineStore((state) => state.address);
 
   const [spring, setSpring] = useSpring(() => ({
     rotation: [0, 0, 0],
@@ -66,21 +68,26 @@ export const DuckCylinder = () => {
             <meshBasicMaterial attach="material" color="#6C6C6C" />
           </Cylinder>
         </primitive>
-        {(restRoundCount === 0 || restRoundCount === 2) && (
-          <CardImageSection
-            isFront={restRoundCount === 0 ? isFront : !isFront}
-          ></CardImageSection>
+        {address && (
+          <>
+            {(restRoundCount === 0 || restRoundCount === 2) && (
+              <CardImageSection
+                isFront={restRoundCount === 0 ? isFront : !isFront}
+              ></CardImageSection>
+            )}
+            {(restRoundCount === 1 || restRoundCount === 0) && (
+              <DrawingTool
+                isFront={restRoundCount === 1 ? isFront : !isFront}
+              ></DrawingTool>
+            )}
+            {(restRoundCount === 2 || restRoundCount === 1) && (
+              <AdminMain
+                isFront={restRoundCount === 2 ? isFront : !isFront}
+              ></AdminMain>
+            )}
+          </>
         )}
-        {(restRoundCount === 1 || restRoundCount === 0) && (
-          <DrawingTool
-            isFront={restRoundCount === 1 ? isFront : !isFront}
-          ></DrawingTool>
-        )}
-        {(restRoundCount === 2 || restRoundCount === 1) && (
-          <AdminMain
-            isFront={restRoundCount === 2 ? isFront : !isFront}
-          ></AdminMain>
-        )}
+        <WalletConnect isFront={isFront} isShow={!address}></WalletConnect>
       </group>
     </a.group>
   );

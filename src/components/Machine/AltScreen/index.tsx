@@ -12,6 +12,7 @@ const AltScreen: () => JSX.Element = () => {
   const customStep = useMachineStore((state) => state.customStep);
   const setCustomStep = useMachineStore((state) => state.setCustomStep);
   const DToolInst = useMachineStore((state) => state.DToolInst);
+  const address = useMachineStore((state) => state.address);
   const { viewport } = useThree();
 
   return (
@@ -30,49 +31,53 @@ const AltScreen: () => JSX.Element = () => {
       transform
     >
       <div className="AltScreen">
-        <div className="content scanlines">
-          <Shopping></Shopping>
-          <Custom></Custom>
-          <Admin></Admin>
-        </div>
-        <div className="footer">
-          <div
-            className={`btn bg-info ${
-              currentMode === MachineMode.Shopping ? "fadeIn" : "fadeOut"
-            }`}
-          >
-            Buy Duck
-          </div>
-          <div
-            className={`btn bg-yellow ${
-              currentMode === MachineMode.Customization && customStep === 0
-                ? "fadeIn"
-                : "fadeOut"
-            }`}
-            onClick={() => {
-              setCustomStep(1);
-              DToolInst.saveToWebp();
-            }}
-          >
-            Export Webp
-          </div>
-          <div
-            className={`btn bg-info ${
-              currentMode === MachineMode.Customization && customStep === 1
-                ? "fadeIn"
-                : "fadeOut"
-            }`}
-          >
-            Mint it
-          </div>
-          <div
-            className={`btn bg-danger ${
-              currentMode === MachineMode.Admin ? "fadeIn" : "fadeOut"
-            }`}
-          >
-            Burn
-          </div>
-        </div>
+        {address && (
+          <>
+            <div className="content scanlines">
+              <Shopping></Shopping>
+              <Custom></Custom>
+              <Admin></Admin>
+            </div>
+            <div className="footer">
+              <div
+                className={`btn bg-info ${
+                  currentMode === MachineMode.Shopping ? "fadeIn" : "fadeOut"
+                }`}
+              >
+                Buy Duck
+              </div>
+              <div
+                className={`btn bg-yellow ${
+                  currentMode === MachineMode.Customization && customStep === 0
+                    ? "fadeIn"
+                    : "fadeOut"
+                }`}
+                onClick={() => {
+                  setCustomStep(1);
+                  DToolInst.saveToWebp();
+                }}
+              >
+                Export Webp
+              </div>
+              <div
+                className={`btn bg-info ${
+                  currentMode === MachineMode.Customization && customStep === 1
+                    ? "fadeIn"
+                    : "fadeOut"
+                }`}
+              >
+                Mint it
+              </div>
+              <div
+                className={`btn bg-danger ${
+                  currentMode === MachineMode.Admin ? "fadeIn" : "fadeOut"
+                }`}
+              >
+                Burn
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </Html>
   );
