@@ -1,16 +1,21 @@
 import useMachineStore from "../../../store";
+import { MachineMode } from "../../../utils/constants";
 
 const Shopping: () => JSX.Element = () => {
-  const currentDuckID = useMachineStore((state) => state.currentDuckID);
-  console.log("currentDuckID", currentDuckID);
+  const currentMode = useMachineStore((state) => state.currentMode);
+  const currentDuckId = useMachineStore((state) => state.currentDuckId);
 
   return (
-    <div className="Shopping">
-      {currentDuckID !== 0 && (
+    <div
+      className={`Shopping ${
+        currentMode === MachineMode.Shopping ? "fadeIn" : "fadeOut"
+      }`}
+    >
+      {currentDuckId !== 0 && (
         <img
           className="Shopping-img"
           alt={""}
-          src={require(`../../../assets/img/ducks/crypto_duck_${currentDuckID}.svg`)}
+          src={require(`../../../assets/img/ducks/crypto_duck_${currentDuckId}.svg`)}
         />
       )}
     </div>

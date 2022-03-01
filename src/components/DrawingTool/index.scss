@@ -1,0 +1,78 @@
+.DrawingTool {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // & * {
+  //   border: 1px solid red;
+  // }
+  & .btn {
+    border: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: aquamarine;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 13px;
+    &.disabled {
+      background-color: gray;
+      cursor: default;
+    }
+    // &-img {
+    //   width: 100%;
+    //   height: 100%;
+    // }
+  }
+  .drawing-canvas {
+    width: 420px;
+    height: 420px;
+    border-radius: 140px;
+    cursor: url("../../../public/assets/images/pencil.png"), default;
+  }
+  .bottom {
+    position: fixed;
+    bottom: -55px;
+    left: 25%;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+  }
+  .right {
+    position: fixed;
+    right: -55px;
+    bottom: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+  }
+}
+
+.ColorPicker {
+  width: 160px;
+  height: 160px;
+  border-radius: 80px;
+  cursor: pointer;
+  & .react-colorful {
+    width: 0;
+    height: 0;
+  }
+  & .react-colorful__saturation {
+    display: none;
+    position: fixed;
+    width: 200px;
+    height: 200px;
+    top: -30px;
+    left: -27px;
+  }
+  & .react-colorful__hue {
+    position: fixed;
+    width: 444px;
+    height: 30px;
+    top: 182px;
+    left: 210px;
+  }
+}

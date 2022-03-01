@@ -22,7 +22,7 @@ function hexToRgb(hex) {
 }
 
 let enableCall = true;
-class DTool {
+export default class DTool {
   constructor(pixelSize, canvasSize) {
     this.pixelSize = pixelSize;
     this.canvasSize = canvasSize;
@@ -39,7 +39,7 @@ class DTool {
   }
   init(layersSettings, historyChangeCallback) {
     this.historyChangeCallback = historyChangeCallback;
-    const c = document.getElementById("dtool-canvas");
+    const c = document.getElementById("drawingtool_canvas");
     if (!c) {
       setTimeout(() => {
         this.init(layersSettings, historyChangeCallback);
@@ -56,6 +56,7 @@ class DTool {
     this.ctx.imageSmoothingEnabled = false;
 
     this.initEvents();
+    this.eraseCurrentLayer(); // ron
     this.draw();
   }
   layersInit(layersSettings) {
@@ -79,12 +80,13 @@ class DTool {
     }
   }
   undoredo(dir) {
+    const curBtnStates = this.getURButtonsState();
+    if (dir === -1 && !curBtnStates[0]) return;
+    if (dir === 1 && !curBtnStates[1]) return;
     this.currentHistoryPos -= dir;
-
     if (this.currentHistoryPos <= 0) this.currentHistoryPos = 0;
     if (this.currentHistoryPos >= this.history.length)
       this.currentHistoryPos = this.history.length - 1;
-
     _.each(this.layers, (l, i) => {
       l.ctx.putImageData(this.history[this.currentHistoryPos][i], 0, 0);
     });
@@ -148,8 +150,10 @@ class DTool {
   eraseCurrentLayer() {
     const layer = this.layers[this.selectedLayerIndex];
     layer.ctx.clearRect(0, 0, layer.ctx.canvas.width, layer.ctx.canvas.height);
-    this.saveHistory();
     this.draw();
+    this.history = []; // ron
+    this.currentHistoryPos = 0; // ron
+    this.historyChangeCallback(this.getURButtonsState()); // ron
   }
   mouseUpHandler(e) {
     document.removeEventListener("mouseup", this.mouseUpHandlerBinded);
@@ -189,11 +193,12 @@ class DTool {
   }
   mouseDownHandler(e) {
     if (this.selectedTool === 0) {
+      // pencil
       document.addEventListener("mouseup", this.mouseUpHandlerBinded);
       this.c.addEventListener("mousemove", this.mouseMoveHandlerBinded);
       this.mouseMoveHandler(e);
     } else {
-      // fill
+      // paint
       this.fillHandler(e);
       this.draw();
       this.saveHistory();
@@ -231,6 +236,7 @@ class DTool {
         reader.readAsDataURL(blob);
         reader.onloadend = function () {
           var base64data = reader.result;
+          console.log(base64data);
         };
       })
       .catch(console.error);
@@ -324,7 +330,3 @@ class DTool {
     }
   }
 }
-
-const dtool = new DTool(10, 40);
-
-export default dtool;

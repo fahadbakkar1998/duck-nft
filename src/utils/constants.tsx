@@ -1,126 +1,40 @@
 export const aspectRatio = 16 / 9;
 
-export const distance = 5;
-
-export const targetPoints = [
-  {
-    x: distance,
-    y: 0,
-    z: 0,
-  },
-  {
-    x: 0,
-    y: 0,
-    z: distance,
-  },
-  {
-    x: -distance,
-    y: 0,
-    z: 0,
-  },
-  {
-    x: 0,
-    y: 0,
-    z: -distance,
-  },
-];
-
-export const oneTimeAngle = (90 * Math.PI) / 180;
-
-export const letters = [
-  "A",
-  "B",
-  "C",
-  "D",
-  "E",
-  "F",
-  "G",
-  "H",
-  "I",
-  "J",
-  "K",
-  "L",
-  "M",
-  "N",
-  "O",
-  "P",
-  "Q",
-  "R",
-  "S",
-  "T",
-  "U",
-  "V",
-  "W",
-  "X",
-  "Y",
-  "Z",
-];
-
-export const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
-
-export const duckButtonSize = {
-  x: 0.12,
-  y: 0.12,
-  z: 0.01,
-};
-
-export const duckButtonPosInfo = {
-  start: {
-    x: 1.3,
-    y: 1.18,
-    z: 1.33,
-  },
-  xOffset: 0.21,
-  yOffset: 0.21,
-  rowCount: 3,
-};
-
-export const cardCount = 200;
-
-export const duckCardPosInfo = {
-  start: {
-    x: -1.5,
-    y: 1.3,
-    z: 0.75,
-  },
-  xOffset: 0.6,
-  yOffset: 0.7,
-  rowCount: 4,
-  size: {
-    x: 0.5,
-    y: 0.5,
-    z: 0.01,
-  },
-};
-
-export const cameraProps = {
-  fov: 20,
-  position: [30, 0, 0],
-};
-
-export const cardImages: any = [];
-
-for (let i = 1; i <= cardCount; i++) {
-  const image = require("../assets/img/ducks/crypto_duck_" + i + ".svg");
-  cardImages.push(image);
+export enum MachineMode {
+  Shopping,
+  Customization,
+  Admin,
 }
 
-export const numberPadBtns: any = [];
-
-numbers.forEach((item: string, index: number) => {
-  const pIndex = Math.floor(index / duckButtonPosInfo.rowCount);
-
-  if (numberPadBtns.length - 1 < pIndex) numberPadBtns.push([]);
-
-  numberPadBtns[pIndex].push(item);
-});
-
-export const alphabetPadBtns: any = [];
-
-letters.forEach((item: string, index: number) => {
-  const pIndex = Math.floor(index / 6);
-
-  if (alphabetPadBtns.length - 1 < pIndex) alphabetPadBtns.push([]);
-
-  alphabetPadBtns[pIndex].push(item);
-});
+export const defaultLayerIndex = 0;
+export const defaultColorIndex = 0;
+export const colors = [
+  "#000000",
+  "#464646",
+  "#787878",
+  "#b4b4b4",
+  "#dcdcdc",
+  "#ffffff",
+  "#990030",
+  "#9c5a3c",
+  "#ed1c24",
+  "#ffa3b1",
+  "#ff7e00",
+  "#e5aa7a",
+  "#ffc20e",
+  "#f5e49c",
+  "#fff200",
+  "#fff9bd",
+  "#a8e61d",
+  "#d3f9bc",
+  "#22b14c",
+  "#9dbb61",
+  "#00b7ef",
+  "#99d9ea",
+  "#4d6df3",
+  "#709ad1",
+  "#2f3699",
+  "#546d8e",
+  "#6f3198",
+  "#b5a5d5",
+];
