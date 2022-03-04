@@ -6,6 +6,8 @@ import {
   colors,
 } from "../utils/constants";
 import DTool from "./DTool";
+import { Duck } from "../types/types";
+import ducks from "../utils/duck-data.json";
 
 type MachineStore = {
   // main
@@ -33,7 +35,15 @@ type MachineStore = {
   customStep: number;
   setCustomStep: (val: number) => void;
 
-  // wallet
+  // duck data
+  duckData: Array<Duck>;
+  setDuckData: (val: Array<Duck>) => void;
+
+  // contract
+  syncing: boolean; // for wallet connection
+  setSyncing: (val: boolean) => void; // for wallet connection
+  processing: boolean;
+  setProcessing: (val: boolean) => void;
   address: string | null;
   setAddress: (val: string | null) => void;
 };
@@ -46,7 +56,7 @@ export const useMachineStore = create<MachineStore>(
       set({ currentMode: mode });
     },
 
-    currentDuckId: 1,
+    currentDuckId: 0,
     setCurrentDuckId: (id: number): void => {
       set({ currentDuckId: id });
     },
@@ -96,7 +106,23 @@ export const useMachineStore = create<MachineStore>(
       set({ customStep: val });
     },
 
-    // wallet
+    // duck data
+    duckData: ducks,
+    setDuckData: (val: Array<Duck>): void => {
+      set({ duckData: val });
+    },
+
+    // contract
+    syncing: false,
+    setSyncing: (val: boolean): void => {
+      set({ syncing: val });
+    },
+
+    processing: false,
+    setProcessing: (val: boolean): void => {
+      set({ processing: val });
+    },
+
     address: "",
     setAddress: (val: string | null): void => {
       set({ address: val });

@@ -7,6 +7,7 @@ const DuckCard = (props: any) => {
   const gridRow = useMachineStore((state) => state.gridRow);
   const currentDuckId = useMachineStore((state) => state.currentDuckId);
   const currentFilterVal = useMachineStore((state) => state.filterVal);
+  const duckData = useMachineStore((state) => state.duckData);
   const numberRef = useRef<HTMLHeadingElement>(null);
   const cardRef = useRef<HTMLHeadingElement>(null);
   const setCurrentDuckId = useMachineStore((state) => state.setCurrentDuckId);
@@ -43,10 +44,10 @@ const DuckCard = (props: any) => {
   useEffect(() => {
     if (gridRow === "4x") {
       cardRef.current!.style.width = "25%";
-      numberRef.current!.style.fontSize = "4em";
+      numberRef.current!.style.fontSize = "3em";
     } else {
       cardRef.current!.style.width = "33.3%";
-      numberRef.current!.style.fontSize = "5em";
+      numberRef.current!.style.fontSize = "4em";
     }
   });
 
@@ -66,8 +67,13 @@ const DuckCard = (props: any) => {
       >
         <img alt="pic" src={props.img}></img>
       </div>
-      <div ref={numberRef} className="DarkCard__number">
-        {props.number && props.number.toString().padStart(3, '0')}
+      <div className="DarkCard__content">
+        <div ref={numberRef} className="DarkCard__number">
+          {props.number && props.number.toString().padStart(3, "0")}
+        </div>
+        <div className="DarkCard__status">
+          {duckData[props.number].owner && "SOLD"}
+        </div>
       </div>
     </div>
   );

@@ -17,11 +17,14 @@
     "jsx": "react-jsx",
     "baseUrl": "src",
     "paths": {
-      "@/*": ["*"]
-    }
+      "@/*": ["*"],
+      "stream": ["./node_modules/readable-stream"]
+    },
+    "noImplicitAny": false,
   },
   "include": ["src", "react-app-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", "build"],
   "moduleResolution": ["node_modules", ".next", "node"],
-  "typeRoots": ["./types", "./node_modules/@types"]
+  "typeRoots": ["./types", "./node_modules/@types"],
+  "noImplicitAny": false,
 }

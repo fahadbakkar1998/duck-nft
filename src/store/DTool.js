@@ -270,7 +270,7 @@ export default class DTool {
     imageData.data[offset + 0] = color[0];
     imageData.data[offset + 1] = color[1];
     imageData.data[offset + 2] = color[2];
-    imageData.data[offset + 3] = color[0];
+    imageData.data[offset + 3] = color[3];
   }
 
   _colorsMatch(a, b, rangeSq) {
@@ -296,8 +296,7 @@ export default class DTool {
     );
 
     const visited = new Uint8Array(
-      imageDataSource.width,
-      imageDataSource.height
+      imageDataSource.width * imageDataSource.height
     );
 
     const targetColor = this._getPixel(imageDataSource, x, y);
@@ -310,8 +309,9 @@ export default class DTool {
         const x = pixelsToCheck.pop();
 
         const currentColor = this._getPixel(imageDataSource, x, y);
+
         if (
-          !visited[y * imageDataSource.width + x] &&
+          visited[y * imageDataSource.width + x] === 0 &&
           this._colorsMatch(currentColor, targetColor, rangeSq)
         ) {
           this._setPixel(imageDataSource, x, y, fillColor);

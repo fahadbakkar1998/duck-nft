@@ -16,19 +16,18 @@
     border: 0;
     border-radius: 16px;
     position: relative;
-    .Shopping {
+    background-color: gray;
+    & > * {
       position: absolute;
       width: 100%;
       height: 100%;
+    }
+    .Shopping {
       &-img {
         width: 100%;
-        // height: 100%;
       }
     }
     .Custom {
-      position: absolute;
-      width: 100%;
-      height: 100%;
       padding: 30px;
       background-color: white;
       text-align: left;
@@ -38,6 +37,30 @@
       }
       &-content {
         font-size: 12px;
+      }
+    }
+    .processing {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      background: gray;
+      &-end {
+        background-color: aquamarine;
+        border: 0;
+        border-radius: 20px;
+        padding: 0 30px;
+        cursor: pointer;
+      }
+    }
+    .duck-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      .owner-address {
+        font-size: 15px;
       }
     }
   }
@@ -64,6 +87,9 @@
       }
       &.bg-yellow {
         background-color: yellow;
+      }
+      &.white {
+        color: white;
       }
     }
   }
