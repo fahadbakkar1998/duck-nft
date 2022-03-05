@@ -71,7 +71,7 @@ const CardImageSection = (props: any) => {
             onClick={() => {
               const filter = duckData.filter((e) => !e.owner);
               setFilterDuckData(filter);
-              setCurrentDuckId(filter[0].id);
+              filter.length && setCurrentDuckId(filter[0].id);
             }}
           >
             Available
@@ -80,7 +80,7 @@ const CardImageSection = (props: any) => {
             onClick={() => {
               const filter = duckData.filter((e) => e.owner);
               setFilterDuckData(filter);
-              setCurrentDuckId(filter[0].id);
+              filter.length && setCurrentDuckId(filter[0].id);
             }}
           >
             Sold
@@ -93,7 +93,7 @@ const CardImageSection = (props: any) => {
                 return owner === me;
               });
               setFilterDuckData(filter);
-              setCurrentDuckId(filter[0].id);
+              filter.length && setCurrentDuckId(filter[0].id);
             }}
           >
             My Ducks

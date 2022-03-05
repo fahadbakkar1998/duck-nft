@@ -155,6 +155,7 @@ export const fetchDuckMintedEvent = async (duckData) => {
 
 export const mintTozziDuck = async (data) => {
   const price = await machine.methods.tozziDuckPrice().call();
+  console.log("price", price);
   const res = await sendTransaction({
     from: data.address,
     to: machineAddress,

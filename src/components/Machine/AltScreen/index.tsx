@@ -84,9 +84,11 @@ const AltScreen: () => JSX.Element = () => {
                     ...duckData[currentDuckId],
                     address,
                   });
-                  const tempDuckData = [...duckData];
-                  tempDuckData[currentDuckId].owner = address;
-                  setDuckData(tempDuckData);
+                  if (res.success) {
+                    const tempDuckData = [...duckData];
+                    tempDuckData[currentDuckId].owner = address;
+                    setDuckData(tempDuckData);
+                  }
                   setStatus(res.status);
                   setProcessing(false);
                 }}
