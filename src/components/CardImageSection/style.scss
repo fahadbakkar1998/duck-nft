@@ -10,39 +10,55 @@ $scan-moving-line: true;
 $scan-opacity: 0.75;
 //******************** scanlines effect variable end ********************//
 
-
-    
-    .main {
-      // padding-top: 10vh;
-      // margin-left: 40vw;
-      width: 430px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      // text-align: center;
-    }
-
-    .mainScreen {
-      border-radius: 100px;
-      height: 430px;
-      background-color: white;
-      overflow: hidden;
-      .imgContainer {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        overflow: scroll;
-        border-radius: 1em;
+.main {
+  // padding-top: 10vh;
+  // margin-left: 40vw;
+  width: 430px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  // text-align: center;
+  .footer {
+    position: absolute;
+    bottom: -50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    & > div {
+      border: 0;
+      background-color: #6fe5de;
+      border-radius: 5px;
+      padding: 0 5px;
+      font-size: 30px;
+      cursor: pointer;
+      &:active {
+        font-size: 28px;
       }
     }
-    ::-webkit-scrollbar {
-      width: 0px;
-      height: 0px;
-      background: transparent; /* make scrollbar transparent */
-    }
-    .dropbox {
-      width: 40%;
-      font-size: 80%;
+  }
+}
+
+.mainScreen {
+  border-radius: 100px;
+  height: 430px;
+  background-color: white;
+  overflow: hidden;
+  .imgContainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    overflow: scroll;
+    border-radius: 1em;
+  }
+}
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  background: transparent; /* make scrollbar transparent */
+}
+.dropbox {
+  width: 40%;
+  font-size: 80%;
 }
 //******************** scanlines effect css start ********************//
 

@@ -1,12 +1,21 @@
 import { useState, useEffect } from "react";
 import "./WalletConnect.scss";
 import { Html } from "@react-three/drei";
-import { connectWallet, getCurrentWalletConnected } from "../../utils/interact";
+import {
+  connectWallet,
+  getCurrentWalletConnected,
+  fetchDuckMintedEvent,
+} from "../../utils/interact";
 import useMachineStore from "../../store";
 
 const WalletConnect = (props: any) => {
   const [status, setStatus] = useState<any>("Please connect your wallet.");
+  const address = useMachineStore((state) => state.address);
   const setAddress = useMachineStore((state) => state.setAddress);
+  const syncing = useMachineStore((state) => state.syncing);
+  const setSyncing = useMachineStore((state) => state.setSyncing);
+  const duckData = useMachineStore((state) => state.duckData);
+  const setDuckData = useMachineStore((state) => state.setDuckData);
 
   useEffect(() => {
     const getWalletConnected = async () => {
@@ -17,6 +26,16 @@ const WalletConnect = (props: any) => {
     getWalletConnected();
     addWalletListener();
   }, []);
+
+  useEffect(() => {
+    const fetchDucks = async () => {
+      setSyncing(true);
+      const res = await fetchDuckMintedEvent(duckData);
+      setDuckData(res);
+      setSyncing(false);
+    };
+    if (address) fetchDucks();
+  }, [address, setSyncing]);
 
   const addWalletListener = () => {
     if ((window as any).ethereum) {
@@ -61,17 +80,23 @@ const WalletConnect = (props: any) => {
       occlude
     >
       <div className={`WalletConnect ${!props.isShow && "hidden"}`}>
-        <div className="description">{status}</div>
-        <div
-          className="btn-connect"
-          onClick={async () => {
-            const { address, status } = await connectWallet();
-            setAddress(address);
-            setStatus(status);
-          }}
-        >
-          Connect Wallet
-        </div>
+        {syncing ? (
+          <div>Syncing</div>
+        ) : (
+          <>
+            <div className="description">{status}</div>
+            <div
+              className="btn-connect"
+              onClick={async () => {
+                const { address, status } = await connectWallet();
+                setAddress(address);
+                setStatus(status);
+              }}
+            >
+              Connect Wallet
+            </div>
+          </>
+        )}
       </div>
     </Html>
   );

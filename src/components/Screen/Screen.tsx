@@ -2,7 +2,6 @@ import { render } from "react-dom";
 import { useEffect, useRef, useState } from "react";
 import Select from "react-select";
 import DuckCard from "../DuckCard/DuckCard";
-import duckData from "../../utils/duck-data.json";
 import Scrollbar from "smooth-scrollbar";
 import "./Screen.scss";
 // import { useScreenStore } from "../store";

@@ -20,6 +20,7 @@ export const DuckCylinder = () => {
   const gltfDisk = useLoader(GLTFLoader, "assets/models/DuckDisk.glb");
   const setCurrentMode = useMachineStore((state) => state.setCurrentMode);
   const address = useMachineStore((state) => state.address);
+  const syncing = useMachineStore((state) => state.syncing);
 
   const [spring, setSpring] = useSpring(() => ({
     rotation: [0, 0, 0],
@@ -68,7 +69,7 @@ export const DuckCylinder = () => {
             <meshBasicMaterial attach="material" color="#6C6C6C" />
           </Cylinder>
         </primitive>
-        {address && (
+        {address && !syncing && (
           <>
             {(restRoundCount === 0 || restRoundCount === 2) && (
               <CardImageSection
@@ -87,7 +88,10 @@ export const DuckCylinder = () => {
             )}
           </>
         )}
-        <WalletConnect isFront={isFront} isShow={!address}></WalletConnect>
+        <WalletConnect
+          isFront={isFront}
+          isShow={!address || syncing}
+        ></WalletConnect>
       </group>
     </a.group>
   );

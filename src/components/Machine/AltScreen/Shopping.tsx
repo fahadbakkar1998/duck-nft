@@ -11,11 +11,11 @@ const Shopping: () => JSX.Element = () => {
         currentMode === MachineMode.Shopping ? "fadeIn" : "fadeOut"
       }`}
     >
-      {currentDuckId !== 0 && (
+      {currentDuckId >= 0 && (
         <img
           className="Shopping-img"
           alt={""}
-          src={require(`../../../assets/img/ducks/crypto_duck_${currentDuckId}.svg`)}
+          src={require(`../../../assets/img/ducks/crypto_duck_${currentDuckId + 1}.svg`)}
         />
       )}
     </div>
