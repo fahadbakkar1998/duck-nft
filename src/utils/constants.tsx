@@ -39,9 +39,8 @@ export const colors = [
   "#b5a5d5",
 ];
 
-export const timer = (ms: number) => new Promise((res) => setTimeout(res, ms));
-
 export const projectAddress = "0x78076156F51277569f61A7F3dCf0C63b597b8D25";
+export const machineAddress = "0x92378b5CF57EF1e4941c34455c1f38c11cD3Cc07";
+export const withdrawer = "0xD5f4154E84DD8010E5E1764003A7AE5A60c6caf5";
 
-// export const machineAddress = "0xb5b9757C9a81f5875bD3C6F5A0Ee0aC01187f0Ed";
-export const machineAddress = "0x91B71193DbF2D020b9027917aa892cb8AA367566";
+export const tozziDuckNum = 200;

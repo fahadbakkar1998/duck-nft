@@ -4,8 +4,11 @@ import { Html } from "@react-three/drei";
 import {
   connectWallet,
   getCurrentWalletConnected,
-  fetchDuckMintedEvent,
+  fetchMachineData,
+  fetchTozziDuck,
+  fetchCustomDuck,
 } from "../../utils/interact";
+import { getFloat, getInt } from "../../utils/common";
 import useMachineStore from "../../store";
 
 const WalletConnect = (props: any) => {
@@ -14,8 +17,10 @@ const WalletConnect = (props: any) => {
   const setAddress = useMachineStore((state) => state.setAddress);
   const syncing = useMachineStore((state) => state.syncing);
   const setSyncing = useMachineStore((state) => state.setSyncing);
-  const duckData = useMachineStore((state) => state.duckData);
-  const setDuckData = useMachineStore((state) => state.setDuckData);
+  const setMachineSetting = useMachineStore((state) => state.setMachineSetting);
+  const tozziDuckData = useMachineStore((state) => state.tozziDuckData);
+  const setTozziDuckData = useMachineStore((state) => state.setTozziDuckData);
+  const setCustomDuckData = useMachineStore((state) => state.setCustomDuckData);
 
   useEffect(() => {
     const getWalletConnected = async () => {
@@ -30,12 +35,23 @@ const WalletConnect = (props: any) => {
   useEffect(() => {
     const fetchDucks = async () => {
       setSyncing(true);
-      const res = await fetchDuckMintedEvent(duckData);
-      setDuckData(res);
+      const machineSetting = await fetchMachineData();
+      console.log("fetch machine setting", machineSetting);
+      setMachineSetting({
+        tozziDuckPrice: getFloat(machineSetting.tozziDuckPrice),
+        customDuckPrice: getFloat(machineSetting.customDuckPrice),
+        maxCustomDucks: getFloat(machineSetting.maxCustomDucks),
+        balance: getFloat(machineSetting.balance),
+        tozziDucksEnabled: machineSetting.tozziDucksEnabled,
+        customDucksEnabled: machineSetting.customDucksEnabled,
+        burnWindow: getInt(machineSetting.burnWindow),
+      });
+      setTozziDuckData(await fetchTozziDuck(tozziDuckData));
+      setCustomDuckData(await fetchCustomDuck());
       setSyncing(false);
     };
     if (address) fetchDucks();
-  }, [address, setSyncing]);
+  }, [address]);
 
   const addWalletListener = () => {
     if ((window as any).ethereum) {

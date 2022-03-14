@@ -19,6 +19,12 @@ export const DuckCylinder = () => {
   const [roundCount, setRoundCount] = useState(0);
   const gltfDisk = useLoader(GLTFLoader, "assets/models/DuckDisk.glb");
   const setCurrentMode = useMachineStore((state) => state.setCurrentMode);
+  const setCurrentTozziDuckId = useMachineStore(
+    (state) => state.setCurrentTozziDuckId
+  );
+  const setCurrentCustomDuckId = useMachineStore(
+    (state) => state.setCurrentCustomDuckId
+  );
   const address = useMachineStore((state) => state.address);
   const syncing = useMachineStore((state) => state.syncing);
 
@@ -40,6 +46,8 @@ export const DuckCylinder = () => {
     globalRotating = true;
     setSpring({ rotation: [Math.PI * ++globalRoundCount, 0, 0] });
     setCurrentMode(globalRoundCount % 3);
+    setCurrentTozziDuckId(-1);
+    setCurrentCustomDuckId(-1);
   };
 
   const restRoundCount = roundCount % 3;

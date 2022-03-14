@@ -1,28 +1,52 @@
 import { Html } from "@react-three/drei";
 import useMachineStore from "../../../store";
-import { MachineMode, aspectRatio } from "../../../utils/constants";
-import { mintTozziDuck } from "../../../utils/interact";
+import {
+  MachineMode,
+  aspectRatio,
+  tozziDuckNum,
+} from "../../../utils/constants";
+import { mintTozziDuck, mintCustomDuck } from "../../../utils/interact";
 import Shopping from "./Shopping";
 import Custom from "./Custom";
 import Admin from "./Admin";
 import { useThree } from "react-three-fiber";
-import { useState } from "react";
 import "./index.scss";
 
 const AltScreen: () => JSX.Element = () => {
   const currentMode = useMachineStore((state) => state.currentMode);
-  const customStep = useMachineStore((state) => state.customStep);
-  const setCustomStep = useMachineStore((state) => state.setCustomStep);
   const DToolInst = useMachineStore((state) => state.DToolInst);
   const address = useMachineStore((state) => state.address);
-  const currentDuckId = useMachineStore((state) => state.currentDuckId);
-  const duckData = useMachineStore((state) => state.duckData);
-  const setDuckData = useMachineStore((state) => state.setDuckData);
+
+  const currentTozziDuckId = useMachineStore(
+    (state) => state.currentTozziDuckId
+  );
+  const tozziDuckData = useMachineStore((state) => state.tozziDuckData);
+  const setTozziDuckData = useMachineStore((state) => state.setTozziDuckData);
+
+  const machineSetting = useMachineStore((state) => state.machineSetting);
+  const setMachineSetting = useMachineStore((state) => state.setMachineSetting);
+
+  const currentCustomDuckId = useMachineStore(
+    (state) => state.currentCustomDuckId
+  );
+  const customDuckData = useMachineStore((state) => state.customDuckData);
+  const setCustomDuckData = useMachineStore((state) => state.setCustomDuckData);
+
+  const currentAdminDuckId = useMachineStore(
+    (state) => state.currentAdminDuckId
+  );
+
   const processing = useMachineStore((state) => state.processing);
   const setProcessing = useMachineStore((state) => state.setProcessing);
+  const transactionStatus = useMachineStore((state) => state.transactionStatus);
+  const setTransactionStatus = useMachineStore(
+    (state) => state.setTransactionStatus
+  );
+  const showTxStatus = useMachineStore((state) => state.showTxStatus);
+  const setShowTxStatus = useMachineStore((state) => state.setShowTxStatus);
+  const setOpenBurnModal = useMachineStore((state) => state.setOpenBurnModal);
+
   const { viewport } = useThree();
-  const [showTxStatus, setShowTxStatus] = useState(false);
-  const [status, setStatus] = useState<any>("");
 
   return (
     <Html
@@ -45,7 +69,7 @@ const AltScreen: () => JSX.Element = () => {
             <div className="content scanlines">
               {showTxStatus ? (
                 <div className="processing">
-                  <div className="processing-status">{status}</div>
+                  <div className="processing-status">{transactionStatus}</div>
                   <div
                     className="processing-end"
                     onClick={() => {
@@ -56,10 +80,20 @@ const AltScreen: () => JSX.Element = () => {
                     Go Back
                   </div>
                 </div>
-              ) : duckData[currentDuckId].owner ? (
+              ) : currentTozziDuckId >= 0 &&
+                tozziDuckData[currentTozziDuckId] &&
+                tozziDuckData[currentTozziDuckId].owner ? (
                 <div className="duck-info">
                   <div className="owner-address">
-                    {duckData[currentDuckId].owner}
+                    {tozziDuckData[currentTozziDuckId].owner}
+                  </div>
+                </div>
+              ) : currentCustomDuckId >= tozziDuckNum &&
+                customDuckData[currentCustomDuckId - tozziDuckNum] &&
+                customDuckData[currentCustomDuckId - tozziDuckNum].owner ? (
+                <div className="duck-info">
+                  <div className="owner-address">
+                    {customDuckData[currentCustomDuckId - tozziDuckNum].owner}
                   </div>
                 </div>
               ) : (
@@ -73,23 +107,41 @@ const AltScreen: () => JSX.Element = () => {
             <div className="footer">
               <div
                 className={`btn bg-info ${
-                  currentMode === MachineMode.Shopping ? "fadeIn" : "fadeOut"
-                } ${duckData[currentDuckId].owner && "white"} `}
+                  currentMode === MachineMode.Shopping &&
+                  currentTozziDuckId >= 0
+                    ? "fadeIn"
+                    : "fadeOut"
+                } ${
+                  currentTozziDuckId >= 0 &&
+                  tozziDuckData[currentTozziDuckId] &&
+                  tozziDuckData[currentTozziDuckId].owner &&
+                  "white"
+                } `}
                 onClick={async () => {
-                  if (duckData[currentDuckId].owner) return;
+                  if (
+                    currentTozziDuckId < 0 ||
+                    (tozziDuckData[currentTozziDuckId] &&
+                      tozziDuckData[currentTozziDuckId].owner)
+                  )
+                    return;
                   setProcessing(true);
-                  setStatus("processing...");
+                  setTransactionStatus("processing...");
                   setShowTxStatus(true);
                   const res = await mintTozziDuck({
-                    ...duckData[currentDuckId],
+                    ...tozziDuckData[currentTozziDuckId],
                     address,
                   });
                   if (res.success) {
-                    const tempDuckData = [...duckData];
-                    tempDuckData[currentDuckId].owner = address;
-                    setDuckData(tempDuckData);
+                    const tempDuckData = [...tozziDuckData];
+                    tempDuckData[currentTozziDuckId].owner = address;
+                    setTozziDuckData(tempDuckData);
+                    setMachineSetting({
+                      ...machineSetting,
+                      balance:
+                        machineSetting.balance + machineSetting.tozziDuckPrice,
+                    });
                   }
-                  setStatus(res.status);
+                  setTransactionStatus(res.status);
                   setProcessing(false);
                 }}
               >
@@ -97,30 +149,56 @@ const AltScreen: () => JSX.Element = () => {
               </div>
               <div
                 className={`btn bg-yellow ${
-                  currentMode === MachineMode.Customization && customStep === 0
+                  currentMode === MachineMode.Customization
+                    ? "fadeIn"
+                    : "fadeOut"
+                }`}
+                onClick={async () => {
+                  console.log(customDuckData);
+                  setProcessing(true);
+                  const base64data = await DToolInst.getWebp();
+                  console.log("base64data: ", base64data);
+                  setTransactionStatus("processing...");
+                  setShowTxStatus(true);
+                  const res = await mintCustomDuck({
+                    base64data,
+                    address,
+                  });
+                  console.log("tozzi duck minting result: ", res);
+                  if (res.success) {
+                    console.log(customDuckData);
+                    setCustomDuckData([
+                      ...customDuckData,
+                      {
+                        id: tozziDuckNum + customDuckData.length,
+                        image: base64data,
+                        owner: address,
+                        restTimestamp: machineSetting.burnWindow,
+                      },
+                    ]);
+                    setMachineSetting({
+                      ...machineSetting,
+                      balance:
+                        machineSetting.balance + machineSetting.customDuckPrice,
+                    });
+                  }
+                  setTransactionStatus(res.status);
+                  setProcessing(false);
+                }}
+              >
+                Mint
+              </div>
+              <div
+                className={`btn bg-danger ${
+                  currentMode === MachineMode.Admin &&
+                  currentAdminDuckId >= tozziDuckNum
                     ? "fadeIn"
                     : "fadeOut"
                 }`}
                 onClick={() => {
-                  setCustomStep(1);
-                  DToolInst.saveToWebp();
+                  console.log("openBurnModal");
+                  setOpenBurnModal(true);
                 }}
-              >
-                Export Webp
-              </div>
-              <div
-                className={`btn bg-info ${
-                  currentMode === MachineMode.Customization && customStep === 1
-                    ? "fadeIn"
-                    : "fadeOut"
-                }`}
-              >
-                Mint it
-              </div>
-              <div
-                className={`btn bg-danger ${
-                  currentMode === MachineMode.Admin ? "fadeIn" : "fadeOut"
-                }`}
               >
                 Burn
               </div>

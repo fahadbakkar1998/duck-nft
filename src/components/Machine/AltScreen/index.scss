@@ -39,6 +39,26 @@
         font-size: 12px;
       }
     }
+    .Admin {
+      & .slider-content {
+        position: absolute;
+        width: 336px;
+        height: 324px;
+        top: 0;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .slider-description {
+          background-color: white;
+          border: 0;
+          border-radius: 30px;
+          font-size: 40px;
+          padding: 0 20px;
+          max-width: 280px;
+        }
+      }
+    }
     .processing {
       display: flex;
       flex-direction: column;

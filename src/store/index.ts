@@ -6,19 +6,18 @@ import {
   colors,
 } from "../utils/constants";
 import DTool from "./DTool";
-import { Duck } from "../types/types";
 import ducks from "../utils/duck-data.json";
 
 type MachineStore = {
   // main
   currentMode: MachineMode;
   setCurrentMode: (val: MachineMode) => void;
-  currentDuckId: number;
-  setCurrentDuckId: (val: number) => void;
-  gridRow: string | null;
-  updateGridRow: (val: string | null) => void;
-  filterVal: any;
-  updateFilterVal: (val: any) => void;
+  currentTozziDuckId: number;
+  setCurrentTozziDuckId: (val: number) => void;
+  currentCustomDuckId: number;
+  setCurrentCustomDuckId: (val: number) => void;
+  currentAdminDuckId: number;
+  setCurrentAdminDuckId: (val: number) => void;
 
   // color picker
   DToolInst: DTool;
@@ -32,12 +31,14 @@ type MachineStore = {
   setSelectedTool: (val: number) => void;
   historyButtonsState: any;
   setHistoryButtonsState: (val: any) => void;
-  customStep: number;
-  setCustomStep: (val: number) => void;
 
-  // duck data
-  duckData: Array<Duck>;
-  setDuckData: (val: Array<Duck>) => void;
+  // contract
+  machineSetting: any;
+  setMachineSetting: (val: any) => void;
+  tozziDuckData: Array<any>;
+  setTozziDuckData: (val: Array<any>) => void;
+  customDuckData: Array<any>;
+  setCustomDuckData: (val: Array<any>) => void;
 
   // contract
   syncing: boolean; // for wallet connection
@@ -46,6 +47,14 @@ type MachineStore = {
   setProcessing: (val: boolean) => void;
   address: string | null;
   setAddress: (val: string | null) => void;
+  transactionStatus: any;
+  setTransactionStatus: (val: any) => void;
+  showTxStatus: boolean;
+  setShowTxStatus: (val: boolean) => void;
+
+  // modal
+  openBurnModal: boolean;
+  setOpenBurnModal: (val: boolean) => void;
 };
 
 export const useMachineStore = create<MachineStore>(
@@ -56,21 +65,19 @@ export const useMachineStore = create<MachineStore>(
       set({ currentMode: mode });
     },
 
-    currentDuckId: 0,
-    setCurrentDuckId: (id: number): void => {
-      set({ currentDuckId: id });
+    currentTozziDuckId: -1,
+    setCurrentTozziDuckId: (id: number): void => {
+      set({ currentTozziDuckId: id });
     },
 
-    gridRow: "3x",
-    updateGridRow: (value: any): void => {
-      set({ gridRow: value });
+    currentCustomDuckId: -1,
+    setCurrentCustomDuckId: (id: number): void => {
+      set({ currentCustomDuckId: id });
     },
 
-    filterVal: {
-      string: "",
-    },
-    updateFilterVal: (value: any): void => {
-      set({ filterVal: value });
+    currentAdminDuckId: -1,
+    setCurrentAdminDuckId: (id: number): void => {
+      set({ currentAdminDuckId: id });
     },
 
     // color picker
@@ -101,15 +108,21 @@ export const useMachineStore = create<MachineStore>(
       set({ historyButtonsState: val });
     },
 
-    customStep: 0,
-    setCustomStep: (val: number): void => {
-      set({ customStep: val });
+    // duck data
+    machineSetting: {},
+    setMachineSetting: (val: any): void => {
+      set({ machineSetting: val });
     },
 
     // duck data
-    duckData: ducks,
-    setDuckData: (val: Array<Duck>): void => {
-      set({ duckData: val });
+    tozziDuckData: ducks,
+    setTozziDuckData: (val: Array<any>): void => {
+      set({ tozziDuckData: val });
+    },
+
+    customDuckData: [],
+    setCustomDuckData: (val: Array<any>): void => {
+      set({ customDuckData: val });
     },
 
     // contract
@@ -126,6 +139,22 @@ export const useMachineStore = create<MachineStore>(
     address: "",
     setAddress: (val: string | null): void => {
       set({ address: val });
+    },
+
+    transactionStatus: "",
+    setTransactionStatus: (val: any): void => {
+      set({ transactionStatus: val });
+    },
+
+    showTxStatus: false,
+    setShowTxStatus: (val: boolean): void => {
+      set({ showTxStatus: val });
+    },
+
+    // modal
+    openBurnModal: false,
+    setOpenBurnModal: (val: boolean): void => {
+      set({ openBurnModal: val });
     },
   })
 );

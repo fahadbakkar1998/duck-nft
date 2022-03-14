@@ -220,7 +220,17 @@ export default class DTool {
     }
     this.draw();
   }
-  saveToWebp() {
+  readAsDataURLAsync(blob) {
+    return new Promise((resolve, reject) => {
+      let reader = new FileReader();
+      reader.onloadend = () => {
+        resolve(reader.result);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  }
+  async getWebp() {
     const inMemoryCanvas = document.createElement("canvas");
     inMemoryCanvas.setAttribute("width", 400);
     inMemoryCanvas.setAttribute("height", 400);
@@ -229,17 +239,11 @@ export default class DTool {
     inMemoryContext.drawImage(this.c, 0, 0, 400, 400);
     inMemoryCanvas.style =
       "image-rendering: -moz-crisp-edges;image-rendering: -webkit-crisp-edges;image-rendering: pixelated;image-rendering: crisp-edges;";
-    fetch(inMemoryCanvas.toDataURL("image/webp", 1))
+    const blob = await fetch(inMemoryCanvas.toDataURL("image/webp", 1))
       .then((response) => response.blob())
-      .then((blob) => {
-        var reader = new FileReader();
-        reader.readAsDataURL(blob);
-        reader.onloadend = function () {
-          var base64data = reader.result;
-          console.log(base64data);
-        };
-      })
       .catch(console.error);
+    const base64data = await this.readAsDataURLAsync(blob);
+    return base64data;
   }
   fillHandler(e) {
     const layer = this.layers[this.selectedLayerIndex];

@@ -3,7 +3,7 @@ import { MachineMode } from "../../../utils/constants";
 
 const Shopping: () => JSX.Element = () => {
   const currentMode = useMachineStore((state) => state.currentMode);
-  const currentDuckId = useMachineStore((state) => state.currentDuckId);
+  const currentTozziDuckId = useMachineStore((state) => state.currentTozziDuckId);
 
   return (
     <div
@@ -11,11 +11,11 @@ const Shopping: () => JSX.Element = () => {
         currentMode === MachineMode.Shopping ? "fadeIn" : "fadeOut"
       }`}
     >
-      {currentDuckId >= 0 && (
+      {currentTozziDuckId >= 0 && (
         <img
           className="Shopping-img"
           alt={""}
-          src={require(`../../../assets/img/ducks/crypto_duck_${currentDuckId + 1}.svg`)}
+          src={require(`../../../assets/img/ducks/crypto_duck_${currentTozziDuckId + 1}.svg`)}
         />
       )}
     </div>

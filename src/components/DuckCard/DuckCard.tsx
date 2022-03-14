@@ -1,78 +1,84 @@
 import "./DuckCard.scss";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { useMachineStore } from "../../store";
+import { tozziDuckNum } from "../../utils/constants";
 
 const DuckCard = (props: any) => {
-  const [flag, setFlag] = useState("block");
-  const gridRow = useMachineStore((state) => state.gridRow);
-  const currentDuckId = useMachineStore((state) => state.currentDuckId);
-  const currentFilterVal = useMachineStore((state) => state.filterVal);
-  const duckData = useMachineStore((state) => state.duckData);
+  const tozziDuckData = useMachineStore((state) => state.tozziDuckData);
+  const currentTozziDuckId = useMachineStore(
+    (state) => state.currentTozziDuckId
+  );
+  const setCurrentTozziDuckId = useMachineStore(
+    (state) => state.setCurrentTozziDuckId
+  );
+
+  const customDuckData = useMachineStore((state) => state.customDuckData);
+  const currentCustomDuckId = useMachineStore(
+    (state) => state.currentCustomDuckId
+  );
+  const setCurrentCustomDuckId = useMachineStore(
+    (state) => state.setCurrentCustomDuckId
+  );
+
   const numberRef = useRef<HTMLHeadingElement>(null);
   const cardRef = useRef<HTMLHeadingElement>(null);
-  const setCurrentDuckId = useMachineStore((state) => state.setCurrentDuckId);
 
-  useEffect(() => {
-    const itemObj = { ...props.attribute };
-    switch (currentFilterVal) {
-      case "available":
-        setFlag("block");
-        if (itemObj.owner !== null) {
-          setFlag("none");
-        }
-        break;
-      case "all":
-        setFlag("block");
-        break;
-      case "custom":
-        setFlag("block");
-        if (!itemObj.isCustom) {
-          setFlag("none");
-        }
-        break;
-      case "sold":
-        setFlag("block");
-        if (!itemObj.owner) {
-          setFlag("none");
-        }
-        break;
-      default:
-        break;
-    }
-  }, [currentFilterVal, props.attribute]);
-
-  useEffect(() => {
-    if (gridRow === "4x") {
-      cardRef.current!.style.width = "25%";
-      numberRef.current!.style.fontSize = "3em";
-    } else {
-      cardRef.current!.style.width = "33.3%";
-      numberRef.current!.style.fontSize = "4em";
-    }
-  });
-
-  return (
+  return props.isCustom ? (
     <div
       ref={cardRef}
       className="DarkCard"
-      style={{ display: flag }}
-      onClick={() => setCurrentDuckId(parseInt(props.number))}
+      onClick={() => {
+        setCurrentTozziDuckId(-1);
+        setCurrentCustomDuckId(parseInt(props.data.id));
+      }}
     >
       <div
         className="DarkCard__pic"
         style={{
           border:
-            currentDuckId === props.number ? "10px solid #00fff3" : "unset",
+            currentCustomDuckId === props.data.id
+              ? "10px solid #00fff3"
+              : "unset",
+        }}
+      >
+        <img alt="" src={props.img}></img>
+      </div>
+      <div className="DarkCard__content">
+        <div ref={numberRef} className="DarkCard__number">
+          {props.data.id && props.data.id.toString().padStart(3, "0")}
+        </div>
+        <div className="DarkCard__status">
+          {customDuckData[parseInt(props.data.id) - tozziDuckNum].owner &&
+            "SOLD"}
+        </div>
+      </div>
+    </div>
+  ) : (
+    <div
+      ref={cardRef}
+      className="DarkCard"
+      onClick={() => {
+        setCurrentTozziDuckId(parseInt(props.data.id));
+        setCurrentCustomDuckId(-1);
+      }}
+    >
+      <div
+        className="DarkCard__pic"
+        style={{
+          border:
+            currentTozziDuckId === props.data.id
+              ? "10px solid #00fff3"
+              : "unset",
         }}
       >
         <img alt="pic" src={props.img}></img>
       </div>
       <div className="DarkCard__content">
         <div ref={numberRef} className="DarkCard__number">
-          {props.number && props.number.toString().padStart(3, "0")}
+          {props.data.id.toString().padStart(3, "0")}
         </div>
         <div className="DarkCard__status">
-          {duckData[props.number].owner && "SOLD"}
+          {!!tozziDuckData[parseInt(props.data.id)].owner && "SOLD"}
         </div>
       </div>
     </div>

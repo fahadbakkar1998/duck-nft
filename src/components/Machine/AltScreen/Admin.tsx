@@ -3,6 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import useMachineStore from "../../../store";
 import { MachineMode } from "../../../utils/constants";
+import { useState, useEffect } from "react";
 
 const SampleNextArrow = (props: any) => {
   const { className, style, onClick } = props;
@@ -28,6 +29,19 @@ const SamplePrevArrow = (props: any) => {
 
 const Admin: () => JSX.Element = () => {
   const currentMode = useMachineStore((state) => state.currentMode);
+  const customDuckData = useMachineStore((state) => state.customDuckData);
+  const setCurrentAdminDuckId = useMachineStore(
+    (state) => state.setCurrentAdminDuckId
+  );
+  const [sortedCustomDuckData, setSortedCustomDuckData] = useState<any>([]);
+
+  useEffect(() => {
+    const SCDD = customDuckData.sort(
+      (a, b) => a.restTimestamp - b.restTimestamp
+    );
+    setSortedCustomDuckData(SCDD);
+    SCDD.length && setCurrentAdminDuckId(SCDD[0].id);
+  }, [customDuckData, setCurrentAdminDuckId]);
 
   const settings = {
     infinite: true,
@@ -36,6 +50,9 @@ const Admin: () => JSX.Element = () => {
     slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
+    afterChange: (currentSlide) => {
+      setCurrentAdminDuckId(sortedCustomDuckData[currentSlide].id);
+    },
   };
 
   return (
@@ -45,12 +62,13 @@ const Admin: () => JSX.Element = () => {
       }`}
     >
       <Slider {...settings}>
-        {Array.from(Array(200).keys()).map((i) => (
-          <img
-            key={i}
-            alt=""
-            src={require(`../../../assets/img/ducks/crypto_duck_${i + 1}.svg`)}
-          ></img>
+        {sortedCustomDuckData.map((e: any, i: number) => (
+          <div className="slider-container">
+            <img className="slider-image" key={i} alt="" src={e.image}></img>
+            <div className="slider-content">
+              <div className="slider-description">{e.restTimestamp}s</div>
+            </div>
+          </div>
         ))}
       </Slider>
     </div>

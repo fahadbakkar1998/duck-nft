@@ -1,0 +1,49 @@
+.main {
+  width: 430px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  .footer {
+    position: absolute;
+    bottom: -50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    & > div {
+      border: 0;
+      background-color: #6fe5de;
+      border-radius: 5px;
+      padding: 0 5px;
+      font-size: 24px;
+      cursor: pointer;
+      &:active {
+        font-size: 28px;
+      }
+    }
+  }
+}
+
+.mainScreen {
+  border-radius: 100px;
+  height: 430px;
+  background-color: white;
+  overflow: hidden;
+  .imgContainer {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    overflow: scroll;
+    border-radius: 1em;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  background: transparent;
+}
+
+.dropbox {
+  width: 40%;
+  font-size: 80%;
+}

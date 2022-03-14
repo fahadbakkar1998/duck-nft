@@ -13,5 +13,5 @@ export const combineDucksAndProofs = () => {
       proof: proofValues[index].proof,
     };
   });
-  console.log(combineValues);
+  console.log("combine values: ", combineValues);
 };

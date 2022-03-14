@@ -1,0 +1,107 @@
+$color: #12cdd4;
+$bgColor: #484848;
+$elementBgColor: #1a1a1a;
+$gap: 10px;
+
+.AdminMain {
+  width: 430px;
+  height: 430px;
+  border-radius: 100px;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  background-color: $bgColor;
+  & * {
+    color: $color;
+  }
+  ._group {
+    width: 100%;
+    padding: 10px;
+    border: 0;
+    border-bottom: 1px solid $color;
+    display: flex;
+    flex-direction: column;
+    gap: $gap;
+    justify-content: space-between;
+    align-items: center;
+    ._row {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      & ._small {
+        font-size: 15px;
+      }
+      & ._radio-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: $gap;
+        &-item {
+          background-color: $elementBgColor;
+          width: 20px;
+          height: 20px;
+          cursor: pointer;
+        }
+      }
+      & ._input-group {
+        background-color: $elementBgColor;
+        display: flex;
+        &-text {
+          width: 100px;
+          background-color: transparent;
+        }
+        &-suffix {
+          background-color: transparent;
+          padding: 0 5px;
+        }
+      }
+      ._row-sub {
+        display: flex;
+        gap: $gap;
+      }
+      ._input {
+        width: 138px;
+        background-color: $elementBgColor;
+      }
+      ._btn {
+        padding: 0 10px;
+        font-size: 15px;
+        border: 0;
+        border-radius: 5px;
+        background-color: $color;
+        color: black;
+        cursor: pointer;
+        &:active {
+          color: white;
+        }
+      }
+      &.flex-end {
+        justify-content: flex-end;
+      }
+    }
+  }
+  ._title {
+    font-size: 30px;
+    align-items: start;
+  }
+  ._footer {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+    gap: $gap;
+    ._btn {
+      padding: 0 10px;
+      font-size: 15px;
+      border: 0;
+      border-radius: 5px;
+      background-color: $color;
+      color: black;
+      cursor: pointer;
+      &:active {
+        color: white;
+      }
+    }
+  }
+}

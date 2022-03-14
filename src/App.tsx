@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       <Canvas
         orthographic
-        camera={{ zoom: 115, position: [0, 0, 100] }}
+        camera={{ zoom: 115, position: [0, 0, 200] }}
         shadows
       >
         <Suspense fallback={null}>
