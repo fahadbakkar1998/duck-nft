@@ -4,6 +4,7 @@ import {
   MachineMode,
   aspectRatio,
   tozziDuckNum,
+  minViewLength,
 } from "../../../utils/constants";
 import { mintTozziDuck, mintCustomDuck } from "../../../utils/interact";
 import Shopping from "./Shopping";
@@ -16,6 +17,7 @@ const AltScreen: () => JSX.Element = () => {
   const currentMode = useMachineStore((state) => state.currentMode);
   const DToolInst = useMachineStore((state) => state.DToolInst);
   const address = useMachineStore((state) => state.address);
+  const syncing = useMachineStore((state) => state.syncing);
 
   const currentTozziDuckId = useMachineStore(
     (state) => state.currentTozziDuckId
@@ -47,24 +49,22 @@ const AltScreen: () => JSX.Element = () => {
   const setOpenBurnModal = useMachineStore((state) => state.setOpenBurnModal);
 
   const { viewport } = useThree();
+  // const min = Math.min(viewport.width, viewport.height);
+const min = viewport.width;
 
   return (
     <Html
       scale={[
-        viewport.width / 24 / aspectRatio,
-        viewport.width / 40,
-        viewport.width / 44,
+        (0.165 * min) / minViewLength,
+        (0.165 * min) / minViewLength,
+        (0.165 * min) / minViewLength,
       ]}
-      position={[
-        (-229 * viewport.width) / 1000,
-        (40 * viewport.width) / 1000,
-        0.2,
-      ]}
+      position={[-0.225 * min, -0.045 * min, 0]}
       rotation={[0.0, 0.0, 0.0]}
       transform
     >
       <div className="AltScreen">
-        {address && (
+        {address && !syncing && (
           <>
             <div className="content scanlines">
               {showTxStatus ? (
@@ -129,8 +129,8 @@ const AltScreen: () => JSX.Element = () => {
                   setShowTxStatus(true);
                   const res = await mintTozziDuck({
                     ...tozziDuckData[currentTozziDuckId],
-                    address,
                   });
+                  // console.log("mintTozziDuck status", res);
                   if (res.success) {
                     const tempDuckData = [...tozziDuckData];
                     tempDuckData[currentTozziDuckId].owner = address;
@@ -144,6 +144,7 @@ const AltScreen: () => JSX.Element = () => {
                   setTransactionStatus(res.status);
                   setProcessing(false);
                 }}
+                id="mint_tozzi_duck"
               >
                 Buy Duck
               </div>
@@ -154,19 +155,17 @@ const AltScreen: () => JSX.Element = () => {
                     : "fadeOut"
                 }`}
                 onClick={async () => {
-                  console.log(customDuckData);
+                  // console.log("before minting custom duck data: ", customDuckData);
                   setProcessing(true);
                   const base64data = await DToolInst.getWebp();
-                  console.log("base64data: ", base64data);
+                  // console.log("base64data: ", base64data);
                   setTransactionStatus("processing...");
                   setShowTxStatus(true);
                   const res = await mintCustomDuck({
                     base64data,
-                    address,
                   });
-                  console.log("tozzi duck minting result: ", res);
+                  // console.log("custom duck minting result: ", res);
                   if (res.success) {
-                    console.log(customDuckData);
                     setCustomDuckData([
                       ...customDuckData,
                       {
@@ -196,7 +195,7 @@ const AltScreen: () => JSX.Element = () => {
                     : "fadeOut"
                 }`}
                 onClick={() => {
-                  console.log("openBurnModal");
+                  // console.log("openBurnModal");
                   setOpenBurnModal(true);
                 }}
               >

@@ -1,4 +1,5 @@
-export const aspectRatio = 16 / 9;
+export const aspectRatio = 1;
+export const minViewLength = 6.582608695652174;
 
 export enum MachineMode {
   Shopping,
@@ -39,8 +40,8 @@ export const colors = [
   "#b5a5d5",
 ];
 
-export const projectAddress = "0x78076156F51277569f61A7F3dCf0C63b597b8D25";
-export const machineAddress = "0x92378b5CF57EF1e4941c34455c1f38c11cD3Cc07";
+export const machineContractAddress =
+  "0x9810E473615e14af5ae6B7f531d83a833D158cC7";
 export const withdrawer = "0xD5f4154E84DD8010E5E1764003A7AE5A60c6caf5";
 
 export const tozziDuckNum = 200;

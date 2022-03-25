@@ -1,13 +1,12 @@
 import { Html } from "@react-three/drei";
 import useMachineStore from "../../store";
-import { aspectRatio } from "../../utils/constants";
+import { aspectRatio, minViewLength } from "../../utils/constants";
 import { burnRenegadeDuck } from "../../utils/interact";
 import { useThree } from "react-three-fiber";
 import { useRef } from "react";
 import "./index.scss";
 
 const BurnModal: (props: any) => JSX.Element = (props: any) => {
-  const address = useMachineStore((state) => state.address);
   const currentAdminDuckId = useMachineStore(
     (state) => state.currentAdminDuckId
   );
@@ -16,6 +15,8 @@ const BurnModal: (props: any) => JSX.Element = (props: any) => {
   );
   const setProcessing = useMachineStore((state) => state.setProcessing);
   const { viewport } = useThree();
+  // const min = Math.min(viewport.width, viewport.height);
+const min = viewport.width;
   const setTransactionStatus = useMachineStore(
     (state) => state.setTransactionStatus
   );
@@ -27,9 +28,9 @@ const BurnModal: (props: any) => JSX.Element = (props: any) => {
   return (
     <Html
       scale={[
-        viewport.width / 24 / aspectRatio,
-        viewport.width / 40,
-        viewport.width / 44,
+        (0.3 * min) / minViewLength,
+        (0.2 * min) / minViewLength,
+        (1 * min) / minViewLength,
       ]}
       position={[0, 0, 0.2]}
       rotation={[0.0, 0.0, 0.0]}
@@ -43,7 +44,6 @@ const BurnModal: (props: any) => JSX.Element = (props: any) => {
             <div
               className="_btn-burn"
               onClick={async () => {
-                // console.log(currentAdminDuckId, reasonRef.current.value);
                 if (currentAdminDuckId < 0) return;
                 if (!reasonRef.current.value) {
                   reasonRef.current.focus();
@@ -53,11 +53,10 @@ const BurnModal: (props: any) => JSX.Element = (props: any) => {
                 setTransactionStatus("processing...");
                 setShowTxStatus(true);
                 const res = await burnRenegadeDuck({
-                  address,
                   duckId: currentAdminDuckId,
                   reason: reasonRef.current.value,
                 });
-                console.log("burnRenegadeDuck result: ", res);
+                // console.log("burnRenegadeDuck result: ", res);
                 if (res.success) {
                   // remove burned duck data.
                   const filterCustomDuckData = customDuckData.filter(

@@ -11,23 +11,33 @@ $scan-opacity: 0.75;
 html,
 body,
 #root {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
+  overflow: auto;
 }
 
 body {
-  background-color: black;
+  background-color: white;
   background-size: cover;
   background-position: 0 -500px;
   position: fixed;
 }
 
 .App {
-  text-align: center;
-  width: 100%;
-  height: 100%;
+  position: relative;
+  .machine-container {
+    text-align: center;
+    height: 100vw;
+    position: relative;
+    display: flex;
+    align-items: center;
+    .background {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate3d(-50%, -50%, 0);
+      width: 100vw;
+      height: 100vw;
+    }
+  }
 }
 
 .App-logo {

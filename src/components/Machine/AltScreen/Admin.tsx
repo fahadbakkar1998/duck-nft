@@ -10,7 +10,13 @@ const SampleNextArrow = (props: any) => {
   return (
     <div
       className={className}
-      style={{ ...style, right: 0, zIndex: 1 }}
+      style={{
+        ...style,
+        right: 0,
+        zIndex: 1,
+        backgroundColor: "black",
+        borderRadius: "100px",
+      }}
       onClick={onClick}
     />
   );
@@ -21,7 +27,13 @@ const SamplePrevArrow = (props: any) => {
   return (
     <div
       className={className}
-      style={{ ...style, left: 0, zIndex: 1 }}
+      style={{
+        ...style,
+        left: 0,
+        zIndex: 1,
+        backgroundColor: "black",
+        borderRadius: "100px",
+      }}
       onClick={onClick}
     />
   );
@@ -39,6 +51,7 @@ const Admin: () => JSX.Element = () => {
     const SCDD = customDuckData.sort(
       (a, b) => a.restTimestamp - b.restTimestamp
     );
+    // console.log(SCDD);
     setSortedCustomDuckData(SCDD);
     SCDD.length && setCurrentAdminDuckId(SCDD[0].id);
   }, [customDuckData, setCurrentAdminDuckId]);

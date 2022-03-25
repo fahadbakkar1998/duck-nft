@@ -5,7 +5,7 @@ import DrawingTool from "../DrawingTool";
 import useMachineStore from "../../store";
 import CardImageSection from "../CardImageSection/CardImageSection";
 import AdminMain from "../AdminMain/AdminMain";
-import { aspectRatio } from "../../utils/constants";
+import { aspectRatio, minViewLength } from "../../utils/constants";
 import { useLoader, useThree } from "react-three-fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { AxesHelper } from "three";
@@ -16,6 +16,8 @@ let globalRotating = false;
 
 export const DuckCylinder = () => {
   const { viewport } = useThree();
+  // const min = Math.min(viewport.width, viewport.height);
+const min = viewport.width;
   const [roundCount, setRoundCount] = useState(0);
   const gltfDisk = useLoader(GLTFLoader, "assets/models/DuckDisk.glb");
   const setCurrentMode = useMachineStore((state) => state.setCurrentMode);
@@ -27,6 +29,8 @@ export const DuckCylinder = () => {
   );
   const address = useMachineStore((state) => state.address);
   const syncing = useMachineStore((state) => state.syncing);
+  const processing = useMachineStore((state) => state.processing);
+  const showTxStatus = useMachineStore((state) => state.showTxStatus);
 
   const [spring, setSpring] = useSpring(() => ({
     rotation: [0, 0, 0],
@@ -42,7 +46,7 @@ export const DuckCylinder = () => {
   }));
 
   const handelOnClick = () => {
-    if (globalRotating) return;
+    if (globalRotating || syncing || processing || showTxStatus) return;
     globalRotating = true;
     setSpring({ rotation: [Math.PI * ++globalRoundCount, 0, 0] });
     setCurrentMode(globalRoundCount % 3);
@@ -57,23 +61,20 @@ export const DuckCylinder = () => {
     <a.group
       {...(spring as any)}
       onClick={handelOnClick}
-      position={[0, (15 * viewport.width) / 1000, 0]}
+      scale={[min / minViewLength, min / minViewLength, min / minViewLength]}
+      position={[0.093 * min, -0.068 * min, 0]}
     >
       <group
-        scale={[
-          viewport.width / 6 / aspectRatio,
-          viewport.width / 10,
-          viewport.width / 11,
-        ]}
+        scale={[0.65, 0.65, 0.65]}
         rotation={[0, Math.PI / 2, Math.PI / 2]}
-        position={[viewport.width / 12, 0, 0.0]}
+        position={[0, 0, 0]}
       >
         <primitive
           object={gltfDisk.scene}
           scale={[0.6, 0.6, 0.6]}
           rotation={[0, 0, Math.PI / 2]}
         >
-          <Cylinder args={[1.8, 1.8, 0.1, 50]} rotation={[0, 0, Math.PI / 2]}>
+          <Cylinder args={[1, 1, 0.1, 50]} rotation={[0, 0, Math.PI / 2]}>
             <meshBasicMaterial attach="material" color="#6C6C6C" />
           </Cylinder>
         </primitive>

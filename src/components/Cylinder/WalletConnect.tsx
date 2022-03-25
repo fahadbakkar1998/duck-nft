@@ -22,13 +22,25 @@ const WalletConnect = (props: any) => {
   const setTozziDuckData = useMachineStore((state) => state.setTozziDuckData);
   const setCustomDuckData = useMachineStore((state) => state.setCustomDuckData);
 
-  useEffect(() => {
-    const getWalletConnected = async () => {
-      const { address, status } = await getCurrentWalletConnected();
-      setAddress(address);
-      setStatus(status);
-    };
+  const getWalletConnected = async () => {
+    const { address, status } = await getCurrentWalletConnected();
+    setAddress(address);
+    setStatus(status);
+  };
+
+  const addWalletListener = () => {
     getWalletConnected();
+    if ((window as any).ethereum) {
+      (window as any).ethereum.on("accountsChanged", () => {
+        window.location.reload();
+      });
+      (window as any).ethereum.on("chainChanged", () => {
+        window.location.reload();
+      });
+    }
+  };
+
+  useEffect(() => {
     addWalletListener();
   }, []);
 
@@ -36,7 +48,7 @@ const WalletConnect = (props: any) => {
     const fetchDucks = async () => {
       setSyncing(true);
       const machineSetting = await fetchMachineData();
-      console.log("fetch machine setting", machineSetting);
+      // console.log("fetch machine setting", machineSetting);
       setMachineSetting({
         tozziDuckPrice: getFloat(machineSetting.tozziDuckPrice),
         customDuckPrice: getFloat(machineSetting.customDuckPrice),
@@ -52,35 +64,6 @@ const WalletConnect = (props: any) => {
     };
     if (address) fetchDucks();
   }, [address]);
-
-  const addWalletListener = () => {
-    if ((window as any).ethereum) {
-      (window as any).ethereum.on("accountsChanged", (accounts: any) => {
-        if (accounts.length > 0) {
-          setAddress(accounts[0]);
-          setStatus("👆🏽 Write a message in the text-field above.");
-        } else {
-          setAddress("");
-          setStatus("🦊 Connect to Metamask using the top right button.");
-        }
-      });
-    } else {
-      setStatus(
-        <p>
-          {" "}
-          🦊{" "}
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href={`https://metamask.io/download.html`}
-          >
-            You must install Metamask, a virtual Ethereum wallet, in your
-            browser.
-          </a>
-        </p>
-      );
-    }
-  };
 
   return (
     <Html

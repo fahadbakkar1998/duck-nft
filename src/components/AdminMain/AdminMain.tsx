@@ -29,7 +29,6 @@ const AdminMain = (props: any) => {
     (state) => state.setTransactionStatus
   );
   const setShowTxStatus = useMachineStore((state) => state.setShowTxStatus);
-  const address = useMachineStore((state) => state.address);
 
   return (
     <Html
@@ -172,7 +171,6 @@ const AdminMain = (props: any) => {
                 setTransactionStatus("processing...");
                 setShowTxStatus(true);
                 const res = await withdraw({
-                  address,
                   amount: correctWithdrawAmount,
                 });
                 if (res.success) {
@@ -210,7 +208,6 @@ const AdminMain = (props: any) => {
               setTransactionStatus("processing...");
               setShowTxStatus(true);
               const res = await saveMachineSetting({
-                address,
                 machineSetting: setting,
               });
               if (res.success) {
