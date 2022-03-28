@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <div className="header">
-        <img src="/assets/images/back1.png" alt="" />
+        <img className="logo" src="/assets/images/Tozzi_Ducks_Logo.png" alt="" />
       </div>
       <div className="machine-container">
         <img className="background" src={bgImg} alt=""></img>
@@ -25,9 +25,6 @@ function App() {
             <MachineLayout />
           </Suspense>
         </Canvas>
-      </div>
-      <div className="footer">
-        <img src="/assets/images/back2.png" alt="" />
       </div>
     </div>
   );

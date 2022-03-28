@@ -8,27 +8,33 @@ $scan-moving-line: true;
 $scan-opacity: 0.75;
 /******************** scanlines effect variable end ********************/
 
-html,
-body,
-#root {
-  overflow: auto;
-}
-
-body {
-  background-color: white;
-  background-size: cover;
-  background-position: 0 -500px;
-  position: fixed;
-}
-
 .App {
   position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: auto;
+  background-color: paleturquoise;
+  .header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 50vh;
+    background-color: chocolate;
+    .logo {
+      position: absolute;
+      top: 1vh;
+      left: 1vh;
+      width: 30vw;
+      z-index: 2;
+    }
+  }
   .machine-container {
-    text-align: center;
-    height: 100vw;
     position: relative;
-    display: flex;
-    align-items: center;
+    width: 100vw;
+    height: 100vw;
     .background {
       position: absolute;
       left: 50%;
@@ -40,61 +46,13 @@ body {
   }
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
+/******************** scanlines effect css start ********************/
 canvas {
   image-rendering: -moz-crisp-edges;
   image-rendering: -webkit-crisp-edges;
   image-rendering: pixelated;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.changeModeBtn {
-  background-color: rgb(153, 149, 149);
-  color: rgb(37, 36, 36);
-  font-size: 14px;
-  padding: 8px 11px;
-  border-radius: 5px;
-  margin: 10px 0px;
-  cursor: pointer;
-  z-index: 99;
-  position: absolute;
-  left: 50%;
-}
-
-/******************** scanlines effect css start ********************/
 @mixin scan-crt($scan-crt) {
   @if $scan-crt == true {
     animation: scanlines 1s steps($scan-fps) infinite;
@@ -141,7 +99,6 @@ canvas {
   }
 }
 
-/* ANIMATE UNIQUE SCANLINE */
 @keyframes scanline {
   0% {
     transform: translate3d(0, 200000%, 0);

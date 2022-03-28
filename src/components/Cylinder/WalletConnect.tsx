@@ -92,7 +92,7 @@ const WalletConnect = (props: any) => {
                 setStatus(status);
               }}
             >
-              Connect Wallet
+              Connect Wallet To Start
             </div>
           </>
         )}

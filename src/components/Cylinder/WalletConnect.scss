@@ -1,4 +1,5 @@
 .WalletConnect {
+  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
@@ -10,11 +11,18 @@
   height: 430px;
   border-radius: 100px;
   padding: 20px;
-  font-size: 30px;
+  font-size: 20px;
   text-align: center;
   align-items: center;
+  background-image: url("../../../public/assets/images/pixel-duck.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
   &.hidden {
     display: none;
+  }
+  & * {
+    font-family: PressStart2P-Regular;
   }
   .description {
     color: black;
