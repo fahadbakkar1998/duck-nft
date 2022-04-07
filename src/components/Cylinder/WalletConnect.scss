@@ -1,42 +1,45 @@
+@import url('http://fonts.cdnfonts.com/css/amiga-forever');
+@import url('http://fonts.cdnfonts.com/css/nokia-cellphone-fc');
+@import url('http://fonts.cdnfonts.com/css/quadrit');
+
 .WalletConnect {
   position: relative;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: end;
   gap: 10px;
-  background-color: darkgray;
-  width: 430px;
-  height: 430px;
-  border-radius: 100px;
+  background-color: rgb(8, 8, 8);
+  width: 435px;
+  height: 435px;
+  border: 2px solid rgba(255, 255, 255, 0.383);
+  border-radius: 15%;
   padding: 20px;
-  font-size: 20px;
+  font-size: 16px;
   text-align: center;
   align-items: center;
   background-image: url("../../../public/assets/images/pixel-duck.png");
   background-repeat: no-repeat;
   background-size: 100%;
-  background-position: center;
+  background-position: 50% 10%;
   &.hidden {
     display: none;
   }
   & * {
-    font-family: PressStart2P-Regular;
+    // font-family: PressStart2P-Regular;
+    
+    // font-family: 'Quadrit', sans-serif;
+    font-family: 'Nokia Cellphone FC', 'Quadrit', monospace,sans-serif;                                                
+    
   }
   .description {
     color: black;
   }
   .btn-connect {
-    padding: 10px 50px;
-    display: grid;
-    text-align: center;
-    align-items: center;
-    background-color: darkorange;
-    border-radius: 30px;
-    cursor: pointer;
-    &:active {
-      padding: 10px 48px;
-    }
+    
+    
+      
+    cursor: pointer;    
   }
 }

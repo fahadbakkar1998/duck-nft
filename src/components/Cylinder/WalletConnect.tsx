@@ -28,6 +28,12 @@ const WalletConnect = (props: any) => {
     setStatus(status);
   };
 
+  const handleClick = async () => {
+    const { address, status } = await connectWallet();
+    setAddress(address);
+    setStatus(status);
+  }
+
   const addWalletListener = () => {
     getWalletConnected();
     if ((window as any).ethereum) {
@@ -78,21 +84,36 @@ const WalletConnect = (props: any) => {
       transform
       occlude
     >
-      <div className={`WalletConnect ${!props.isShow && "hidden"}`}>
+      <div className={`scanlines WalletConnect ${!props.isShow && "hidden"}`}>
         {syncing ? (
           <div>Syncing</div>
         ) : (
           <>
-            <div className="description">{status}</div>
-            <div
-              className="btn-connect"
-              onClick={async () => {
-                const { address, status } = await connectWallet();
-                setAddress(address);
-                setStatus(status);
-              }}
+            {/* <div className="description">{status}</div> */}
+            
+            <div 
+              className={`
+                text-white                                 
+                flex flex-col space-y-1
+                text-sm
+                mb-2
+              `} 
+              onClick={handleClick}
             >
-              Connect Wallet To Start
+              <div 
+                className={`
+                  btn-connect 
+                  text-white hover:text-black hover:bg-white
+                  px-4 text-lg
+                `} onClick={handleClick}>
+                  <span>{">"}</span><span className="ml-2">Connect Wallet</span>
+              </div>
+              <div className="flex justify-center opacity-75">
+                <div className="mr-2">TM &amp; Ⓒ</div> 
+                <div>CHAIN/SAW CORP, 2022</div>
+              </div>
+              <div className="opacity-75">LICENSED BY JIM TOZZI</div> 
+              <div className="opacity-75">FOR USE ON ETHEREUM BLOCKCHAIN</div> 
             </div>
           </>
         )}
