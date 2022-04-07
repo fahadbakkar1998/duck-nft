@@ -30,3 +30,9 @@ code {
   outline: 1px solid rgba(0, 0, 0, 0.4);
   border-radius: 0.2vw;
 }
+
+@font-face {
+  font-family: "PressStart2P-Regular";
+  src: local("PressStart2P-Regular"),
+    url("./assets/font/PressStart2P-Regular.ttf") format("truetype");
+}
