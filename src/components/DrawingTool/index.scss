@@ -46,9 +46,9 @@
 }
 
 .ColorPicker {
-  width: 160px;
-  height: 160px;
-  border-radius: 80px;
+  width: 110px;
+  height: 110px;
+  border-radius: 13px;
   cursor: pointer;
   & .react-colorful {
     width: 0;
@@ -64,10 +64,16 @@
   }
   & .react-colorful__hue {
     position: fixed;
-    width: 412px;
-    height: 34px;
-    top: 183px;
-    left: 195px;
-    border-radius: 0 0 30px 8px;
+    width: 416px;
+    height: 33px;
+    top: 156px;
+    left: 169px;
+    border: 0;
+    border-radius: 0;
+    clip-path: polygon(-10% 0, 100% 0, 95% 100%, -10% 100%);
+  }
+  & .react-colorful__pointer {
+    width: 33px;
+    height: 33px;
   }
 }
