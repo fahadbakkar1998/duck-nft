@@ -132,14 +132,15 @@ $scan-opacity: 0.75;
 }
 
 .myButton {
-	box-shadow: 0px 2px 0px 3px #ba5425;
-	background:linear-gradient(to bottom, #fd864a 5%, #dd7737 100%);
+	box-shadow: 1px 2px 2px 2px #b53c24;
+	background:linear-gradient(to bottom, #ff912a 5%, #ff6e25 100%);
 	background-color:#ff8040;
-
+  margin-right: 1px;
   border-width: 2px;
   height: 45px;
 
-	border:1px solid #ff9e66bd;
+	border:3px solid #ffffff37;
+  border-top: 0;
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
@@ -155,8 +156,9 @@ $scan-opacity: 0.75;
 }
 .myButton:active {
 	position:relative;
-  box-shadow: 0px 1px 0px 2px #ba5425;
-  background:linear-gradient(to bottom, #c75339 5%, #b54916 100%);
+  box-shadow: 1px 1px 0px 2px #b53c24;
+  border:3px solid #ffffff1c;
+  background:linear-gradient(to bottom, #f06824 5%, #ec5523 100%);
 	top:1px;
 }
 

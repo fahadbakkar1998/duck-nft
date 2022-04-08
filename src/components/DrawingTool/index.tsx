@@ -2,7 +2,6 @@ import { Suspense, useEffect, useRef } from "react";
 import { Html } from "@react-three/drei";
 import { useMachineStore } from "../../store";
 import { colors } from "../../utils/constants";
-import LayerPicker from "./LayerPicker";
 import duckbill from "../../assets/duck-bill.png";
 import "./index.scss";
 import CircleButton from "../common/CircleButton";
@@ -55,7 +54,7 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
             className="drawing-canvas"
             ref={drawingCanvas}
             id="drawingtool_canvas"
-          ></canvas>                  
+          />               
           <div className="right">
             <CircleButton 
               onClick={() => {

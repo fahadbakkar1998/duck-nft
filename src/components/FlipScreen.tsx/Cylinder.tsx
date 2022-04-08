@@ -86,10 +86,7 @@ export const DuckCylinder = () => {
             <meshBasicMaterial attach="material" color="#6C6C6C" />
           </Cylinder>
         </primitive>
-        <CardImageSection
-          isFront={restRoundCount === 0 ? isFront : !isFront}
-        ></CardImageSection>
-        {/* {address && !syncing && (
+        {address && !syncing && (
           <>
             {(restRoundCount === 0 || restRoundCount === 2) && (
               <CardImageSection
@@ -111,7 +108,7 @@ export const DuckCylinder = () => {
         <WalletConnect
           isFront={isFront}
           isShow={!address || syncing}
-        ></WalletConnect> */}
+        ></WalletConnect>
       </group>
     </a.group>
   );
