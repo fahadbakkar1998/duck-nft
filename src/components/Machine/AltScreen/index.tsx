@@ -64,13 +64,14 @@ const min = viewport.width;
       rotation={[0.0, 0.0, 0.0]}
       transform
     >
-      <div className="AltScreen">
+      <div className="AltScreen ">        
         {!address && (
           <NotConnected />
         )}
         {address && !syncing && (
           <>
-            <div className="content scanlines">
+            <div className="content  relative">
+              <div className="w-full h-full inner-shadow absolute z-10"></div>
               {showTxStatus ? (
                 <div className="processing">
                   <div className="processing-status">{transactionStatus}</div>
