@@ -5,6 +5,7 @@ import { colors } from "../../utils/constants";
 import LayerPicker from "./LayerPicker";
 import duckbill from "../../assets/duck-bill.png";
 import "./index.scss";
+import CircleButton from "../common/CircleButton";
 
 const layers: any[] = [
   { label: "Head" },
@@ -53,70 +54,53 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
             className="drawing-canvas"
             ref={drawingCanvas}
             id="drawingtool_canvas"
-          ></canvas>
-          <div className="bottom">
-            <div
-              className="btn"
-              onClick={() => {
-                DToolInst.eraseCurrentLayer();
-              }}
-            >
-              clear
-            </div>
-            <div
-              className={`btn ${!historyButtonsState[0] && "disabled"}`}
-              onClick={() => {
-                DToolInst.undoredo(-1);
-              }}
-            >
-              <img className="btn-img" alt="" src="/assets/images/undo.png" />
-            </div>
-            <div
-              className={`btn ${!historyButtonsState[1] && "disabled"}`}
-              onClick={() => {
-                DToolInst.undoredo(1);
-              }}
-            >
-              <img className="btn-img" alt="" src="/assets/images/redo.png" />
-            </div>
-          </div>
+          ></canvas>                  
           <div className="right">
-            <div
-              className="btn"
+            <CircleButton 
               onClick={() => {
                 setSelectedTool(0);
                 DToolInst.selectTool(0);
                 drawingCanvas.current!.style.cursor =
                   "url('/assets/images/pencil.png'), default";
               }}
-            >
-              <img className="btn-img" alt="" src="/assets/images/pencil.png" />
-            </div>
-            <div
-              className="btn"
+            />
+
+            <CircleButton 
               onClick={() => {
                 setSelectedTool(1);
                 DToolInst.selectTool(1);
                 drawingCanvas.current!.style.cursor =
                   "url('/assets/images/paintbucket.png'), default";
               }}
-            >
-              <img
-                className="btn-img"
-                alt=""
-                src="/assets/images/paintbucket.png"
-              />
-            </div>
-            <div
-              className="btn"
+            />
+
+            <CircleButton 
               onClick={() => {
                 DToolInst.selectColor(null);
                 drawingCanvas.current!.style.cursor =
                   "url('/assets/images/eraser.png'), default";
               }}
-            >
-              <img className="btn-img" alt="" src="/assets/images/eraser.png" />
-            </div>
+            />
+                      
+          </div>
+          <div className="bottom space-x-8">
+            <CircleButton
+              
+              onClick={() => {
+                DToolInst.eraseCurrentLayer();
+              }}
+            />
+            <CircleButton
+              onClick={() => {
+                DToolInst.undoredo(-1);
+              }}                        
+            />
+
+            <CircleButton
+              onClick={() => {
+                DToolInst.undoredo(1);
+              }}
+            />                        
           </div>
         </div>
       </Suspense>

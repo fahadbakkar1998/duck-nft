@@ -19,7 +19,7 @@ function App() {
           onCreated={(state) => state.gl.clearColor()}
         >
           <Suspense fallback={null}>
-            <pointLight  intensity={8} position={[0, 10, 10]} />
+            <pointLight  intensity={9} position={[0, 8, 10]} />
             {/* <OrbitControls /> */}
             <MachineLayout />
           </Suspense>

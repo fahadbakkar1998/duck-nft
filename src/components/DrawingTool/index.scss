@@ -5,39 +5,40 @@
   justify-content: center;
   & .btn {
     border: 0;
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
-    background-color: aquamarine;
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    background-color: rgb(240, 159, 159);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    padding: 13px;
+    padding: 10px;
     &.disabled {
       background-color: gray;
       cursor: default;
     }
   }
   .drawing-canvas {
-    width: 420px;
-    height: 420px;
-    border-radius: 140px;
-    border: 1px solid black;
+    width: 435px;
+    height: 435px;
+    border-radius: 15%;
+    border: 2px solid rgba(255, 255, 255, 0.383);
     cursor: url("../../../public/assets/images/pencil.png"), default;
   }
   .bottom {
     position: fixed;
-    bottom: -55px;
-    left: 25%;
+    bottom: -48px;
+    
     display: flex;
-    justify-content: center;
-    gap: 25px;
+    justify-content: center;    
+  
   }
   .right {
     position: fixed;
-    right: -55px;
-    bottom: 25%;
+    right: -12%;
+    width: 10%;
+    bottom: 27%;
     display: flex;
     flex-direction: column;
     justify-content: center;

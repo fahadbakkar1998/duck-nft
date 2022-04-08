@@ -72,7 +72,7 @@ const min = viewport.width;
       >
         <primitive
           object={gltfDisk.scene}
-          scale={[0.6, 0.6, 0.6]}
+          scale={[0.25, 0.6, 0.6]}
           rotation={[0, 0, Math.PI / 2]}
         >
           <Cylinder args={[1, 1, 0.1, 50]} rotation={[0, 0, Math.PI / 2]}>
