@@ -1,28 +1,29 @@
-$color: #12cdd4;
+$color: white;
 $bgColor: #484848;
 $elementBgColor: #1a1a1a;
 $gap: 10px;
 
 .AdminMain {
-  width: 430px;
-  height: 430px;
-  border-radius: 100px;
+  width: 435px;
+  height: 435px;
+  border-radius: 15%;
+  border: 2px solid rgba(255, 255, 255, 0.383);  
   display: flex;
   flex-direction: column;
-  padding: 30px;
-  background-color: $bgColor;
-  border: 1px solid black;
+  color: white;
+  
+  background-color: rgb(8, 8, 8);
+  
   & * {
-    color: $color;
+    // color: $color;
   }
   ._group {
-    width: 100%;
-    padding: 10px;
+    width: 100%;    
     border: 0;
-    border-bottom: 1px solid $color;
+    // border-bottom: 1px solid $color;
     display: flex;
     flex-direction: column;
-    gap: $gap;
+    // gap: $gap;
     justify-content: space-between;
     align-items: center;
     ._row {
@@ -72,6 +73,7 @@ $gap: 10px;
         border-radius: 5px;
         background-color: $color;
         color: black;
+        
         cursor: pointer;
         &:active {
           color: white;
@@ -88,20 +90,24 @@ $gap: 10px;
   }
   ._footer {
     width: 100%;
-    padding: 10px;
+    
     display: flex;
-    justify-content: flex-end;
-    gap: $gap;
+    justify-content: flex-end;  
     ._btn {
       padding: 0 10px;
       font-size: 15px;
-      border: 0;
-      border-radius: 5px;
-      background-color: $color;
-      color: black;
+      border: 0;      
+      background-color: rgb(8, 8, 8);
+      
+      color: white;
       cursor: pointer;
       &:active {
         color: white;
+      }
+      &:hover {
+        background-color: white;
+        color: rgb(8, 8, 8);
+
       }
     }
   }
