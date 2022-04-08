@@ -11,21 +11,21 @@ const ColorPicker: () => JSX.Element = () => {
   const setSelectedColor = useMachineStore((state) => state.setSelectedColor);
   const { viewport } = useThree();
   // const min = Math.min(viewport.width, viewport.height);
-const min = viewport.width;
+  const min = viewport.width;
   const bgColor = selectedColor || "#FFFFFF";
 
   useEffect(() => {
-    const satElements = Array.from(
-      document.getElementsByClassName(
-        "react-colorful__saturation"
-      ) as HTMLCollectionOf<HTMLElement>
-    );
-    if (satElements.length) {
-      satElements[0].addEventListener("mouseup", (e) => e.stopPropagation());
-      document.addEventListener("mouseup", (e) => {
-        satElements[0].style.display = "none";
-      });
-    }
+    // const satElements = Array.from(
+    //   document.getElementsByClassName(
+    //     "react-colorful__saturation"
+    //   ) as HTMLCollectionOf<HTMLElement>
+    // );
+    // if (satElements.length) {
+    //   satElements[0].addEventListener("mouseup", (e) => e.stopPropagation());
+    //   document.addEventListener("mouseup", (e) => {
+    //     satElements[0].style.display = "none";
+    //   });
+    // }
   }, []);
 
   return (
@@ -43,14 +43,14 @@ const min = viewport.width;
         className="ColorPicker"
         style={{ backgroundColor: bgColor }}
         onClick={() => {
-          const satElements = Array.from(
-            document.getElementsByClassName(
-              "react-colorful__saturation"
-            ) as HTMLCollectionOf<HTMLElement>
-          );
-          if (satElements.length) {
-            satElements[0].style.display = "block";
-          }
+          // const satElements = Array.from(
+          //   document.getElementsByClassName(
+          //     "react-colorful__saturation"
+          //   ) as HTMLCollectionOf<HTMLElement>
+          // );
+          // if (satElements.length) {
+          //   satElements[0].style.display = "block";
+          // }
         }}
       >
         <HexColorPicker
