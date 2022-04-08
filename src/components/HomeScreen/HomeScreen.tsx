@@ -2,11 +2,11 @@ import { useRef, useState, useEffect } from "react";
 import { Html } from "@react-three/drei";
 import DuckCard from "../DuckCard/DuckCard";
 import useMachineStore from "../../store";
-import "./CardImageSection.scss";
+import "./HomeScreen.scss";
 import Footer from "./Footer";
 
 
-const CardImageSection = (props: any) => {  
+const HomeScreen = (props: any) => {  
   const tozziDuckData = useMachineStore((state) => state.tozziDuckData);
   const [isHovered, setIsHovered] = useState(false);
   const [filterTozziDuckData] =
@@ -28,9 +28,11 @@ const CardImageSection = (props: any) => {
     >
       <div className="main">
         <div
-          className="mainScreen"
-          style={{ overflow: isHovered ? 'scroll' : 'hidden' }}
-          id="mainScreen"
+          id="home-screen"
+          className={`
+            mainScreen
+            overflow-scroll
+          `}                    
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
@@ -67,4 +69,4 @@ const CardImageSection = (props: any) => {
   );
 };
 
-export default CardImageSection;
+export default HomeScreen;

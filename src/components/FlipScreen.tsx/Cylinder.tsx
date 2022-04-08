@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { a, useSpring, easings } from "@react-spring/three";
 import DrawingTool from "../DrawingTool";
 import useMachineStore from "../../store";
-import CardImageSection from "../CardImageSection/CardImageSection";
+import CardImageSection from "../HomeScreen/HomeScreen";
 import AdminMain from "../AdminMain/AdminMain";
 import { aspectRatio, minViewLength } from "../../utils/constants";
 import { useLoader, useThree } from "react-three-fiber";
@@ -47,12 +47,18 @@ const min = viewport.width;
   }));
 
   const handelOnClick = () => {
+    const homeScreen = document.getElementById('home-screen');
+    homeScreen?.classList.add('overflow-hidden');
+    homeScreen?.classList.remove('overflow-scroll');    
     if (globalRotating || syncing || processing || showTxStatus) return;
     globalRotating = true;
     setSpring({ rotation: [Math.PI * ++globalRoundCount, 0, 0] });
     setCurrentMode(globalRoundCount % 3);
     setCurrentTozziDuckId(-1);
-    setCurrentCustomDuckId(-1);
+    setCurrentCustomDuckId(-1);    
+    setTimeout(() => {
+      homeScreen?.classList.add('overflow-scroll');
+    }, 6000);
   };
 
   const restRoundCount = roundCount % 3;
@@ -79,7 +85,10 @@ const min = viewport.width;
             <meshBasicMaterial attach="material" color="#6C6C6C" />
           </Cylinder>
         </primitive>
-        {address && !syncing && (
+        <CardImageSection
+          isFront={restRoundCount === 0 ? isFront : !isFront}
+        ></CardImageSection>
+        {/* {address && !syncing && (
           <>
             {(restRoundCount === 0 || restRoundCount === 2) && (
               <CardImageSection
@@ -101,7 +110,7 @@ const min = viewport.width;
         <WalletConnect
           isFront={isFront}
           isShow={!address || syncing}
-        ></WalletConnect>
+        ></WalletConnect> */}
       </group>
     </a.group>
   );
