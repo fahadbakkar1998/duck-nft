@@ -17,7 +17,7 @@ let globalRotating = false;
 export const DuckCylinder = () => {
   const { viewport } = useThree();
   // const min = Math.min(viewport.width, viewport.height);
-const min = viewport.width;
+  const min = viewport.width;
   const [roundCount, setRoundCount] = useState(0);
   const gltfDisk = useLoader(GLTFLoader, "assets/models/DuckDisk.glb");
   const setCurrentMode = useMachineStore((state) => state.setCurrentMode);
@@ -63,6 +63,7 @@ const min = viewport.width;
 
   const restRoundCount = roundCount % 3;
   const isFront = !(roundCount % 2);
+  console.log(address, syncing);
 
   return (
     <a.group
