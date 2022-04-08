@@ -12,6 +12,7 @@ import Custom from "./Custom";
 import Admin from "./Admin";
 import { useThree } from "react-three-fiber";
 import "./index.scss";
+import NotConnected from "./NotConnected";
 
 const AltScreen: () => JSX.Element = () => {
   const currentMode = useMachineStore((state) => state.currentMode);
@@ -64,6 +65,9 @@ const min = viewport.width;
       transform
     >
       <div className="AltScreen">
+        {!address && (
+          <NotConnected />
+        )}
         {address && !syncing && (
           <>
             <div className="content scanlines">
@@ -97,13 +101,16 @@ const min = viewport.width;
                   </div>
                 </div>
               ) : (
-                <>
+                <>                  
                   <Shopping></Shopping>
                   <Custom></Custom>
                   <Admin></Admin>
                 </>
               )}
             </div>
+
+
+
             <div className="footer">
               <div
                 className={`btn bg-info ${

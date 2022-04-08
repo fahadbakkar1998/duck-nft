@@ -84,7 +84,7 @@ const WalletConnect = (props: any) => {
       transform
       occlude
     >
-      <div className={`scanlines WalletConnect ${!props.isShow && "hidden"}`}>
+      <div className={`scanlines inner-shadow WalletConnect ${!props.isShow && "hidden"}`}>
         {syncing ? (
           <div>Syncing</div>
         ) : (
