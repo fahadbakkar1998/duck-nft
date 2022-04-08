@@ -1,22 +1,15 @@
-.main {
-  width: 430px;
+.main {  
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 10px;  
   border: 0;
-  .mainScreen {
-    border-radius: 100px;
-    height: 430px;
-    background-color: white;
-    overflow: hidden;
-    border: 1px solid black;
-    .imgContainer {
-      display: flex;
-      justify-content: flex-start;
-      flex-wrap: wrap;
-      overflow: scroll;
-      border-radius: 1em;
-    }
+  .mainScreen {      
+    border-radius: 15%;  
+    border: 2px solid rgba(255, 255, 255, 0.383);  
+    width: 435px;
+    height: 435px;
+    background-color: rgb(8, 8, 8);
+    overflow: hidden;     
   }
   .footer {
     position: absolute;

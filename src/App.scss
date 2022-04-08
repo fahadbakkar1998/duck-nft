@@ -3,9 +3,9 @@
 @import url('http://fonts.cdnfonts.com/css/quadrit');
 
 .inner-shadow {
-  -webkit-box-shadow: inset 8px 5px 8px -1px rgba(0,0,0,0.3);
-  -moz-box-shadow: inset 8px 5px 8px -1px rgba(0,0,0,0.3);
-  box-shadow: inset 8px 5px 8px -1px rgba(0,0,0,0.3);
+  -webkit-box-shadow: inset 8px 5px 8px -1px rgba(0,0,0,0.5);
+  -moz-box-shadow: inset 8px 5px 8px -1px rgba(0,0,0,0.5);
+  box-shadow: inset 8px 5px 8px -1px rgba(0,0,0,0.5);
 }
 
 .App {
@@ -124,4 +124,9 @@ $scan-opacity: 0.75;
 
 .pixel-font {
   font-family: 'Nokia Cellphone FC', 'Quadrit', monospace,sans-serif;           
+}
+
+.shiny {
+  background: rgb(255,255,255);
+  background: radial-gradient(circle, rgba(255,255,255,0.5508578431372548) 6%, rgba(204,204,204,0) 75%);
 }
