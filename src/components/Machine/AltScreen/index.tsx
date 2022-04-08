@@ -13,6 +13,9 @@ import Admin from "./Admin";
 import { useThree } from "react-three-fiber";
 import "./index.scss";
 import NotConnected from "./NotConnected";
+import RectButton from "../../../components/common/RectButton";
+
+
 
 const AltScreen: () => JSX.Element = () => {
   const currentMode = useMachineStore((state) => state.currentMode);
@@ -51,6 +54,37 @@ const AltScreen: () => JSX.Element = () => {
 
   const { viewport } = useThree();
   // const min = Math.min(viewport.width, viewport.height);
+
+  const handleMint = async () => {    
+    // console.log("before minting custom duck data: ", customDuckData);
+    setProcessing(true);
+    const base64data = await DToolInst.getWebp();
+    // console.log("base64data: ", base64data);
+    setTransactionStatus("processing...");
+    setShowTxStatus(true);
+    const res = await mintCustomDuck({
+      base64data,
+    });
+    // console.log("custom duck minting result: ", res);
+    if (res.success) {
+      setCustomDuckData([
+        ...customDuckData,
+        {
+          id: tozziDuckNum + customDuckData.length,
+          image: base64data,
+          owner: address,
+          restTimestamp: machineSetting.burnWindow,
+        },
+      ]);
+      setMachineSetting({
+        ...machineSetting,
+        balance:
+          machineSetting.balance + machineSetting.customDuckPrice,
+      });
+    }
+    setTransactionStatus(res.status);
+    setProcessing(false);    
+  }
 const min = viewport.width;
 
   return (
@@ -156,45 +190,14 @@ const min = viewport.width;
               >
                 Buy Duck
               </div>
-              <div
-                className={`btn bg-yellow ${
-                  currentMode === MachineMode.Customization
-                    ? "fadeIn"
-                    : "fadeOut"
-                }`}
-                onClick={async () => {
-                  // console.log("before minting custom duck data: ", customDuckData);
-                  setProcessing(true);
-                  const base64data = await DToolInst.getWebp();
-                  // console.log("base64data: ", base64data);
-                  setTransactionStatus("processing...");
-                  setShowTxStatus(true);
-                  const res = await mintCustomDuck({
-                    base64data,
-                  });
-                  // console.log("custom duck minting result: ", res);
-                  if (res.success) {
-                    setCustomDuckData([
-                      ...customDuckData,
-                      {
-                        id: tozziDuckNum + customDuckData.length,
-                        image: base64data,
-                        owner: address,
-                        restTimestamp: machineSetting.burnWindow,
-                      },
-                    ]);
-                    setMachineSetting({
-                      ...machineSetting,
-                      balance:
-                        machineSetting.balance + machineSetting.customDuckPrice,
-                    });
-                  }
-                  setTransactionStatus(res.status);
-                  setProcessing(false);
-                }}
-              >
-                Mint
-              </div>
+              
+              { currentMode === MachineMode.Customization && (
+                <div className="absolute -bottom-[30px] left-[24px] w-[148px] bg-red-200">
+                  <RectButton onClick={() => console.log('foo')} >                    
+                    <div className="">MINT</div>                    
+                  </RectButton>
+                </div>
+              )}                                                          
               <div
                 className={`btn bg-danger ${
                   currentMode === MachineMode.Admin &&

@@ -6,19 +6,22 @@ const Custom: () => JSX.Element = () => {
 
   return (
     <div
-      className={`Custom ${
+      className={`Custom pixel-font p-6 ${
         currentMode === MachineMode.Customization ? "fadeIn" : "fadeOut"
       }`}
     >
-      <div className="Custom-title">Create-a-Duck</div>
+      <div className="Custom-title mb-2">DUCKSTOMIZER</div>
+      <div className="Custom-content mb-2">
+        Mint your own own custom duck using the drawing application 
+        to the right.
+      </div>
+      <div className="Custom-content mb-2">
+        Your custom work of duck will be stored directly on the 
+        Ethereum blockchain.
+      </div>
       <div className="Custom-content">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
+        <span className="text-red-500">BURN NOTICE:</span> the owner of this machine reserves the right to destroy any ducks that offend their arbitrary 
+        standards of decency.
       </div>
     </div>
   );

@@ -49,7 +49,8 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
       occlude
     >
       <Suspense fallback={null}>
-        <div className="DrawingTool">
+        <div className="DrawingTool relative">
+          <div className="absolute w-full h-full inner-shadow rounded-[15%] pointer-events-none" />
           <canvas
             className="drawing-canvas"
             ref={drawingCanvas}
@@ -58,13 +59,13 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
           <div className="right">
             <CircleButton 
               onClick={() => {
+                console.log('pencil');
                 setSelectedTool(0);
                 DToolInst.selectTool(0);
                 drawingCanvas.current!.style.cursor =
                   "url('/assets/images/pencil.png'), default";
               }}
             />
-
             <CircleButton 
               onClick={() => {
                 setSelectedTool(1);
@@ -73,17 +74,15 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
                   "url('/assets/images/paintbucket.png'), default";
               }}
             />
-
             <CircleButton 
               onClick={() => {
                 DToolInst.selectColor(null);
                 drawingCanvas.current!.style.cursor =
                   "url('/assets/images/eraser.png'), default";
               }}
-            />
-                      
+            />                      
           </div>
-          <div className="bottom space-x-8">
+          <div className="bottom space-x-8 ">
             <CircleButton
               
               onClick={() => {

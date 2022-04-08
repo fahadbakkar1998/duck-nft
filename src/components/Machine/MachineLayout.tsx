@@ -29,13 +29,13 @@ const min = viewport.width;
       </mesh> */}
       <DuckCylinder />
       <AltScreen />
-      <ColorPicker></ColorPicker>
+      <ColorPicker />
       <BurnModal
         openModal={openBurnModal}
         onCloseModal={() => {
           setOpenBurnModal(false);
         }}
-      ></BurnModal>
+      />
     </group>
   );
 };

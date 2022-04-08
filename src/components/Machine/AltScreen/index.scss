@@ -31,12 +31,12 @@
       }
     }
     .Custom {
-      padding: 30px;
-      background-color: white;
+      
+      background-color: rgb(8, 8, 8);
+      color: white;
       text-align: left;
       &-title {
-        font-size: 30px;
-        margin-bottom: 30px;
+        font-size: 25px;        
       }
       &-content {
         font-size: 12px;
