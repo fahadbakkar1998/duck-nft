@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 import { Canvas } from "react-three-fiber";
-import { OrbitControls } from "@react-three/drei";
 import "./App.scss";
 import { MachineLayout } from "./components/Machine/MachineLayout";
 import bgImg from "./assets/img/duck-base-holepunch.png";

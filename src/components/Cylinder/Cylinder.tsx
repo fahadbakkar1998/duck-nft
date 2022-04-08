@@ -36,7 +36,8 @@ const min = viewport.width;
     rotation: [0, 0, 0],
     position: [0, 0, 0],
     config: {
-      duration: 3000,
+      duration: 2500,      
+      bounce: 2,                  
       easing: easings.easeInOutElastic,
     },
     onRest: () => {
