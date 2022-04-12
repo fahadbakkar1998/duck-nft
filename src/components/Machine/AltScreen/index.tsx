@@ -65,7 +65,7 @@ const AltScreen: () => JSX.Element = () => {
     const res = await mintCustomDuck({
       base64data,
     });
-    // console.log("custom duck minting result: ", res);
+
     if (res.success) {
       setCustomDuckData([
         ...customDuckData,
@@ -96,15 +96,15 @@ const min = viewport.width;
       ]}
       position={[-0.225 * min, -0.045 * min, 0]}
       rotation={[0.0, 0.0, 0.0]}
-      transform
+      transform      
     >
-      <div className="AltScreen ">        
+      <div className="">                
         {!address && (
           <NotConnected />
         )}
         {address && !syncing && (
           <>
-            <div className="content  relative">
+            {/* <div className="content  relative">
               <div className="w-full h-full inner-shadow absolute z-10"></div>
               {showTxStatus ? (
                 <div className="processing">
@@ -142,11 +142,11 @@ const min = viewport.width;
                   <Admin></Admin>
                 </>
               )}
-            </div>
+            </div> */}
 
 
 
-            <div className="footer">
+            {/* <div className="footer">
               <div
                 className={`btn bg-info ${
                   currentMode === MachineMode.Shopping &&
@@ -205,14 +205,13 @@ const min = viewport.width;
                     ? "fadeIn"
                     : "fadeOut"
                 }`}
-                onClick={() => {
-                  // console.log("openBurnModal");
+                onClick={() => {                  
                   setOpenBurnModal(true);
                 }}
               >
                 Burn
               </div>
-            </div>
+            </div> */}
           </>
         )}
       </div>

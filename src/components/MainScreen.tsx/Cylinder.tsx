@@ -8,13 +8,12 @@ import AdminMain from "../AdminMain/AdminMain";
 import { aspectRatio, minViewLength } from "../../utils/constants";
 import { useLoader, useThree } from "react-three-fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { AxesHelper } from "three";
 import WalletConnect from "./WalletConnect";
 
 let globalRoundCount = 0;
 let globalRotating = false;
 
-export const DuckCylinder = () => {
+export const FlipScreen = () => {
   const { viewport } = useThree();
   // const min = Math.min(viewport.width, viewport.height);
   const min = viewport.width;
@@ -57,14 +56,14 @@ export const DuckCylinder = () => {
     setCurrentTozziDuckId(-1);
     setCurrentCustomDuckId(-1);    
     setTimeout(() => {
+      console.log('unlocked');
       homeScreen?.classList.add('overflow-scroll');
-    }, 6000);
+    }, 1500);
   };
 
   const restRoundCount = roundCount % 3;
   const isFront = !(roundCount % 2);
-  console.log(address, syncing);
-
+  
   return (
     <a.group
       {...(spring as any)}
@@ -83,7 +82,7 @@ export const DuckCylinder = () => {
           rotation={[0, 0, Math.PI / 2]}
         >
           <Cylinder args={[1, 1, 0.1, 50]} rotation={[0, 0, Math.PI / 2]}>
-            <meshBasicMaterial attach="material" color="#6C6C6C" />
+            <meshBasicMaterial attach="material" />
           </Cylinder>
         </primitive>
         {address && !syncing && (

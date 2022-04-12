@@ -1,7 +1,7 @@
 import img from "../../../src/assets/img/duck-base-holepunch.png";
 import { useLoader, useThree } from "react-three-fiber";
 import * as THREE from "three";
-import { DuckCylinder } from "../FlipScreen.tsx/Cylinder";
+import { FlipScreen } from "../MainScreen.tsx/Cylinder";
 import AltScreen from "./AltScreen";
 import ColorPicker from "../DrawingTool/ColorPicker";
 import BurnModal from "../BurnModal";
@@ -14,7 +14,7 @@ export const MachineLayout = () => {
 
   return (
     <group>
-      <DuckCylinder />
+      <FlipScreen />
       <AltScreen />
       <ColorPicker />
       <BurnModal
