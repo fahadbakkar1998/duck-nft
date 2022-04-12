@@ -36,8 +36,8 @@ export const DuckCylinder = () => {
     rotation: [0, 0, 0],
     position: [0, 0, 0],
     config: {
-      duration: 2500,      
-      bounce: 2,                  
+      duration: 2500,
+      bounce: 2,
       easing: easings.easeInOutElastic,
     },
     onRest: () => {
@@ -47,23 +47,22 @@ export const DuckCylinder = () => {
   }));
 
   const handelOnClick = () => {
-    const homeScreen = document.getElementById('home-screen');
-    homeScreen?.classList.add('overflow-hidden');
-    homeScreen?.classList.remove('overflow-scroll');    
+    const homeScreen = document.getElementById("home-screen");
+    homeScreen?.classList.add("overflow-hidden");
+    homeScreen?.classList.remove("overflow-scroll");
     if (globalRotating || syncing || processing || showTxStatus) return;
     globalRotating = true;
     setSpring({ rotation: [Math.PI * ++globalRoundCount, 0, 0] });
     setCurrentMode(globalRoundCount % 3);
     setCurrentTozziDuckId(-1);
-    setCurrentCustomDuckId(-1);    
+    setCurrentCustomDuckId(-1);
     setTimeout(() => {
-      homeScreen?.classList.add('overflow-scroll');
+      homeScreen?.classList.add("overflow-scroll");
     }, 6000);
   };
 
   const restRoundCount = roundCount % 3;
   const isFront = !(roundCount % 2);
-  console.log(address, syncing);
 
   return (
     <a.group
@@ -88,21 +87,18 @@ export const DuckCylinder = () => {
         </primitive>
         {address && !syncing && (
           <>
-            {(restRoundCount === 0 || restRoundCount === 2) && (
-              <CardImageSection
-                isFront={restRoundCount === 0 ? isFront : !isFront}
-              ></CardImageSection>
-            )}
-            {(restRoundCount === 1 || restRoundCount === 0) && (
-              <DrawingTool
-                isFront={restRoundCount === 1 ? isFront : !isFront}
-              ></DrawingTool>
-            )}
-            {(restRoundCount === 2 || restRoundCount === 1) && (
-              <AdminMain
-                isFront={restRoundCount === 2 ? isFront : !isFront}
-              ></AdminMain>
-            )}
+            <CardImageSection
+              isFront={restRoundCount === 0 ? isFront : !isFront}
+              isActive={restRoundCount === 0 || restRoundCount === 2}
+            ></CardImageSection>
+            <DrawingTool
+              isFront={restRoundCount === 1 ? isFront : !isFront}
+              isActive={restRoundCount === 1 || restRoundCount === 0}
+            ></DrawingTool>
+            <AdminMain
+              isFront={restRoundCount === 2 ? isFront : !isFront}
+              isActive={restRoundCount === 2 || restRoundCount === 1}
+            ></AdminMain>
           </>
         )}
         <WalletConnect

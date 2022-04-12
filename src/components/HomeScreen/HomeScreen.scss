@@ -1,8 +1,11 @@
 .main {  
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 10px;  
   border: 0;
+  &.active {
+    display: flex;
+  }
   .mainScreen {      
     border-radius: 15%;  
     border: 2px solid rgba(255, 255, 255, 0.383);  

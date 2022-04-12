@@ -15,8 +15,6 @@ import "./index.scss";
 import NotConnected from "./NotConnected";
 import RectButton from "../../../components/common/RectButton";
 
-
-
 const AltScreen: () => JSX.Element = () => {
   const currentMode = useMachineStore((state) => state.currentMode);
   const DToolInst = useMachineStore((state) => state.DToolInst);
@@ -55,7 +53,7 @@ const AltScreen: () => JSX.Element = () => {
   const { viewport } = useThree();
   // const min = Math.min(viewport.width, viewport.height);
 
-  const handleMint = async () => {    
+  const handleMint = async () => {
     // console.log("before minting custom duck data: ", customDuckData);
     setProcessing(true);
     const base64data = await DToolInst.getWebp();
@@ -78,14 +76,13 @@ const AltScreen: () => JSX.Element = () => {
       ]);
       setMachineSetting({
         ...machineSetting,
-        balance:
-          machineSetting.balance + machineSetting.customDuckPrice,
+        balance: machineSetting.balance + machineSetting.customDuckPrice,
       });
     }
     setTransactionStatus(res.status);
-    setProcessing(false);    
-  }
-const min = viewport.width;
+    setProcessing(false);
+  };
+  const min = viewport.width;
 
   return (
     <Html
@@ -98,53 +95,50 @@ const min = viewport.width;
       rotation={[0.0, 0.0, 0.0]}
       transform
     >
-      <div className="AltScreen ">        
-        {!address && (
-          <NotConnected />
-        )}
+      <div className="AltScreen ">
+        {!address && <NotConnected />}
         {address && !syncing && (
           <>
             <div className="content  relative">
-              <div className="w-full h-full inner-shadow absolute z-10"></div>
-              {showTxStatus ? (
-                <div className="processing">
-                  <div className="processing-status">{transactionStatus}</div>
-                  <div
-                    className="processing-end"
-                    onClick={() => {
-                      if (processing) return;
-                      setShowTxStatus(false);
-                    }}
-                  >
-                    Go Back
+              <div className="w-full h-full inner-shadow absolute z-10">
+                {showTxStatus ? (
+                  <div className="processing">
+                    <div className="processing-status">{transactionStatus}</div>
+                    <div
+                      className="processing-end"
+                      onClick={() => {
+                        if (processing) return;
+                        setShowTxStatus(false);
+                      }}
+                    >
+                      Go Back
+                    </div>
                   </div>
-                </div>
-              ) : currentTozziDuckId >= 0 &&
-                tozziDuckData[currentTozziDuckId] &&
-                tozziDuckData[currentTozziDuckId].owner ? (
-                <div className="duck-info">
-                  <div className="owner-address">
-                    {tozziDuckData[currentTozziDuckId].owner}
+                ) : currentTozziDuckId >= 0 &&
+                  tozziDuckData[currentTozziDuckId] &&
+                  tozziDuckData[currentTozziDuckId].owner ? (
+                  <div className="duck-info">
+                    <div className="owner-address">
+                      {tozziDuckData[currentTozziDuckId].owner}
+                    </div>
                   </div>
-                </div>
-              ) : currentCustomDuckId >= tozziDuckNum &&
-                customDuckData[currentCustomDuckId - tozziDuckNum] &&
-                customDuckData[currentCustomDuckId - tozziDuckNum].owner ? (
-                <div className="duck-info">
-                  <div className="owner-address">
-                    {customDuckData[currentCustomDuckId - tozziDuckNum].owner}
+                ) : currentCustomDuckId >= tozziDuckNum &&
+                  customDuckData[currentCustomDuckId - tozziDuckNum] &&
+                  customDuckData[currentCustomDuckId - tozziDuckNum].owner ? (
+                  <div className="duck-info">
+                    <div className="owner-address">
+                      {customDuckData[currentCustomDuckId - tozziDuckNum].owner}
+                    </div>
                   </div>
-                </div>
-              ) : (
-                <>                  
-                  <Shopping></Shopping>
-                  <Custom></Custom>
-                  <Admin></Admin>
-                </>
-              )}
+                ) : (
+                  <>
+                    <Shopping></Shopping>
+                    <Custom></Custom>
+                    <Admin></Admin>
+                  </>
+                )}
+              </div>
             </div>
-
-
 
             <div className="footer">
               <div
@@ -190,14 +184,14 @@ const min = viewport.width;
               >
                 Buy Duck
               </div>
-              
-              { currentMode === MachineMode.Customization && (
+
+              {currentMode === MachineMode.Customization && (
                 <div className="absolute -bottom-[30px] left-[24px] w-[148px] bg-red-200">
-                  <RectButton onClick={() => console.log('foo')} >                    
-                    <div className="">MINT</div>                    
+                  <RectButton onClick={() => console.log("foo")}>
+                    <div className="">MINT</div>
                   </RectButton>
                 </div>
-              )}                                                          
+              )}
               <div
                 className={`btn bg-danger ${
                   currentMode === MachineMode.Admin &&
