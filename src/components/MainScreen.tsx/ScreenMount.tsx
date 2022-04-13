@@ -1,14 +1,10 @@
-import { Cylinder } from "@react-three/drei";
 import { useEffect, useRef, useState } from "react";
 import { a, useSpring, easings } from "@react-spring/three";
-import DrawingTool from "../DrawingTool";
 import useMachineStore from "../../store";
-import CardImageSection from "../HomeScreen/HomeScreen";
-import AdminMain from "../AdminMain/AdminMain";
 import { aspectRatio, minViewLength } from "../../utils/constants";
 import { useLoader, useThree } from "react-three-fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import WalletConnect from "./WalletConnect";
+import Screen from "./Screen";
 
 let globalRoundCount = 0;
 let globalRotating = false;
@@ -75,16 +71,8 @@ export const MainScreen = () => {
         rotation={[0, Math.PI / 2, Math.PI / 2]}
         position={[0, 0, 0]}
       >
-        <primitive
-          object={gltfDisk.scene}
-          scale={[0.25, 0.6, 0.6]}
-          rotation={[0, 0, Math.PI / 2]}
-        >
-          <Cylinder args={[1, 1, 0.1, 50]} rotation={[0, 0, Math.PI / 2]}>
-            <meshBasicMaterial attach="material" />
-          </Cylinder>
-        </primitive>
-        
+        <primitive object={gltfDisk.scene} scale={[0.25, 0.6, 0.6]} rotation={[0, 0, Math.PI / 2]} />        
+        <Screen restRoundCount={restRoundCount} isFront={isFront} />
       </group>
     </a.group>
   );

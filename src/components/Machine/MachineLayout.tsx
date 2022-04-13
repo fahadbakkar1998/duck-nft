@@ -1,6 +1,5 @@
 import { MainScreen } from "../MainScreen.tsx/ScreenMount";
 import AltScreen from "./AltScreen";
-import ColorPicker from "../DrawingTool/ColorPicker";
 import BurnModal from "../BurnModal";
 import useMachineStore from "../../store";
 
@@ -12,8 +11,7 @@ export const MachineLayout = () => {
   return (
     <group>      
       <AltScreen />
-      <MainScreen />
-      <ColorPicker />
+      <MainScreen />      
       <BurnModal
         openModal={openBurnModal}
         onCloseModal={() => { setOpenBurnModal(false)}}

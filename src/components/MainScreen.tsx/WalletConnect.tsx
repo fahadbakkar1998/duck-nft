@@ -1,6 +1,5 @@
   import { useState, useEffect } from "react";
 import "./WalletConnect.scss";
-import { Html } from "@react-three/drei";
 import {
   connectWallet,
   getCurrentWalletConnected,
@@ -73,18 +72,7 @@ const WalletConnect = (props: any) => {
   }, [address]);
 
   return (
-    <Html
-      style={{ pointerEvents: "auto" }}
-      distanceFactor={2.4}
-      position={props.isFront ? [0.0, 0.1, 0.0] : [0.0, -0.1, 0.0]}
-      rotation={
-        props.isFront
-          ? [Math.PI / 2, Math.PI, Math.PI / 2]
-          : [Math.PI / 2, -Math.PI * 2, Math.PI / 2]
-      }
-      transform
-      occlude
-    >
+    
       <div className={`inner-shadow WalletConnect ${!props.isShow && "hidden"}`}>
         <div 
           className={`
@@ -102,7 +90,7 @@ const WalletConnect = (props: any) => {
               px-4 text-lg
             `} onClick={handleClick}
           >
-            { true && (
+            { syncing && (
               <>                
                 <span className="ml-2">Syncing Duck Data</span>
                 <div className="inline-block h-6 w-6 pt-1">
@@ -110,7 +98,7 @@ const WalletConnect = (props: any) => {
                 </div>
               </>
             )}
-            { false && (
+            { !syncing && (
               <>
                 <span>{">"}</span>
                 <span className="ml-2">Connect Wallet</span>
@@ -124,8 +112,7 @@ const WalletConnect = (props: any) => {
           <div className="opacity-75">LICENSED BY JIM TOZZI</div> 
           <div className="opacity-75">FOR USE ON ETHEREUM BLOCKCHAIN</div> 
         </div>
-      </div>
-    </Html>
+      </div>    
   );
 };
 
