@@ -1,6 +1,6 @@
 import useMachineStore from "../store";
 import { mintTozziDuck, mintCustomDuck } from "../utils/interact";
-import { tozziDuckNum } from "@/utils/constants";
+import { tozziDuckNum } from "../utils/constants";
 
 
 export const useMintTozziDuck = () => {
