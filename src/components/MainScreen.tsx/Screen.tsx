@@ -5,7 +5,6 @@ import WalletConnect from "./WalletConnect";
 import BrowsingMode from "../BrowsingScreen/BrowsingScreen";
 import { FC } from "react";
 import { Html } from "@react-three/drei";
-import ColorPicker from "../DrawingTool/ColorPicker";
 import { MachineMode } from "../../utils/constants";
 
 interface ScreenProps {

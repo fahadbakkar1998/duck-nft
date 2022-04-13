@@ -40,7 +40,7 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
         <div className="DrawingTool relative">
           <div className="absolute w-full h-full inner-shadow rounded-[15%] pointer-events-none" />
           <canvas
-            className="drawing-canvas"
+            className="drawing-canvas bg-black border-[#3f3f41] border-[30px]"
             ref={drawingCanvas}
             id="drawingtool_canvas"
           />               
