@@ -13,9 +13,8 @@ import WalletConnect from "./WalletConnect";
 let globalRoundCount = 0;
 let globalRotating = false;
 
-export const FlipScreen = () => {
-  const { viewport } = useThree();
-  // const min = Math.min(viewport.width, viewport.height);
+export const MainScreen = () => {
+  const { viewport } = useThree();  
   const min = viewport.width;
   const [roundCount, setRoundCount] = useState(0);
   const gltfDisk = useLoader(GLTFLoader, "assets/models/DuckDisk.glb");
@@ -85,29 +84,7 @@ export const FlipScreen = () => {
             <meshBasicMaterial attach="material" />
           </Cylinder>
         </primitive>
-        {address && !syncing && (
-          <>
-            {(restRoundCount === 0 || restRoundCount === 2) && (
-              <CardImageSection
-                isFront={restRoundCount === 0 ? isFront : !isFront}
-              ></CardImageSection>
-            )}
-            {(restRoundCount === 1 || restRoundCount === 0) && (
-              <DrawingTool
-                isFront={restRoundCount === 1 ? isFront : !isFront}
-              ></DrawingTool>
-            )}
-            {(restRoundCount === 2 || restRoundCount === 1) && (
-              <AdminMain
-                isFront={restRoundCount === 2 ? isFront : !isFront}
-              ></AdminMain>
-            )}
-          </>
-        )}
-        <WalletConnect
-          isFront={isFront}
-          isShow={!address || syncing}
-        ></WalletConnect>
+        
       </group>
     </a.group>
   );

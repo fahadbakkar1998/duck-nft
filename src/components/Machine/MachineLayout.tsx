@@ -1,7 +1,4 @@
-import img from "../../../src/assets/img/duck-base-holepunch.png";
-import { useLoader, useThree } from "react-three-fiber";
-import * as THREE from "three";
-import { FlipScreen } from "../MainScreen.tsx/Cylinder";
+import { MainScreen } from "../MainScreen.tsx/ScreenMount";
 import AltScreen from "./AltScreen";
 import ColorPicker from "../DrawingTool/ColorPicker";
 import BurnModal from "../BurnModal";
@@ -13,15 +10,13 @@ export const MachineLayout = () => {
   const setOpenBurnModal = useMachineStore((state) => state.setOpenBurnModal);
 
   return (
-    <group>
-      <FlipScreen />
+    <group>      
       <AltScreen />
+      <MainScreen />
       <ColorPicker />
       <BurnModal
         openModal={openBurnModal}
-        onCloseModal={() => {
-          setOpenBurnModal(false);
-        }}
+        onCloseModal={() => { setOpenBurnModal(false)}}
       />
     </group>
   );
