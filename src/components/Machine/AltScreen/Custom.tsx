@@ -6,9 +6,7 @@ const Custom: () => JSX.Element = () => {
 
   return (
     <div
-      className={`Custom pixel-font p-6 ${
-        currentMode === MachineMode.Customization ? "fadeIn" : "fadeOut"
-      }`}
+      className={`pixel-font`}
     >
       <div className="Custom-title mb-2">DUCKSTOMIZER</div>
       <div className="Custom-content mb-2">

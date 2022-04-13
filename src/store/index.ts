@@ -85,7 +85,7 @@ export const useMachineStore = create<MachineStore>(
       });
     },
     
-    currentTozziDuckId: -1,
+    currentTozziDuckId: 0,
     setCurrentTozziDuckId: (id: number): void => {
       set({ currentTozziDuckId: id });
     },
