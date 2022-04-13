@@ -22,8 +22,7 @@ const AltScreen: () => JSX.Element = () => {
   const currentMode = useMachineStore((state) => state.currentMode);
   const DToolInst = useMachineStore((state) => state.DToolInst);
   const address = useMachineStore((state) => state.address);
-  const syncing = useMachineStore((state) => state.syncing);
-
+  
   const currentTozziDuckId = useMachineStore(
     (state) => state.currentTozziDuckId
   );
@@ -100,8 +99,8 @@ const min = viewport.width;
       transform      
     >
       <div className="">                
-        {!address && <NotConnected syncing={syncing} />}
-        {address && !syncing && (
+        {!address && <NotConnected />}
+        {address && currentMode !== MachineMode.Syncing  && (
           <>
             {/* <div className="content  relative">
               <div className="w-full h-full inner-shadow absolute z-10"></div>

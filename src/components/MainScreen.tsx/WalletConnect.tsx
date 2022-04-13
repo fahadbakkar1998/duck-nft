@@ -10,13 +10,14 @@ import {
 import { getFloat, getInt } from "../../utils/common";
 import useMachineStore from "../../store";
 import hourglass from  '../../assets/img/hourglass.gif';
+import { MachineMode } from "../../utils/constants";
 
 const WalletConnect = (props: any) => {
   const [status, setStatus] = useState<any>("Please connect your wallet.");
   const address = useMachineStore((state) => state.address);
-  const setAddress = useMachineStore((state) => state.setAddress);
-  const syncing = useMachineStore((state) => state.syncing);
-  const setSyncing = useMachineStore((state) => state.setSyncing);
+  const setAddress = useMachineStore((state) => state.setAddress);  
+  const currentMode = useMachineStore((state) => state.currentMode);
+  const setCurrentMode = useMachineStore((state) => state.setCurrentMode);
   const setMachineSetting = useMachineStore((state) => state.setMachineSetting);
   const tozziDuckData = useMachineStore((state) => state.tozziDuckData);
   const setTozziDuckData = useMachineStore((state) => state.setTozziDuckData);
@@ -52,9 +53,8 @@ const WalletConnect = (props: any) => {
 
   useEffect(() => {
     const fetchDucks = async () => {
-      setSyncing(true);
-      const machineSetting = await fetchMachineData();
-      // console.log("fetch machine setting", machineSetting);
+      setCurrentMode(MachineMode.Syncing);
+      const machineSetting = await fetchMachineData();      
       setMachineSetting({
         tozziDuckPrice: getFloat(machineSetting.tozziDuckPrice),
         customDuckPrice: getFloat(machineSetting.customDuckPrice),
@@ -66,7 +66,8 @@ const WalletConnect = (props: any) => {
       });
       setTozziDuckData(await fetchTozziDuck(tozziDuckData));
       setCustomDuckData(await fetchCustomDuck());
-      setSyncing(false);
+      setCurrentMode(MachineMode.Shopping);
+      console.log('resyncing');
     };
     if (address) fetchDucks();
   }, [address]);
@@ -90,7 +91,7 @@ const WalletConnect = (props: any) => {
               px-4 text-lg
             `} onClick={handleClick}
           >
-            { syncing && (
+            { currentMode === MachineMode.Syncing && (
               <>                
                 <span className="ml-2">Syncing Duck Data</span>
                 <div className="inline-block h-6 w-6 pt-1">
@@ -98,7 +99,7 @@ const WalletConnect = (props: any) => {
                 </div>
               </>
             )}
-            { !syncing && (
+            { currentMode === MachineMode.Off && (
               <>
                 <span>{">"}</span>
                 <span className="ml-2">Connect Wallet</span>

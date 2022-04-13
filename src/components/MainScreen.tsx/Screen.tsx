@@ -15,7 +15,7 @@ interface ScreenProps {
 
 const Screen: FC<ScreenProps> = ({isFront, restRoundCount}) => {
   const currentState = useMachineStore((state) => state);
-  const { address, syncing, currentMode } = currentState;
+  const { address, currentMode } = currentState;
 
   return (    
     <Html
@@ -30,21 +30,15 @@ const Screen: FC<ScreenProps> = ({isFront, restRoundCount}) => {
       transform
       occlude
     >
-      { (!address || syncing) &&  <WalletConnect /> }
-      { address && !syncing && currentMode === MachineMode.Shopping && (
-          <BrowsingMode
-            isFront={restRoundCount === 0 ? isFront : !isFront}
-          ></BrowsingMode>
-      )}
-      { address && !syncing && currentMode === MachineMode.Customization && (
+      { [MachineMode.Off, MachineMode.Syncing].includes(currentMode) && <WalletConnect /> }
+      { currentMode === MachineMode.Shopping && <BrowsingMode /> }
+      { currentMode === MachineMode.Customization && (
         <>
           {/* <ColorPicker /> */}
-          <DrawingTool isFront={restRoundCount === 1 ? isFront : !isFront} />
+          <DrawingTool />
         </>
       )}
-      { address && !syncing && currentMode === MachineMode.Admin && (
-        <AdminMain isFront={restRoundCount === 2 ? isFront : !isFront} />
-      )}
+      { currentMode === MachineMode.Admin && <AdminMain /> }
     </Html>
   );  
 }

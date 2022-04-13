@@ -10,11 +10,12 @@ import {
 } from "../../../utils/interact";
 import MessageModal from './MessageModal';
 
-const NotConnected: FC<{syncing: boolean}> = ({syncing}) => {
+const NotConnected= () => {
 
   const [duckIndex, setDuckIndex] = useState(1);
   const [flipper, setFlipper] = useState(true);
   const setAddress = useMachineStore((state) => state.setAddress);
+  const currentMode = useMachineStore((state) => state.currentMode);
   const [status, setStatus] = useState<any>("Please connect your wallet.");
   const [modalOpen, setModalOpen] = useState(true);
   

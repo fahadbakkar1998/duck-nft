@@ -7,8 +7,7 @@ import bgImg from "./assets/img/duck-base-holepunch.png";
 function App() {
   return (
     <div className="App">
-      <div className="header">
-        {/* <img className="logo" src="/assets/images/Tozzi_Ducks_Logo.png" alt="" /> */}
+      <div className="header">        
       </div>
       <div className="machine-container">
         <img className="background" src={bgImg} alt=""></img>

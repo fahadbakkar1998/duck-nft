@@ -1,31 +1,32 @@
 import { useEffect, useRef, useState } from "react";
-import { a, useSpring, easings } from "@react-spring/three";
+import { a, useSpring, easings, useSpringRef } from "@react-spring/three";
 import useMachineStore from "../../store";
-import { aspectRatio, minViewLength } from "../../utils/constants";
+import { aspectRatio, MachineMode, minViewLength } from "../../utils/constants";
 import { useLoader, useThree } from "react-three-fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import Screen from "./Screen";
 
 let globalRoundCount = 0;
-let globalRotating = false;
+let screenIsRotating = false;
 
 export const MainScreen = () => {
   const { viewport } = useThree();  
-  const min = viewport.width;
+  const min = viewport.width;  
   const [roundCount, setRoundCount] = useState(0);
   const gltfDisk = useLoader(GLTFLoader, "assets/models/DuckDisk.glb");
-  const setCurrentMode = useMachineStore((state) => state.setCurrentMode);
-  const setCurrentTozziDuckId = useMachineStore(
-    (state) => state.setCurrentTozziDuckId
-  );
-  const setCurrentCustomDuckId = useMachineStore(
-    (state) => state.setCurrentCustomDuckId
-  );
-  const address = useMachineStore((state) => state.address);
-  const syncing = useMachineStore((state) => state.syncing);
-  const processing = useMachineStore((state) => state.processing);
-  const showTxStatus = useMachineStore((state) => state.showTxStatus);
-
+  const screenRef = useSpringRef();
+  const currState = useMachineStore((state) => state);
+  const { 
+    setCurrentMode, 
+    switchModes,
+    currentMode,
+    setCurrentTozziDuckId, 
+    setCurrentCustomDuckId,
+    address,    
+    processing,
+    showTxStatus,
+  } = currState;
+    
   const [spring, setSpring] = useSpring(() => ({
     rotation: [0, 0, 0],
     position: [0, 0, 0],
@@ -35,23 +36,24 @@ export const MainScreen = () => {
       easing: easings.easeInOutElastic,
     },
     onRest: () => {
-      globalRotating = false;
+      screenIsRotating = false;
       setRoundCount(globalRoundCount);
-    },
+    },    
   }));
 
-  const handelOnClick = () => {
+  const handleModeSwitch = () => {
     const homeScreen = document.getElementById('home-screen');
     homeScreen?.classList.add('overflow-hidden');
     homeScreen?.classList.remove('overflow-scroll');    
-    if (globalRotating || syncing || processing || showTxStatus) return;
-    globalRotating = true;
+
+    if ([MachineMode.Off, MachineMode.Syncing].includes(currentMode)) return;
+    if (screenIsRotating || processing || showTxStatus) return;
+    screenIsRotating = true;
     setSpring({ rotation: [Math.PI * ++globalRoundCount, 0, 0] });
-    setCurrentMode(globalRoundCount % 3);
+    switchModes();
     setCurrentTozziDuckId(-1);
     setCurrentCustomDuckId(-1);    
-    setTimeout(() => {
-      console.log('unlocked');
+    setTimeout(() => {      
       homeScreen?.classList.add('overflow-scroll');
     }, 1500);
   };
@@ -62,9 +64,9 @@ export const MainScreen = () => {
   return (
     <a.group
       {...(spring as any)}
-      onClick={handelOnClick}
+      onClick={handleModeSwitch}
       scale={[min / minViewLength, min / minViewLength, min / minViewLength]}
-      position={[0.093 * min, -0.068 * min, 0]}
+      position={[0.093 * min, -0.068 * min, 0]}      
     >
       <group
         scale={[0.65, 0.65, 0.65]}

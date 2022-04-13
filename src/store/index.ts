@@ -11,6 +11,7 @@ import ducks from "../utils/duck-data.json";
 type MachineStore = {
   // main
   currentMode: MachineMode;
+  switchModes: () => void;
   setCurrentMode: (val: MachineMode) => void;
   currentTozziDuckId: number;
   setCurrentTozziDuckId: (val: number) => void;
@@ -41,8 +42,6 @@ type MachineStore = {
   setCustomDuckData: (val: Array<any>) => void;
 
   // contract
-  syncing: boolean; // for wallet connection
-  setSyncing: (val: boolean) => void; // for wallet connection
   processing: boolean;
   setProcessing: (val: boolean) => void;
   address: string | null;
@@ -60,11 +59,32 @@ type MachineStore = {
 export const useMachineStore = create<MachineStore>(
   (set: SetState<MachineStore>) => ({
     // main
-    currentMode: MachineMode.Shopping,
+    currentMode: MachineMode.Off,
     setCurrentMode: (mode: MachineMode): void => {
       set({ currentMode: mode });
     },
 
+    switchModes: (): void => {    
+      set((state) => {
+        const currentMode = state.currentMode;  
+        let nextMode;
+        switch(state.currentMode) {
+          case MachineMode.Shopping:
+            nextMode = MachineMode.Customization;
+            break;
+          case MachineMode.Customization:
+            nextMode = MachineMode.Admin
+            break;
+          case MachineMode.Admin:
+            nextMode = MachineMode.Shopping
+            break;
+          default:
+            nextMode = currentMode;
+        }
+        return { currentMode: nextMode };
+      });
+    },
+    
     currentTozziDuckId: -1,
     setCurrentTozziDuckId: (id: number): void => {
       set({ currentTozziDuckId: id });
@@ -123,12 +143,6 @@ export const useMachineStore = create<MachineStore>(
     customDuckData: [],
     setCustomDuckData: (val: Array<any>): void => {
       set({ customDuckData: val });
-    },
-
-    // contract
-    syncing: false,
-    setSyncing: (val: boolean): void => {
-      set({ syncing: val });
     },
 
     processing: false,

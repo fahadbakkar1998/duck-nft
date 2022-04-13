@@ -8,9 +8,9 @@ const ButtonView = () => {
   const handleMintTozziDuck = useMintTozziDuck();
   const handleMintCustomDuck = useMintCustomDuck();
   const currState = useMachineStore((state) => state);  
-  const { syncing, currentMode, setOpenBurnModal } = currState;
+  const { currentMode, setOpenBurnModal } = currState;
 
-  if (syncing) return <div>Syncing...</div>
+  if (currentMode === MachineMode.Syncing) return <div>Syncing...</div>
   
   if (currentMode === MachineMode.Shopping) {
     return <Button label="Buy Duck" onClick={handleMintTozziDuck} />;

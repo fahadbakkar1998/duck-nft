@@ -2,6 +2,8 @@ export const aspectRatio = 1;
 export const minViewLength = 6.582608695652174;
 
 export enum MachineMode {
+  Off,
+  Syncing,
   Shopping,
   Customization,
   Admin,
