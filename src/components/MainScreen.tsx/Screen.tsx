@@ -2,10 +2,11 @@ import useMachineStore from "../../store";
 import AdminMain from "../AdminMain/AdminMain";
 import DrawingTool from "../DrawingTool";
 import WalletConnect from "./WalletConnect";
-import CardImageSection from "../BrowsingScreen/BrowsingScreen";
+import BrowsingMode from "../BrowsingScreen/BrowsingScreen";
 import { FC } from "react";
 import { Html } from "@react-three/drei";
 import ColorPicker from "../DrawingTool/ColorPicker";
+import { MachineMode } from "../../utils/constants";
 
 interface ScreenProps {
   isFront: boolean;
@@ -14,7 +15,7 @@ interface ScreenProps {
 
 const Screen: FC<ScreenProps> = ({isFront, restRoundCount}) => {
   const currentState = useMachineStore((state) => state);
-  const { address, syncing } = currentState;
+  const { address, syncing, currentMode } = currentState;
 
   return (    
     <Html
@@ -29,23 +30,21 @@ const Screen: FC<ScreenProps> = ({isFront, restRoundCount}) => {
       transform
       occlude
     >
-      <WalletConnect isFront={isFront} isShow={!address || syncing} />
-      { address && !syncing && (restRoundCount === 0 || restRoundCount === 2 ) && (
-          <CardImageSection
+      { (!address || syncing) &&  <WalletConnect /> }
+      { address && !syncing && currentMode === MachineMode.Shopping && (
+          <BrowsingMode
             isFront={restRoundCount === 0 ? isFront : !isFront}
-          ></CardImageSection>
+          ></BrowsingMode>
       )}
-      {/* `{ address && !syncing && (restRoundCount === 1 || restRoundCount === 0) && (
-          <>
-            <ColorPicker />
-            <DrawingTool isFront={restRoundCount === 1 ? isFront : !isFront} />
-          </>
-      )} */}
-      {/* { address && !syncing && (restRoundCount === 2 || restRoundCount === 1) && (
-          <AdminMain
-            isFront={restRoundCount === 2 ? isFront : !isFront}
-          ></AdminMain>
-      )}` */}
+      { address && !syncing && currentMode === MachineMode.Customization && (
+        <>
+          {/* <ColorPicker /> */}
+          <DrawingTool isFront={restRoundCount === 1 ? isFront : !isFront} />
+        </>
+      )}
+      { address && !syncing && currentMode === MachineMode.Admin && (
+        <AdminMain isFront={restRoundCount === 2 ? isFront : !isFront} />
+      )}
     </Html>
   );  
 }

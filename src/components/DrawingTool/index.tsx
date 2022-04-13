@@ -36,17 +36,6 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
   }, []);
 
   return (
-    <Html
-      distanceFactor={2.5}
-      position={props.isFront ? [0.0, 0.1, 0.0] : [0.0, -0.1, 0.0]}
-      rotation={
-        props.isFront
-          ? [Math.PI / 2, Math.PI, Math.PI / 2]
-          : [Math.PI / 2, -Math.PI * 2, Math.PI / 2]
-      }
-      transform
-      occlude
-    >
       <Suspense fallback={null}>
         <div className="DrawingTool relative">
           <div className="absolute w-full h-full inner-shadow rounded-[15%] pointer-events-none" />
@@ -101,8 +90,7 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
             />                        
           </div>
         </div>
-      </Suspense>
-    </Html>
+      </Suspense>    
   );
 };
 

@@ -73,7 +73,7 @@ const WalletConnect = (props: any) => {
 
   return (
     
-      <div className={`inner-shadow WalletConnect ${!props.isShow && "hidden"}`}>
+      <div className={`inner-shadow WalletConnect`}>
         <div 
           className={`
             text-white                                 
