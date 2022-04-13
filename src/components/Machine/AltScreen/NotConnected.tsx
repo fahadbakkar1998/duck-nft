@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, FC } from 'react';
 import img from '../../../assets/img/ducks/crypto_duck_1.svg';
 import useMachineStore from "../../../store";
 import {
@@ -10,7 +10,7 @@ import {
 } from "../../../utils/interact";
 import MessageModal from './MessageModal';
 
-const NotConnected = () => {
+const NotConnected: FC<{syncing: boolean}> = ({syncing}) => {
 
   const [duckIndex, setDuckIndex] = useState(1);
   const [flipper, setFlipper] = useState(true);
@@ -37,9 +37,7 @@ const NotConnected = () => {
         overflow-hidden relative rounded-lg mr-1 z-0
 
       `}    
-    >
-      
-      
+    >            
       <MessageModal 
         open={modalOpen}
         message='Connect your wallet to get started.' 

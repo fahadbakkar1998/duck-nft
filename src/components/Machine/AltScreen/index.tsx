@@ -14,6 +14,7 @@ import { useThree } from "react-three-fiber";
 import "./index.scss";
 import NotConnected from "./NotConnected";
 import RectButton from "../../../components/common/RectButton";
+import AltButton from "./AltButton";
 
 
 
@@ -99,9 +100,7 @@ const min = viewport.width;
       transform      
     >
       <div className="">                
-        {!address && (
-          <NotConnected />
-        )}
+        {!address && <NotConnected syncing={syncing} />}
         {address && !syncing && (
           <>
             {/* <div className="content  relative">
@@ -143,77 +142,10 @@ const min = viewport.width;
                 </>
               )}
             </div> */}
-
-
-
-            {/* <div className="footer">
-              <div
-                className={`btn bg-info ${
-                  currentMode === MachineMode.Shopping &&
-                  currentTozziDuckId >= 0
-                    ? "fadeIn"
-                    : "fadeOut"
-                } ${
-                  currentTozziDuckId >= 0 &&
-                  tozziDuckData[currentTozziDuckId] &&
-                  tozziDuckData[currentTozziDuckId].owner &&
-                  "white"
-                } `}
-                onClick={async () => {
-                  if (
-                    currentTozziDuckId < 0 ||
-                    (tozziDuckData[currentTozziDuckId] &&
-                      tozziDuckData[currentTozziDuckId].owner)
-                  )
-                    return;
-                  setProcessing(true);
-                  setTransactionStatus("processing...");
-                  setShowTxStatus(true);
-                  const res = await mintTozziDuck({
-                    ...tozziDuckData[currentTozziDuckId],
-                  });
-                  // console.log("mintTozziDuck status", res);
-                  if (res.success) {
-                    const tempDuckData = [...tozziDuckData];
-                    tempDuckData[currentTozziDuckId].owner = address;
-                    setTozziDuckData(tempDuckData);
-                    setMachineSetting({
-                      ...machineSetting,
-                      balance:
-                        machineSetting.balance + machineSetting.tozziDuckPrice,
-                    });
-                  }
-                  setTransactionStatus(res.status);
-                  setProcessing(false);
-                }}
-                id="mint_tozzi_duck"
-              >
-                Buy Duck
-              </div>
-              
-              { currentMode === MachineMode.Customization && (
-                <div className="absolute -bottom-[30px] left-[24px] w-[148px] bg-red-200">
-                  <RectButton onClick={() => console.log('foo')} >                    
-                    <div className="">MINT</div>                    
-                  </RectButton>
-                </div>
-              )}                                                          
-              <div
-                className={`btn bg-danger ${
-                  currentMode === MachineMode.Admin &&
-                  currentAdminDuckId >= tozziDuckNum
-                    ? "fadeIn"
-                    : "fadeOut"
-                }`}
-                onClick={() => {                  
-                  setOpenBurnModal(true);
-                }}
-              >
-                Burn
-              </div>
-            </div> */}
+            
           </>
         )}
+        <AltButton />
       </div>
     </Html>
   );
