@@ -21,7 +21,7 @@ const WaveForm: () => JSX.Element = () => {
         style={{ borderRadius: 13 }}       
         className="h-[115px] w-[110px] bg-black border-gray-600 border-2"                
       >
-        <video muted autoPlay playsInline className="aspect-square w-full h-full" src="/assets/video/wave.mp4" />
+        <video loop muted autoPlay playsInline className="aspect-square w-full h-full" src="/assets/video/wave.mp4" />
       </div>
     </Html>
   );
