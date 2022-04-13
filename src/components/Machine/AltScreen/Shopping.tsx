@@ -1,15 +1,14 @@
 import useMachineStore from "../../../store";
 
 
-const Shopping: () => JSX.Element = () => {
-  const currentMode = useMachineStore((state) => state.currentMode);
-  const currentTozziDuckId = useMachineStore((state) => state.currentTozziDuckId);
-  const duckIndex = currentTozziDuckId + 1;
+const Shopping = () => {  
+  const currentTozziDuckId = 10;
+  const currentTozziDuckId2 = useMachineStore((state) => state.currentTozziDuckId);
   return (
-    <div className="w-full h-full">
-      <img        
-        alt=""
-        src={`../../../assets/img/ducks/crypto_duck_${duckIndex}.svg`}          
+    <div className="w-full h-full bg-red-200">
+      <img                
+        alt={`Duck ${currentTozziDuckId + 1}`}
+        src={require(`../../../assets/img/ducks/crypto_duck_${currentTozziDuckId2 + 1}.svg`)}          
       />         
     </div>    
   );

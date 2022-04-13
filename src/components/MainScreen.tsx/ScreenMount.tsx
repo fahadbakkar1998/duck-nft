@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-import { a, useSpring, easings, useSpringRef } from "@react-spring/three";
+import { useState } from "react";
+import { a, useSpring, easings } from "@react-spring/three";
 import useMachineStore from "../../store";
-import { aspectRatio, MachineMode, minViewLength } from "../../utils/constants";
+import { MachineMode, minViewLength } from "../../utils/constants";
 import { useLoader, useThree } from "react-three-fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import Screen from "./Screen";
@@ -13,16 +13,13 @@ export const MainScreen = () => {
   const { viewport } = useThree();  
   const min = viewport.width;  
   const [screenInverted, setScreenInverted] = useState(false);
-  const gltfDisk = useLoader(GLTFLoader, "assets/models/DuckDisk.glb");
-  const screenRef = useSpringRef();
+  const gltfDisk = useLoader(GLTFLoader, "assets/models/DuckDisk.glb");  
   const currState = useMachineStore((state) => state);
-  const { 
-    setCurrentMode, 
+  const {     
     switchModes,
     currentMode,
     setCurrentTozziDuckId, 
-    setCurrentCustomDuckId,
-    address,    
+    setCurrentCustomDuckId,    
     processing,
     showTxStatus,
   } = currState;
@@ -48,9 +45,7 @@ export const MainScreen = () => {
     setTimeout(() => {
       switchModes();
       setScreenInverted(!screenInverted);      
-    }, 1200);   
-    setCurrentTozziDuckId(-1);
-    setCurrentCustomDuckId(-1);        
+    }, 1200);    
   };
 
   return (
