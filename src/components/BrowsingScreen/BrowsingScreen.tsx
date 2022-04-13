@@ -6,8 +6,7 @@ import "./BrowsingScreen.scss";
 
 
 const HomeScreen = (props: any) => {  
-  const tozziDuckData = useMachineStore((state) => state.tozziDuckData);
-  const [isHovered, setIsHovered] = useState(false);
+  const tozziDuckData = useMachineStore((state) => state.tozziDuckData);  
   const [filterTozziDuckData] =
   useState<any>(tozziDuckData);
   const [filterCustomDuckData] = useState<any>([]);
@@ -15,14 +14,8 @@ const HomeScreen = (props: any) => {
   return (
     <div className="main">
     
-      <div
-        id="home-screen"
-        className={`
-          mainScreen
-          overflow-scroll
-        `}                    
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+      <div                        
+        className={`mainScreen overflow-scroll w-full`}        
       >
         <div 
           style={{ borderRadius: '15%' }} 

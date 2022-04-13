@@ -9,11 +9,10 @@ import ColorPicker from "../DrawingTool/ColorPicker";
 import { MachineMode } from "../../utils/constants";
 
 interface ScreenProps {
-  isFront: boolean;
-  restRoundCount: number;
+  screenInverted: boolean;
 }
 
-const Screen: FC<ScreenProps> = ({isFront, restRoundCount}) => {
+const Screen: FC<ScreenProps> = ({screenInverted}) => {
   const currentState = useMachineStore((state) => state);
   const { address, currentMode } = currentState;
 
@@ -21,23 +20,18 @@ const Screen: FC<ScreenProps> = ({isFront, restRoundCount}) => {
     <Html
       style={{ pointerEvents: "auto" }}
       distanceFactor={2.4}
-      position={isFront ? [0.0, 0.1, 0.0] : [0.0, -0.1, 0.0]}
+      position={[0.0, 0.0, 0.0]}
       rotation={
-        isFront
-          ? [Math.PI / 2, Math.PI, Math.PI / 2]
-          : [Math.PI / 2, -Math.PI * 2, Math.PI / 2]
+          screenInverted
+          ? [Math.PI / 2, -Math.PI * 2, Math.PI / 2]
+          : [Math.PI / 2, Math.PI, Math.PI / 2]
       }
       transform
       occlude
     >
       { [MachineMode.Off, MachineMode.Syncing].includes(currentMode) && <WalletConnect /> }
       { currentMode === MachineMode.Shopping && <BrowsingMode /> }
-      { currentMode === MachineMode.Customization && (
-        <>
-          {/* <ColorPicker /> */}
-          <DrawingTool />
-        </>
-      )}
+      { currentMode === MachineMode.Customization && <DrawingTool /> }
       { currentMode === MachineMode.Admin && <AdminMain /> }
     </Html>
   );  

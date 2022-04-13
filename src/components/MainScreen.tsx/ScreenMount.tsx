@@ -12,7 +12,7 @@ let screenIsRotating = false;
 export const MainScreen = () => {
   const { viewport } = useThree();  
   const min = viewport.width;  
-  const [roundCount, setRoundCount] = useState(0);
+  const [screenInverted, setScreenInverted] = useState(false);
   const gltfDisk = useLoader(GLTFLoader, "assets/models/DuckDisk.glb");
   const screenRef = useSpringRef();
   const currState = useMachineStore((state) => state);
@@ -36,31 +36,23 @@ export const MainScreen = () => {
       easing: easings.easeInOutElastic,
     },
     onRest: () => {
-      screenIsRotating = false;
-      setRoundCount(globalRoundCount);
+      screenIsRotating = false;      
     },    
   }));
 
-  const handleModeSwitch = () => {
-    const homeScreen = document.getElementById('home-screen');
-    homeScreen?.classList.add('overflow-hidden');
-    homeScreen?.classList.remove('overflow-scroll');    
-
+  const handleModeSwitch = () => {    
     if ([MachineMode.Off, MachineMode.Syncing].includes(currentMode)) return;
     if (screenIsRotating || processing || showTxStatus) return;
-    screenIsRotating = true;
+    screenIsRotating = true;    
     setSpring({ rotation: [Math.PI * ++globalRoundCount, 0, 0] });
-    switchModes();
+    setTimeout(() => {
+      switchModes();
+      setScreenInverted(!screenInverted);      
+    }, 1200);   
     setCurrentTozziDuckId(-1);
-    setCurrentCustomDuckId(-1);    
-    setTimeout(() => {      
-      homeScreen?.classList.add('overflow-scroll');
-    }, 1500);
+    setCurrentCustomDuckId(-1);        
   };
 
-  const restRoundCount = roundCount % 3;
-  const isFront = !(roundCount % 2);
-  
   return (
     <a.group
       {...(spring as any)}
@@ -74,7 +66,7 @@ export const MainScreen = () => {
         position={[0, 0, 0]}
       >
         <primitive object={gltfDisk.scene} scale={[0.25, 0.6, 0.6]} rotation={[0, 0, Math.PI / 2]} />        
-        <Screen restRoundCount={restRoundCount} isFront={isFront} />
+        <Screen screenInverted={screenInverted} />
       </group>
     </a.group>
   );
