@@ -18,12 +18,11 @@ export const MainScreen = () => {
   const {     
     switchModes,
     currentMode,
-    changeChannel,
-    setCurrentTozziDuckId, 
-    setCurrentCustomDuckId,    
+    changeChannel,    
     processing,
     showTxStatus,
-  } = useMachineStore();;
+    setIsSwitchingModes
+  } = useMachineStore();
     
   const [spring, setSpring] = useSpring(() => ({
     rotation: [0, 0, 0],
@@ -44,6 +43,7 @@ export const MainScreen = () => {
     screenIsRotating = true;    
     setTimeout(() => {changeChannel(1000)}, 300);
     setSpring({ rotation: [Math.PI * ++globalRoundCount, 0, 0] });
+    setIsSwitchingModes(true);
     setTimeout(() => {
       switchModes();
       setScreenInverted(!screenInverted);      

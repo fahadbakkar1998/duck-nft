@@ -12,6 +12,8 @@ type MachineStore = {
   // main
   currentMode: MachineMode;
   switchModes: () => void;
+  isSwitchingModes: boolean;
+  setIsSwitchingModes: (isSwitching: boolean) => void;
   setCurrentMode: (val: MachineMode) => void;
   currentTozziDuckId: number;
   setCurrentTozziDuckId: (val: number) => void;
@@ -77,8 +79,13 @@ export const useMachineStore = create<MachineStore>(
       }, duration)
     },
 
+    setIsSwitchingModes: (isSwitching: boolean): void => {
+      set({isSwitchingModes: isSwitching})
+    },
+    isSwitchingModes: false,
     switchModes: (): void => {    
       set((state) => {
+        setTimeout(() => { set({ isSwitchingModes: false}) }, 300)
         const currentMode = state.currentMode;  
         let nextMode;
         switch(state.currentMode) {
@@ -94,7 +101,7 @@ export const useMachineStore = create<MachineStore>(
           default:
             nextMode = currentMode;
         }
-        return { currentMode: nextMode };
+        return { currentMode: nextMode, isSwitchingModes: true };
       });
     },
     
