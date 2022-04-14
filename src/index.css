@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  /* position: relative; */
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -35,4 +43,8 @@ code {
   font-family: "PressStart2P-Regular";
   src: local("PressStart2P-Regular"),
     url("./assets/font/PressStart2P-Regular.ttf") format("truetype");
+}
+
+.absolute-center {
+  @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
 }

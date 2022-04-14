@@ -21,7 +21,7 @@ const HomeScreen = (props: any) => {
                   
         <div className="relative w-full h-full">
           
-          <div className="grid grid-cols-3 gap-1 relative">
+          <div className="grid grid-cols-3 gap-1">
             
             {filterTozziDuckData.map((item: any) => {
               let img = require(`../../../../assets/img/ducks/crypto_duck_${
