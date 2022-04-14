@@ -1,8 +1,7 @@
 import { useRef, useState, useEffect } from "react";
-import { Html } from "@react-three/drei";
-import DuckCard from "../DuckCard/DuckCard";
-import useMachineStore from "../../store";
-import "./BrowsingScreen.scss";
+import DuckCard from "../../../DuckCard/DuckCard";
+import useMachineStore from "../../../../store";
+import "./index.scss";
 
 
 const HomeScreen = (props: any) => {  
@@ -26,7 +25,7 @@ const HomeScreen = (props: any) => {
           <div className="grid grid-cols-3 gap-1 relative">
             
             {filterTozziDuckData.map((item: any) => {
-              let img = require(`../../assets/img/ducks/crypto_duck_${
+              let img = require(`../../../../assets/img/ducks/crypto_duck_${
                 parseInt(item.id) + 1
               }.svg`);              
               return <DuckCard key={item.id} img={img} data={item} />;

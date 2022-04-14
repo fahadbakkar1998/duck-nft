@@ -1,10 +1,10 @@
 import { Suspense, useEffect, useRef } from "react";
 import { Html } from "@react-three/drei";
-import { useMachineStore } from "../../store";
-import { colors } from "../../utils/constants";
-import duckbill from "../../assets/duck-bill.png";
+import { useMachineStore } from "../../../../store";
+import { colors } from "../../../../utils/constants";
+import duckbill from "../../../../assets/duck-bill.png";
 import "./index.scss";
-import CircleButton from "../common/CircleButton";
+import CircleButton from "../../../common/CircleButton";
 
 const layers: any[] = [
   { label: "Head" },

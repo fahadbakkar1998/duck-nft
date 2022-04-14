@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { HexColorPicker } from "react-colorful";
 import { Html } from "@react-three/drei";
 import { useThree } from "react-three-fiber";
-import { aspectRatio, minViewLength } from "../../utils/constants";
-import useMachineStore from "../../store";
+import { aspectRatio, minViewLength } from "../../../../utils/constants";
+import useMachineStore from "../../../../store";
 
 const ColorPicker: () => JSX.Element = () => {
   const DToolInst = useMachineStore((state) => state.DToolInst);

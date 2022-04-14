@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { a, useSpring, easings } from "@react-spring/three";
-import useMachineStore from "../../store";
-import { MachineMode, minViewLength } from "../../utils/constants";
+import useMachineStore from "../../../store";
+import { MachineMode, minViewLength } from "../../../utils/constants";
 import { useLoader, useThree } from "react-three-fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import Screen from "./Screen";

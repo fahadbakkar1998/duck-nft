@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Canvas } from "react-three-fiber";
 import "./App.scss";
-import { MachineLayout } from "./components/Machine/MachineLayout";
+import { MachineLayout } from "./components/Machine";
 import bgImg from "./assets/img/duck-base-holepunch.png";
 
 function App() {

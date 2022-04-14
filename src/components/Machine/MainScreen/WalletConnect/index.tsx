@@ -1,16 +1,16 @@
   import { useState, useEffect } from "react";
-import "./WalletConnect.scss";
+import "./index.scss";
 import {
   connectWallet,
   getCurrentWalletConnected,
   fetchMachineData,
   fetchTozziDuck,
   fetchCustomDuck,
-} from "../../utils/interact";
-import { getFloat, getInt } from "../../utils/common";
-import useMachineStore from "../../store";
-import hourglass from  '../../assets/img/hourglass.gif';
-import { MachineMode } from "../../utils/constants";
+} from "../../../../utils/interact";
+import { getFloat, getInt } from "../../../../utils/common";
+import useMachineStore from "../../../../store";
+import hourglass from  '../../../../assets/img/hourglass.gif';
+import { MachineMode } from "../../../../utils/constants";
 
 const WalletConnect = (props: any) => {
   const [status, setStatus] = useState<any>("Please connect your wallet.");

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Html } from "@react-three/drei";
-import { getUFloat, getUInt } from "../../utils/common";
-import { saveMachineSetting, withdraw } from "../../utils/interact";
-import useMachineStore from "../../store";
-import "./AdminMain.scss";
-import CheckBox from "../common/CheckBox";
+import { getUFloat, getUInt } from "../../../../utils/common";
+import { saveMachineSetting, withdraw } from "../../../../utils/interact";
+import useMachineStore from "../../../../store";
+import "./index.scss";
+import CheckBox from "../../../common/CheckBox";
 
 const AdminMain = (props: any) => {
   const machineSetting = useMachineStore((state) => state.machineSetting);
