@@ -54,6 +54,9 @@ type MachineStore = {
   // modal
   openBurnModal: boolean;
   setOpenBurnModal: (val: boolean) => void;
+
+  eyeDropperColor: any;
+  setEyeDropperColor: (val: boolean) => void;
 };
 
 export const useMachineStore = create<MachineStore>(
@@ -101,7 +104,7 @@ export const useMachineStore = create<MachineStore>(
     },
 
     // color picker
-    DToolInst: new DTool(10, 40),
+    DToolInst: new DTool(2, 40),
 
     selectedLayerIndex: defaultLayerIndex,
     setSelectedLayerIndex: (val: number): void => {
@@ -169,6 +172,11 @@ export const useMachineStore = create<MachineStore>(
     openBurnModal: false,
     setOpenBurnModal: (val: boolean): void => {
       set({ openBurnModal: val });
+    },
+
+    eyeDropperColor: { r: 0, g: 0, b: 0 },
+    setEyeDropperColor: (eyeDropperColor: boolean): void => {
+      set({ eyeDropperColor });
     },
   })
 );

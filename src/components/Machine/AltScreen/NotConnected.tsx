@@ -29,8 +29,6 @@ const NotConnected= () => {
       </div>
     </>
   );
-}
-
-
+};
 
 export default NotConnected;

@@ -63,21 +63,21 @@ export default AltScreen;
                   >
                     Go Back
                   </div>
-                </div>
-              ) : currentTozziDuckId >= 0 &&
-                tozziDuckData[currentTozziDuckId] &&
-                tozziDuckData[currentTozziDuckId].owner ? (
-                <div className="duck-info">
-                  <div className="owner-address">
-                    {tozziDuckData[currentTozziDuckId].owner}
+                ) : currentTozziDuckId >= 0 &&
+                  tozziDuckData[currentTozziDuckId] &&
+                  tozziDuckData[currentTozziDuckId].owner ? (
+                  <div className="duck-info">
+                    <div className="owner-address">
+                      {tozziDuckData[currentTozziDuckId].owner}
+                    </div>
                   </div>
-                </div>
-              ) : currentCustomDuckId >= tozziDuckNum &&
-                customDuckData[currentCustomDuckId - tozziDuckNum] &&
-                customDuckData[currentCustomDuckId - tozziDuckNum].owner ? (
-                <div className="duck-info">
-                  <div className="owner-address">
-                    {customDuckData[currentCustomDuckId - tozziDuckNum].owner}
+                ) : currentCustomDuckId >= tozziDuckNum &&
+                  customDuckData[currentCustomDuckId - tozziDuckNum] &&
+                  customDuckData[currentCustomDuckId - tozziDuckNum].owner ? (
+                  <div className="duck-info">
+                    <div className="owner-address">
+                      {customDuckData[currentCustomDuckId - tozziDuckNum].owner}
+                    </div>
                   </div>
                 </div>
               ) : ( } */}

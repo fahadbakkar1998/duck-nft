@@ -1,11 +1,11 @@
-@import url('http://fonts.cdnfonts.com/css/amiga-forever');
-@import url('http://fonts.cdnfonts.com/css/nokia-cellphone-fc');
-@import url('http://fonts.cdnfonts.com/css/quadrit');
+@import url("http://fonts.cdnfonts.com/css/amiga-forever");
+@import url("http://fonts.cdnfonts.com/css/nokia-cellphone-fc");
+@import url("http://fonts.cdnfonts.com/css/quadrit");
 
 .inner-shadow {
-  -webkit-box-shadow: inset 8px 5px 8px -1px rgba(0,0,0,0.5);
-  -moz-box-shadow: inset 8px 5px 8px -1px rgba(0,0,0,0.5);
-  box-shadow: inset 8px 5px 8px -1px rgba(0,0,0,0.5);
+  -webkit-box-shadow: inset 8px 5px 8px -1px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: inset 8px 5px 8px -1px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 8px 5px 8px -1px rgba(0, 0, 0, 0.5);
 }
 
 .App {
@@ -123,74 +123,77 @@ $scan-opacity: 0.75;
 }
 
 .pixel-font {
-  font-family: 'Nokia Cellphone FC', 'Quadrit', monospace,sans-serif;           
+  font-family: "Nokia Cellphone FC", "Quadrit", monospace, sans-serif;
 }
 
 .shiny {
-  background: rgb(255,255,255);
-  background: radial-gradient(circle, rgba(255,255,255,0.5508578431372548) 6%, rgba(204,204,204,0) 75%);
+  background: rgb(255, 255, 255);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.5508578431372548) 6%,
+    rgba(204, 204, 204, 0) 75%
+  );
 }
 
 .myButton {
-	box-shadow: 1px 2px 2px 2px #b53c24;
-	background:linear-gradient(to bottom, #ff912a 5%, #ff6e25 100%);
-	background-color:#ff8040;
+  box-shadow: 1px 2px 2px 2px #b53c24;
+  background: linear-gradient(to bottom, #ff912a 5%, #ff6e25 100%);
+  background-color: #ff8040;
   margin-right: 1px;
   border-width: 2px;
   height: 45px;
 
-	border:3px solid #ffffff37;
+  border: 3px solid #ffffff37;
   border-top: 0;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:17px;
-	// padding:7px 25px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #96423c;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 17px;
+  // padding:7px 25px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #96423c;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .myButton:hover {
-	
-	
 }
 .myButton:active {
-	position:relative;
+  position: relative;
   box-shadow: 1px 1px 0px 2px #b53c24;
-  border:3px solid #ffffff1c;
-  background:linear-gradient(to bottom, #f06824 5%, #ec5523 100%);
-	top:1px;
+  border: 3px solid #ffffff1c;
+  background: linear-gradient(to bottom, #f06824 5%, #ec5523 100%);
+  top: 1px;
 }
 
 .rectButton {
-	box-shadow: 0px 0px 0px 8px #cb5c28;
-	background:linear-gradient(to bottom, #fd864a 5%, #dd7737 100%);
-	background-color:#ff8040;
+  box-shadow: 0px 0px 0px 8px #cb5c28;
+  background: linear-gradient(to bottom, #fd864a 5%, #dd7737 100%);
+  background-color: #ff8040;
   width: 100%;
-  
+
   border-width: 2px;
   height: 30px;
 
-	border:1px solid #ff9e66bd;
-	display:inline-block;
-	cursor:pointer;
-	color:#a84731;
+  border: 1px solid #ff9e66bd;
+  display: inline-block;
+  cursor: pointer;
+  color: #a84731;
   font-weight: bold;
-	font-family: helvetica;
-	font-size:20px;
-	// padding:7px 25px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #ffc26c;
+  font-family: helvetica;
+  font-size: 20px;
+  // padding:7px 25px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #ffc26c;
 }
 .rectButton:hover {
-	
-	
 }
 .rectButton:active {
-	position:relative;
-  color:#78301f;
-  border:1px solid #a96741bd;
+  position: relative;
+  color: #78301f;
+  border: 1px solid #a96741bd;
   box-shadow: 0px 0px 0px 6px #ba5425;
-  background:linear-gradient(to bottom, #c75339 5%, #b54916 100%);
-	top:1px;
+  background: linear-gradient(to bottom, #c75339 5%, #b54916 100%);
+  top: 1px;
 }

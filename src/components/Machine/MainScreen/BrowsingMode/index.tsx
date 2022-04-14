@@ -3,7 +3,6 @@ import DuckCard from "../../../DuckCard/DuckCard";
 import useMachineStore from "../../../../store";
 import "./index.scss";
 
-
 const HomeScreen = (props: any) => {  
   const tozziDuckData = useMachineStore((state) => state.tozziDuckData);  
   const [filterTozziDuckData] =

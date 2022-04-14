@@ -15,8 +15,11 @@ export const MachineLayout = () => {
     <group>      
       <AltScreen />
       <MainScreen />     
-      { currentMode === MachineMode.Customization && <ColorPicker /> }
-      { currentMode !== MachineMode.Customization  && <WaveForm />} 
+      { 
+        currentMode === MachineMode.Customization 
+          ? <ColorPicker /> 
+          : <WaveForm /> 
+      }      
       {/* <BurnModal
         openModal={openBurnModal}
         onCloseModal={() => { setOpenBurnModal(false)}}

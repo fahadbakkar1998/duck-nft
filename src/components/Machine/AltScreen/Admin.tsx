@@ -3,7 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import useMachineStore from "../../../store";
 import { MachineMode } from "../../../utils/constants";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 const SampleNextArrow = (props: any) => {
   const { className, style, onClick } = props;
@@ -74,16 +74,18 @@ const Admin: () => JSX.Element = () => {
         currentMode === MachineMode.Admin ? "fadeIn" : "fadeOut"
       }`}
     >
-      <Slider {...settings}>
-        {sortedCustomDuckData.map((e: any, i: number) => (
-          <div className="slider-container">
-            <img className="slider-image" key={i} alt="" src={e.image}></img>
-            <div className="slider-content">
-              <div className="slider-description">{e.restTimestamp}s</div>
+      {React.Children.toArray(
+        <Slider {...settings}>
+          {sortedCustomDuckData.map((e: any, i: number) => (
+            <div className="slider-container">
+              <img className="slider-image" key={i} alt="" src={e.image}></img>
+              <div className="slider-content">
+                <div className="slider-description">{e.restTimestamp}s</div>
+              </div>
             </div>
-          </div>
-        ))}
-      </Slider>
+          ))}
+        </Slider>
+      )}
     </div>
   );
 };

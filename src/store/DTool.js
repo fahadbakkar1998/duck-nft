@@ -36,11 +36,13 @@ export default class DTool {
     this.history = [];
     this.maxHistory = 20;
     this.currentHistoryPos = 0;
+    this.disableDrawing = false;
   }
   init(layersSettings, historyChangeCallback) {
     this.historyChangeCallback = historyChangeCallback;
     const c = document.getElementById("drawingtool_canvas");
     if (!c) {
+      console.log("loop");
       setTimeout(() => {
         this.init(layersSettings, historyChangeCallback);
       }, 100);
@@ -160,15 +162,10 @@ export default class DTool {
     this.c.removeEventListener("mousemove", this.mouseMoveHandlerBinded);
     this.saveHistory();
   }
-  mouseMoveHandler(e) {
-    enableCall = false;
-
-    const layer = this.layers[this.selectedLayerIndex];
+  getCorrectPos(e) {
     const rect = e.target.getBoundingClientRect();
-
-    const mx = e.clientX - rect.left; //x position within the element.
+    const mx = e.clientX - rect.left;
     const my = e.clientY - rect.top;
-
     let px = Math.floor(
       mx / (this.c.getBoundingClientRect()["width"] / this.canvasSize)
     );
@@ -177,21 +174,39 @@ export default class DTool {
       my / (this.c.getBoundingClientRect()["width"] / this.canvasSize)
     );
     py = Math.min(Math.max(0, py), this.canvasSize - 1);
+    return { x: px, y: py };
+  }
+  rgbToHex(r, g, b) {
+    if (r > 255 || g > 255 || b > 255) throw "Invalid color component";
+    return ((r << 16) | (g << 8) | b).toString(16);
+  }
+  getColor(e) {
+    const correctPos = this.getCorrectPos(e);
+    let c = e.target.getContext("2d");
+    let p = c.getImageData(correctPos.x, correctPos.y, 1, 1).data;
+    let hex = "#" + ("000000" + this.rgbToHex(p[0], p[1], p[2])).slice(-6);
+    return hex;
+  }
+  mouseMoveHandler(e) {
+    enableCall = false;
+    const layer = this.layers[this.selectedLayerIndex];
+    const correctPos = this.getCorrectPos(e);
 
     if (this.selectedColor) {
       layer.ctx.beginPath();
       layer.ctx.fillStyle = this.selectedColor;
-      layer.ctx.rect(px, py, 1, 1);
+      layer.ctx.rect(correctPos.x, correctPos.y, 1, 1);
       layer.ctx.fill();
       layer.ctx.closePath();
     } else {
-      layer.ctx.clearRect(px, py, 1, 1);
+      layer.ctx.clearRect(correctPos.x, correctPos.y, 1, 1);
     }
 
     this.draw();
     setTimeout(() => (enableCall = true), 10);
   }
   mouseDownHandler(e) {
+    if (this.disableDrawing) return;
     if (this.selectedTool === 0) {
       // pencil
       document.addEventListener("mouseup", this.mouseUpHandlerBinded);
