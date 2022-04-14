@@ -19,6 +19,8 @@ type MachineStore = {
   setCurrentCustomDuckId: (val: number) => void;
   currentAdminDuckId: number;
   setCurrentAdminDuckId: (val: number) => void;
+  altIsStatic: boolean;
+  changeChannel: (duration?: number) => void;
 
   // color picker
   DToolInst: DTool;
@@ -67,6 +69,14 @@ export const useMachineStore = create<MachineStore>(
       set({ currentMode: mode });
     },
 
+    altIsStatic: false,
+    changeChannel: (duration = 200): void => {
+      set({ altIsStatic: true });
+      setTimeout(() => {
+        set({ altIsStatic: false});
+      }, duration)
+    },
+
     switchModes: (): void => {    
       set((state) => {
         const currentMode = state.currentMode;  
@@ -90,7 +100,10 @@ export const useMachineStore = create<MachineStore>(
     
     currentTozziDuckId: 0,
     setCurrentTozziDuckId: (id: number): void => {
-      set({ currentTozziDuckId: id });
+      set((state) => {
+        state.changeChannel();
+        return { currentTozziDuckId: id };
+      });
     },
 
     currentCustomDuckId: -1,

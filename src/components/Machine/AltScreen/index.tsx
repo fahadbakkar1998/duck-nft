@@ -14,7 +14,7 @@ import NotConnected from "./NotConnected";
 import AltButton from "./AltButton";
 
 const AltScreen: () => JSX.Element = () => {
-  const currentMode = useMachineStore((state) => state.currentMode);  
+  const { currentMode, altIsStatic } = useMachineStore();  
   const { viewport } = useThree();  
   const min = viewport.width;
   
@@ -36,8 +36,18 @@ const AltScreen: () => JSX.Element = () => {
             w-[336px] h-[324px] relative rounded-lg  z-0
             bg-[rgb(8,8,8)] text-white overflow-hidden
           `}    
-        >            
-          <div className={`absolute pointer-events-none h-full w-full inner-shadow  rounded-lg opacity-70`} />
+        >   
+          { altIsStatic && (
+            <div className="aspect-square -left-5 absolute  w-[115%] opacity-100">
+              <video playsInline autoPlay muted loop src="/assets/video/static.mp4" />
+            </div>         
+          )}          
+          <div 
+            className={`
+              absolute pointer-events-none 
+              h-full w-full inner-shadow rounded-lg opacity-70
+            `} 
+          />
           { [MachineMode.Off, MachineMode.Syncing].includes(currentMode) && <NotConnected /> }
           { currentMode === MachineMode.Shopping && <Shopping /> }
           { currentMode === MachineMode.Customization && <Custom /> }

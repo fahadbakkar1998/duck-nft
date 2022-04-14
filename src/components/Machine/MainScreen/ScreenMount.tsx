@@ -14,15 +14,16 @@ export const MainScreen = () => {
   const min = viewport.width;  
   const [screenInverted, setScreenInverted] = useState(false);
   const gltfDisk = useLoader(GLTFLoader, "assets/models/DuckDisk.glb");  
-  const currState = useMachineStore((state) => state);
+  
   const {     
     switchModes,
     currentMode,
+    changeChannel,
     setCurrentTozziDuckId, 
     setCurrentCustomDuckId,    
     processing,
     showTxStatus,
-  } = currState;
+  } = useMachineStore();;
     
   const [spring, setSpring] = useSpring(() => ({
     rotation: [0, 0, 0],
@@ -41,6 +42,7 @@ export const MainScreen = () => {
     if ([MachineMode.Off, MachineMode.Syncing].includes(currentMode)) return;
     if (screenIsRotating || processing || showTxStatus) return;
     screenIsRotating = true;    
+    setTimeout(() => {changeChannel(1000)}, 300);
     setSpring({ rotation: [Math.PI * ++globalRoundCount, 0, 0] });
     setTimeout(() => {
       switchModes();
