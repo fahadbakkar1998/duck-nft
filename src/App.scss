@@ -200,12 +200,18 @@ $scan-opacity: 0.75;
 
 
 .status-panel {
+  font-family: Helvetica, sans-serif;
   position: fixed;
-  width: 400px;    
-  height: 22px;
-  top: 164px;
-  left: 180px;      
+  width: 403px;    
+  height: 26px;
+  top: 162px;
+  left: 178px;      
   border-right: 0;
   border-radius: 0;
-  clip-path: polygon(-10% 0, 100% 0, 96.5% 100%, -10% 100%);
+  clip-path: polygon(-10% 0, 100% 0, 96.5% 100%, -10% 100%);  
+  font-size: 8pt;
+  text-shadow: rgba(46,255,245,0.9) 0px 0px 19px;
+  background-color: #000000;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%231cd9cb' fill-opacity='0.2' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+  
 }

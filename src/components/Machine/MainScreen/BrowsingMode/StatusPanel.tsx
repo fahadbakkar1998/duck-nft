@@ -25,9 +25,17 @@ const StatusPanel: () => JSX.Element = () => {
       rotation={[0.0, 0.0, 0.0]}
       transform
     >
-      <div className="status-panel bg-black" >
-        
-      
+      <div className="status-panel bg-black text-teal-200   font-thin flex items-center  justify-between pr-4 pl-2">
+        <div>
+          Duck Sales: <b>Enabled</b>
+        </div>
+        <div>
+          Duck Price: <b>0.5 ETH</b>
+        </div>
+
+        <div>
+          Machine Balance: <b>100 ETH</b>
+        </div>
       </div>
     </Html>
   );
