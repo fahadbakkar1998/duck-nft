@@ -8,7 +8,22 @@ import { OrbitControls } from "@react-three/drei";
 function App() {
   return (
     <div className="App">
-      <div className="header">        
+      <div className={`
+        top-0
+        mx-auto
+        w-full
+        absolute h-1/6  z-20 bg-clip-text text-transparent
+        testy-font text-[100pt] phat-purple pl-28
+        `}
+      >        
+        {/* <div className="w-[640px] left-4 h-24 z-0 absolute bg-green-100 rounded-full overflow-hidden">
+          <video className="z-10" playsInline autoPlay muted loop src="/assets/video/static-wide.mp4" />
+          
+        </div> */}
+        {/* <div className="w-[640px] left-4 h-24 opacity-30  absolute z-10 bg-green-200 rounded-full overflow-hidden" />   */}
+        <div className="z-30 relative mx-auto">
+          (Tozzi ducks&copy;)
+        </div>
       </div>
       <div className="machine-container">
         <img className="background" src={bgImg} alt=""></img>

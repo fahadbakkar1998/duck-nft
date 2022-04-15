@@ -5,6 +5,7 @@ import useMachineStore from "../../store";
 import ColorPicker from "./MainScreen/CustomizationMode/ColorPicker";
 import { MachineMode } from "../../utils/constants";
 import WaveForm from "./WaveForm";
+import StatusPanel from "./MainScreen/BrowsingMode/StatusPanel";
 
 
 export const MachineLayout = () => {
@@ -18,8 +19,13 @@ export const MachineLayout = () => {
       { 
         currentMode === MachineMode.Customization 
           ? <ColorPicker /> 
-          : <WaveForm /> 
-      }      
+          : (
+            <>
+              <WaveForm /> 
+              <StatusPanel />
+            </>
+          )
+      }            
       {/* <BurnModal
         openModal={openBurnModal}
         onCloseModal={() => { setOpenBurnModal(false)}}

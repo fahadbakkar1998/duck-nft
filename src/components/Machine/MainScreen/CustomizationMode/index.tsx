@@ -6,6 +6,14 @@ import duckbill from "../../../../assets/duck-bill.png";
 import "./index.scss";
 import CircleButton from "../../../common/CircleButton";
 import cn from "classnames";
+import pencilIcon from "../../../../assets/img/icons/pencil.svg";
+import paintBucketIcon from "../../../../assets/img/icons/paintbucket.svg";
+import eraserIcon from "../../../../assets/img/icons/eraser.svg";
+import dropperIcon from "../../../../assets/img/icons/eye-dropper.svg";
+import trashIcon from "../../../../assets/img/icons/trash.svg";
+import undoIcon from "../../../../assets/img/icons/undo.svg";
+import redoIcon from "../../../../assets/img/icons/redo.svg";
+
 
 const layers: any[] = [
   { label: "Head" },
@@ -66,10 +74,7 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
             className="drawing-canvas bg-black border-[#3f3f41] border-[30px]"
             ref={drawingCanvas}
             id="drawingtool_canvas"
-          />
-          <div className="left">
-            <CircleButton onClick={() => toggleEyeDrop(true)} name="color" />
-          </div>
+          />          
           <div className="right">
             <CircleButton
               onClick={() => {
@@ -77,8 +82,8 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
                 DToolInst.selectTool(0);
                 drawingCanvas.current!.style.cursor =
                   "url('/assets/images/pencil.png'), default";
-              }}
-              image="/assets/images/pencil.png"
+              }}              
+              image={pencilIcon}
             />
             <CircleButton
               onClick={() => {
@@ -87,7 +92,7 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
                 drawingCanvas.current!.style.cursor =
                   "url('/assets/images/paintbucket.png'), default";
               }}
-              image="/assets/images/paintbucket.png"
+              image={paintBucketIcon}
             />
             <CircleButton
               onClick={() => {
@@ -95,28 +100,30 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
                 drawingCanvas.current!.style.cursor =
                   "url('/assets/images/eraser.png'), default";
               }}
-              image="/assets/images/eraser.png"
+              image={eraserIcon}
             />
+            <CircleButton onClick={() => toggleEyeDrop(true)} image={dropperIcon} />
           </div>
+          
           <div className="bottom space-x-8">
             <CircleButton
               onClick={() => {
                 DToolInst.eraseCurrentLayer();
               }}
-              name="clear"
+              image={trashIcon}
             />
             <CircleButton
               onClick={() => {
                 DToolInst.undoredo(-1);
               }}
-              image="/assets/images/undo.png"
+              image={undoIcon}
             />
 
             <CircleButton
               onClick={() => {
                 DToolInst.undoredo(1);
               }}
-              image="/assets/images/redo.png"
+              image={redoIcon}
             />
           </div>
         </div>

@@ -67,7 +67,7 @@ const WalletConnect = (props: any) => {
 
   return (
     
-      <div className={`inner-shadow WalletConnect`}>
+      <div className={`inner-shadow WalletConnect scanlines`}>
         <div 
           className={`
             text-white                                 

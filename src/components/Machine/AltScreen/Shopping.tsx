@@ -1,14 +1,13 @@
 import useMachineStore from "../../../store";
 
-
-const Shopping = () => {  
-  const currentTozziDuckId = 10;
-  const currentTozziDuckId2 = useMachineStore((state) => state.currentTozziDuckId);
+const Shopping = () => {    
+  const { currentTozziDuckId } = useMachineStore();
   return (
-    <div className="w-full h-full bg-red-200">
+    <div className="min-h-full">
+      
       <img                
         alt={`Duck ${currentTozziDuckId + 1}`}
-        src={require(`../../../assets/img/ducks/crypto_duck_${currentTozziDuckId2 + 1}.svg`)}          
+        src={require(`../../../assets/img/ducks/crypto_duck_${currentTozziDuckId + 1}.svg`)}          
       />         
     </div>    
   );
