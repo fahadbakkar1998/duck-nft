@@ -4,7 +4,7 @@ import { FC } from 'react';
 interface CheckBoxProps {
   isSelected: boolean;
   onClick: () => void;
-  label: string;
+  label?: string;
   className?: string;
 }
 
@@ -25,7 +25,7 @@ const CheckBox: FC<CheckBoxProps> = ({isSelected, onClick, label, className}) =>
             py-1
       `}
     >
-      {label}
+      { label ?? <div>yes</div> }
     </div>
   );
 }

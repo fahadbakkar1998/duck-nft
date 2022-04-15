@@ -28,7 +28,7 @@ const DuckCard: FC<DuckCardProps> = ({img, data, isCustom = false}) => {
     >
       <div className="h-full w-full bg-orange-500  absolute opacity-0 group-hover:opacity-50" />
       <img alt="Tozzi Duck" src={img} />
-      <div className="text-white pixel-font text-sm  absolute right-0 bottom-0 bg-orange-500 z-50 border-2 border-white px-2 pt-1 rounded-l-lg">
+      <div className="text-white pixel-font text-sm  absolute right-0 bottom-0 bg-orange-500 z-30 border-2 border-white px-2 pt-1 rounded-l-lg">
         {data.id.toString().padStart(3, '0')}
       </div>
       { data.owner && (
