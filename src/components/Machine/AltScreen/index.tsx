@@ -12,12 +12,25 @@ import { useThree } from "react-three-fiber";
 import "./index.scss";
 import NotConnected from "./NotConnected";
 import AltButton from "./AltButton";
+import { useEffect, useRef } from "react";
 
 const AltScreen: () => JSX.Element = () => {
   const { currentMode, altIsStatic } = useMachineStore();  
   const { viewport } = useThree();  
+  const videoRef = useRef<HTMLVideoElement>();
   const min = viewport.width;
   
+  useEffect(() => {
+    if (altIsStatic && videoRef.current) {
+      const video: HTMLVideoElement = videoRef.current;
+      video.currentTime = Math.random() * 15;
+      console.log(video.currentTime);
+      videoRef.current.play();
+    } else {
+      videoRef.current?.pause();
+    }
+  }, [altIsStatic])
+
   return (
     <Html
       scale={[
@@ -39,8 +52,9 @@ const AltScreen: () => JSX.Element = () => {
           `}    
         >   
           { altIsStatic && (
-            <div className="aspect-square -left-5 absolute  w-[115%] opacity-100">
-              <video playsInline autoPlay muted loop src="/assets/video/static.mp4" />
+            <div className=" top-[21%] absolute scale-[1.75]  opacity-100">
+              {/* @ts-ignore */}
+              <video ref={videoRef} id="alt-static" playsInline autoPlay={altIsStatic} muted loop src="/assets/video/rainbow-static.mp4" />
             </div>         
           )}          
           <div 
