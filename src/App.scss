@@ -9,28 +9,11 @@
 }
 
 .App {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
+  position: relative;  
   display: flex;
   align-items: center;
-  overflow: auto;
-  background-color: paleturquoise;
-  .header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 50vh;
-    background-color: chocolate;
-    .logo {
-      position: absolute;
-      top: 1vh;
-      left: 1vh;
-      width: 30vw;
-      z-index: 2;
-    }
-  }
+  
+
   .machine-container {
     position: relative;
     width: 100vw;
@@ -41,7 +24,7 @@
       top: 50%;
       transform: translate3d(-50%, -50%, 0);
       width: 100vw;
-      height: 100vw;
+      // height: 100vw;
     }
   }
 }

@@ -2,12 +2,14 @@ import { Suspense } from "react";
 import { Canvas } from "react-three-fiber";
 import "./App.scss";
 import { MachineLayout } from "./components/Machine/index";
-import bgImg from "./assets/img/duck-base-holepunch.png";
+// import bgImg from "./assets/img/duck-base-holepunch.png";
+import bgImg from "./assets/img/machine-bg.jpg";
 import { OrbitControls } from "@react-three/drei";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App flex flex-col">
+      <div className="h-96 w-full bg-[#ddd3c9]" />
       <div className={`
         top-0
         mx-auto
@@ -25,6 +27,7 @@ function App() {
           (Tozzi ducks&copy;)
         </div>
       </div>
+      
       <div className="machine-container">
         <img className="background" src={bgImg} alt=""></img>
         <Canvas
@@ -39,6 +42,8 @@ function App() {
           </Suspense>
         </Canvas>
       </div>
+
+      <div className="h-96 w-full bg-[#d7dad2]" />
     </div>
   );
 }
