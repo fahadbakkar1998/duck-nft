@@ -35,6 +35,7 @@ const AltScreen: () => JSX.Element = () => {
             border-[#348476] border mb-11 
             w-[336px] h-[324px] relative rounded-lg  z-0
             bg-[rgb(8,8,8)] text-white overflow-hidden
+            scanlines
           `}    
         >   
           { altIsStatic && (

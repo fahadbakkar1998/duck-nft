@@ -22,8 +22,8 @@ const HomeScreen = (props: any) => {
           <>
             <div 
               style={{ borderRadius: '15%' }} 
-              className="pointer-events-none absolute w-full  z-30  inner-shadow border-radius h-full" 
-            />            
+              className="pointer-events-none absolute w-full  z-30  inner-shadow h-full" 
+            />                                    
 
             <div 
               className="absolute -bottom-14 left-0 w-full flex justify-center"

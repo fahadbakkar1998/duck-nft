@@ -45,6 +45,36 @@ code {
     url("./assets/font/PressStart2P-Regular.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "RoughShark";
+  src: local("RoughShark"),
+    url("./assets/font/RoughShark.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "RadioLand";
+  src: local("RadioLand"),
+    url("./assets/font/RadioLand.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "62DRAGZ";
+  src: local("62DRAGZ"),
+    url("./assets/font/62DRAGZ.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "ducky";
+  src: local("ducky"),
+    url("./assets/font/ducky.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "testy";
+  src: local("testy"),
+    url("./assets/font/barcade.otf") format("opentype");
+}
+
 .absolute-center {
   @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
 }
