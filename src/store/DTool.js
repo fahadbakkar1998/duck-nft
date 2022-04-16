@@ -42,7 +42,6 @@ export default class DTool {
     this.historyChangeCallback = historyChangeCallback;
     const c = document.getElementById("drawingtool_canvas");
     if (!c) {
-      console.log("loop");
       setTimeout(() => {
         this.init(layersSettings, historyChangeCallback);
       }, 100);
@@ -164,14 +163,27 @@ export default class DTool {
   }
   getCorrectPos(e) {
     const rect = e.target.getBoundingClientRect();
-    const mx = e.clientX - rect.left;
-    const my = e.clientY - rect.top;
+    const style = e.target.currentStyle || window.getComputedStyle(e.target);
+    const borderLeftWidth = parseInt(style.borderLeftWidth);
+    const borderRightWidth = parseInt(style.borderRightWidth);
+    const borderTopWidth = parseInt(style.borderTopWidth);
+    const borderBottomWidth = parseInt(style.borderBottomWidth);
+    const mx = e.clientX - rect.left - borderLeftWidth;
+    const my = e.clientY - rect.top - borderTopWidth;
     let px = Math.floor(
-      mx / (this.c.getBoundingClientRect()["width"] / this.canvasSize)
+      mx /
+        ((this.c.getBoundingClientRect()["width"] -
+          borderLeftWidth -
+          borderRightWidth) /
+          this.canvasSize)
     );
     px = Math.min(Math.max(0, px), this.canvasSize - 1);
     let py = Math.floor(
-      my / (this.c.getBoundingClientRect()["width"] / this.canvasSize)
+      my /
+        ((this.c.getBoundingClientRect()["height"] -
+          borderTopWidth -
+          borderBottomWidth) /
+          this.canvasSize)
     );
     py = Math.min(Math.max(0, py), this.canvasSize - 1);
     return { x: px, y: py };

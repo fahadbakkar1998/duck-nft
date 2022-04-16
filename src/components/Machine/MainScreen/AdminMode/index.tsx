@@ -1,132 +1,150 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Html } from "@react-three/drei";
 import { getUFloat, getUInt } from "../../../../utils/common";
 import { saveMachineSetting, withdraw } from "../../../../utils/interact";
 import useMachineStore from "../../../../store";
 import "./index.scss";
 import CheckBox from "../../../common/CheckBox";
+import { MachineMode } from "../../../../utils/constants";
+import cn from "classnames";
 
 const AdminMain = (props: any) => {
-  const machineSetting = useMachineStore((state) => state.machineSetting);
-  const setMachineSetting = useMachineStore((state) => state.setMachineSetting);
+  const currentState = useMachineStore((state) => state);
+  const {
+    currentMode,
+    machineConfig,
+    setMachineConfig,
+    setProcessing,
+    setTransactionStatus,
+    setShowTxStatus,
+  } = currentState;
   const [tozziDucksEnabled, setTozziDucksEnabled] = useState<boolean>(
-    machineSetting.tozziDucksEnabled
+    machineConfig.tozziDucksEnabled
   );
   const [tozziDuckPrice, setTozziDuckPrice] = useState<any>(
-    machineSetting.tozziDuckPrice
+    machineConfig.tozziDuckPrice
   );
   const [customDucksEnabled, setCustomDucksEnabled] = useState<boolean>(
-    machineSetting.customDucksEnabled
+    machineConfig.customDucksEnabled
   );
   const [customDuckPrice, setCustomDuckPrice] = useState<any>(
-    machineSetting.customDuckPrice
+    machineConfig.customDuckPrice
   );
   const [maxCustomDucks, setMaxCustomDucks] = useState<any>(
-    machineSetting.maxCustomDucks
+    machineConfig.maxCustomDucks
   );
   const [withdrawAmount, setWithdrawAmount] = useState<any>(0);
-  const setProcessing = useMachineStore((state) => state.setProcessing);
-  const setTransactionStatus = useMachineStore(
-    (state) => state.setTransactionStatus
-  );
-  const setShowTxStatus = useMachineStore((state) => state.setShowTxStatus);
+
+  useEffect(() => {
+    setTozziDucksEnabled(machineConfig.tozziDucksEnabled || false);
+    setTozziDuckPrice(machineConfig.tozziDuckPrice || 0);
+    setCustomDucksEnabled(machineConfig.customDucksEnabled || false);
+    setCustomDuckPrice(machineConfig.customDuckPrice || 0);
+    setMaxCustomDucks(machineConfig.maxCustomDucks || 0);
+  }, [machineConfig]);
 
   return (
-    <div className="AdminMain inner-shadow pixel-font py-5 px-10 relative text-sm">        
+    <div
+      className={cn(
+        "AdminMain inner-shadow pixel-font py-5 px-10 relative text-sm",
+        { active: currentMode === MachineMode.Admin }
+      )}
+    >
       <div className="mb-2 text-lg">SYSTEM SETTINGS</div>
-      
+
       <div className="tozzi-duck-settings flex flex-col space-y-2">
         <div className="flex items-center justify-between space-x-10">
-          <h2 className="flex justify-start items-center">
-            OWNER:
-          </h2>
-          <div>Ox00...000</div>
+          <h2 className="flex justify-start items-center">OWNER:</h2>
+          <div>0x00...00</div>
+          {/* <div>{machineConfig.owner}</div> */}
         </div>
-        <h2 className="flex justify-start items-center">
-          TOZZI DUCKS:
-        </h2>
+        <h2 className="flex justify-start items-center">TOZZI DUCKS:</h2>
         <div className="flex items-center justify-between ml-4 space-x-10">
-        <div className="flex-2 flex h-full items-center">Minting Enabled?</div>
+          <div className="flex-2 flex h-full items-center">
+            Minting Enabled?
+          </div>
           <div className="flex flex-1">
-            <CheckBox 
+            <CheckBox
               className="mr-2 w-full text-center"
               isSelected={tozziDucksEnabled}
               onClick={() => setTozziDucksEnabled(true)}
               label="YES"
             />
-            <CheckBox 
+            <CheckBox
               className="w-full text-center"
               isSelected={!tozziDucksEnabled}
               onClick={() => setTozziDucksEnabled(false)}
               label="NO"
-            />              
+            />
           </div>
-        </div>        
-        
+        </div>
 
         <div className="flex items-center justify-between ml-4">
           <div className="flex-2 flex h-full items-center">Mint Price:</div>
-          <div className="relative">              
-            <input 
+          <div className="relative">
+            <input
               value={tozziDuckPrice}
               onChange={(e) => {
                 setTozziDuckPrice(e.target.value);
               }}
-              type="text" 
+              type="text"
               className="
                 focus:outline-none
                 py-1 px-2 text-left bg-white w-[148px] text-black 
               "
             />
-            <div className="absolute right-2 top-1 text-[rgba(8,8,8,0.4)]">ETH</div>
+            <div className="absolute right-2 top-1 text-[rgba(8,8,8,0.4)]">
+              ETH
+            </div>
           </div>
         </div>
       </div>
 
       <div className="custom-duck-settings flex flex-col space-y-2 mt-2 pt-2 pb-2 ">
-        <h2 className="flex justify-start items-center">
-          CUSTOM DUCKS:
-        </h2>
+        <h2 className="flex justify-start items-center">CUSTOM DUCKS:</h2>
         <div className="flex items-center justify-between ml-4 space-x-10">
-          <div className="flex-2 flex h-full items-center">Minting Enabled?</div>
+          <div className="flex-2 flex h-full items-center">
+            Minting Enabled?
+          </div>
           <div className="flex flex-1">
-            <CheckBox 
+            <CheckBox
               className="mr-2 w-full text-center"
               isSelected={customDucksEnabled}
               onClick={() => setCustomDucksEnabled(true)}
               label="YES"
             />
-            <CheckBox 
+            <CheckBox
               className="w-full text-center"
               isSelected={!customDucksEnabled}
               onClick={() => setCustomDucksEnabled(false)}
               label="NO"
-            />              
+            />
           </div>
-        </div>        
-        
+        </div>
 
         <div className="flex items-center justify-between ml-4">
           <div className="flex-2 flex items-center h-full">Mint Price:</div>
-          <div className="relative">              
-            <input 
+          <div className="relative">
+            <input
               value={customDuckPrice}
               onChange={(e) => {
                 setCustomDuckPrice(e.target.value);
               }}
-              type="text" 
+              type="text"
               className="
                 focus:outline-none
                 py-1 px-2 text-left bg-white w-[148px] text-black 
               "
             />
-            <div className="absolute right-2 top-1 text-[rgba(8,8,8,0.4)]">ETH</div>
+            <div className="absolute right-2 top-1 text-[rgba(8,8,8,0.4)]">
+              ETH
+            </div>
           </div>
         </div>
         <div className="flex items-center justify-between ml-4">
           <div className="flex-2">Max Custom Ducks:</div>
-          <div className="relative">              
-            <input 
+          <div className="relative">
+            <input
               type="text"
               value={maxCustomDucks}
               onChange={(e) => {
@@ -136,7 +154,7 @@ const AdminMain = (props: any) => {
                 focus:outline-none
                 py-1 px-2 text-left bg-white w-[148px] text-black 
               "
-            />              
+            />
           </div>
         </div>
       </div>
@@ -159,13 +177,13 @@ const AdminMain = (props: any) => {
             };
             setProcessing(true);
             setTransactionStatus("processing...");
-            setShowTxStatus(true);
+            // setShowTxStatus(true);
             const res = await saveMachineSetting({
-              machineSetting: setting,
+              machineConfig: setting,
             });
             if (res.success) {
-              setMachineSetting({
-                ...machineSetting,
+              setMachineConfig({
+                ...machineConfig,
                 ...setting,
               });
             }
@@ -176,53 +194,41 @@ const AdminMain = (props: any) => {
           SAVE
         </div>
       </div>
-      
+
       <div className="flex items-center justify-between space-x-10 mt-2">
-        <h2 className="flex justify-start items-center">
-          SYSTEM BALANCE:
-        </h2>
-        <div >{machineSetting.balance} ETH</div>
+        <h2 className="flex justify-start items-center">SYSTEM BALANCE:</h2>
+        <div>{machineConfig.balance} ETH</div>
       </div>
       <div className="_row flex-end">
-          <div
-            className="_btn"
-            onClick={async () => {
-              const correctWithdrawAmount = getUFloat(withdrawAmount);
-              setWithdrawAmount(correctWithdrawAmount);
-              if (
-                correctWithdrawAmount <= 0 ||
-                correctWithdrawAmount > machineSetting.balance
-              )
-                return;
-              setProcessing(true);
-              setTransactionStatus("processing...");
-              setShowTxStatus(true);
-              const res = await withdraw({
-                amount: correctWithdrawAmount,
+        <div
+          className="_btn"
+          onClick={async () => {
+            const correctWithdrawAmount = getUFloat(withdrawAmount);
+            setWithdrawAmount(correctWithdrawAmount);
+            if (
+              correctWithdrawAmount <= 0 ||
+              correctWithdrawAmount > machineConfig.balance
+            )
+              return;
+            setProcessing(true);
+            setTransactionStatus("processing...");
+            // setShowTxStatus(true);
+            const res = await withdraw({
+              amount: correctWithdrawAmount,
+            });
+            if (res.success) {
+              setMachineConfig({
+                ...machineConfig,
+                balance: machineConfig.balance - correctWithdrawAmount,
               });
-              if (res.success) {
-                setMachineSetting({
-                  ...machineSetting,
-                  balance: machineSetting.balance - correctWithdrawAmount,
-                });
-              }
-              setTransactionStatus(res.status);
-              setProcessing(false);
-            }}
-          >
-            WITHDRAW
-          </div>
+            }
+            setTransactionStatus(res.status);
+            setProcessing(false);
+          }}
+        >
+          WITHDRAW
         </div>
-      
-
-
-      
-
-      
-      
-
-
-
+      </div>
 
       {/* <div className="_group">
         <div className="_row">
@@ -278,7 +284,7 @@ const AdminMain = (props: any) => {
       </div>
       <div className="_group">
         <div className="_row">
-          <div className="_small">Balance: {machineSetting.balance}</div>
+          <div className="_small">Balance: {machineConfig.balance}</div>
           <div className="_row-sub">
             Withdraw:
             <div className="_input-group">
@@ -302,19 +308,19 @@ const AdminMain = (props: any) => {
               setWithdrawAmount(correctWithdrawAmount);
               if (
                 correctWithdrawAmount <= 0 ||
-                correctWithdrawAmount > machineSetting.balance
+                correctWithdrawAmount > machineConfig.balance
               )
                 return;
               setProcessing(true);
               setTransactionStatus("processing...");
-              setShowTxStatus(true);
+              // setShowTxStatus(true);
               const res = await withdraw({
                 amount: correctWithdrawAmount,
               });
               if (res.success) {
-                setMachineSetting({
-                  ...machineSetting,
-                  balance: machineSetting.balance - correctWithdrawAmount,
+                setMachineConfig({
+                  ...machineConfig,
+                  balance: machineConfig.balance - correctWithdrawAmount,
                 });
               }
               setTransactionStatus(res.status);
@@ -325,8 +331,7 @@ const AdminMain = (props: any) => {
           </div>
         </div>
       </div> */}
-      
-    </div>    
+    </div>
   );
 };
 

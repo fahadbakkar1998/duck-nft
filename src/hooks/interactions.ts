@@ -1,59 +1,58 @@
 import useMachineStore from "../store";
 import { mintTozziDuck, mintCustomDuck } from "../utils/interact";
 import { tozziDuckNum } from "../utils/constants";
+import React from "react";
 
-
-export const useMintTozziDuck = () => {
-  const currState = useMachineStore((state) => state);  
-  const { 
-    address,     
+export const UseMintTozziDuck = () => {
+  console.log("useMintTozziDuck");
+  const currState = useMachineStore((state) => state);
+  const {
+    address,
     currentTozziDuckId,
-    tozziDuckData,
-    setTozziDuckData,
-    machineSetting,
-    setMachineSetting,    
+    ducks,
+    setDucks,
+    machineConfig,
+    setMachineConfig,
     setProcessing,
     setTransactionStatus,
-    setShowTxStatus,    
+    setShowTxStatus,
   } = currState;
   const doMint = async () => {
     if (
       currentTozziDuckId < 0 ||
-      (tozziDuckData[currentTozziDuckId] &&
-        tozziDuckData[currentTozziDuckId].owner)
+      (ducks[currentTozziDuckId] && ducks[currentTozziDuckId].owner)
     )
       return;
     setProcessing(true);
     setTransactionStatus("processing...");
-    setShowTxStatus(true);
+    // setShowTxStatus(true);
     const res = await mintTozziDuck({
-      ...tozziDuckData[currentTozziDuckId],
-    });    
+      ...ducks[currentTozziDuckId],
+    });
     if (res.success) {
-      const tempDuckData = [...tozziDuckData];
+      const tempDuckData = [...ducks];
       tempDuckData[currentTozziDuckId].owner = address;
-      setTozziDuckData(tempDuckData);
-      setMachineSetting({
-        ...machineSetting,
-        balance:
-          machineSetting.balance + machineSetting.tozziDuckPrice,
+      setDucks(tempDuckData);
+      setMachineConfig({
+        ...machineConfig,
+        balance: machineConfig.balance + machineConfig.tozziDuckPrice,
       });
     }
     setTransactionStatus(res.status);
-    setProcessing(false);  
-  }
+    setProcessing(false);
+  };
   return doMint;
-}
+};
 
-export const useMintCustomDuck = () => {
-  const currState = useMachineStore((state) => state);  
-  const { 
-    address, 
-    machineSetting,
-    setMachineSetting,    
+export const UseMintCustomDuck = () => {
+  const currState = useMachineStore((state) => state);
+  const {
+    address,
+    machineConfig,
+    setMachineConfig,
     setProcessing,
     setTransactionStatus,
-    setShowTxStatus,    
+    setShowTxStatus,
     DToolInst,
     setCustomDuckData,
     customDuckData,
@@ -65,7 +64,7 @@ export const useMintCustomDuck = () => {
     const base64data = await DToolInst.getWebp();
     // console.log("base64data: ", base64data);
     setTransactionStatus("processing...");
-    setShowTxStatus(true);
+    // setShowTxStatus(true);
     const res = await mintCustomDuck({
       base64data,
     });
@@ -77,17 +76,16 @@ export const useMintCustomDuck = () => {
           id: tozziDuckNum + customDuckData.length,
           image: base64data,
           owner: address,
-          restTimestamp: machineSetting.burnWindow,
+          restTimestamp: machineConfig.burnWindow,
         },
       ]);
-      setMachineSetting({
-        ...machineSetting,
-        balance:
-          machineSetting.balance + machineSetting.customDuckPrice,
+      setMachineConfig({
+        ...machineConfig,
+        balance: machineConfig.balance + machineConfig.customDuckPrice,
       });
     }
     setTransactionStatus(res.status);
     setProcessing(false);
-  }
+  };
   return doMint;
-}
+};

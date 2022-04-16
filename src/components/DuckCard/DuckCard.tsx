@@ -4,7 +4,7 @@ import { useMachineStore } from "../../store";
 import { tozziDuckNum } from "../../utils/constants";
 
 const DuckCard = (props: any) => {
-  const tozziDuckData = useMachineStore((state) => state.tozziDuckData);
+  const ducks = useMachineStore((state) => state.ducks);
   const currentTozziDuckId = useMachineStore(
     (state) => state.currentTozziDuckId
   );
@@ -25,7 +25,6 @@ const DuckCard = (props: any) => {
 
   const handleClick = () => {
     setCurrentTozziDuckId(props.data.id);
-    console.log('test', props);
   }
 
   return (

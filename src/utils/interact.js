@@ -1,20 +1,23 @@
 import { machineContractAddress, tozziDuckNum, withdrawer } from "./constants";
+import { getFloat, getInt } from "./common";
 import jsonMachineContract from "../contracts/TheAmazingTozziDuckMachine.json";
 import Web3 from "web3";
 import { ethers } from "ethers";
 import axios from "axios";
 
-const web3 = new Web3(
-  // "https://rinkeby.infura.io/v3/a6dceddd72b74133aab4c0665a676406"
-  window.ethereum
+const web3 = new Web3(window.ethereum);
+const machineContract = new web3.eth.Contract(
+  jsonMachineContract.abi,
+  machineContractAddress
 );
+console.log("interact machineContract: ", machineContract);
 const ethereumProvider = new ethers.providers.Web3Provider(window.ethereum);
 
 const getTxResult = async (promise) => {
   try {
     const tx = await promise;
     const res = await tx.wait();
-    // console.log("Tx Result: ", res);
+    console.log("interact tx result: ", res);
     if (res.transactionHash) {
       return {
         success: true,
@@ -158,136 +161,120 @@ export const getCurrentWalletConnected = async () => {
   }
 };
 
-export const fetchMachineData = async () => {
-  const machineContract = getMachineContract();
-  const machineSetting = await machineContract.machineSetting();
-  const tozziDuckPrice = web3.utils.fromWei(
-    machineSetting.tozziDuckPrice._hex,
-    "ether"
-  );
-  const customDuckPrice = web3.utils.fromWei(
-    machineSetting.customDuckPrice._hex,
-    "ether"
-  );
+export const fetchMachineConfig = async () => {
+  const machineConfig = await machineContract.methods.machineConfig().call();
   const balance = web3.utils.fromWei(
     await web3.eth.getBalance(machineContractAddress),
     "ether"
   );
-  const burnWindow = await machineContract.BURN_WINDOW();
-  // console.log("balance: ", balance);
-  // console.log("burnWindow: ", burnWindow);
-  return {
-    ...machineSetting,
-    tozziDuckPrice,
-    customDuckPrice,
-    balance,
-    burnWindow,
+  const burnWindow = await machineContract.methods.BURN_WINDOW().call();
+  const ownershipTokenId = parseInt(
+    await machineContract.methods.OWNERSHIP_TOKEN_ID().call()
+  );
+  const owner = await machineContract.methods.ownerOf(ownershipTokenId).call();
+  const data = {
+    tozziDuckPrice: getFloat(
+      web3.utils.fromWei(machineConfig.tozziDuckPrice, "ether")
+    ),
+    customDuckPrice: getFloat(
+      web3.utils.fromWei(machineConfig.customDuckPrice, "ether")
+    ),
+    maxCustomDucks: getInt(machineConfig.maxCustomDucks),
+    tozziDucksEnabled: machineConfig.tozziDucksEnabled,
+    customDucksEnabled: machineConfig.customDucksEnabled,
+    balance: getFloat(balance),
+    burnWindow: getInt(burnWindow),
+    ownershipTokenId,
+    owner,
   };
+  console.log("interact machineConfig: ", data);
+  return data;
 };
 
-export const fetchTozziDuck = async (tozziDuckData) => {
-  const machineContract = getMachineContract();
-  let promises = [];
-  for (let i = 0; i < tozziDuckNum; i++) {
-    promises.push(
-      machineContract
-        .ownerOf(i)
-        .then((res) => {
-          if (tozziDuckData[i]) {
-            tozziDuckData[i].owner = res;
-          }
-        })
-        .catch((e) => {
-          // console.error(e);
-        })
-    );
-  }
-  await Promise.all(promises);
-  // console.log("tozzi duck data: ", tozziDuckData);
-  return tozziDuckData;
-};
-
-export const fetchCustomDuck = async () => {
-  const machineContract = getMachineContract();
-  let promises = [];
-  let customDuckData = [];
-  const machineSetting = await machineContract.machineSetting();
-  const maxCustomDuckNum = machineSetting.maxCustomDucks;
-  // console.log("max custom ducks: ", maxCustomDuckNum);
-  const burnWindow = await machineContract.BURN_WINDOW();
-  // console.log("burn window: ", burnWindow);
+export const fetchDucks = async (ducks) => {
+  console.log("interact raw ducks: ", ducks);
+  const totalSupply = await machineContract.methods.totalSupply().call();
+  console.log("interact totalSupply: ", totalSupply);
+  const machineConfig = await fetchMachineConfig();
+  const { burnWindow, ownershipTokenId } = machineConfig;
   const blockObj = await web3.eth.getBlock(await web3.eth.getBlockNumber());
-  const curBlockTimestamp = blockObj.timestamp;
-  // console.log("current block timestamp: ", curBlockTimestamp);
-  for (let i = 0; i < maxCustomDuckNum; i++) {
-    // console.log("current custom duck index: ", tozziDuckNum + i);
+  const { timestamp } = blockObj;
+  let newDucks = [...ducks];
+  let promises = [];
+  for (let i = 0; i < totalSupply; i++) {
+    console.log("interact duck index: ", i);
     promises.push(
-      // get token uri
-      machineContract
-        .tokenURI(tozziDuckNum + i)
-        .then(async (res) => {
-          const tokenUriRes = await axios.get(res);
-          if (tokenUriRes.status === 200) {
-            // get owner
-            const ownerOfRes = await machineContract
-              .ownerOf(tozziDuckNum + i)
-              .catch((e) => {
-                // console.error(e);
-              });
-            if (!ownerOfRes) return;
-            // console.log("ownerOfRes", ownerOfRes);
-            // get hatched time
-            const hatchedTime = await machineContract.customDuckHatchedTimes(
-              tozziDuckNum + i
-            );
-            // console.log("hatched time: ", hatchedTime);
-            tokenUriRes.data.id = tozziDuckNum + i;
-            tokenUriRes.data.owner = ownerOfRes;
-            tokenUriRes.data.restTimestamp =
-              burnWindow - (curBlockTimestamp - hatchedTime);
-            customDuckData[i] = tokenUriRes.data;
-          }
-        })
-        .catch((e) => {
-          // console.error(e);
-        })
+      await (async () => {
+        const tokenId = parseInt(
+          await machineContract.methods.tokenByIndex(i).call()
+        );
+        console.log("tokenId: ", tokenId);
+        if (tokenId === ownershipTokenId) return;
+        let duck = {};
+        const index = newDucks.findIndex((e) => e.id === tokenId);
+        if (index < 0) {
+          newDucks.push(duck);
+        } else {
+          duck = newDucks[index];
+        }
+        const tokenURI = await machineContract.methods.tokenURI(tokenId).call();
+        console.log("interact tokenURI: ", tokenURI);
+        const tokenURIRes = await axios.get(tokenURI);
+        if (tokenURIRes.statusText === "OK") {
+          duck.image = tokenURIRes.data.image;
+        }
+        const owner = await machineContract.methods.ownerOf(tokenId).call();
+        console.log("owner of token: ", owner);
+        duck.owner = owner;
+        if (tokenId >= tozziDuckNum) {
+          const hatchedTime = parseInt(
+            await machineContract.methods.customDuckHatchedTimes(tokenId).call()
+          );
+          duck.isCustom = true;
+          duck.restTimestamp = burnWindow - (timestamp - hatchedTime);
+        }
+      })()
     );
   }
   await Promise.all(promises);
-  const CDD = customDuckData.filter((a) => a);
-  // console.log("custom duck data: ", CDD);
-  return CDD;
+  console.log("interact newDucks: ", newDucks);
+  return newDucks;
 };
 
 export const mintTozziDuck = async (data) => {
   const machineContract = getMachineContract();
-  const machineSetting = await machineContract.machineSetting();
-  const enabled = machineSetting.tozziDucksEnabled;
+  const machineConfig = await machineContract.machineConfig();
+  const enabled = machineConfig.tozziDucksEnabled;
   if (!enabled) {
     return {
       status: "😥 Buying tozzi duck was restricted.",
     };
   }
-  const price = machineSetting.tozziDuckPrice;
+  const price = machineConfig.tozziDuckPrice;
   // console.log("tozzi duck price: ", price);
   const res = await getTxResult(
-    machineContract.mintTozziDuck(data.id, data.webp, data.proof, {
-      value: ethers.BigNumber.from(price)._hex,
-    })
+    machineContract.mintTozziDuck(
+      data.id,
+      data.staticData.webp,
+      data.staticData.proof,
+      {
+        value: ethers.BigNumber.from(price)._hex,
+      }
+    )
   );
   return res;
 };
 
 export const mintCustomDuck = async (data) => {
   const machineContract = getMachineContract();
-  const machineSetting = await machineContract.machineSetting();
-  const enabled = machineSetting.customDucksEnabled;
+  const machineConfig = await machineContract.machineConfig();
+  const enabled = machineConfig.customDucksEnabled;
   if (!enabled) {
     return {
       status: "😥 Buying custom duck was restricted.",
     };
   }
-  const price = machineSetting.customDuckPrice;
+  const price = machineConfig.customDuckPrice;
   // console.log("custom duck price: ", price);
   const res = await getTxResult(
     machineContract.mintCustomDuck(data.base64data, {
@@ -317,7 +304,7 @@ export const withdraw = async (data) => {
 };
 
 export const saveMachineSetting = async (data) => {
-  const setting = data.machineSetting;
+  const setting = data.machineConfig;
   setting.tozziDuckPrice = web3.utils.toWei(
     setting.tozziDuckPrice.toString(),
     "ether"
@@ -328,7 +315,7 @@ export const saveMachineSetting = async (data) => {
   );
   const machineContract = getMachineContract();
   const res = await getTxResult(
-    machineContract.setMachineSetting(data.machineSetting)
+    machineContract.setMachineConfig(data.machineConfig)
   );
   return res;
 };

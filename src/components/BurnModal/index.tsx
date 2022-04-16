@@ -51,7 +51,7 @@ const min = viewport.width;
                 }
                 setProcessing(true);
                 setTransactionStatus("processing...");
-                setShowTxStatus(true);
+                // setShowTxStatus(true);
                 const res = await burnRenegadeDuck({
                   duckId: currentAdminDuckId,
                   reason: reasonRef.current.value,

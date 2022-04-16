@@ -4,12 +4,19 @@ import "./App.scss";
 import { MachineLayout } from "./components/Machine/index";
 import bgImg from "./assets/img/duck-base-holepunch.png";
 import { OrbitControls } from "@react-three/drei";
+import Mobile from "./components/Mobile/Mobile";
 
 function App() {
-  return (
+  const isMobile =
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+
+  return isMobile ? (
+    <Mobile />
+  ) : (
     <div className="App">
-      <div className="header">        
-      </div>
+      <div className="header"></div>
       <div className="machine-container">
         <img className="background" src={bgImg} alt=""></img>
         <Canvas
@@ -19,8 +26,9 @@ function App() {
           onCreated={(state) => state.gl.clearColor()}
         >
           <Suspense fallback={null}>
-            <pointLight  intensity={9} position={[0, 8, 10]} />            
+            <pointLight intensity={9} position={[0, 8, 10]} />
             <MachineLayout />
+            {/* <OrbitControls /> */}
           </Suspense>
         </Canvas>
       </div>
