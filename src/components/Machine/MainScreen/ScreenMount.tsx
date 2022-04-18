@@ -1,19 +1,21 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { a, useSpring, easings } from "@react-spring/three";
 import useMachineStore from "../../../store";
 import { MachineMode, minViewLength } from "../../../utils/constants";
-import { useLoader, useThree } from "react-three-fiber";
+import { useLoader, useThree, useFrame } from "react-three-fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import Screen from "./Screen";
+import { Vector3 } from "three";
 
 let globalRoundCount = 0;
 let screenIsRotating = false;
 
 export const MainScreen = () => {
-  const { viewport } = useThree();  
+  const { viewport, scene, mouse } = useThree();  
   const min = viewport.width;  
   const [screenInverted, setScreenInverted] = useState(false);
   const gltfDisk = useLoader(GLTFLoader, "assets/models/DuckDisk.glb");  
+  const modelRef = useRef();
   
   const {     
     switchModes,
@@ -50,9 +52,12 @@ export const MainScreen = () => {
     }, 1200);    
   };
 
+
+
   return (
     <a.group
       {...(spring as any)}
+      ref={modelRef}
       onClick={handleModeSwitch}
       scale={[min / minViewLength, min / minViewLength, min / minViewLength]}
       position={[0.093 * min, -0.068 * min, 0]}      
