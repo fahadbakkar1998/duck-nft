@@ -6,6 +6,7 @@ import ColorPicker from "./MainScreen/CustomizationMode/ColorPicker";
 import { MachineMode } from "../../utils/constants";
 import WaveForm from "./WaveForm";
 import StatusPanel from "./MainScreen/BrowsingMode/StatusPanel";
+import Keyboard from "./Keyboard";
 
 
 export const MachineLayout = () => {
@@ -15,7 +16,8 @@ export const MachineLayout = () => {
   return (
     <group>      
       <AltScreen />
-      <MainScreen />     
+      <MainScreen />  
+      <Keyboard />   
       { 
         currentMode === MachineMode.Customization 
           ? <ColorPicker /> 
