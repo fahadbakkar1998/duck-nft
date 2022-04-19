@@ -11,3 +11,9 @@ export interface DuckData {
   salePrice: number; // sale price in ETH or 0
   isCustom: boolean; // defaults to false
 }
+
+export interface DuckCardProps {
+  img: string;
+  data: DuckData;
+  isCustom?: boolean;
+}

@@ -1,8 +1,9 @@
 {
   "name": "duck-machine-3",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@react-three/drei": "^8.6.4",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",

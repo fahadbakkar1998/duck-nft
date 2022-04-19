@@ -36,18 +36,11 @@ const WalletConnect = (props: any) => {
 
   const addWalletListener = () => {
     getWalletConnected();
-    if ((window as any).ethereum) {
-      (window as any).ethereum.on("accountsChanged", () => {
-        window.location.reload();
-      });
-      (window as any).ethereum.on("chainChanged", () => {
-        window.location.reload();
-      });
-    }
   };
 
   useEffect(() => {
     addWalletListener();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -67,9 +60,10 @@ const WalletConnect = (props: any) => {
   }, [address]);
 
   return (
-    <div className={`inner-shadow WalletConnect`}>
-      <div
-        className={`
+    
+      <div className={`inner-shadow WalletConnect scanlines`}>
+        <div 
+          className={`
             text-white                                 
             flex flex-col space-y-1
             text-sm

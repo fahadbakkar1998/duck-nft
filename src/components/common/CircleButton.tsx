@@ -12,7 +12,9 @@ const CircleButton = (props) => {
         className="relative z-20 myButton w-11 rounded-full"
         onClick={props.onClick}
       >
-        <img className="btn-img" alt="" src={props.image} />
+        <div className="flex justify-center items-center">          
+          <img className="mt-1 w-6 h-6" alt="" src={props.image} />        
+        </div>
         {props.name}
         {props.children}
       </div>

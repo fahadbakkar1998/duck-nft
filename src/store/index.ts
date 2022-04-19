@@ -15,6 +15,8 @@ type MachineStore = {
   // main
   currentMode: MachineMode;
   switchModes: () => void;
+  isSwitchingModes: boolean;
+  setIsSwitchingModes: (isSwitching: boolean) => void;
   setCurrentMode: (val: MachineMode) => void;
   currentTozziDuckId: number;
   setCurrentTozziDuckId: (val: number) => void;
@@ -22,6 +24,8 @@ type MachineStore = {
   setCurrentCustomDuckId: (val: number) => void;
   currentAdminDuckId: number;
   setCurrentAdminDuckId: (val: number) => void;
+  altIsStatic: boolean;
+  changeChannel: (duration?: number) => void;
 
   // color picker
   DToolInst: DTool;
@@ -70,11 +74,24 @@ export const useMachineStore = create<MachineStore>(
       set({ currentMode: mode });
     },
 
-    switchModes: (): void => {
+    altIsStatic: false,
+    changeChannel: (duration = 200): void => {
+      set({ altIsStatic: true });
+      setTimeout(() => {
+        set({ altIsStatic: false});
+      }, duration)
+    },
+
+    setIsSwitchingModes: (isSwitching: boolean): void => {
+      set({isSwitchingModes: isSwitching})
+    },
+    isSwitchingModes: false,
+    switchModes: (): void => {    
       set((state) => {
-        const currentMode = state.currentMode;
-        let nextMode: MachineMode;
-        switch (state.currentMode) {
+        setTimeout(() => { set({ isSwitchingModes: false}) }, 300)
+        const currentMode = state.currentMode;  
+        let nextMode;
+        switch(state.currentMode) {
           case MachineMode.Shopping:
             nextMode = MachineMode.Customization;
             break;
@@ -87,13 +104,16 @@ export const useMachineStore = create<MachineStore>(
           default:
             nextMode = currentMode;
         }
-        return { currentMode: nextMode };
+        return { currentMode: nextMode, isSwitchingModes: true };
       });
     },
 
     currentTozziDuckId: 0,
     setCurrentTozziDuckId: (id: number): void => {
-      set({ currentTozziDuckId: id });
+      set((state) => {
+        state.changeChannel();
+        return { currentTozziDuckId: id };
+      });
     },
 
     currentCustomDuckId: -1,
