@@ -9,8 +9,6 @@ const Ducks = (props) => {
   const mobileStore = useMobileStore((state) => state);
   const { isOpenDuckModal, setIsOpenDuckModal, curDuckId } = mobileStore;
 
-  console.log(ducks[curDuckId].staticData.webp)
-
   return (
     <div className="Ducks">
       {ducks.map((duck, index) => (
@@ -24,7 +22,7 @@ const Ducks = (props) => {
         <div className="Duck-modal">
           <img
             className="image"
-            src={`data:image/webp;base64,${ducks[curDuckId].staticData.webp}`}
+            src={`data:image/webp;base64,${ducks[curDuckId].webp}`}
             alt=""
           ></img>
           <div className="info">Duck Info</div>

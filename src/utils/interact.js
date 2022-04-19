@@ -4,12 +4,11 @@ import jsonMachineContract from "../contracts/TheAmazingTozziDuckMachine.json";
 import Web3 from "web3";
 import { ethers } from "ethers";
 import axios from "axios";
+import { Moralis } from "moralis";
 
+let mca = machineContractAddress;
 const web3 = new Web3(window.ethereum);
-const machineContract = new web3.eth.Contract(
-  jsonMachineContract.abi,
-  machineContractAddress
-);
+let machineContract = new web3.eth.Contract(jsonMachineContract.abi, mca);
 console.log("interact machineContract: ", machineContract);
 const ethereumProvider = new ethers.providers.Web3Provider(window.ethereum);
 
@@ -51,7 +50,7 @@ const getTxResult = async (promise) => {
 
 const getMachineContract = () => {
   const contract = new ethers.Contract(
-    machineContractAddress,
+    mca,
     jsonMachineContract.abi,
     ethereumProvider.getSigner()
   );
@@ -163,10 +162,7 @@ export const getCurrentWalletConnected = async () => {
 
 export const fetchMachineConfig = async () => {
   const machineConfig = await machineContract.methods.machineConfig().call();
-  const balance = web3.utils.fromWei(
-    await web3.eth.getBalance(machineContractAddress),
-    "ether"
-  );
+  const balance = web3.utils.fromWei(await web3.eth.getBalance(mca), "ether");
   const burnWindow = await machineContract.methods.BURN_WINDOW().call();
   const ownershipTokenId = parseInt(
     await machineContract.methods.OWNERSHIP_TOKEN_ID().call()
@@ -253,14 +249,9 @@ export const mintTozziDuck = async (data) => {
   const price = machineConfig.tozziDuckPrice;
   // console.log("tozzi duck price: ", price);
   const res = await getTxResult(
-    machineContract.mintTozziDuck(
-      data.id,
-      data.staticData.webp,
-      data.staticData.proof,
-      {
-        value: ethers.BigNumber.from(price)._hex,
-      }
-    )
+    machineContract.mintTozziDuck(data.id, data.webp, data.proof, {
+      value: ethers.BigNumber.from(price)._hex,
+    })
   );
   return res;
 };
@@ -319,3 +310,5 @@ export const saveMachineSetting = async (data) => {
   );
   return res;
 };
+
+export const initInteract = async () => {};

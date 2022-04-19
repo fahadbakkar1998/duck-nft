@@ -1,3 +1,5 @@
+// import "./test/combine";
+
 export const timer = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 export const getUFloat = (val: any) => {

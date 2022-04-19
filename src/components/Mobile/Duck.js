@@ -14,7 +14,7 @@ const Duck = (props) => {
           setCurDuckId(props.id);
           setIsOpenDuckModal(true);
         }}
-        src={`data:image/webp;base64,${props.staticData.webp}`}
+        src={`data:image/webp;base64,${props.webp}`}
         alt=""
       ></img>
     </div>

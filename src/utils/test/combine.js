@@ -21,10 +21,8 @@ const combineStep2 = () => {
   const combineValues = ducks.map((duck, index) => {
     return {
       id: index,
-      staticData: {
-        proof: duck.proof,
-        webp: duck.webp,
-      },
+      proof: duck.proof,
+      webp: duck.webp,
       mintTime: 0,
       owner: "",
       salePrice: 0,

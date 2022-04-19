@@ -4,6 +4,7 @@ import {
   connectWallet,
   getCurrentWalletConnected,
   fetchMachineConfig,
+  initInteract,
   fetchDucks,
 } from "../../../../utils/interact";
 import { getFloat, getInt } from "../../../../utils/common";
@@ -40,13 +41,14 @@ const WalletConnect = (props: any) => {
 
   useEffect(() => {
     addWalletListener();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (address) {
       (async () => {
         setCurrentMode(MachineMode.Syncing);
+        await initInteract();
         const machineConfig = await fetchMachineConfig();
         setMachineConfig(machineConfig);
         console.log("WalletConnect ducks: ", ducks);
@@ -60,10 +62,9 @@ const WalletConnect = (props: any) => {
   }, [address]);
 
   return (
-    
-      <div className={`inner-shadow WalletConnect scanlines`}>
-        <div 
-          className={`
+    <div className={`inner-shadow WalletConnect scanlines`}>
+      <div
+        className={`
             text-white                                 
             flex flex-col space-y-1
             text-sm

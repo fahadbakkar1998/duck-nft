@@ -15,7 +15,6 @@ import trashIcon from "../../../../assets/img/icons/trash.svg";
 import undoIcon from "../../../../assets/img/icons/undo.svg";
 import redoIcon from "../../../../assets/img/icons/redo.svg";
 
-
 const layers: any[] = [
   { label: "Head" },
   { label: "Bill", preset: duckbill, disabled: true },
@@ -66,66 +65,18 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
   }, []);
 
   return (
-      <Suspense fallback={null}>
-        <div className={cn("DrawingTool relative", { active: props.isActive })}>
-          <div className="absolute w-full h-full inner-shadow rounded-[15%] pointer-events-none" />
-          <canvas
-            className="drawing-canvas bg-black border-[#3f3f41] border-[30px]"
-            ref={drawingCanvas}
-            id="drawingtool_canvas"
-          />          
-          <div className="right">
-            <CircleButton
-              onClick={() => {
-                setSelectedTool(0);
-                DToolInst.selectTool(0);
-                drawingCanvas.current!.style.cursor =
-                  "url('/assets/images/pencil.png'), default";
-              }}              
-              image={pencilIcon}
-            />
-            <CircleButton
-              onClick={() => {
-                setSelectedTool(1);
-                DToolInst.selectTool(1);
-                drawingCanvas.current!.style.cursor =
-                  "url('/assets/images/paintbucket.png'), default";
-              }}
-              image={paintBucketIcon}
-            />
-            <CircleButton
-              onClick={() => {
-                DToolInst.selectColor(null);
-                drawingCanvas.current!.style.cursor =
-                  "url('/assets/images/eraser.png'), default";
-              }}
-              image={eraserIcon}
-            />
-            <CircleButton onClick={() => toggleEyeDrop(true)} image={dropperIcon} />
-          </div>
-          
-          <div className="bottom space-x-8">
-            <CircleButton
-              onClick={() => {
-                DToolInst.eraseCurrentLayer();
-              }}
-              image={trashIcon}
-            />
-            <CircleButton
-              onClick={() => {
-                DToolInst.undoredo(-1);
-              }}
-              image={undoIcon}
-            />
-
-            <CircleButton
-              onClick={() => {
-                DToolInst.undoredo(1);
-              }}
-              image={redoIcon}
-            />
-          </div>
-        </div>
+    <Suspense fallback={null}>
+      <div
+        className={cn("DrawingTool relative", {
+          active: currentMode === MachineMode.Customization,
+        })}
+      >
+        <div className="absolute w-full h-full inner-shadow rounded-[15%] pointer-events-none" />
+        <canvas
+          className="drawing-canvas bg-black border-[#3f3f41] border-[30px]"
+          ref={drawingCanvas}
+          id="drawingtool_canvas"
+        />
         <div className="right">
           <CircleButton
             onClick={() => {
@@ -134,7 +85,7 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
               drawingCanvas.current!.style.cursor =
                 "url('/assets/images/pencil.png'), default";
             }}
-            image="/assets/images/pencil.png"
+            image={pencilIcon}
           />
           <CircleButton
             onClick={() => {
@@ -143,7 +94,7 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
               drawingCanvas.current!.style.cursor =
                 "url('/assets/images/paintbucket.png'), default";
             }}
-            image="/assets/images/paintbucket.png"
+            image={paintBucketIcon}
           />
           <CircleButton
             onClick={() => {
@@ -151,31 +102,85 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
               drawingCanvas.current!.style.cursor =
                 "url('/assets/images/eraser.png'), default";
             }}
-            image="/assets/images/eraser.png"
+            image={eraserIcon}
+          />
+          <CircleButton
+            onClick={() => toggleEyeDrop(true)}
+            image={dropperIcon}
           />
         </div>
+
         <div className="bottom space-x-8">
           <CircleButton
             onClick={() => {
               DToolInst.eraseCurrentLayer();
             }}
-            name="clear"
+            image={trashIcon}
           />
           <CircleButton
             onClick={() => {
               DToolInst.undoredo(-1);
             }}
-            image="/assets/images/undo.png"
+            image={undoIcon}
           />
 
           <CircleButton
             onClick={() => {
               DToolInst.undoredo(1);
             }}
-            image="/assets/images/redo.png"
+            image={redoIcon}
           />
         </div>
       </div>
+      {/* <div className="right">
+        <CircleButton
+          onClick={() => {
+            setSelectedTool(0);
+            DToolInst.selectTool(0);
+            drawingCanvas.current!.style.cursor =
+              "url('/assets/images/pencil.png'), default";
+          }}
+          image="/assets/images/pencil.png"
+        />
+        <CircleButton
+          onClick={() => {
+            setSelectedTool(1);
+            DToolInst.selectTool(1);
+            drawingCanvas.current!.style.cursor =
+              "url('/assets/images/paintbucket.png'), default";
+          }}
+          image="/assets/images/paintbucket.png"
+        />
+        <CircleButton
+          onClick={() => {
+            DToolInst.selectColor(null);
+            drawingCanvas.current!.style.cursor =
+              "url('/assets/images/eraser.png'), default";
+          }}
+          image="/assets/images/eraser.png"
+        />
+      </div>
+      <div className="bottom space-x-8">
+        <CircleButton
+          onClick={() => {
+            DToolInst.eraseCurrentLayer();
+          }}
+          name="clear"
+        />
+        <CircleButton
+          onClick={() => {
+            DToolInst.undoredo(-1);
+          }}
+          image="/assets/images/undo.png"
+        />
+
+        <CircleButton
+          onClick={() => {
+            DToolInst.undoredo(1);
+          }}
+          image="/assets/images/redo.png"
+        />
+      </div> */}
     </Suspense>
   );
 };
