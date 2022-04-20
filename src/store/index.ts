@@ -86,9 +86,9 @@ export const useMachineStore = create<MachineStore>(
 
     duckFilters:{
       all: true,
-      available: false,
-      sold: false,
-      mine: false,
+      available: true,
+      sold: true,
+      mine: true,
       custom: false,
       hideUI: false,
     },

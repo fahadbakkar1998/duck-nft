@@ -1,4 +1,5 @@
 
+import useMachineStore from '../../../../../store';
 import { FC } from 'react';
 import Modal from '../../Modal';
 
@@ -6,18 +7,6 @@ interface FiltersModalProps {
   open: boolean;
   onClose: () => void;
 }
-
-/*
-  Filters include:
-    All Ducks
-    Available Ducks
-    Sold Ducks
-    My Ducks
-    Custom Ducks
-
-  Display Options:
-    Hide stuff
-*/
 
 interface CheckBoxProps {
   isChecked: boolean;
@@ -30,7 +19,7 @@ const CheckBox: FC<CheckBoxProps> = ({isChecked, onToggle}) => {
       onClick={onToggle}    
       className={`
         bg-white aspect-square 
-        w-6 cursor-pointer
+        w-4 cursor-pointer
         ${ isChecked ? 'opacity-100' : 'opacity-20'}
       `} 
     />    
@@ -38,37 +27,53 @@ const CheckBox: FC<CheckBoxProps> = ({isChecked, onToggle}) => {
 }
 
 const FiltersModal: FC<FiltersModalProps> = ({open, children, onClose}) => {
-
+  const { duckFilters, setDuckFilters } = useMachineStore();
+  const { available, sold, mine, custom } = duckFilters; 
   
+  const toggleFilter = (filterName: string) => {
+    if (duckFilters[filterName] !== undefined) {
+      const newFilters = {...duckFilters};
+      newFilters[filterName] = !newFilters[filterName];
+      setDuckFilters(newFilters);
+    }
+  }
 
   return (
     <Modal open={open} onClose={onClose}>
-      <div className="border-b-4 border-dashed mb-4">Narrow Your Search</div>
-      <div className="grid grid-cols-2 pixel-font gap-2">
+      <div className="border-b-4 border-dashed mb-4">DUCK FILTERS</div>
+      <div className="grid grid-cols-2 pixel-font gap-2 text-base w-full">
         <div className="flex items-center">
-          All Ducks
+          Available
         </div>
         <div className="flex items-center justify-end">
-          <CheckBox isChecked={false} onToggle={() => {}} />
+          <CheckBox isChecked={available} onToggle={() => toggleFilter('available')} />
         </div>
         <div className="flex items-center">
-          All Ducks
+          Sold
         </div>
         <div className="flex items-center justify-end">
-          <CheckBox isChecked={false} onToggle={() => {}} />
+          <CheckBox isChecked={sold} onToggle={() => toggleFilter('sold')} />
         </div>
         <div className="flex items-center">
-          All Ducks
+          Custom Ducks
         </div>
         <div className="flex items-center justify-end">
-          <CheckBox isChecked={false} onToggle={() => {}} />
+          <CheckBox isChecked={custom} onToggle={() => toggleFilter('custom')} />
         </div>
         <div className="flex items-center">
-          All Ducks
+          My Ducks
         </div>
-        <div className="flex items-center justify-end">
-          <CheckBox isChecked={false} onToggle={() => {}} />
+        <div className="flex items-center justify-end ">
+          <CheckBox isChecked={mine} onToggle={() => toggleFilter('mine')} />
         </div>
+
+        {/* <div className="flex items-center justify-between w-full bg-red-200">
+          <div>
+            Hide UI
+          </div>
+          <CheckBox isChecked={false} onToggle={() => {}} />          
+        </div> */}
+        
 
       </div>
 
