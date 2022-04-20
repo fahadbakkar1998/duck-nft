@@ -1,35 +1,43 @@
 import { useRef, useState, useEffect } from "react";
 import DuckCard from "../../../DuckCard/DuckCard";
 import useMachineStore from "../../../../store";
+import { MachineMode } from "../../../../utils/constants";
 import "./index.scss";
 import Modal from "../Modal";
 import FiltersModal from "./FiltersModal";
+import cn from "classnames";
 
-const HomeScreen = (props: any) => {  
-  const { tozziDuckData, isSwitchingModes } = useMachineStore();  
+const HomeScreen = (props: any) => {
+  const { ducks, isSwitchingModes, currentMode } = useMachineStore();
   const [showFilters, setShowFilters] = useState(false);
-  const [filterTozziDuckData] = useState<any>(tozziDuckData);
+  const [filterTozziDuckData] = useState<any>(ducks);
   const [filterCustomDuckData] = useState<any>([]);
 
   return (
-    <div className="main">
-      <div className={`mainScreen overflow-scroll w-full`}>
-        <FiltersModal 
-          open={showFilters} 
-          onClose={() => { setShowFilters(false) }} 
+    <div
+      className={cn("main", {
+        active: currentMode === MachineMode.Shopping,
+      })}
+    >
+      <div className={cn("mainScreen overflow-scroll w-full")}>
+        <FiltersModal
+          open={showFilters}
+          onClose={() => {
+            setShowFilters(false);
+          }}
         />
-        {!isSwitchingModes && (     
+        {!isSwitchingModes && (
           <>
-            <div 
-              style={{ borderRadius: '15%' }} 
-              className="pointer-events-none absolute w-full  z-30  inner-shadow h-full" 
-            />                                    
+            <div
+              style={{ borderRadius: "15%" }}
+              className="pointer-events-none absolute w-full  z-30  inner-shadow h-full"
+            />
 
-            <div 
-              className="absolute -bottom-14 left-0 w-full flex justify-center"
-            >
-              <div 
-                onClick={() => { setShowFilters(true) }}
+            <div className="absolute -bottom-14 left-0 w-full flex justify-center">
+              <div
+                onClick={() => {
+                  setShowFilters(true);
+                }}
                 className="bg-red-500 p-2 cursor-pointer"
               >
                 FILTERS
@@ -37,13 +45,17 @@ const HomeScreen = (props: any) => {
             </div>
 
             {/* DUCK GRID   */}
-            <div className="relative w-full h-full">              
+            <div
+              className={cn("relative w-full h-full duck-grid", {
+                overflow:
+                  !isSwitchingModes && currentMode === MachineMode.Shopping,
+              })}
+            >
               <div className="grid grid-cols-3 gap-1">
-                
                 {filterTozziDuckData.map((item: any) => {
                   let img = require(`../../../../assets/img/ducks/crypto_duck_${
                     parseInt(item.id) + 1
-                  }.svg`);              
+                  }.svg`);
                   return <DuckCard key={item.id} img={img} data={item} />;
                 })}
                 {filterCustomDuckData.map((item: any) => {
@@ -58,10 +70,10 @@ const HomeScreen = (props: any) => {
                 })}
               </div>
             </div>
-          </>   
+          </>
         )}
-      </div>         
-    </div>    
+      </div>
+    </div>
   );
 };
 

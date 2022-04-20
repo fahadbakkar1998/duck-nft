@@ -89,11 +89,11 @@ export default AltScreen;
                     Go Back
                   </div>
                 ) : currentTozziDuckId >= 0 &&
-                  tozziDuckData[currentTozziDuckId] &&
-                  tozziDuckData[currentTozziDuckId].owner ? (
+                  ducks[currentTozziDuckId] &&
+                  ducks[currentTozziDuckId].owner ? (
                   <div className="duck-info">
                     <div className="owner-address">
-                      {tozziDuckData[currentTozziDuckId].owner}
+                      {ducks[currentTozziDuckId].owner}
                     </div>
                   </div>
                 ) : currentCustomDuckId >= tozziDuckNum &&

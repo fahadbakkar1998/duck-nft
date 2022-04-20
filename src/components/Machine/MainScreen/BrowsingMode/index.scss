@@ -1,15 +1,23 @@
-.main {  
-  display: flex;
+.main {
+  display: none;
   flex-direction: column;
-  gap: 10px;  
+  gap: 10px;
   border: 0;
-  .mainScreen {      
-    border-radius: 15%;  
-    border: 2px solid rgba(255, 255, 255, 0.383);  
+  &.active {
+    display: flex;
+  }
+  .mainScreen {
+    border-radius: 15%;
+    border: 2px solid rgba(255, 255, 255, 0.383);
     width: 435px;
     height: 435px;
     background-color: rgb(8, 8, 8);
-      
+    .duck-grid {
+      overflow: hidden;
+      &.overflow {
+        overflow: auto;
+      }
+    }
   }
   .footer {
     position: absolute;

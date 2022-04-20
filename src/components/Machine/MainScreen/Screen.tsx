@@ -11,29 +11,31 @@ interface ScreenProps {
   screenInverted: boolean;
 }
 
-const Screen: FC<ScreenProps> = ({screenInverted}) => {
+const Screen: FC<ScreenProps> = ({ screenInverted }) => {
   const currentState = useMachineStore((state) => state);
   const { currentMode } = currentState;
 
-  return (    
+  return (
     <Html
       style={{ pointerEvents: "auto" }}
       distanceFactor={2.4}
       position={[0.0, 0.0, 0.0]}
       rotation={
-          screenInverted
-            ? [Math.PI / 2, -Math.PI * 2, Math.PI / 2]
-            : [Math.PI / 2, Math.PI, Math.PI / 2]
+        screenInverted
+          ? [Math.PI / 2, -Math.PI * 2, Math.PI / 2]
+          : [Math.PI / 2, Math.PI, Math.PI / 2]
       }
       transform
       occlude
-    >      
-      { [MachineMode.Off, MachineMode.Syncing].includes(currentMode) && <WalletConnect /> }
-      { currentMode === MachineMode.Shopping && <BrowsingMode /> }
-      { currentMode === MachineMode.Customization && <DrawingTool /> }
-      { currentMode === MachineMode.Admin && <AdminMain /> }
+    >
+      {[MachineMode.Off, MachineMode.Syncing].includes(currentMode) && (
+        <WalletConnect />
+      )}
+      <BrowsingMode />
+      <DrawingTool />
+      <AdminMain />
     </Html>
-  );  
-}
+  );
+};
 
 export default Screen;

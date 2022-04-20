@@ -8,22 +8,22 @@ import CheckBox from "../common/CheckBox";
 import cn from "classnames";
 
 const AdminMain = (props: any) => {
-  const machineSetting = useMachineStore((state) => state.machineSetting);
-  const setMachineSetting = useMachineStore((state) => state.setMachineSetting);
+  const machineConfig = useMachineStore((state) => state.machineConfig);
+  const setMachineConfig = useMachineStore((state) => state.setMachineConfig);
   const [tozziDucksEnabled, setTozziDucksEnabled] = useState<boolean>(
-    machineSetting.tozziDucksEnabled
+    machineConfig.tozziDucksEnabled
   );
   const [tozziDuckPrice, setTozziDuckPrice] = useState<any>(
-    machineSetting.tozziDuckPrice
+    machineConfig.tozziDuckPrice
   );
   const [customDucksEnabled, setCustomDucksEnabled] = useState<boolean>(
-    machineSetting.customDucksEnabled
+    machineConfig.customDucksEnabled
   );
   const [customDuckPrice, setCustomDuckPrice] = useState<any>(
-    machineSetting.customDuckPrice
+    machineConfig.customDuckPrice
   );
   const [maxCustomDucks, setMaxCustomDucks] = useState<any>(
-    machineSetting.maxCustomDucks
+    machineConfig.maxCustomDucks
   );
   const [withdrawAmount, setWithdrawAmount] = useState<any>(0);
   const setProcessing = useMachineStore((state) => state.setProcessing);
@@ -177,13 +177,13 @@ const AdminMain = (props: any) => {
               };
               setProcessing(true);
               setTransactionStatus("processing...");
-              setShowTxStatus(true);
+              // setShowTxStatus(true);
               const res = await saveMachineSetting({
-                machineSetting: setting,
+                machineConfig: setting,
               });
               if (res.success) {
-                setMachineSetting({
-                  ...machineSetting,
+                setMachineConfig({
+                  ...machineConfig,
                   ...setting,
                 });
               }
@@ -197,7 +197,7 @@ const AdminMain = (props: any) => {
 
         <div className="flex items-center justify-between space-x-10 mt-2">
           <h2 className="flex justify-start items-center">SYSTEM BALANCE:</h2>
-          <div>{machineSetting.balance} ETH</div>
+          <div>{machineConfig.balance} ETH</div>
         </div>
         <div className="_row flex-end">
           <div
@@ -207,19 +207,19 @@ const AdminMain = (props: any) => {
               setWithdrawAmount(correctWithdrawAmount);
               if (
                 correctWithdrawAmount <= 0 ||
-                correctWithdrawAmount > machineSetting.balance
+                correctWithdrawAmount > machineConfig.balance
               )
                 return;
               setProcessing(true);
               setTransactionStatus("processing...");
-              setShowTxStatus(true);
+              // setShowTxStatus(true);
               const res = await withdraw({
                 amount: correctWithdrawAmount,
               });
               if (res.success) {
-                setMachineSetting({
-                  ...machineSetting,
-                  balance: machineSetting.balance - correctWithdrawAmount,
+                setMachineConfig({
+                  ...machineConfig,
+                  balance: machineConfig.balance - correctWithdrawAmount,
                 });
               }
               setTransactionStatus(res.status);
@@ -284,7 +284,7 @@ const AdminMain = (props: any) => {
         </div>
         <div className="_group">
           <div className="_row">
-            <div className="_small">Balance: {machineSetting.balance}</div>
+            <div className="_small">Balance: {machineConfig.balance}</div>
             <div className="_row-sub">
               Withdraw:
               <div className="_input-group">
@@ -308,19 +308,19 @@ const AdminMain = (props: any) => {
                 setWithdrawAmount(correctWithdrawAmount);
                 if (
                   correctWithdrawAmount <= 0 ||
-                  correctWithdrawAmount > machineSetting.balance
+                  correctWithdrawAmount > machineConfig.balance
                 )
                   return;
                 setProcessing(true);
                 setTransactionStatus("processing...");
-                setShowTxStatus(true);
+                // setShowTxStatus(true);
                 const res = await withdraw({
                   amount: correctWithdrawAmount,
                 });
                 if (res.success) {
-                  setMachineSetting({
-                    ...machineSetting,
-                    balance: machineSetting.balance - correctWithdrawAmount,
+                  setMachineConfig({
+                    ...machineConfig,
+                    balance: machineConfig.balance - correctWithdrawAmount,
                   });
                 }
                 setTransactionStatus(res.status);

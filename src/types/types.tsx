@@ -1,10 +1,11 @@
-
 export interface DuckData {
-  id: number;
-  img: string;
-  owner?: string;
-  proof: string[];
-  webp: string;
+  id: number; // token ID
+  proof: string[]; // merkle proof
+  webp: string; // base64 image data
+  mintTime: number; // timestamp when minted or 0
+  owner: string; // account or ""
+  salePrice: number; // sale price in ETH or 0
+  isCustom: boolean; // defaults to false
 }
 
 export interface DuckCardProps {

@@ -37,18 +37,18 @@ export default class DTool {
     this.maxHistory = 20;
     this.currentHistoryPos = 0;
     this.disableDrawing = false;
+    this.layersSettings = [];
   }
   init(layersSettings, historyChangeCallback) {
     this.historyChangeCallback = historyChangeCallback;
     const c = document.getElementById("drawingtool_canvas");
     if (!c) {
-      console.log("loop");
       setTimeout(() => {
         this.init(layersSettings, historyChangeCallback);
       }, 100);
       return;
     }
-    this.layersInit(layersSettings);
+    this.layersSettings = [...layersSettings];
     this.c = c;
 
     this.size = this.pixelSize * this.canvasSize;
@@ -59,9 +59,9 @@ export default class DTool {
 
     this.initEvents();
     this.eraseCurrentLayer(); // ron
-    this.draw();
   }
   layersInit(layersSettings) {
+    this.layers = [];
     for (let i = 0; i < layersSettings.length; i++) {
       const settings = layersSettings[i];
       const inMemoryCanvas = document.createElement("canvas");
@@ -87,8 +87,9 @@ export default class DTool {
     if (dir === 1 && !curBtnStates[1]) return;
     this.currentHistoryPos -= dir;
     if (this.currentHistoryPos <= 0) this.currentHistoryPos = 0;
-    if (this.currentHistoryPos >= this.history.length)
+    if (this.currentHistoryPos >= this.history.length) {
       this.currentHistoryPos = this.history.length - 1;
+    }
     _.each(this.layers, (l, i) => {
       l.ctx.putImageData(this.history[this.currentHistoryPos][i], 0, 0);
     });
@@ -150,11 +151,9 @@ export default class DTool {
     }
   }
   eraseCurrentLayer() {
+    this.layersInit(this.layersSettings);
     const layer = this.layers[this.selectedLayerIndex];
     layer.ctx.clearRect(0, 0, layer.ctx.canvas.width, layer.ctx.canvas.height);
-    this.draw();
-    this.history = []; // ron
-    this.currentHistoryPos = 0; // ron
     this.historyChangeCallback(this.getURButtonsState()); // ron
   }
   mouseUpHandler(e) {
@@ -164,14 +163,27 @@ export default class DTool {
   }
   getCorrectPos(e) {
     const rect = e.target.getBoundingClientRect();
-    const mx = e.clientX - rect.left;
-    const my = e.clientY - rect.top;
+    const style = e.target.currentStyle || window.getComputedStyle(e.target);
+    const borderLeftWidth = parseInt(style.borderLeftWidth);
+    const borderRightWidth = parseInt(style.borderRightWidth);
+    const borderTopWidth = parseInt(style.borderTopWidth);
+    const borderBottomWidth = parseInt(style.borderBottomWidth);
+    const mx = e.clientX - rect.left - borderLeftWidth;
+    const my = e.clientY - rect.top - borderTopWidth;
     let px = Math.floor(
-      mx / (this.c.getBoundingClientRect()["width"] / this.canvasSize)
+      mx /
+        ((this.c.getBoundingClientRect()["width"] -
+          borderLeftWidth -
+          borderRightWidth) /
+          this.canvasSize)
     );
     px = Math.min(Math.max(0, px), this.canvasSize - 1);
     let py = Math.floor(
-      my / (this.c.getBoundingClientRect()["width"] / this.canvasSize)
+      my /
+        ((this.c.getBoundingClientRect()["height"] -
+          borderTopWidth -
+          borderBottomWidth) /
+          this.canvasSize)
     );
     py = Math.min(Math.max(0, py), this.canvasSize - 1);
     return { x: px, y: py };

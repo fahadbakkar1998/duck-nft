@@ -6,7 +6,10 @@ import {
   colors,
 } from "../utils/constants";
 import DTool from "./DTool";
-import ducks from "../utils/duck-data.json";
+import jsonDucks from "../utils/duck-data.json";
+import { DuckData } from "../types/types";
+
+console.log("jsonDucks: ", jsonDucks);
 
 type MachineStore = {
   // main
@@ -30,26 +33,26 @@ type MachineStore = {
   setSelectedLayerIndex: (val: number) => void;
   selectedColorIndex: number;
   setSelectedColorIndex: (val: number) => void;
-  selectedColor: string | null;
-  setSelectedColor: (val: string | null) => void;
+  selectedColor: string;
+  setSelectedColor: (val: string) => void;
   selectedTool: number;
   setSelectedTool: (val: number) => void;
   historyButtonsState: any;
   setHistoryButtonsState: (val: any) => void;
 
   // contract
-  machineSetting: any;
-  setMachineSetting: (val: any) => void;
-  tozziDuckData: Array<any>;
-  setTozziDuckData: (val: Array<any>) => void;
+  machineConfig: any;
+  setMachineConfig: (val: any) => void;
+  ducks: Array<any>;
+  setDucks: (val: Array<any>) => void;
   customDuckData: Array<any>;
   setCustomDuckData: (val: Array<any>) => void;
 
   // contract
   processing: boolean;
   setProcessing: (val: boolean) => void;
-  address: string | null;
-  setAddress: (val: string | null) => void;
+  address: string;
+  setAddress: (val: string) => void;
   transactionStatus: any;
   setTransactionStatus: (val: any) => void;
   showTxStatus: boolean;
@@ -93,10 +96,10 @@ export const useMachineStore = create<MachineStore>(
             nextMode = MachineMode.Customization;
             break;
           case MachineMode.Customization:
-            nextMode = MachineMode.Admin
+            nextMode = MachineMode.Admin;
             break;
           case MachineMode.Admin:
-            nextMode = MachineMode.Shopping
+            nextMode = MachineMode.Shopping;
             break;
           default:
             nextMode = currentMode;
@@ -104,7 +107,7 @@ export const useMachineStore = create<MachineStore>(
         return { currentMode: nextMode, isSwitchingModes: true };
       });
     },
-    
+
     currentTozziDuckId: 0,
     setCurrentTozziDuckId: (id: number): void => {
       set((state) => {
@@ -137,7 +140,7 @@ export const useMachineStore = create<MachineStore>(
     },
 
     selectedColor: colors[defaultLayerIndex],
-    setSelectedColor: (val: string | null): void => {
+    setSelectedColor: (val: string): void => {
       set({ selectedColor: val });
     },
 
@@ -152,15 +155,23 @@ export const useMachineStore = create<MachineStore>(
     },
 
     // duck data
-    machineSetting: {},
-    setMachineSetting: (val: any): void => {
-      set({ machineSetting: val });
+    machineConfig: {
+      tozziDuckPrice: 0,
+      customDuckPrice: 0,
+      maxCustomDucks: 0,
+      tozziDucksEnabled: false,
+      customDucksEnabled: false,
+      balance: 0,
+      burnWindow: 0,
+      owner: "",
+    },
+    setMachineConfig: (val: any): void => {
+      set({ machineConfig: val });
     },
 
-    // duck data
-    tozziDuckData: ducks,
-    setTozziDuckData: (val: Array<any>): void => {
-      set({ tozziDuckData: val });
+    ducks: jsonDucks,
+    setDucks: (val: Array<any>): void => {
+      set({ ducks: val });
     },
 
     customDuckData: [],
@@ -174,7 +185,7 @@ export const useMachineStore = create<MachineStore>(
     },
 
     address: "",
-    setAddress: (val: string | null): void => {
+    setAddress: (val: string): void => {
       set({ address: val });
     },
 

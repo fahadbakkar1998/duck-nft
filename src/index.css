@@ -26,6 +26,16 @@ code {
     monospace;
 }
 
+.react-responsive-modal-overlay {
+  background-color: transparent !important;
+}
+
+.react-responsive-modal-modal {
+  box-shadow: none !important;
+  background-color: #222424 !important;
+}
+
+
 *::-webkit-scrollbar {
   width: 0.4vw;
 }

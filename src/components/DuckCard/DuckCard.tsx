@@ -6,7 +6,7 @@ import { DuckCardProps } from "../../types/types";
 
 const DuckCard: FC<DuckCardProps> = ({img, data, isCustom = false}) => {
   const {
-    tozziDuckData,
+    ducks,
     currentTozziDuckId,
     setCurrentTozziDuckId,
     customDuckData,
