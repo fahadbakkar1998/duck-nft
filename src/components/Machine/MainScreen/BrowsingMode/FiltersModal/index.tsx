@@ -19,15 +19,6 @@ interface FiltersModalProps {
     Hide stuff
 */
 
-interface FilterState {
-  all: boolean;
-  available: boolean;
-  sold: boolean;
-  mine: boolean;
-  custom: boolean;
-  hideUI: boolean;
-}
-
 interface CheckBoxProps {
   isChecked: boolean;
   onToggle: () => void;  

@@ -13,3 +13,12 @@ export interface DuckCardProps {
   data: DuckData;
   isCustom?: boolean;
 }
+
+export interface DuckFilters {
+  all: boolean;
+  available: boolean;
+  sold: boolean;
+  mine: boolean;
+  custom: boolean;
+  hideUI: boolean;
+}

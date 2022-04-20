@@ -7,7 +7,7 @@ import {
 } from "../utils/constants";
 import DTool from "./DTool";
 import jsonDucks from "../utils/duck-data.json";
-import { DuckData } from "../types/types";
+import { DuckData, DuckFilters } from "../types/types";
 
 console.log("jsonDucks: ", jsonDucks);
 
@@ -26,6 +26,8 @@ type MachineStore = {
   setCurrentAdminDuckId: (val: number) => void;
   altIsStatic: boolean;
   changeChannel: (duration: number) => void;
+  duckFilters: DuckFilters;
+  setDuckFilters: (filters: DuckFilters) => void;
 
   // color picker
   DToolInst: DTool;
@@ -80,6 +82,19 @@ export const useMachineStore = create<MachineStore>(
       setTimeout(() => {
         set({ altIsStatic: false});
       }, duration)
+    },
+
+    duckFilters:{
+      all: true,
+      available: false,
+      sold: false,
+      mine: false,
+      custom: false,
+      hideUI: false,
+    },
+
+    setDuckFilters: (filters: DuckFilters): void => {
+      set({duckFilters: filters})
     },
 
     setIsSwitchingModes: (isSwitching: boolean): void => {
