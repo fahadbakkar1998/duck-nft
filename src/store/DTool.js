@@ -37,6 +37,7 @@ export default class DTool {
     this.maxHistory = 20;
     this.currentHistoryPos = 0;
     this.disableDrawing = false;
+    this.layersSettings = [];
   }
   init(layersSettings, historyChangeCallback) {
     this.historyChangeCallback = historyChangeCallback;
@@ -47,7 +48,7 @@ export default class DTool {
       }, 100);
       return;
     }
-    this.layersInit(layersSettings);
+    this.layersSettings = [...layersSettings];
     this.c = c;
 
     this.size = this.pixelSize * this.canvasSize;
@@ -58,9 +59,9 @@ export default class DTool {
 
     this.initEvents();
     this.eraseCurrentLayer(); // ron
-    this.draw();
   }
   layersInit(layersSettings) {
+    this.layers = [];
     for (let i = 0; i < layersSettings.length; i++) {
       const settings = layersSettings[i];
       const inMemoryCanvas = document.createElement("canvas");
@@ -86,8 +87,9 @@ export default class DTool {
     if (dir === 1 && !curBtnStates[1]) return;
     this.currentHistoryPos -= dir;
     if (this.currentHistoryPos <= 0) this.currentHistoryPos = 0;
-    if (this.currentHistoryPos >= this.history.length)
+    if (this.currentHistoryPos >= this.history.length) {
       this.currentHistoryPos = this.history.length - 1;
+    }
     _.each(this.layers, (l, i) => {
       l.ctx.putImageData(this.history[this.currentHistoryPos][i], 0, 0);
     });
@@ -149,11 +151,9 @@ export default class DTool {
     }
   }
   eraseCurrentLayer() {
+    this.layersInit(this.layersSettings);
     const layer = this.layers[this.selectedLayerIndex];
     layer.ctx.clearRect(0, 0, layer.ctx.canvas.width, layer.ctx.canvas.height);
-    this.draw();
-    this.history = []; // ron
-    this.currentHistoryPos = 0; // ron
     this.historyChangeCallback(this.getURButtonsState()); // ron
   }
   mouseUpHandler(e) {

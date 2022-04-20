@@ -30,6 +30,7 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
     selectedLayerIndex,
     setSelectedTool,
     setHistoryButtonsState,
+    selectedColor,
     setSelectedColor,
   } = currentState;
 
@@ -82,6 +83,7 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
             onClick={() => {
               setSelectedTool(0);
               DToolInst.selectTool(0);
+              DToolInst.selectColor(selectedColor);
               drawingCanvas.current!.style.cursor =
                 "url('/assets/images/pencil.png'), default";
             }}
@@ -132,55 +134,6 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
           />
         </div>
       </div>
-      {/* <div className="right">
-        <CircleButton
-          onClick={() => {
-            setSelectedTool(0);
-            DToolInst.selectTool(0);
-            drawingCanvas.current!.style.cursor =
-              "url('/assets/images/pencil.png'), default";
-          }}
-          image="/assets/images/pencil.png"
-        />
-        <CircleButton
-          onClick={() => {
-            setSelectedTool(1);
-            DToolInst.selectTool(1);
-            drawingCanvas.current!.style.cursor =
-              "url('/assets/images/paintbucket.png'), default";
-          }}
-          image="/assets/images/paintbucket.png"
-        />
-        <CircleButton
-          onClick={() => {
-            DToolInst.selectColor(null);
-            drawingCanvas.current!.style.cursor =
-              "url('/assets/images/eraser.png'), default";
-          }}
-          image="/assets/images/eraser.png"
-        />
-      </div>
-      <div className="bottom space-x-8">
-        <CircleButton
-          onClick={() => {
-            DToolInst.eraseCurrentLayer();
-          }}
-          name="clear"
-        />
-        <CircleButton
-          onClick={() => {
-            DToolInst.undoredo(-1);
-          }}
-          image="/assets/images/undo.png"
-        />
-
-        <CircleButton
-          onClick={() => {
-            DToolInst.undoredo(1);
-          }}
-          image="/assets/images/redo.png"
-        />
-      </div> */}
     </Suspense>
   );
 };
