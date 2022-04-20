@@ -39,7 +39,7 @@ function App() {
         <div className="z-30 relative mx-auto">(Tozzi ducks&copy;)</div>
       </div>
       
-      <div className="machine-container max-w-screen-xl">
+      <div className="machine-container">
         <img className="background" src={bgImg} alt=""></img>
         <Canvas
           orthographic

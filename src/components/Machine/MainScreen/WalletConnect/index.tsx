@@ -50,8 +50,7 @@ const WalletConnect = (props: any) => {
         setCurrentMode(MachineMode.Syncing);
         await initInteract();
         const machineConfig = await fetchMachineConfig();
-        setMachineConfig(machineConfig);
-        console.log("WalletConnect ducks: ", ducks);
+        setMachineConfig(machineConfig);        
         const newDucks = await fetchDucks(ducks);
         setDucks(newDucks);
         setCurrentMode(MachineMode.Shopping);

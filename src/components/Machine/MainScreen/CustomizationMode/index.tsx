@@ -58,8 +58,7 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
     toggleEyeDrop(false);
   };
 
-  useEffect(() => {
-    console.log("DrawingTool useEffect");
+  useEffect(() => {    
     DToolInst.init(layers, setHistoryButtonsState);
     DToolInst.selectColor(colors[selectedColorIndex]);
     DToolInst.selectLayer(selectedLayerIndex);

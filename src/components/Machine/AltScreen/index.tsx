@@ -23,8 +23,7 @@ const AltScreen: () => JSX.Element = () => {
   useEffect(() => {
     if (altIsStatic && videoRef.current) {
       const video: HTMLVideoElement = videoRef.current;
-      video.currentTime = Math.random() * 15;
-      console.log(video.currentTime);
+      video.currentTime = Math.random() * 15;      
       videoRef.current.play();
     } else {
       videoRef.current?.pause();

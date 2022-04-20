@@ -50,8 +50,7 @@ const Admin: () => JSX.Element = () => {
   useEffect(() => {
     const SCDD = customDuckData.sort(
       (a, b) => a.restTimestamp - b.restTimestamp
-    );
-    // console.log(SCDD);
+    );    
     setSortedCustomDuckData(SCDD);
     SCDD.length && setCurrentAdminDuckId(SCDD[0].id);
   }, [customDuckData, setCurrentAdminDuckId]);

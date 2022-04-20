@@ -55,8 +55,7 @@ const min = viewport.width;
                 const res = await burnRenegadeDuck({
                   duckId: currentAdminDuckId,
                   reason: reasonRef.current.value,
-                });
-                // console.log("burnRenegadeDuck result: ", res);
+                });                
                 if (res.success) {
                   // remove burned duck data.
                   const filterCustomDuckData = customDuckData.filter(
