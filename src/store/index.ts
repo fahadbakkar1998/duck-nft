@@ -89,7 +89,7 @@ export const useMachineStore = create<MachineStore>(
       available: true,
       sold: true,
       mine: true,
-      custom: false,
+      custom: true,
       hideUI: false,
     },
 

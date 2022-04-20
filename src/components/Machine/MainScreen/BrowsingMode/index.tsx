@@ -5,11 +5,12 @@ import { MachineMode } from "../../../../utils/constants";
 import "./index.scss";
 import FiltersModal from "./FiltersModal";
 import cn from "classnames";
+import { useFilteredDucks } from "../../../../hooks";
 
 const HomeScreen = (props: any) => {
   const { ducks, isSwitchingModes, currentMode } = useMachineStore();
-  const [showFilters, setShowFilters] = useState(false);
-  const [filterTozziDuckData] = useState<any>(ducks);
+  const [showFilters, setShowFilters] = useState(false);  
+  const filteredDucks = useFilteredDucks();
 
   return (
     <div
@@ -50,7 +51,7 @@ const HomeScreen = (props: any) => {
               })}
             >
               <div className="grid grid-cols-3 gap-1">
-                {filterTozziDuckData.map((item: any) => {
+                {filteredDucks.map((item: any) => {
                   let img = require(`../../../../assets/img/ducks/crypto_duck_${
                     parseInt(item.id) + 1
                   }.svg`);
