@@ -31,12 +31,16 @@ function App() {
         testy-font text-[100pt] phat-purple 
         `}
       >
-        {/* <div className="w-[640px] left-4 h-24 z-0 absolute bg-green-100 rounded-full overflow-hidden">
-          <video className="z-10" playsInline autoPlay muted loop src="/assets/video/static-wide.mp4" />
-          
-        </div> */}
-        {/* <div className="w-[640px] left-4 h-24 opacity-30  absolute z-10 bg-green-200 rounded-full overflow-hidden" />   */}
-        <div className="z-30 relative mx-auto">(Tozzi ducks&copy;)</div>
+        <div
+        // border-2 border-orange-400 shadow-lg bg-orange-500  
+          className={`
+            mt-40 z-30 relative mx-auto  
+            
+            bg-opacity-20 rounded-full
+          `}>
+            Tozzi ducks
+          <span className="text-7xl copy-text ">&copy;</span>
+        </div>
       </div>
       
       <div className="machine-container">

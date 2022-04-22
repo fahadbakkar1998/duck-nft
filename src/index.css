@@ -82,7 +82,17 @@ code {
 @font-face {
   font-family: "testy";
   src: local("testy"),
-    url("./assets/font/barcade.otf") format("opentype");
+  /* url("./assets/font/ducky.ttf") format("truetype"); */
+  /* url("./assets/font/62DRAGZ.otf") format("opentype"); */
+  /* url("./assets/font/RoughShark.ttf") format("truetype"); */
+  url("./assets/font/Cheap-Motel.ttf") format("truetype");
+  /* url("./assets/font/barcade.otf") format("opentype"); */
+}
+
+@font-face {
+  font-family: "copy";
+  src: local("copy"),  
+  url("./assets/font/Gretoon.ttf") format("truetype");  
 }
 
 .absolute-center {
