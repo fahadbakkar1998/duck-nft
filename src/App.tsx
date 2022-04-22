@@ -39,13 +39,13 @@ function App() {
           </Suspense>
         </Canvas> */}
         <Canvas
-          // orthographic
-          camera={{ zoom: 1, position: [0, 0, 90] }}
+          orthographic
+          camera={{ zoom: 100, position: [0, 0, 200] }}
           shadows
           onCreated={(state) => state.gl.clearColor()}
         >
           <Suspense fallback={null}>
-            <pointLight intensity={2} position={[55, 5, 10]} />
+            <pointLight intensity={5} position={[55, 5, 10]} />
             {/* <OrbitControls /> */}
             <MachineLayout />
           </Suspense>
