@@ -38,8 +38,7 @@ const ButtonView = () => {
     // setShowTxStatus(true);
     const res = await mintTozziDuck({
       ...ducks[currentTozziDuckId],
-    });
-    console.log('dkdkdk')
+    });    
     if (res.success) {
       const tempDuckData = [...ducks];
       tempDuckData[currentTozziDuckId].owner = address;
@@ -54,16 +53,14 @@ const ButtonView = () => {
   };
 
   const doMintCustomDuck = async () => {
-    // console.log("before minting custom duck data: ", customDuckData);
     setProcessing(true);
-    const base64data = await DToolInst.getWebp();
-    // console.log("base64data: ", base64data);
+    const base64data = await DToolInst.getWebp();    
     setTransactionStatus("processing...");
     // setShowTxStatus(true);
     const res = await mintCustomDuck({
       base64data,
     });
-    // console.log("custom duck minting result: ", res);
+  
     if (res.success) {
       setCustomDuckData([
         ...customDuckData,

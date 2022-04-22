@@ -7,7 +7,7 @@ import {
 } from "../utils/constants";
 import DTool from "./DTool";
 import jsonDucks from "../utils/duck-data.json";
-import { DuckData } from "../types/types";
+import { DuckData, DuckFilters } from "../types/types";
 
 console.log("jsonDucks: ", jsonDucks);
 
@@ -25,7 +25,9 @@ type MachineStore = {
   currentAdminDuckId: number;
   setCurrentAdminDuckId: (val: number) => void;
   altIsStatic: boolean;
-  changeChannel: (duration?: number) => void;
+  changeChannel: (duration: number) => void;
+  duckFilters: DuckFilters;
+  setDuckFilters: (filters: DuckFilters) => void;
 
   // color picker
   DToolInst: DTool;
@@ -75,11 +77,24 @@ export const useMachineStore = create<MachineStore>(
     },
 
     altIsStatic: false,
-    changeChannel: (duration = 200): void => {
+    changeChannel: (duration): void => {
       set({ altIsStatic: true });
       setTimeout(() => {
         set({ altIsStatic: false});
       }, duration)
+    },
+
+    duckFilters:{
+      all: true,
+      available: true,
+      sold: true,
+      mine: true,
+      custom: true,
+      hideUI: false,
+    },
+
+    setDuckFilters: (filters: DuckFilters): void => {
+      set({duckFilters: filters})
     },
 
     setIsSwitchingModes: (isSwitching: boolean): void => {
@@ -111,7 +126,7 @@ export const useMachineStore = create<MachineStore>(
     currentTozziDuckId: 0,
     setCurrentTozziDuckId: (id: number): void => {
       set((state) => {
-        state.changeChannel();
+        state.changeChannel(250);
         return { currentTozziDuckId: id };
       });
     },

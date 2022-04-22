@@ -3,15 +3,14 @@ import DuckCard from "../../../DuckCard/DuckCard";
 import useMachineStore from "../../../../store";
 import { MachineMode } from "../../../../utils/constants";
 import "./index.scss";
-import Modal from "../Modal";
 import FiltersModal from "./FiltersModal";
 import cn from "classnames";
+import { useFilteredDucks } from "../../../../hooks";
 
 const HomeScreen = (props: any) => {
   const { ducks, isSwitchingModes, currentMode } = useMachineStore();
-  const [showFilters, setShowFilters] = useState(false);
-  const [filterTozziDuckData] = useState<any>(ducks);
-  const [filterCustomDuckData] = useState<any>([]);
+  const [showFilters, setShowFilters] = useState(false);  
+  const filteredDucks = useFilteredDucks();
 
   return (
     <div
@@ -52,22 +51,12 @@ const HomeScreen = (props: any) => {
               })}
             >
               <div className="grid grid-cols-3 gap-1">
-                {filterTozziDuckData.map((item: any) => {
+                {filteredDucks.map((item: any) => {
                   let img = require(`../../../../assets/img/ducks/crypto_duck_${
                     parseInt(item.id) + 1
                   }.svg`);
                   return <DuckCard key={item.id} img={img} data={item} />;
-                })}
-                {filterCustomDuckData.map((item: any) => {
-                  return (
-                    <DuckCard
-                      key={item.id}
-                      img={item.image}
-                      data={item}
-                      isCustom={true}
-                    />
-                  );
-                })}
+                })}         
               </div>
             </div>
           </>
