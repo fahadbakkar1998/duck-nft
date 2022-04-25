@@ -1,86 +1,97 @@
 import { useState, useEffect } from "react";
-import { Html } from "@react-three/drei";
 import { getUFloat, getUInt } from "../../../../utils/common";
 import { saveMachineSetting, withdraw } from "../../../../utils/interact";
 import useMachineStore from "../../../../store";
-import "./index.scss";
 import CheckBox from "../../../common/CheckBox";
 import { MachineMode } from "../../../../utils/constants";
+import { MintStatus } from "../../../../types/types";
 import cn from "classnames";
+import "./index.scss";
 
-const AdminMain = (props: any) => {
-  const currentState = useMachineStore((state) => state);
+const AdminMain = () => {
   const {
     currentMode,
     machineConfig,
     setMachineConfig,
+    processing,
     setProcessing,
     setTransactionStatus,
-    setShowTxStatus,
-  } = currentState;
-  const [tozziDucksEnabled, setTozziDucksEnabled] = useState<boolean>(
-    machineConfig.tozziDucksEnabled
+    // setShowTxStatus,
+  } = useMachineStore();
+
+  const [tozziDuckMintStatus, setTozziDuckMintStatus] = useState<number>(
+    machineConfig.tozziDuckMintStatus
   );
-  const [tozziDuckPrice, setTozziDuckPrice] = useState<any>(
+  const [tozziDuckPrice, setTozziDuckPrice] = useState<number | string>(
     machineConfig.tozziDuckPrice
   );
-  const [customDucksEnabled, setCustomDucksEnabled] = useState<boolean>(
-    machineConfig.customDucksEnabled
+  const [customDuckMintStatus, setCustomDuckMintStatus] = useState<number>(
+    machineConfig.customDuckMintStatus
   );
-  const [customDuckPrice, setCustomDuckPrice] = useState<any>(
+  const [customDuckPrice, setCustomDuckPrice] = useState<number | string>(
     machineConfig.customDuckPrice
   );
-  const [maxCustomDucks, setMaxCustomDucks] = useState<any>(
+  const [maxCustomDucks, setMaxCustomDucks] = useState<number | string>(
     machineConfig.maxCustomDucks
   );
-  const [withdrawAmount, setWithdrawAmount] = useState<any>(0);
+  const [withdrawAmount, setWithdrawAmount] = useState<number | string>(0);
 
   useEffect(() => {
-    setTozziDucksEnabled(machineConfig.tozziDucksEnabled || false);
-    setTozziDuckPrice(machineConfig.tozziDuckPrice || 0);
-    setCustomDucksEnabled(machineConfig.customDucksEnabled || false);
-    setCustomDuckPrice(machineConfig.customDuckPrice || 0);
-    setMaxCustomDucks(machineConfig.maxCustomDucks || 0);
+    setTozziDuckMintStatus(machineConfig.tozziDuckMintStatus || 0);
+    setTozziDuckPrice(machineConfig.tozziDuckPrice || "");
+    setCustomDuckMintStatus(machineConfig.customDuckMintStatus || 0);
+    setCustomDuckPrice(machineConfig.customDuckPrice || "");
+    setMaxCustomDucks(machineConfig.maxCustomDucks || "");
   }, [machineConfig]);
 
   return (
     <div
       className={cn(
         "AdminMain inner-shadow pixel-font py-5 px-10 relative text-sm",
-        { active: currentMode === MachineMode.Admin }
+        {
+          active: currentMode === MachineMode.Admin,
+        }
       )}
     >
       <div className="mb-2 text-lg">SYSTEM SETTINGS</div>
-
-      <div className="tozzi-duck-settings flex flex-col space-y-2">
-        <div className="flex items-center justify-between space-x-10">
-          <h2 className="flex justify-start items-center">OWNER:</h2>
-          <div>0x00...00</div>
-          {/* <div>{machineConfig.owner}</div> */}
+      <div className="flex flex-col space-y-2">
+        <div className="flex items-center justify-between space-x-4">
+          <h2 className="flex items-center justify-start">OWNER:</h2>
+          <div
+            className="flex-1 overflow-hidden text-ellipsis"
+            title={machineConfig.owner}
+          >
+            {machineConfig.owner}
+          </div>
         </div>
-        <h2 className="flex justify-start items-center">TOZZI DUCKS:</h2>
-        <div className="flex items-center justify-between ml-4 space-x-10">
-          <div className="flex-2 flex h-full items-center">
+        <h2 className="flex items-center justify-start">TOZZI DUCKS:</h2>
+        <div className="flex items-center justify-between ml-4">
+          <div className="flex items-center h-full flex-2">
             Minting Enabled?
           </div>
-          <div className="flex flex-1">
+          <div className="relative">
             <CheckBox
-              className="mr-2 w-full text-center"
-              isSelected={tozziDucksEnabled}
-              onClick={() => setTozziDucksEnabled(true)}
+              className="w-full px-1 mr-2 text-center"
+              isSelected={tozziDuckMintStatus === MintStatus.Enabled}
+              onClick={() => setTozziDuckMintStatus(MintStatus.Enabled)}
               label="YES"
             />
             <CheckBox
-              className="w-full text-center"
-              isSelected={!tozziDucksEnabled}
-              onClick={() => setTozziDucksEnabled(false)}
+              className="w-full px-1 mr-2 text-center"
+              isSelected={tozziDuckMintStatus === MintStatus.Whitelist}
+              onClick={() => setTozziDuckMintStatus(MintStatus.Whitelist)}
+              label="WHITE"
+            />
+            <CheckBox
+              className="w-full px-1 text-center"
+              isSelected={tozziDuckMintStatus === MintStatus.Disabled}
+              onClick={() => setTozziDuckMintStatus(MintStatus.Disabled)}
               label="NO"
             />
           </div>
         </div>
-
         <div className="flex items-center justify-between ml-4">
-          <div className="flex-2 flex h-full items-center">Mint Price:</div>
+          <div className="flex items-center h-full">Mint Price:</div>
           <div className="relative">
             <input
               value={tozziDuckPrice}
@@ -99,31 +110,35 @@ const AdminMain = (props: any) => {
           </div>
         </div>
       </div>
-
-      <div className="custom-duck-settings flex flex-col space-y-2 mt-2 pt-2 pb-2 ">
-        <h2 className="flex justify-start items-center">CUSTOM DUCKS:</h2>
-        <div className="flex items-center justify-between ml-4 space-x-10">
-          <div className="flex-2 flex h-full items-center">
+      <div className="flex flex-col pt-2 pb-2 mt-2 space-y-2">
+        <h2 className="flex items-center justify-start">CUSTOM DUCKS:</h2>
+        <div className="flex items-center justify-between ml-4">
+          <div className="flex items-center h-full flex-2">
             Minting Enabled?
           </div>
-          <div className="flex flex-1">
+          <div className="relative">
             <CheckBox
-              className="mr-2 w-full text-center"
-              isSelected={customDucksEnabled}
-              onClick={() => setCustomDucksEnabled(true)}
+              className="w-full px-1 mr-2 text-center"
+              isSelected={customDuckMintStatus === MintStatus.Enabled}
+              onClick={() => setCustomDuckMintStatus(MintStatus.Enabled)}
               label="YES"
             />
             <CheckBox
-              className="w-full text-center"
-              isSelected={!customDucksEnabled}
-              onClick={() => setCustomDucksEnabled(false)}
+              className="w-full px-1 mr-2 text-center"
+              isSelected={customDuckMintStatus === MintStatus.Whitelist}
+              onClick={() => setCustomDuckMintStatus(MintStatus.Whitelist)}
+              label="WHITE"
+            />
+            <CheckBox
+              className="w-full px-1 text-center"
+              isSelected={customDuckMintStatus === MintStatus.Disabled}
+              onClick={() => setCustomDuckMintStatus(MintStatus.Disabled)}
               label="NO"
             />
           </div>
         </div>
-
         <div className="flex items-center justify-between ml-4">
-          <div className="flex-2 flex items-center h-full">Mint Price:</div>
+          <div className="flex items-center h-full flex-2">Mint Price:</div>
           <div className="relative">
             <input
               value={customDuckPrice}
@@ -148,7 +163,7 @@ const AdminMain = (props: any) => {
               type="text"
               value={maxCustomDucks}
               onChange={(e) => {
-                setMaxCustomDucks(e.target.value);
+                setMaxCustomDucks(Number(e.target.value));
               }}
               className="
                 focus:outline-none
@@ -158,51 +173,49 @@ const AdminMain = (props: any) => {
           </div>
         </div>
       </div>
-      <div className="_footer">
-        <div
-          className="_btn px-4 p-2 mt-2 w-full text-center bg-"
-          onClick={async () => {
-            const correctTozziDuckPrice = getUFloat(tozziDuckPrice);
-            const correctCustomDuckPrice = getUFloat(customDuckPrice);
-            const correctMaxCustomDucks = getUInt(maxCustomDucks);
-            setTozziDuckPrice(correctTozziDuckPrice);
-            setCustomDuckPrice(correctCustomDuckPrice);
-            setMaxCustomDucks(correctMaxCustomDucks);
-            const setting = {
-              tozziDucksEnabled,
-              tozziDuckPrice: correctTozziDuckPrice,
-              customDucksEnabled,
-              customDuckPrice: correctCustomDuckPrice,
-              maxCustomDucks: correctMaxCustomDucks,
-            };
-            setProcessing(true);
-            setTransactionStatus("processing...");
-            // setShowTxStatus(true);
-            const res = await saveMachineSetting({
-              machineConfig: setting,
+      <div
+        className="w-full p-2 px-4 mt-2 text-center cursor-pointer hover:bg-white hover:text-black"
+        onClick={async () => {
+          if (processing) return;
+          const correctTozziDuckPrice = getUFloat(tozziDuckPrice);
+          const correctCustomDuckPrice = getUFloat(customDuckPrice);
+          const correctMaxCustomDucks = getUInt(maxCustomDucks);
+          setTozziDuckPrice(correctTozziDuckPrice);
+          setCustomDuckPrice(correctCustomDuckPrice);
+          setMaxCustomDucks(correctMaxCustomDucks);
+          const setting = {
+            tozziDuckMintStatus,
+            tozziDuckPrice: correctTozziDuckPrice,
+            customDuckMintStatus,
+            customDuckPrice: correctCustomDuckPrice,
+            maxCustomDucks: correctMaxCustomDucks,
+          };
+          setProcessing(true);
+          setTransactionStatus("processing...");
+          // setShowTxStatus(true);
+          const res = await saveMachineSetting({
+            machineConfig: setting,
+          });
+          if (res.success) {
+            setMachineConfig({
+              ...machineConfig,
+              ...setting,
             });
-            if (res.success) {
-              setMachineConfig({
-                ...machineConfig,
-                ...setting,
-              });
-            }
-            setTransactionStatus(res.status);
-            setProcessing(false);
-          }}
-        >
-          SAVE
-        </div>
+          }
+          setTransactionStatus(res.status);
+          setProcessing(false);
+        }}
+      >
+        SAVE
       </div>
-
-      <div className="flex items-center justify-between space-x-10 mt-2">
-        <h2 className="flex justify-start items-center">SYSTEM BALANCE:</h2>
+      <div className="flex items-center justify-between mt-2">
+        <h2 className="flex items-center justify-start">SYSTEM BALANCE:</h2>
         <div>{machineConfig.balance} ETH</div>
       </div>
-      <div className="_row flex-end">
+      <div className="flex-end">
         <div
-          className="_btn"
           onClick={async () => {
+            if (processing) return;
             const correctWithdrawAmount = getUFloat(withdrawAmount);
             setWithdrawAmount(correctWithdrawAmount);
             if (
@@ -229,108 +242,6 @@ const AdminMain = (props: any) => {
           WITHDRAW
         </div>
       </div>
-
-      {/* <div className="_group">
-        <div className="_row">
-          <div className="_small">Custom Duck Minting</div>
-          <div className="_radio-group">
-            <input
-              className="_radio-group-item"
-              type="radio"
-              name="custom_duck_bool"
-              value="off"
-              defaultChecked={!customDucksEnabled}
-              onChange={() => {
-                setCustomDucksEnabled(false);
-              }}
-            ></input>
-            <input
-              className="_radio-group-item"
-              type="radio"
-              name="custom_duck_bool"
-              value="on"
-              defaultChecked={customDucksEnabled}
-              onChange={() => {
-                setCustomDucksEnabled(true);
-              }}
-            ></input>
-          </div>
-        </div>
-        <div className="_row">
-          <div className="_small">Custom Duck Price</div>
-          <div className="_input-group">
-            <input
-              className="_input-group-text"
-              type="text"
-              value={customDuckPrice}
-              onChange={(e) => {
-                setCustomDuckPrice(e.target.value);
-              }}
-            ></input>
-            <div className="_input-group-suffix">ETH</div>
-          </div>
-        </div>
-        <div className="_row">
-          <div className="_small">Max Custom Ducks</div>
-          <input
-            className="_input"
-            type="text"
-            value={maxCustomDucks}
-            onChange={(e) => {
-              setMaxCustomDucks(e.target.value);
-            }}
-          ></input>
-        </div>
-      </div>
-      <div className="_group">
-        <div className="_row">
-          <div className="_small">Balance: {machineConfig.balance}</div>
-          <div className="_row-sub">
-            Withdraw:
-            <div className="_input-group">
-              <input
-                className="_input-group-text"
-                type="text"
-                value={withdrawAmount}
-                onChange={(e) => {
-                  setWithdrawAmount(e.target.value);
-                }}
-              ></input>
-              <div className="_input-group-suffix">ETH</div>
-            </div>
-          </div>
-        </div>
-        <div className="_row flex-end">
-          <div
-            className="_btn"
-            onClick={async () => {
-              const correctWithdrawAmount = getUFloat(withdrawAmount);
-              setWithdrawAmount(correctWithdrawAmount);
-              if (
-                correctWithdrawAmount <= 0 ||
-                correctWithdrawAmount > machineConfig.balance
-              )
-                return;
-              setProcessing(true);
-              setTransactionStatus("processing...");
-              // setShowTxStatus(true);
-              const res = await withdraw({
-                amount: correctWithdrawAmount,
-              });
-              if (res.success) {
-                setMachineConfig({
-                  ...machineConfig,
-                  balance: machineConfig.balance - correctWithdrawAmount,
-                });
-              }
-              setTransactionStatus(res.status);
-              setProcessing(false);
-            }}
-          >
-            Withdraw
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 };

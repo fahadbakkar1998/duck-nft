@@ -1,47 +1,45 @@
 import useMachineStore from "../../../store";
 import { MachineMode, tozziDuckNum } from "../../../utils/constants";
-import { mintTozziDuck, mintCustomDuck } from "../../../utils/interact";
-import "./index.scss";
 import {
-  UseMintTozziDuck,
-  UseMintCustomDuck,
-} from "../../../hooks/interactions";
+  mintTozziDuck,
+  mintCustomDuck,
+  getLastTokenId,
+} from "../../../utils/interact";
+import "./index.scss";
 import Button from "./Button";
 
 const ButtonView = () => {
   const currState = useMachineStore((state) => state);
   const {
     address,
-    currentTozziDuckId,
+    currentDuckId,
     ducks,
     setDucks,
     machineConfig,
     setMachineConfig,
     setProcessing,
     setTransactionStatus,
-    setShowTxStatus,
     currentMode,
     setOpenBurnModal,
     DToolInst,
-    setCustomDuckData,
-    customDuckData,
+    // setShowTxStatus,
   } = currState;
 
   const doMintTozziDuck = async () => {
     if (
-      currentTozziDuckId < 0 ||
-      (ducks[currentTozziDuckId] && !!ducks[currentTozziDuckId].owner)
+      currentDuckId < 0 ||
+      (ducks[currentDuckId] && !!ducks[currentDuckId].owner)
     )
       return;
     setProcessing(true);
     setTransactionStatus("processing...");
     // setShowTxStatus(true);
     const res = await mintTozziDuck({
-      ...ducks[currentTozziDuckId],
-    });    
+      ...ducks[currentDuckId],
+    });
     if (res.success) {
       const tempDuckData = [...ducks];
-      tempDuckData[currentTozziDuckId].owner = address;
+      tempDuckData[currentDuckId].owner = address;
       setDucks(tempDuckData);
       setMachineConfig({
         ...machineConfig,
@@ -54,21 +52,24 @@ const ButtonView = () => {
 
   const doMintCustomDuck = async () => {
     setProcessing(true);
-    const base64data = await DToolInst.getWebp();    
+    const base64data = await DToolInst.getWebp();
     setTransactionStatus("processing...");
     // setShowTxStatus(true);
     const res = await mintCustomDuck({
       base64data,
     });
-  
     if (res.success) {
-      setCustomDuckData([
-        ...customDuckData,
+      setDucks([
+        ...ducks,
         {
-          id: tozziDuckNum + customDuckData.length,
-          image: base64data,
+          id: await getLastTokenId(),
+          proof: [],
+          webp: "",
           owner: address,
+          salePrice: 0,
+          isCustom: true,
           restTimestamp: machineConfig.burnWindow,
+          image: base64data,
         },
       ]);
       setMachineConfig({

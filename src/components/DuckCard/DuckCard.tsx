@@ -1,45 +1,29 @@
 import "./DuckCard.scss";
-import { useRef, FC } from "react";
+import { FC } from "react";
 import { useMachineStore } from "../../store";
-import { tozziDuckNum } from "../../utils/constants";
-import { DuckCardProps } from "../../types/types";
+import { DuckData } from "../../types/types";
 
-const DuckCard: FC<DuckCardProps> = ({img, data, isCustom = false}) => {
-  const {
-    ducks,
-    currentTozziDuckId,
-    setCurrentTozziDuckId,
-    customDuckData,
-    currentCustomDuckId,
-    setCurrentCustomDuckId,
-  } = useMachineStore((state) => state);
-  
-  const numberRef = useRef<HTMLHeadingElement>(null);
-  const cardRef = useRef<HTMLHeadingElement>(null);
+const DuckCard: FC<DuckData> = (data) => {
+  const { setCurrentDuckId } = useMachineStore((state) => state);
 
   const handleClick = () => {
-    setCurrentTozziDuckId(data.id);    
-  }
+    setCurrentDuckId(data.id);
+  };
 
   return (
-    <div 
-      onClick={handleClick}
-      className={`cursor-pointer relative group`}
-    >
-      <div className="h-full w-full bg-orange-500  absolute opacity-0 group-hover:opacity-50" />
-      <img alt="Tozzi Duck" src={img} />
-      <div className="text-white pixel-font text-sm  absolute right-0 bottom-0 bg-orange-500 z-30 border-2 border-white px-2 pt-1 rounded-l-lg">
-        {data.id.toString().padStart(3, '0')}
+    <div onClick={handleClick} className={`cursor-pointer relative group`}>
+      <div className="absolute w-full h-full bg-orange-500 opacity-0 group-hover:opacity-50" />
+      <img alt="Tozzi Duck" src={`data:image/webp;base64,${data.webp}`} />
+      <div className="absolute bottom-0 right-0 z-30 px-2 pt-1 text-sm text-white bg-orange-500 border-2 border-white rounded-l-lg pixel-font">
+        {data.id.toString().padStart(3, "0")}
       </div>
-      { data.owner && (
-        <div className="text-white pixel-font text-opacity-90  absolute-center bg-black w-full h-full bg-opacity-80 flex items-center justify-center text-3xl">
+      {data.owner && (
+        <div className="flex items-center justify-center w-full h-full text-3xl text-white bg-black pixel-font text-opacity-90 absolute-center bg-opacity-80">
           SOLD
         </div>
       )}
-      
-      
     </div>
-  )
+  );
 };
 
 export default DuckCard;

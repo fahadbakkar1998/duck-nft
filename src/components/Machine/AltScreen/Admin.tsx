@@ -3,6 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import useMachineStore from "../../../store";
 import { MachineMode } from "../../../utils/constants";
+import { DuckData } from "../../../types/types";
 import React, { useState, useEffect } from "react";
 
 const SampleNextArrow = (props: any) => {
@@ -14,7 +15,7 @@ const SampleNextArrow = (props: any) => {
         ...style,
         right: 0,
         zIndex: 1,
-        backgroundColor: "black",
+        backgroundColor: "grey",
         borderRadius: "100px",
       }}
       onClick={onClick}
@@ -31,7 +32,7 @@ const SamplePrevArrow = (props: any) => {
         ...style,
         left: 0,
         zIndex: 1,
-        backgroundColor: "black",
+        backgroundColor: "grey",
         borderRadius: "100px",
       }}
       onClick={onClick}
@@ -40,20 +41,19 @@ const SamplePrevArrow = (props: any) => {
 };
 
 const Admin: () => JSX.Element = () => {
-  const currentMode = useMachineStore((state) => state.currentMode);
-  const customDuckData = useMachineStore((state) => state.customDuckData);
-  const setCurrentAdminDuckId = useMachineStore(
-    (state) => state.setCurrentAdminDuckId
-  );
-  const [sortedCustomDuckData, setSortedCustomDuckData] = useState<any>([]);
+  const { currentMode, ducks, setCurrentAdminDuckId } = useMachineStore();
+
+  const [sortedCustomDuckData, setSortedCustomDuckData] = useState<
+    Array<DuckData>
+  >([]);
 
   useEffect(() => {
-    const SCDD = customDuckData.sort(
-      (a, b) => a.restTimestamp - b.restTimestamp
-    );    
+    const SCDD = ducks
+      .filter((e) => e.isCustom)
+      .sort((a, b) => a.restTimestamp - b.restTimestamp);
     setSortedCustomDuckData(SCDD);
     SCDD.length && setCurrentAdminDuckId(SCDD[0].id);
-  }, [customDuckData, setCurrentAdminDuckId]);
+  }, [ducks, setCurrentAdminDuckId]);
 
   const settings = {
     infinite: true,
@@ -62,7 +62,7 @@ const Admin: () => JSX.Element = () => {
     slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-    afterChange: (currentSlide) => {
+    afterChange: (currentSlide: any) => {
       setCurrentAdminDuckId(sortedCustomDuckData[currentSlide].id);
     },
   };
@@ -73,18 +73,18 @@ const Admin: () => JSX.Element = () => {
         currentMode === MachineMode.Admin ? "fadeIn" : "fadeOut"
       }`}
     >
-      {React.Children.toArray(
-        <Slider {...settings}>
-          {sortedCustomDuckData.map((e: any, i: number) => (
+      <Slider {...settings}>
+        {React.Children.toArray(
+          sortedCustomDuckData.map((e: DuckData, i: number) => (
             <div className="slider-container">
               <img className="slider-image" key={i} alt="" src={e.image}></img>
               <div className="slider-content">
                 <div className="slider-description">{e.restTimestamp}s</div>
               </div>
             </div>
-          ))}
-        </Slider>
-      )}
+          ))
+        )}
+      </Slider>
     </div>
   );
 };

@@ -9,8 +9,6 @@ import DTool from "./DTool";
 import jsonDucks from "../utils/duck-data.json";
 import { DuckData, DuckFilters } from "../types/types";
 
-console.log("jsonDucks: ", jsonDucks);
-
 type MachineStore = {
   // main
   currentMode: MachineMode;
@@ -18,10 +16,8 @@ type MachineStore = {
   isSwitchingModes: boolean;
   setIsSwitchingModes: (isSwitching: boolean) => void;
   setCurrentMode: (val: MachineMode) => void;
-  currentTozziDuckId: number;
-  setCurrentTozziDuckId: (val: number) => void;
-  currentCustomDuckId: number;
-  setCurrentCustomDuckId: (val: number) => void;
+  currentDuckId: number;
+  setCurrentDuckId: (val: number) => void;
   currentAdminDuckId: number;
   setCurrentAdminDuckId: (val: number) => void;
   altIsStatic: boolean;
@@ -42,15 +38,13 @@ type MachineStore = {
   historyButtonsState: any;
   setHistoryButtonsState: (val: any) => void;
 
-  // contract
+  // contract data
   machineConfig: any;
   setMachineConfig: (val: any) => void;
-  ducks: Array<any>;
-  setDucks: (val: Array<any>) => void;
-  customDuckData: Array<any>;
-  setCustomDuckData: (val: Array<any>) => void;
+  ducks: Array<DuckData>;
+  setDucks: (val: Array<DuckData>) => void;
 
-  // contract
+  // contract status
   processing: boolean;
   setProcessing: (val: boolean) => void;
   address: string;
@@ -64,6 +58,7 @@ type MachineStore = {
   openBurnModal: boolean;
   setOpenBurnModal: (val: boolean) => void;
 
+  // eyedropper
   eyeDropperColor: any;
   setEyeDropperColor: (val: boolean) => void;
 };
@@ -80,11 +75,11 @@ export const useMachineStore = create<MachineStore>(
     changeChannel: (duration): void => {
       set({ altIsStatic: true });
       setTimeout(() => {
-        set({ altIsStatic: false});
-      }, duration)
+        set({ altIsStatic: false });
+      }, duration);
     },
 
-    duckFilters:{
+    duckFilters: {
       all: true,
       available: true,
       sold: true,
@@ -92,21 +87,22 @@ export const useMachineStore = create<MachineStore>(
       custom: true,
       hideUI: false,
     },
-
     setDuckFilters: (filters: DuckFilters): void => {
-      set({duckFilters: filters})
+      set({ duckFilters: filters });
     },
 
     setIsSwitchingModes: (isSwitching: boolean): void => {
-      set({isSwitchingModes: isSwitching})
+      set({ isSwitchingModes: isSwitching });
     },
     isSwitchingModes: false,
-    switchModes: (): void => {    
+    switchModes: (): void => {
       set((state) => {
-        setTimeout(() => { set({ isSwitchingModes: false}) }, 300)
-        const currentMode = state.currentMode;  
-        let nextMode;
-        switch(state.currentMode) {
+        setTimeout(() => {
+          set({ isSwitchingModes: false });
+        }, 300);
+        const currentMode = state.currentMode;
+        let nextMode: any;
+        switch (state.currentMode) {
           case MachineMode.Shopping:
             nextMode = MachineMode.Customization;
             break;
@@ -123,17 +119,12 @@ export const useMachineStore = create<MachineStore>(
       });
     },
 
-    currentTozziDuckId: 0,
-    setCurrentTozziDuckId: (id: number): void => {
+    currentDuckId: 0,
+    setCurrentDuckId: (id: number): void => {
       set((state) => {
         state.changeChannel(250);
-        return { currentTozziDuckId: id };
+        return { currentDuckId: id };
       });
-    },
-
-    currentCustomDuckId: -1,
-    setCurrentCustomDuckId: (id: number): void => {
-      set({ currentCustomDuckId: id });
     },
 
     currentAdminDuckId: -1,
@@ -169,13 +160,13 @@ export const useMachineStore = create<MachineStore>(
       set({ historyButtonsState: val });
     },
 
-    // duck data
+    // contract data
     machineConfig: {
       tozziDuckPrice: 0,
       customDuckPrice: 0,
       maxCustomDucks: 0,
-      tozziDucksEnabled: false,
-      customDucksEnabled: false,
+      tozziDuckMintStatus: 0,
+      customDuckMintStatus: 0,
       balance: 0,
       burnWindow: 0,
       owner: "",
@@ -185,15 +176,11 @@ export const useMachineStore = create<MachineStore>(
     },
 
     ducks: jsonDucks,
-    setDucks: (val: Array<any>): void => {
+    setDucks: (val: Array<DuckData>): void => {
       set({ ducks: val });
     },
 
-    customDuckData: [],
-    setCustomDuckData: (val: Array<any>): void => {
-      set({ customDuckData: val });
-    },
-
+    // contract status
     processing: false,
     setProcessing: (val: boolean): void => {
       set({ processing: val });
@@ -220,6 +207,7 @@ export const useMachineStore = create<MachineStore>(
       set({ openBurnModal: val });
     },
 
+    // eyedropper
     eyeDropperColor: { r: 0, g: 0, b: 0 },
     setEyeDropperColor: (eyeDropperColor: boolean): void => {
       set({ eyeDropperColor });

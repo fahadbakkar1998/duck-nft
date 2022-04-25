@@ -1,4 +1,4 @@
-import { useState, FC, useEffect, ReactNode } from 'react';
+import { useState, FC, useEffect, ReactNode } from "react";
 
 interface ModalProps {
   children: ReactNode;
@@ -7,10 +7,9 @@ interface ModalProps {
   className?: string;
 }
 
-const Modal: FC<ModalProps> = ({children, open, onClose, className}) => {  
-
-  return open ? ( 
-    <div 
+const Modal: FC<ModalProps> = ({ children, open, onClose, className }) => {
+  return open ? (
+    <div
       className={`   
         ${className}       
         absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2          
@@ -21,19 +20,17 @@ const Modal: FC<ModalProps> = ({children, open, onClose, className}) => {
         z-50
       `}
     >
-      <div>
-        {children}
-      </div>
-      <div className="flex w-full justify-end">
-        <div          
-          onClick={onClose} 
-          className="bg-white text-black px-4 cursor-pointer"
+      <div>{children}</div>
+      <div className="flex justify-end w-full">
+        <div
+          onClick={onClose}
+          className="px-4 text-black bg-white cursor-pointer"
         >
           Close
         </div>
       </div>
     </div>
   ) : null;
-}
+};
 
 export default Modal;

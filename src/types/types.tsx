@@ -2,16 +2,11 @@ export interface DuckData {
   id: number; // token ID
   proof: string[]; // merkle proof
   webp: string; // base64 image data
-  mintTime: number; // timestamp when minted or 0
   owner: string; // account or ""
   salePrice: number; // sale price in ETH or 0
   isCustom: boolean; // defaults to false
-}
-
-export interface DuckCardProps {
-  img: string;
-  data: DuckData;
-  isCustom?: boolean;
+  restTimestamp: number;
+  image: string;
 }
 
 export interface DuckFilters {
@@ -21,4 +16,15 @@ export interface DuckFilters {
   mine: boolean;
   custom: boolean;
   hideUI: boolean;
+}
+
+export enum DuckType {
+  Tozzi,
+  Custom,
+}
+
+export enum MintStatus {
+  Enabled,
+  Disabled,
+  Whitelist,
 }

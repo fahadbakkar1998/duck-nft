@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { pdfjs, Document, Page } from 'react-pdf';
-pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.js';
+import { useState } from "react";
+import { pdfjs, Document, Page } from "react-pdf";
+pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.js";
 
 const OwnersManual = () => {
   const [numPages, setNumPages] = useState(null);
@@ -12,7 +12,7 @@ const OwnersManual = () => {
   }
 
   function changePage(offset) {
-    setPageNumber(prevPageNumber => prevPageNumber + offset);
+    setPageNumber((prevPageNumber) => prevPageNumber + offset);
   }
 
   function previousPage() {
@@ -27,27 +27,24 @@ const OwnersManual = () => {
     <>
       <div className="">
         <div className="">
-          <Document  file="/assets/mock-manual.pdf" onLoadSuccess={onDocumentLoadSuccess}>
-            <Page  canvasBackground="#ddd3c9"   pageNumber={pageNumber} />
+          <Document
+            file="/assets/mock-manual.pdf"
+            onLoadSuccess={onDocumentLoadSuccess}
+          >
+            <Page canvasBackground="#ddd3c9" pageNumber={pageNumber} />
           </Document>
         </div>
-        
+
         <p>
           Page {pageNumber} of {numPages}
         </p>
-      
-
       </div>
 
-      <div className="bg-red-200 z-50">
+      <div className="z-50 bg-red-200">
         <p>
-          Page {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
+          Page {pageNumber || (numPages ? 1 : "--")} of {numPages || "--"}
         </p>
-        <button
-          type="button"
-          disabled={pageNumber <= 1}
-          onClick={previousPage}
-        >
+        <button type="button" disabled={pageNumber <= 1} onClick={previousPage}>
           Previous
         </button>
         <button
@@ -59,8 +56,7 @@ const OwnersManual = () => {
         </button>
       </div>
     </>
-  )
-
-}
+  );
+};
 
 export default OwnersManual;
