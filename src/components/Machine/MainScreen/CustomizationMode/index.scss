@@ -41,14 +41,14 @@
     gap: 25px;
   }
   .left {
-    position: fixed;
+    position: fixed;    
     left: -12%;
     width: 10%;
-    bottom: 44%;
+    top: 25%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 25px;
+    gap: 22px;
   }
   .right {
     position: fixed;

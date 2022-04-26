@@ -31,7 +31,7 @@ const Screen: FC<ScreenProps> = ({ screenInverted, switchModes }) => {
       transform
       occlude
     >
-      <div className="top">
+      <div className="bottom">
         <PillButton
           onClick={switchModes}
           name="Switch Modes"                

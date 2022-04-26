@@ -109,7 +109,7 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
           />
         </div>
 
-        <div className="bottom">
+        <div className="left">
           <CircleButton
             onClick={() => {
               DToolInst.eraseCurrentLayer();
@@ -127,6 +127,10 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
             onClick={() => {
               DToolInst.undoredo(1);
             }}
+            image={redoIcon}
+          />
+          <CircleButton
+            onClick={() => {}}
             image={redoIcon}
           />
         </div>
