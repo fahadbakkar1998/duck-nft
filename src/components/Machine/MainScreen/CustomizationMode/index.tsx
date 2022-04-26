@@ -109,7 +109,7 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
           />
         </div>
 
-        <div className="space-x-8 bottom">
+        <div className="bottom">
           <CircleButton
             onClick={() => {
               DToolInst.eraseCurrentLayer();

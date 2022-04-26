@@ -58,7 +58,6 @@ export const MainScreen = () => {
     <a.group
       {...(spring as any)}
       ref={modelRef}
-      onClick={handleModeSwitch}
       scale={[min / minViewLength, min / minViewLength, min / minViewLength]}
       position={[0.093 * min, -0.068 * min, 0]}
     >
@@ -72,7 +71,7 @@ export const MainScreen = () => {
           scale={[0.25, 0.6, 0.6]}
           rotation={[0, 0, Math.PI / 2]}
         />
-        <Screen screenInverted={screenInverted} />
+        <Screen screenInverted={screenInverted} switchModes={handleModeSwitch} />
       </group>
     </a.group>
   );

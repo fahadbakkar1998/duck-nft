@@ -7,6 +7,9 @@ import FiltersModal from "./FiltersModal";
 import cn from "classnames";
 import { useFilteredDucks } from "../../../../hooks";
 import { DuckData } from "../../../../types/types";
+import CircleButton from "../../../../components/common/CircleButton";
+import filterIcon from "../../../../assets/img/icons/filter.svg";
+import PillButton from "@/components/common/PillButton";
 
 const HomeScreen = () => {
   const { isSwitchingModes, currentMode } = useMachineStore();
@@ -32,18 +35,15 @@ const HomeScreen = () => {
               style={{ borderRadius: "15%" }}
               className="absolute z-30 w-full h-full pointer-events-none inner-shadow"
             />
-
-            <div className="absolute left-0 flex justify-center w-full -bottom-14">
-              <div
+            
+            <div className="right">
+              <CircleButton
                 onClick={() => {
-                  setShowFilters(true);
+                  setShowFilters(!showFilters);
                 }}
-                className="p-2 bg-red-500 cursor-pointer"
-              >
-                FILTERS
-              </div>
-            </div>
-
+                image={filterIcon}
+              />
+            </div>            
             {/* DUCK GRID */}
             <div
               className={cn("relative w-full h-full duck-grid", {
