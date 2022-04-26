@@ -1,12 +1,9 @@
-import { Suspense, useEffect, useRef, useState } from "react";
-import { Html } from "@react-three/drei";
+import { Suspense, useEffect, useRef } from "react";
 import { useMachineStore } from "../../../../store";
 import { colors } from "../../../../utils/constants";
 import duckbill from "../../../../assets/duck-bill.png";
-import "./index.scss";
 import CircleButton from "../../../common/CircleButton";
 import { MachineMode } from "../../../../utils/constants";
-import cn from "classnames";
 import pencilIcon from "../../../../assets/img/icons/pencil.svg";
 import paintBucketIcon from "../../../../assets/img/icons/paintbucket.svg";
 import eraserIcon from "../../../../assets/img/icons/eraser.svg";
@@ -14,8 +11,10 @@ import dropperIcon from "../../../../assets/img/icons/eye-dropper.svg";
 import trashIcon from "../../../../assets/img/icons/trash.svg";
 import undoIcon from "../../../../assets/img/icons/undo.svg";
 import redoIcon from "../../../../assets/img/icons/redo.svg";
+import cn from "classnames";
+import "./index.scss";
 
-const layers: any[] = [
+const layers: Object[] = [
   { label: "Head" },
   { label: "Bill", preset: duckbill, disabled: true },
 ];
@@ -46,22 +45,21 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
         onCanvasMouseDown
       );
     }
-    // @ts-ignore
     DToolInst.disableDrawing = flag;
   };
 
   const onCanvasMouseDown = (e: any) => {
-    // @ts-ignore
     const color = DToolInst.getColor(e);
     setSelectedColor(color);
     DToolInst.selectColor(color);
     toggleEyeDrop(false);
   };
 
-  useEffect(() => {    
+  useEffect(() => {
     DToolInst.init(layers, setHistoryButtonsState);
     DToolInst.selectColor(colors[selectedColorIndex]);
     DToolInst.selectLayer(selectedLayerIndex);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -111,7 +109,7 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
           />
         </div>
 
-        <div className="bottom space-x-8">
+        <div className="space-x-8 bottom">
           <CircleButton
             onClick={() => {
               DToolInst.eraseCurrentLayer();

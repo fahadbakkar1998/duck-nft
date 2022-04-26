@@ -4,5 +4,5 @@ import { DuckData } from "../types/types";
 
 export const useFilteredDucks = (): DuckData[] => {
   const { ducks, duckFilters } = useMachineStore();
-  return filterDucks(ducks, duckFilters);  
-}
+  return filterDucks(ducks, duckFilters);
+};

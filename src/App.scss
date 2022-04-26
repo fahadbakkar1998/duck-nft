@@ -9,10 +9,9 @@
 }
 
 .App {
-  position: relative;  
+  position: relative;
   display: flex;
   align-items: center;
-  
 
   .machine-container {
     position: relative;
@@ -45,7 +44,7 @@ $scan-opacity: 0.75;
 
 @mixin scan-crt($scan-crt) {
   @if $scan-crt == true {
-    animation: scanlines 1s steps($scan-fps) infinite;
+    animation: scanline 1s steps($scan-fps) infinite;
   } @else {
     animation: none;
   }
@@ -59,7 +58,7 @@ $scan-opacity: 0.75;
   }
 }
 
-.scanlines {
+.scanline {
   position: relative;
   overflow: hidden;
   &:before,
@@ -95,7 +94,7 @@ $scan-opacity: 0.75;
   }
 }
 
-@keyframes scanlines {
+@keyframes scanline {
   0% {
     background-position: 0 50%;
   }
@@ -124,35 +123,23 @@ $scan-opacity: 0.75;
 
   $top: #ff8214;
   $bottom: #6f5590;
-  
-  text-shadow: 
-    1px 0px 1px $top, 
-    0px 1px 1px $bottom, 
-    2px 1px 1px $top, 
-    1px 2px 1px $bottom, 
-    3px 2px 1px $top, 
-    2px 3px 1px $bottom, 
-    4px 3px 1px $top, 
-    3px 4px 1px $bottom, 
-    5px 4px 1px $top, 
-    4px 5px 1px $bottom, 
-    6px 5px 1px $top, 
-    5px 6px 1px $bottom, 
-    7px 6px 1px $top;  
-}
 
+  text-shadow: 1px 0px 1px $top, 0px 1px 1px $bottom, 2px 1px 1px $top,
+    1px 2px 1px $bottom, 3px 2px 1px $top, 2px 3px 1px $bottom, 4px 3px 1px $top,
+    3px 4px 1px $bottom, 5px 4px 1px $top, 4px 5px 1px $bottom, 6px 5px 1px $top,
+    5px 6px 1px $bottom, 7px 6px 1px $top;
+}
 
 .duck-font {
   // font-family: "RoughShark";
   // font-family: "RadioLand";
-  font-family: "ducky";  
+  font-family: "ducky";
 }
 
 .drag-font {
   // font-family: "RoughShark";
   // font-family: "RadioLand";
   font-family: "62DRAGZ";
-  
 }
 
 .shiny {
@@ -186,8 +173,10 @@ $scan-opacity: 0.75;
   align-items: center;
   justify-content: center;
 }
+
 .myButton:hover {
 }
+
 .myButton:active {
   position: relative;
   box-shadow: 1px 1px 0px 2px #b53c24;
@@ -227,28 +216,26 @@ $scan-opacity: 0.75;
   top: 1px;
 }
 
-
 .status-panel {
   font-family: Helvetica, sans-serif;
   position: fixed;
-  width: 403px;    
+  width: 403px;
   height: 26px;
   top: 162px;
-  left: 178px;      
+  left: 178px;
   border-right: 0;
   border-radius: 0;
-  clip-path: polygon(-10% 0, 100% 0, 96.5% 100%, -10% 100%);  
+  clip-path: polygon(-10% 0, 100% 0, 96.5% 100%, -10% 100%);
   font-size: 8pt;
-  text-shadow: rgba(46,255,245,0.9) 0px 0px 19px;
+  text-shadow: rgba(46, 255, 245, 0.9) 0px 0px 19px;
   background-color: #000000;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%231cd9cb' fill-opacity='0.2' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");  
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%231cd9cb' fill-opacity='0.2' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
 }
 
 .pdf-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  
 }
 
 .container__document {

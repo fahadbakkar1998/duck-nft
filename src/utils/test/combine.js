@@ -6,7 +6,6 @@ const combineStep2 = () => {
       id: index,
       proof: duck.proof,
       webp: duck.webp,
-      mintTime: 0,
       owner: "",
       salePrice: 0,
       isCustom: false,

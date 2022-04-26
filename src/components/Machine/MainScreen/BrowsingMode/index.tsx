@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import DuckCard from "../../../DuckCard/DuckCard";
 import useMachineStore from "../../../../store";
 import { MachineMode } from "../../../../utils/constants";
@@ -6,10 +6,11 @@ import "./index.scss";
 import FiltersModal from "./FiltersModal";
 import cn from "classnames";
 import { useFilteredDucks } from "../../../../hooks";
+import { DuckData } from "../../../../types/types";
 
-const HomeScreen = (props: any) => {
-  const { ducks, isSwitchingModes, currentMode } = useMachineStore();
-  const [showFilters, setShowFilters] = useState(false);  
+const HomeScreen = () => {
+  const { isSwitchingModes, currentMode } = useMachineStore();
+  const [showFilters, setShowFilters] = useState(false);
   const filteredDucks = useFilteredDucks();
 
   return (
@@ -29,21 +30,21 @@ const HomeScreen = (props: any) => {
           <>
             <div
               style={{ borderRadius: "15%" }}
-              className="pointer-events-none absolute w-full  z-30  inner-shadow h-full"
+              className="absolute z-30 w-full h-full pointer-events-none inner-shadow"
             />
 
-            <div className="absolute -bottom-14 left-0 w-full flex justify-center">
+            <div className="absolute left-0 flex justify-center w-full -bottom-14">
               <div
                 onClick={() => {
                   setShowFilters(true);
                 }}
-                className="bg-red-500 p-2 cursor-pointer"
+                className="p-2 bg-red-500 cursor-pointer"
               >
                 FILTERS
               </div>
             </div>
 
-            {/* DUCK GRID   */}
+            {/* DUCK GRID */}
             <div
               className={cn("relative w-full h-full duck-grid", {
                 overflow:
@@ -51,12 +52,11 @@ const HomeScreen = (props: any) => {
               })}
             >
               <div className="grid grid-cols-3 gap-1">
-                {filteredDucks.map((item: any) => {
-                  let img = require(`../../../../assets/img/ducks/crypto_duck_${
-                    parseInt(item.id) + 1
-                  }.svg`);
-                  return <DuckCard key={item.id} img={img} data={item} />;
-                })}         
+                {React.Children.toArray(
+                  filteredDucks.map((item: DuckData) => {
+                    return <DuckCard {...item} />;
+                  })
+                )}
               </div>
             </div>
           </>

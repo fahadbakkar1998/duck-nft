@@ -1,28 +1,25 @@
 import { Html } from "@react-three/drei";
 import useMachineStore from "../../store";
-import { aspectRatio, minViewLength } from "../../utils/constants";
+import { minViewLength } from "../../utils/constants";
 import { burnRenegadeDuck } from "../../utils/interact";
 import { useThree } from "react-three-fiber";
 import { useRef } from "react";
 import "./index.scss";
 
 const BurnModal: (props: any) => JSX.Element = (props: any) => {
-  const currentAdminDuckId = useMachineStore(
-    (state) => state.currentAdminDuckId
-  );
-  const setCurrentAdminDuckId = useMachineStore(
-    (state) => state.setCurrentAdminDuckId
-  );
-  const setProcessing = useMachineStore((state) => state.setProcessing);
+  const {
+    ducks,
+    setDucks,
+    currentAdminDuckId,
+    setCurrentAdminDuckId,
+    setProcessing,
+    setTransactionStatus,
+    // setShowTxStatus,
+  } = useMachineStore();
+
   const { viewport } = useThree();
   // const min = Math.min(viewport.width, viewport.height);
-const min = viewport.width;
-  const setTransactionStatus = useMachineStore(
-    (state) => state.setTransactionStatus
-  );
-  const setShowTxStatus = useMachineStore((state) => state.setShowTxStatus);
-  const customDuckData = useMachineStore((state) => state.customDuckData);
-  const setCustomDuckData = useMachineStore((state) => state.setCustomDuckData);
+  const min = viewport.width;
   const reasonRef = useRef<any>(null);
 
   return (
@@ -55,17 +52,15 @@ const min = viewport.width;
                 const res = await burnRenegadeDuck({
                   duckId: currentAdminDuckId,
                   reason: reasonRef.current.value,
-                });                
+                });
                 if (res.success) {
                   // remove burned duck data.
-                  const filterCustomDuckData = customDuckData.filter(
+                  const filterDucks = ducks.filter(
                     (e) => e.id !== currentAdminDuckId
                   );
-                  setCustomDuckData(filterCustomDuckData);
+                  setDucks(filterDucks);
                   setCurrentAdminDuckId(
-                    filterCustomDuckData.length
-                      ? filterCustomDuckData[0].id
-                      : -1
+                    filterDucks.length ? filterDucks[0].id : -1
                   );
                 }
                 setTransactionStatus(res.status);
