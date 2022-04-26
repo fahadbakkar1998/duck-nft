@@ -47,10 +47,10 @@ const FiltersModal: FC<FiltersModalProps> = ({ open, children, onClose }) => {
     <Modal open={open} onClose={onClose}>
       <div className="mb-4 border-b-4 border-dashed">DUCK FILTERS</div>
       <div className="grid w-full grid-cols-2 gap-2 text-base pixel-font">
-        <div className="flex items-center">All Ducks</div>
+        {/* <div className="flex items-center">All Ducks</div>
         <div className="flex items-center justify-end">
           <CheckBox isChecked={all} onToggle={() => toggleFilter("all")} />
-        </div>
+        </div> */}
         <div className="flex items-center">Available</div>
         <div className="flex items-center justify-end">
           <CheckBox
