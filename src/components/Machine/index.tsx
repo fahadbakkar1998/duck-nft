@@ -8,7 +8,6 @@ import WaveForm from "./WaveForm";
 import StatusPanel from "./MainScreen/BrowsingMode/StatusPanel";
 import Keyboard from "./Keyboard";
 
-
 export const MachineLayout = () => {
 
   const { openBurnModal, setOpenBurnModal, currentMode} = useMachineStore((state) => state);  
