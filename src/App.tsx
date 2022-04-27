@@ -45,16 +45,17 @@ function App() {
       
       <div className="machine-container">
         <img className="background" src={bgImg} alt=""></img>
+
         <Canvas
           orthographic
-          camera={{ zoom: 115, position: [0, 0, 200] }}
+          camera={{ zoom: 100, position: [0, 0, 100] }}
           shadows
           onCreated={(state) => state.gl.clearColor()}
         >
           <Suspense fallback={null}>
-            <pointLight intensity={9} position={[0, 8, 10]} />
+            <pointLight intensity={4} position={[-10, 10, 5]} />
+            <ambientLight intensity={0.6} />
             <MachineLayout />
-            {/* <OrbitControls /> */}
           </Suspense>
         </Canvas>
       </div>

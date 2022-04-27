@@ -6,6 +6,7 @@ import ColorPicker from "./MainScreen/CustomizationMode/ColorPicker";
 import { MachineMode } from "../../utils/constants";
 import WaveForm from "./WaveForm";
 import StatusPanel from "./MainScreen/BrowsingMode/StatusPanel";
+import Keyboard from "./Keyboard";
 
 export const MachineLayout = () => {
   const { openBurnModal, setOpenBurnModal, currentMode } = useMachineStore(
@@ -15,15 +16,18 @@ export const MachineLayout = () => {
   return (
     <group>
       <AltScreen />
-      <MainScreen />
-      {currentMode === MachineMode.Customization ? (
-        <ColorPicker />
-      ) : (
-        <>
-          <WaveForm />
-          <StatusPanel />
-        </>
-      )}
+      <MainScreen />  
+      <Keyboard />   
+      { 
+        currentMode === MachineMode.Customization 
+          ? <ColorPicker /> 
+          : (
+            <>
+              <WaveForm /> 
+              <StatusPanel />
+            </>
+          )
+      }            
       {/* <BurnModal
         openModal={openBurnModal}
         onCloseModal={() => { setOpenBurnModal(false)}}

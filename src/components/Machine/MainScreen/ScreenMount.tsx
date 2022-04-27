@@ -68,9 +68,9 @@ export const MainScreen = () => {
       >
         <primitive
           object={gltfDisk.scene}
-          scale={[0.25, 0.6, 0.6]}
+          scale={[0.25, 0.6, 0.6]}      
           rotation={[0, 0, Math.PI / 2]}
-        />
+        />        
         <Screen screenInverted={screenInverted} switchModes={handleModeSwitch} />
       </group>
     </a.group>
