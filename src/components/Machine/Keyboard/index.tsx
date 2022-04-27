@@ -65,7 +65,7 @@ const Keyboard: () => JSX.Element = () => {
             buttonSetDefault(e.intersections[0].object.name);
           }}
         >
-          <primitive object={vrm} position={[6.150, -0.390, 0]} scale ={[1, 1, 1]} rotation={[0, 0.080, 0]}/>     
+          <primitive object={vrm} position={[6.1580, -0.40, 0]} scale ={[1, 1, 1]} />     
         </mesh>   
       </group>
   }</>
