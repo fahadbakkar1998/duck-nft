@@ -127,8 +127,7 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
               DToolInst.selectLayer(0);
               DToolInst.selectTool(1);
               drawingCanvas.current!.style.cursor =
-                // "url('/assets/images/paintbucket.png'), default";
-                "url('/assets/images/pencil.png'), default";
+                "url('/assets/images/paintbucket.png'), default";
             }}
             image={paintBucketIcon}
           />

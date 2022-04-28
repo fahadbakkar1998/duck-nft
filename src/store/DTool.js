@@ -355,7 +355,7 @@ export default class DTool {
   }
 
   _floodFill(ctx, x, y, fillColor, range = 1) {
-    const imageDataSource = ctx.getImageData(
+    const imageDataSource = this.ctx.getImageData(
       0,
       0,
       ctx.canvas.width,
