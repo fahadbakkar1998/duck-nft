@@ -4,7 +4,7 @@ import { minViewLength } from "../../../utils/constants";
 import { useThree } from "react-three-fiber";
 
 type Props = {
-    value?: number;
+    value?: string;
 }
 
 const Display: React.FC<Props> = ({ value }) => {
@@ -22,7 +22,7 @@ const Display: React.FC<Props> = ({ value }) => {
       transform
     >
         <div id='display' className={styles.mainWrap}>
-            {value === 0 ? '' : value}
+            {value === null ? '' : value}
         </div>
     </Html>
   )
