@@ -1,22 +1,37 @@
-import { machineContractAddress, tozziDuckNum, withdrawer } from "./constants";
+import { tozziDuckNum } from "./constants";
 import { getFloat, getInt } from "./common";
 import jsonMachineContract from "../contracts/TheAmazingTozziDuckMachine.json";
 import Web3 from "web3";
 import { ethers } from "ethers";
 import axios from "axios";
-import { DuckData, MintStatus } from "../types/types";
-import { Moralis } from "moralis";
+import { DuckData } from "../types/types";
 import { AbiItem } from "web3-utils";
 
+console.log(
+  "interact_machine_contract_address: ",
+  process.env.REACT_APP_MACHINE_CONTRACT_ADDRESS
+);
+
+console.log("interact_withdrawer: ", process.env.REACT_APP_WITHDRAWER);
+
 declare var window: any;
-let mca = machineContractAddress;
-let w = withdrawer;
+let mca = process.env.REACT_APP_MACHINE_CONTRACT_ADDRESS || "";
+let w = process.env.REACT_APP_WITHDRAWER || "";
 let web3 = new Web3(window.ethereum);
 let machineContract = new web3.eth.Contract(
   jsonMachineContract.abi as AbiItem[],
   mca
 );
 let ethereumProvider = new ethers.providers.Web3Provider(window.ethereum);
+
+const getMachineContract = () => {
+  const contract = new ethers.Contract(
+    mca,
+    jsonMachineContract.abi,
+    ethereumProvider.getSigner()
+  );
+  return contract;
+};
 
 const getTxResult = async (promise: Promise<any>) => {
   try {
@@ -52,15 +67,6 @@ const getTxResult = async (promise: Promise<any>) => {
       status: "😥 " + error.message,
     };
   }
-};
-
-const getMachineContract = () => {
-  const contract = new ethers.Contract(
-    mca,
-    jsonMachineContract.abi,
-    ethereumProvider.getSigner()
-  );
-  return contract;
 };
 
 export const connectWallet = async () => {
@@ -213,7 +219,6 @@ export const fetchDucks = async (ducks: Array<DuckData>) => {
   let { timestamp } = blockObj;
   let newDucks = [...ducks];
   let promises: Promise<void>[] = [];
-
   const formatDuck = async (i: number) => {
     const tokenId = parseInt(
       await machineContract.methods.tokenByIndex(i).call()
@@ -267,11 +272,6 @@ export const fetchDucks = async (ducks: Array<DuckData>) => {
 export const mintTozziDuck = async (data) => {
   const machineContract = getMachineContract();
   const machineConfig = await machineContract.machineConfig();
-  // if (machineConfig.tozziDuckMintStatus === MintStatus.Disabled) {
-  //   return {
-  //     status: "😥 Buying tozzi duck was restricted.",
-  //   };
-  // }
   const price = machineConfig.tozziDuckPrice;
   console.log("interact_tozzi_duck_price: ", price);
   const res = await getTxResult(
@@ -285,11 +285,6 @@ export const mintTozziDuck = async (data) => {
 export const mintCustomDuck = async (data) => {
   const machineContract = getMachineContract();
   const machineConfig = await machineContract.machineConfig();
-  // if (machineConfig.customDuckMintStatus === MintStatus.Disabled) {
-  //   return {
-  //     status: "😥 Buying custom duck was restricted.",
-  //   };
-  // }
   const price = machineConfig.customDuckPrice;
   console.log("interact_custom_duck_price: ", price);
   const res = await getTxResult(
@@ -334,38 +329,4 @@ export const saveMachineSetting = async (data) => {
     machineContract.setMachineConfig(data.machineConfig)
   );
   return res;
-};
-
-const serverUrl = "https://hrat1hho6zpj.usemoralis.com:2053/server"; // Moralis Server Url here
-const appId = "MKl3nErOLCC79DLhcD0kF4OqfNWRJ04FxPKvNkc3"; // Moralis Server App ID here
-Moralis.start({ serverUrl, appId });
-const Collection = Moralis.Object.extend("Collection");
-const Query = new Moralis.Query(Collection);
-
-export const getMoralisData = async (name) => {
-  Query.equalTo("name", name);
-  const rows = await Query.find();
-  if (rows.length) {
-    return rows[0].get("value");
-  }
-};
-
-export const initInteract = async () => {
-  try {
-    mca = await getMoralisData("contractAddress");
-    const url = await getMoralisData("url");
-    const apiKey = await getMoralisData("apiKey");
-    w = await getMoralisData("withdrawer");
-    const res = await axios.get(
-      `https://${url}/api?module=contract&action=getabi&address=${mca}&apikey=${apiKey}`
-    );
-    if (res.status !== 200) return;
-    const abi = JSON.parse(res.data.result);
-    console.log("interact_abi: ", abi);
-    machineContract = new web3.eth.Contract(abi, mca);
-    console.log("interact_contractAddress: ", mca);
-    console.log("interact_machineContract: ", machineContract);
-  } catch (e) {
-    console.error(e);
-  }
 };

@@ -57,6 +57,7 @@ const ColorPicker: () => JSX.Element = () => {
           color={bgColor}
           onChange={(color) => {
             if (!color) return;
+            console.log("ColorPicker_color: ", color);
             setSelectedColor(color);
             DToolInst.selectColor(color);
           }}

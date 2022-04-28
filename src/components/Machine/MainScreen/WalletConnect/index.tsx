@@ -5,7 +5,6 @@ import {
   connectWallet,
   getCurrentWalletConnected,
   fetchMachineConfig,
-  initInteract,
   fetchDucks,
 } from "../../../../utils/interact";
 import useMachineStore from "../../../../store";
@@ -45,7 +44,6 @@ const WalletConnect = (props: any) => {
     if (address) {
       (async () => {
         setCurrentMode(MachineMode.Syncing);
-        await initInteract();
         const machineConfig = await fetchMachineConfig();
         setMachineConfig(machineConfig);
         const newDucks = await fetchDucks(ducks);

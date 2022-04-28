@@ -8,6 +8,7 @@ function drawPreset(ctx, preset, cb) {
   };
   image.src = preset;
 }
+
 function hexToRgb(hex) {
   if (hex === null) return [0, 0, 0, 0];
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -80,6 +81,7 @@ export default class DTool {
         label: settings.label,
       });
     }
+    this.draw();
   }
   undoredo(dir) {
     const curBtnStates = this.getURButtonsState();
@@ -162,8 +164,8 @@ export default class DTool {
     this.saveHistory();
   }
   getCorrectPos(e) {
-    const rect = e.target.getBoundingClientRect();
-    const style = e.target.currentStyle || window.getComputedStyle(e.target);
+    const rect = this.c.getBoundingClientRect();
+    const style = this.c.currentStyle || window.getComputedStyle(this.c);
     const borderLeftWidth = parseInt(style.borderLeftWidth);
     const borderRightWidth = parseInt(style.borderRightWidth);
     const borderTopWidth = parseInt(style.borderTopWidth);
@@ -198,6 +200,51 @@ export default class DTool {
     let p = c.getImageData(correctPos.x, correctPos.y, 1, 1).data;
     let hex = "#" + ("000000" + this.rgbToHex(p[0], p[1], p[2])).slice(-6);
     return hex;
+  }
+  getRandomColor() {
+    const hex =
+      "#" +
+      (
+        "000000" +
+        this.rgbToHex(
+          Math.random() * 255,
+          Math.random() * 255,
+          Math.random() * 255
+        )
+      ).slice(-6);
+    return hex;
+  }
+  getAllowedRandomColor(layerIndex) {
+    const layer = this.layersSettings[layerIndex];
+    if (!layer) return;
+    const bannedColors = layer.bannedColors;
+    let hex;
+    if (bannedColors && bannedColors.length) {
+      while (bannedColors.indexOf((hex = this.getRandomColor())) !== -1);
+    } else {
+      hex = this.getRandomColor();
+    }
+    // console.log("DTool_randomColor: ", hex);
+    return hex;
+  }
+  fillWithRandomColor(layerIndex) {
+    const layerSetting = this.layersSettings[layerIndex];
+    const layer = this.layers[layerIndex];
+    if (!layerSetting || !layer) return;
+    const fillPoints = layerSetting.fillPoints;
+    if (!fillPoints || !fillPoints.length) {
+      // console.log("DTool: ", "No fillPoints");
+      return;
+    }
+    fillPoints.forEach((ptObj) => {
+      const randomColor = hexToRgb(this.getAllowedRandomColor(layerIndex));
+      ptObj.points.forEach((pt) => {
+        // console.log("DTool_pt: ", pt);
+        this._floodFill(layer.ctx, pt[0], pt[1], randomColor);
+      });
+    });
+    this.draw();
+    this.saveHistory();
   }
   mouseMoveHandler(e) {
     enableCall = false;
@@ -274,18 +321,13 @@ export default class DTool {
   }
   fillHandler(e) {
     const layer = this.layers[this.selectedLayerIndex];
-    const rect = e.target.getBoundingClientRect();
-    const mx = e.clientX - rect.left; //x position within the element.
-    const my = e.clientY - rect.top;
-    let px = Math.floor(
-      mx / (this.c.getBoundingClientRect()["width"] / this.canvasSize)
+    const correctPos = this.getCorrectPos(e);
+    this._floodFill(
+      layer.ctx,
+      correctPos.x,
+      correctPos.y,
+      hexToRgb(this.selectedColor)
     );
-    px = Math.min(Math.max(0, px), this.canvasSize - 1);
-    let py = Math.floor(
-      my / (this.c.getBoundingClientRect()["width"] / this.canvasSize)
-    );
-    py = Math.min(Math.max(0, py), this.canvasSize - 1);
-    this._floodFill(layer.ctx, px, py, hexToRgb(this.selectedColor));
   }
   _getPixel(imageData, x, y) {
     if (x < 0 || y < 0 || x >= imageData.width || y >= imageData.height) {
@@ -313,7 +355,7 @@ export default class DTool {
   }
 
   _floodFill(ctx, x, y, fillColor, range = 1) {
-    const imageDataSource = this.ctx.getImageData(
+    const imageDataSource = ctx.getImageData(
       0,
       0,
       ctx.canvas.width,

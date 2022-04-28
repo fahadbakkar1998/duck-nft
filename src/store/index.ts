@@ -33,8 +33,6 @@ type MachineStore = {
   setSelectedColorIndex: (val: number) => void;
   selectedColor: string;
   setSelectedColor: (val: string) => void;
-  selectedTool: number;
-  setSelectedTool: (val: number) => void;
   historyButtonsState: any;
   setHistoryButtonsState: (val: any) => void;
 
@@ -148,11 +146,6 @@ export const useMachineStore = create<MachineStore>(
     selectedColor: colors[defaultLayerIndex],
     setSelectedColor: (val: string): void => {
       set({ selectedColor: val });
-    },
-
-    selectedTool: 0,
-    setSelectedTool: (val: number): void => {
-      set({ selectedTool: val });
     },
 
     historyButtonsState: [false, false],
