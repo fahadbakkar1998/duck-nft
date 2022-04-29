@@ -111,6 +111,12 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
           id="drawingtool_canvas"
         />
         <div className="right">
+        <CircleButton
+            onClick={() => {
+              DToolInst.fillWithRandomColor(1);
+            }}
+            image={randomIcon}
+          />
           <CircleButton
             onClick={() => {
               setSelectedLayerIndex(0);
@@ -142,19 +148,13 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
                 "url('/assets/images/eraser.png'), default";
             }}
             image={eraserIcon}
-          />
+          />          
+        </div>
+
+        <div className="left">          
           <CircleButton
             onClick={() => toggleEyeDrop(true)}
             image={dropperIcon}
-          />
-        </div>
-
-        <div className="left">
-          <CircleButton
-            onClick={() => {
-              DToolInst.eraseCurrentLayer();
-            }}
-            image={trashIcon}
           />
           <CircleButton
             onClick={() => {
@@ -171,10 +171,10 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
           />
           <CircleButton
             onClick={() => {
-              DToolInst.fillWithRandomColor(1);
+              DToolInst.eraseCurrentLayer();
             }}
-            image={randomIcon}
-          />
+            image={trashIcon}
+          />          
         </div>
       </div>
     </Suspense>
