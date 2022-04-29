@@ -181,14 +181,31 @@ $scan-opacity: 0.75;
   align-items: center;
   justify-content: center;
 }
-
-
 .circle-button:active {
   position: relative;
   box-shadow: 1px 1px 0px 2px #b53c24;
   border: 3px solid #ffffff1c;
   background: linear-gradient(to bottom, #f06824 5%, #ec5523 100%);
   top: 1px;
+}
+
+.circle-button.small {  
+  height: 25px;
+  border-width: 1px;
+  width: 25px;
+  box-shadow: 2px 1px 1px 0px #b53c24;
+}
+
+
+.circle-button.small:active {
+  position: relative;
+  box-shadow: 1px 1px 1px 0px #b53c24;
+  // border: 3px solid #ffffff1c;
+  background: linear-gradient(to bottom, #f06824 5%, #ec5523 100%);
+  // left: 1px;
+  top: 1px;
+  left: 1px;
+  
 }
 
 .pill-button {

@@ -6,7 +6,7 @@ import BrowsingMode from "./BrowsingMode";
 import { FC } from "react";
 import { Html } from "@react-three/drei";
 import { MachineMode } from "../../../utils/constants";
-import PillButton from "../../../components/common/PillButton";
+import ModeSwitcher from "../../common/ModeSwitcher";
 
 
 interface ScreenProps {
@@ -32,10 +32,7 @@ const Screen: FC<ScreenProps> = ({ screenInverted, switchModes }) => {
       occlude
     >
       <div className="bottom">
-        <PillButton
-          onClick={switchModes}
-          name="Switch Modes"                
-        />
+        <ModeSwitcher switchModes={switchModes}/>
       </div>
       {[MachineMode.Off, MachineMode.Syncing].includes(currentMode) && (
         <WalletConnect />

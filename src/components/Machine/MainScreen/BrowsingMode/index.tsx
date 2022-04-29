@@ -9,7 +9,7 @@ import { useFilteredDucks } from "../../../../hooks";
 import { DuckData } from "../../../../types/types";
 import CircleButton from "../../../../components/common/CircleButton";
 import filterIcon from "../../../../assets/img/icons/filter.svg";
-import PillButton from "@/components/common/PillButton";
+import PillButton from "@/components/common/ModeSwitcher";
 
 const HomeScreen = () => {
   const { isSwitchingModes, currentMode } = useMachineStore();
@@ -22,7 +22,7 @@ const HomeScreen = () => {
         active: currentMode === MachineMode.Shopping,
       })}
     >
-      <div className={cn("mainScreen overflow-scroll w-full")}>
+      <div className={cn("mainScreen overflow-scroll w-full border-gray-600 border-2")}>
         <FiltersModal
           open={showFilters}
           onClose={() => {
