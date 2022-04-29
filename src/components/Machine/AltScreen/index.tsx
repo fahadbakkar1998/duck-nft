@@ -20,7 +20,7 @@ const AltScreen: () => JSX.Element = () => {
   useEffect(() => {
     if (altIsStatic && videoRef.current) {
       const video: HTMLVideoElement = videoRef.current;
-      video.currentTime = Math.random() * 15;
+      video.currentTime = Math.random() * 2;
       videoRef.current.play();
     } else {
       videoRef.current?.pause();
@@ -56,7 +56,7 @@ const AltScreen: () => JSX.Element = () => {
                 autoPlay={altIsStatic}
                 muted
                 loop
-                src="/assets/video/rainbow-static.mp4"
+                src="/assets/video/static.mp4"
               />
             </div>
           )}
