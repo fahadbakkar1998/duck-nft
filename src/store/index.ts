@@ -121,6 +121,7 @@ export const useMachineStore = create<MachineStore>(
     setCurrentDuckId: (id: number): void => {
       set((state) => {
         state.changeChannel(250);
+        console.log('selected duck', id);
         return { currentDuckId: id };
       });
     },
