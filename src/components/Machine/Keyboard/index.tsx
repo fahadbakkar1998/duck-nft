@@ -19,7 +19,6 @@ const Keyboard: () => JSX.Element = () => {
 
   const enterClick = (value: string) => {
     if( Number(value) <= 199 ) setCurrentDuckId(Number(value));
-    setValue('');
   };
 
   const clearClick = () => {
