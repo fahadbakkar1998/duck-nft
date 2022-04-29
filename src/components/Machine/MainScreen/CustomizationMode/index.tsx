@@ -99,7 +99,7 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
   return (
     <Suspense fallback={null}>
       <div
-        className={cn("DrawingTool relative", {
+        className={cn("DrawingTool relative border-2 border-gray-600", {
           active: currentMode === MachineMode.Customization,
         })}
       >

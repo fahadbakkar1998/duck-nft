@@ -47,7 +47,7 @@ const AdminMain = () => {
   return (
     <div
       className={cn(
-        "AdminMain inner-shadow pixel-font py-5 px-10 relative text-sm",
+        "AdminMain inner-shadow pixel-font py-5 px-10 relative text-sm border-2 border-gray-600",
         {
           active: currentMode === MachineMode.Admin,
         }
