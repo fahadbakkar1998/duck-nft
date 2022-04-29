@@ -25,16 +25,13 @@ const StatusPanel: () => JSX.Element = () => {
       rotation={[0.0, 0.0, 0.0]}
       transform
     >
-      <div className="status-panel bg-black text-teal-200   font-thin flex items-center  justify-between pr-4 pl-2">
-        <div>
-          Duck Sales: <b>Enabled</b>
-        </div>
-        <div>
-          Duck Price: <b>0.5 ETH</b>
-        </div>
-
-        <div>
-          Machine Balance: <b>100 ETH</b>
+      <div className="status-panel">
+        <div className="graph-bg lcd-font text-black text-opacity-75  text-2xl inner-shadow rounded-sm font-thin flex items-center  justify-center space-x-10 h-8
+            border-t border-l border-black border-opacity-50
+          ">
+          <div>
+            duck price: 0.5 eth
+          </div>        
         </div>
       </div>
     </Html>

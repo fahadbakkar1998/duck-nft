@@ -104,8 +104,9 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
         })}
       >
         <div className="absolute w-full h-full inner-shadow rounded-[15%] pointer-events-none" />
+        {/* border-[#aba961] */}
         <canvas
-          className="drawing-canvas bg-black border-[#aba961]  border-[30px]"
+          className="drawing-canvas bg-black border-[#656b4d]  border-[30px]"
           ref={drawingCanvas}
           id="drawingtool_canvas"
         />

@@ -3,10 +3,9 @@ const CircleButton = (props) => {
     <div className="relative flex justify-center w-full select-none">
       <div
         className={`
-          z-10 absolute 
-          border-opacity-30 
+          z-10 absolute           
           border-2           
-          -top-[3px]  border-white h-[52px]  w-[52px] rounded-full bg-black bg-opacity-50`}
+          -top-[3px]  border-gray-600 h-[52px]  w-[52px] rounded-full bg-black `}
       />
       <div
         className="relative z-20 circle-button w-11 rounded-full"

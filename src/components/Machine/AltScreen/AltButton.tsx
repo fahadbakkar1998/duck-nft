@@ -7,6 +7,7 @@ import {
 } from "../../../utils/interact";
 import "./index.scss";
 import Button from "./Button";
+import { BuyIcon } from "../../common/SvgIcon";
 
 const ButtonView = () => {
   const currState = useMachineStore((state) => state);
@@ -84,18 +85,33 @@ const ButtonView = () => {
   if (currentMode === MachineMode.Syncing) return <div>Syncing...</div>;
 
   if (currentMode === MachineMode.Shopping) {
-    return <Button label="Buy Duck" onClick={doMintTozziDuck} />;
+    return (
+      <Button onClick={doMintTozziDuck}>
+        <div className="flex space-x-2 justify-center items-center transition-all lcd-font text-black opacity-80">
+          <div>buy duck</div>
+          <BuyIcon  wrapperClassName="w-5 mb-[3px]" className="stroke-black"/>
+        </div>
+      </Button>
+    );
   }
 
   if (currentMode === MachineMode.Customization) {
-    return <Button label="Mint Duck" onClick={doMintCustomDuck} />;
+    return (
+      <Button onClick={doMintCustomDuck}>
+        mint duck
+      </Button>
+    );
   }
-  return <Button label="Burn Duck" onClick={() => setOpenBurnModal(true)} />;
+  return (
+    <Button onClick={() => setOpenBurnModal(true)}>
+      burn duck
+    </Button>
+  );
 };
 
 const AltButton = () => {
   return (
-    <div className="absolute -bottom-10 left-[22px] bg-[rgb(8,8,8)] h-12 w-[48%]">
+    <div className="inner-shadow absolute rounded-sm -bottom-[10.25%] left-[5.75%] graph-bg h-[12.5%] w-[48.75%]">
       <ButtonView />
     </div>
   );

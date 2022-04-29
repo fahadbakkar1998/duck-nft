@@ -68,6 +68,12 @@ code {
 }
 
 @font-face {
+  font-family: "lcd";
+  src: local("lcd"),
+    url("./assets/font/lcd.ttf") format("truetype");
+}
+
+@font-face {
   font-family: "62DRAGZ";
   src: local("62DRAGZ"),
     url("./assets/font/62DRAGZ.otf") format("opentype");
