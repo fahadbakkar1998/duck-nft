@@ -1,16 +1,30 @@
-import React, { useEffect, useRef, useState } from "react";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import modelObject from "../../../assets/glb/key_pad_2.glb";
-import { useThree } from "react-three-fiber";
-import { minViewLength } from "../../../utils/constants";
-import Display from "../Display";
+import React, { useEffect, useRef, useState } from 'react';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import modelObject from '../../../assets/glb/key_pad_2.glb';
+import { useThree } from 'react-three-fiber';
+import { MachineMode, minViewLength } from "../../../utils/constants";
+import Display from '../Display';
+import { useMachineStore } from "../../../store";
 
 const Keyboard: () => JSX.Element = () => {
   const [vrm, setVrm] = useState<any>(null);
   const { current: loader } = useRef(new GLTFLoader());
   const { viewport } = useThree();
   const min = viewport.width;
+  const [value, setValue] = useState<string>('');
+  const { currentMode } = useMachineStore();
 
+  const { setCurrentDuckId } = useMachineStore((state) => state);
+
+  const enterClick = (value: string) => {
+    if( Number(value) <= 199 ) setCurrentDuckId(Number(value));
+  };
+
+  const clearClick = () => {
+    setCurrentDuckId(0);
+    setValue('');
+  };
+  
   const loadObject = () => {
     loader.load(modelObject, (gltf: any) => {
       setVrm(gltf.scene);
@@ -21,17 +35,15 @@ const Keyboard: () => JSX.Element = () => {
     loadObject();
   }, []);
 
-  const [value, setValue] = useState<number>(0);
-
-  const buttonClick = (btnName) => {
-    if (btnName !== "enter") {
-      const digit = Number(btnName);
-      if (value === 0 || value >= 100) {
-        setValue(digit);
-      } else setValue(value * 10 + digit);
-    }
-    vrm.children.forEach((item) => {
-      if (item.name === btnName) {
+  const buttonClick = ( btnName ) => {
+    if ([MachineMode.Off, MachineMode.Syncing].includes(currentMode)) return;
+    if(btnName === 'enter') enterClick(value);
+    else if(btnName === 'clear') clearClick();
+         else {
+           setValue(value + Number(btnName).toString());
+         }
+    vrm.children.forEach( item => {
+      if( item.name === btnName ){
         item.position.z = 0.01;
       }
     });

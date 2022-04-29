@@ -11,7 +11,7 @@ const DuckCard: FC<DuckData> = (data) => {
   };
 
   return (
-    <div onClick={handleClick} className={`cursor-pointer relative group`}>
+    <div onClick={handleClick} className={`cursor-pointer relative group`} id={`item${data.id}`}>
       <div className="absolute w-full h-full bg-orange-500 opacity-0 group-hover:opacity-50" />
       <img alt="Tozzi Duck" src={`data:image/webp;base64,${data.webp}`} />
       <div className="absolute bottom-0 right-0 z-30 px-2 pt-1 text-sm text-white bg-orange-500 border-2 border-white rounded-l-lg pixel-font">

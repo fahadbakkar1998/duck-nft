@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import DuckCard from "../../../DuckCard/DuckCard";
 import useMachineStore from "../../../../store";
 import { MachineMode } from "../../../../utils/constants";
@@ -12,10 +12,18 @@ import filterIcon from "../../../../assets/img/icons/filter.svg";
 import PillButton from "@/components/common/ModeSwitcher";
 
 const HomeScreen = () => {
-  const { isSwitchingModes, currentMode } = useMachineStore();
+  const { isSwitchingModes, currentMode, currentDuckId } = useMachineStore();
   const [showFilters, setShowFilters] = useState(false);
   const filteredDucks = useFilteredDucks();
 
+  useEffect(() => {
+    document.getElementById(`item${filteredDucks[currentDuckId].id}`)?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentDuckId]);
+  
   return (
     <div
       className={cn("main", {
@@ -54,7 +62,7 @@ const HomeScreen = () => {
               <div className="grid grid-cols-3 gap-1">
                 {React.Children.toArray(
                   filteredDucks.map((item: DuckData) => {
-                    return <DuckCard {...item} />;
+                    return <DuckCard {...item}/>;
                   })
                 )}
               </div>
