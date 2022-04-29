@@ -5,6 +5,7 @@ import { useThree } from 'react-three-fiber';
 import { MachineMode, minViewLength } from "../../../utils/constants";
 import Display from '../Display';
 import { useMachineStore } from "../../../store";
+import { padStart } from 'lodash';
 
 const Keyboard: () => JSX.Element = () => {
   const [vrm, setVrm] = useState<any>(null);
@@ -12,12 +13,13 @@ const Keyboard: () => JSX.Element = () => {
   const { viewport } = useThree();
   const min = viewport.width;
   const [value, setValue] = useState<string>('');
-  const { currentMode } = useMachineStore();
+  const { currentDuckId, currentMode } = useMachineStore();
 
   const { setCurrentDuckId } = useMachineStore((state) => state);
-
+  
   const enterClick = (value: string) => {
-    if( Number(value) <= 199 ) setCurrentDuckId(Number(value));
+    if( Number(value) <= 199 ) setCurrentDuckId(Number(value));    
+    else setValue('');
   };
 
   const clearClick = () => {
@@ -34,6 +36,10 @@ const Keyboard: () => JSX.Element = () => {
   useEffect(() => {
     loadObject();
   }, []);
+
+  useEffect(() => {
+    setValue(padStart(currentDuckId, 3, '0'));
+  }, [currentDuckId]);
 
   const buttonClick = ( btnName ) => {
     if ([MachineMode.Off, MachineMode.Syncing].includes(currentMode)) return;
