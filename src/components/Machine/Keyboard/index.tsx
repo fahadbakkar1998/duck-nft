@@ -22,7 +22,6 @@ const Keyboard: () => JSX.Element = () => {
   };
 
   const clearClick = () => {
-    setCurrentDuckId(0);
     setValue('');
   };
   
