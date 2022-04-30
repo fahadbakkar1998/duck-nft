@@ -13,9 +13,9 @@ interface ModeSwitcherProps {
 const getModeName = (mode: MachineMode): string => {
   switch(mode) {          
     case MachineMode.Shopping:
-      return 'browsing mode';
+      return 'duck browser';
     case MachineMode.Customization:
-      return 'custom duck mode'
+      return 'duck customizer'
     case MachineMode.Admin:
         return 'admin mode'
   }

@@ -5,7 +5,7 @@ export const filterDucks = (
   filters: DuckFilters
 ): DuckData[] => {
   return ducks
-    .filter((d) => d.id)
+    .filter((d) => d.id !== undefined)
     .filter((duck) => {
       if (filters.available && !filters.sold) {
         if (duck.owner) return false;

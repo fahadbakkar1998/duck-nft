@@ -20,10 +20,15 @@ type MachineStore = {
   setCurrentDuckId: (val: number) => void;
   currentAdminDuckId: number;
   setCurrentAdminDuckId: (val: number) => void;
-  altIsStatic: boolean;
+  
   changeChannel: (duration: number) => void;
   duckFilters: DuckFilters;
   setDuckFilters: (filters: DuckFilters) => void;
+
+  // alt screen
+  altIsStatic: boolean;
+  showDuckProfile: boolean;
+  setShowDuckProfile: (showProfile: boolean) => void;
 
   // color picker
   DToolInst: DTool;
@@ -69,12 +74,18 @@ export const useMachineStore = create<MachineStore>(
       set({ currentMode: mode });
     },
 
+    // alt screen
     altIsStatic: false,
     changeChannel: (duration): void => {
       set({ altIsStatic: true });
       setTimeout(() => {
         set({ altIsStatic: false });
       }, duration);
+    },
+
+    showDuckProfile: false,
+    setShowDuckProfile: (showProfile: boolean): void => {
+      set({ showDuckProfile: showProfile });
     },
 
     duckFilters: {
@@ -119,10 +130,9 @@ export const useMachineStore = create<MachineStore>(
 
     currentDuckId: 0,
     setCurrentDuckId: (id: number): void => {
-      set((state) => {
-        state.changeChannel(250);
-        console.log('selected duck', id);
-        return { currentDuckId: id };
+      set((state) => {        
+        state.changeChannel(250);        
+        return { showDuckProfile: false, currentDuckId: id };
       });
     },
 
