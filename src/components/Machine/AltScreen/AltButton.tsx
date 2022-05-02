@@ -7,6 +7,8 @@ import {
 } from "../../../utils/interact";
 import "./index.scss";
 import Button from "./Button";
+import { BuyIcon, ProfileIcon, ProfileOpenIcon } from "../../common/SvgIcon";
+import { connectWallet } from "../../../utils/interact";
 
 const ButtonView = () => {
   const currState = useMachineStore((state) => state);
@@ -22,8 +24,19 @@ const ButtonView = () => {
     currentMode,
     setOpenBurnModal,
     DToolInst,
+    setAddress,
+    showDuckProfile,
+    setShowDuckProfile,
     // setShowTxStatus,
   } = currState;
+
+  const selectedDuck = ducks[currentDuckId];
+
+  const onConnectWallet = async () => {
+    const { address, status } = await connectWallet();
+    setAddress(address);    
+  };
+
 
   const doMintTozziDuck = async () => {
     if (
@@ -81,21 +94,64 @@ const ButtonView = () => {
     setProcessing(false);
   };
 
+  if (currentMode === MachineMode.Off) {
+    return (
+      <Button onClick={onConnectWallet}>
+        <div className="flex space-x-2 justify-center items-center lcd-font opacity-80 text-base mt-1">
+          connect wallet
+        </div>
+      </Button>
+    );
+  }
+
   if (currentMode === MachineMode.Syncing) return <div>Syncing...</div>;
 
-  if (currentMode === MachineMode.Shopping) {
-    return <Button label="Buy Duck" onClick={doMintTozziDuck} />;
+  if (currentMode === MachineMode.Shopping) {    
+    if (selectedDuck.owner) {
+      return (
+        <Button onClick={() => setShowDuckProfile(!showDuckProfile)}>
+          <div className="flex space-x-2 justify-center items-center lcd-font text-black opacity-80 ">
+            <div>profile</div>
+            { showDuckProfile ? (
+                <ProfileOpenIcon wrapperClassName="w-5 mb-[1px]" className="stroke-black"/>
+              ) : (
+                <ProfileIcon  wrapperClassName="w-5 mb-[1px]" className="stroke-black"/> 
+            )}
+          </div>
+        </Button>
+      );  
+    }
+    return (
+      <Button onClick={doMintTozziDuck}>
+        <div className="flex space-x-2 justify-center items-center lcd-font text-black opacity-80">
+          <div>buy duck</div>
+          <BuyIcon  wrapperClassName="w-5 mb-[3px]" className="stroke-black"/>
+        </div>
+      </Button>
+    );
   }
 
   if (currentMode === MachineMode.Customization) {
-    return <Button label="Mint Duck" onClick={doMintCustomDuck} />;
+    return (
+      <Button onClick={doMintCustomDuck}>
+        <div className="flex space-x-2 justify-center items-center lcd-font text-black opacity-80">
+          mint duck
+        </div>
+      </Button>
+    );
   }
-  return <Button label="Burn Duck" onClick={() => setOpenBurnModal(true)} />;
+  return (
+    <Button onClick={() => setOpenBurnModal(true)}>
+      <div className="flex space-x-2 justify-center items-center lcd-font text-black opacity-80">
+        burn duck
+      </div>
+    </Button>
+  );
 };
 
 const AltButton = () => {
   return (
-    <div className="absolute -bottom-10 left-[22px] bg-[rgb(8,8,8)] h-12 w-[48%]">
+    <div className="inner-shadow absolute rounded-sm -bottom-[25.5%] left-[5.75%] graph-bg h-[14.75%] w-[48.75%]">
       <ButtonView />
     </div>
   );

@@ -42,8 +42,4 @@ export const colors = [
   "#b5a5d5",
 ];
 
-export const machineContractAddress =
-  "0xfA8A34F0D914A52B74688Ee3bD6966C48079652B";
-export const withdrawer = "0xD0a57Ed2727a574C8edB6F4c8c4fb8E222CF708C";
-
 export const tozziDuckNum = 200;

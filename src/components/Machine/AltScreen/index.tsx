@@ -1,10 +1,11 @@
 import { Html } from "@react-three/drei";
+import { useState } from 'react';
 import useMachineStore from "../../../store";
 import { MachineMode, minViewLength } from "../../../utils/constants";
 
-import Shopping from "./Shopping";
-import Custom from "./Custom";
-import Admin from "./Admin";
+import BrowsingMode from "./BrowsingMode";
+import CustomMode from "./Custom";
+import AdminMode from "./Admin";
 import { useThree } from "react-three-fiber";
 import "./index.scss";
 import NotConnected from "./NotConnected";
@@ -14,13 +15,13 @@ import { useEffect, useRef } from "react";
 const AltScreen: () => JSX.Element = () => {
   const { currentMode, altIsStatic } = useMachineStore();
   const { viewport } = useThree();
-  const videoRef = useRef<HTMLVideoElement>();
-  const min = viewport.width;
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const min = viewport.width;  
 
   useEffect(() => {
     if (altIsStatic && videoRef.current) {
       const video: HTMLVideoElement = videoRef.current;
-      video.currentTime = Math.random() * 15;
+      video.currentTime = Math.random() * 2;
       videoRef.current.play();
     } else {
       videoRef.current?.pause();
@@ -34,29 +35,28 @@ const AltScreen: () => JSX.Element = () => {
         (0.165 * min) / minViewLength,
         (0.165 * min) / minViewLength,
       ]}
-      position={[-0.225 * min, -0.045 * min, 0]}
+      position={[-0.225 * min, -0.031 * min, 0]}
       rotation={[0.0, 0.0, 0.0]}
       transform
     >
-      <div>
+      <div className="relative">
         <div
           className={`
-            border-[#348476] border mb-11 
+            border-[#348476] border 
             w-[336px] h-[324px] relative rounded-lg  z-0
             bg-[rgb(8,8,8)] text-white overflow-hidden
             scanline
           `}
         >
           {altIsStatic && (
-            <div className=" top-[21%] absolute scale-[1.75]  opacity-100">
-              {/* @ts-ignore */}
+            <div className=" top-[21%] absolute scale-[1.75]  opacity-100 z-50">              
               <video ref={videoRef}
                 id="alt-static"
                 playsInline
                 autoPlay={altIsStatic}
                 muted
                 loop
-                src="/assets/video/rainbow-static.mp4"
+                src="/assets/video/static.mp4"
               />
             </div>
           )}
@@ -69,9 +69,9 @@ const AltScreen: () => JSX.Element = () => {
           {[MachineMode.Off, MachineMode.Syncing].includes(currentMode) && (
             <NotConnected />
           )}
-          {currentMode === MachineMode.Shopping && <Shopping />}
-          {currentMode === MachineMode.Customization && <Custom />}
-          {currentMode === MachineMode.Admin && <Admin />}
+          {currentMode === MachineMode.Shopping && <BrowsingMode />}
+          {currentMode === MachineMode.Customization && <CustomMode />}
+          {currentMode === MachineMode.Admin && <AdminMode />}
         </div>
         <AltButton />
       </div>

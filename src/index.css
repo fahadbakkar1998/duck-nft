@@ -68,6 +68,12 @@ code {
 }
 
 @font-face {
+  font-family: "lcd";
+  src: local("lcd"),
+    url("./assets/font/lcd.ttf") format("truetype");
+}
+
+@font-face {
   font-family: "62DRAGZ";
   src: local("62DRAGZ"),
     url("./assets/font/62DRAGZ.otf") format("opentype");
@@ -77,6 +83,12 @@ code {
   font-family: "ducky";
   src: local("ducky"),
     url("./assets/font/ducky.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "thin-pixel";
+  src: local("thin-pixel"),
+    url("./assets/font/thin-pixel.ttf") format("truetype");
 }
 
 @font-face {

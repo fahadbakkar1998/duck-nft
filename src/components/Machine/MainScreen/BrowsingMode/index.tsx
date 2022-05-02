@@ -9,12 +9,13 @@ import { useFilteredDucks } from "../../../../hooks";
 import { DuckData } from "../../../../types/types";
 import CircleButton from "../../../../components/common/CircleButton";
 import filterIcon from "../../../../assets/img/icons/filter.svg";
-import PillButton from "@/components/common/PillButton";
+import PillButton from "@/components/common/ModeSwitcher";
 
 const HomeScreen = () => {
   const { isSwitchingModes, currentMode, currentDuckId } = useMachineStore();
   const [showFilters, setShowFilters] = useState(false);
   const filteredDucks = useFilteredDucks();
+  console.log('filtered', filteredDucks);
 
   useEffect(() => {
     document.getElementById(`item${filteredDucks[currentDuckId].id}`)?.scrollIntoView({
@@ -26,16 +27,14 @@ const HomeScreen = () => {
   
   return (
     <div
-      className={cn("main", {
+      className={cn("main scanline", {
         active: currentMode === MachineMode.Shopping,
       })}
     >
-      <div className={cn("mainScreen overflow-scroll w-full")}>
+      <div className={cn("mainScreen overflow-scroll w-full border-gray-600 border-2")}>
         <FiltersModal
           open={showFilters}
-          onClose={() => {
-            setShowFilters(false);
-          }}
+          onClose={() => { setShowFilters(false) }}
         />
         {!isSwitchingModes && (
           <>
