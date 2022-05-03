@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import modelObject from '../../../assets/glb/key_pad_2.glb';
+import modelObject from '../../../assets/glb/key_pad.glb';
 import { useThree } from 'react-three-fiber';
 import { MachineMode, minViewLength } from "../../../utils/constants";
 import Display from '../Display';
