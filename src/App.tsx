@@ -1,17 +1,20 @@
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 import { Canvas } from "react-three-fiber";
 import "./App.scss";
 import { MachineLayout } from "./components/Machine/index";
 // import bgImg from "./assets/img/duck-base-holepunch.png";
 import bgImg from "./assets/img/machine-bg.jpg";
-import { OrbitControls } from "@react-three/drei";
 import Mobile from "./components/Mobile/Mobile";
+import OwnersManualModal from "./components/OwnersManual/OwnersManualModal";
+import useMachineStore from "./store";
 
 function App() {
   const isMobile =
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent
     );
+    const isOwnersModalOpen = useMachineStore((state) => state.isOwnersManalOpen);
+    const setIsOwnersManualOpen = useMachineStore((state) => state.setIsOwnersManualOpen);
 
   return isMobile ? (
     <Mobile />
@@ -45,7 +48,6 @@ function App() {
       
       <div className="machine-container">
         <img className="background" src={bgImg} alt=""></img>
-
         <Canvas
           orthographic
           camera={{ zoom: 100, position: [0, 0, 100] }}
@@ -59,9 +61,7 @@ function App() {
           </Suspense>
         </Canvas>
       </div>
-
-      {/* <OwnersManual /> */}
-
+      <OwnersManualModal modalIsOpen={isOwnersModalOpen} setModalIsOpen={setIsOwnersManualOpen} />
       <div className="h-96 w-full bg-[#d7dad2]" />
     </div>
   );

@@ -17,7 +17,7 @@ export const MachineLayout = () => {
     <group>
       <AltScreen />
       <MainScreen />  
-      <Keyboard />   
+      <Keyboard />
       { 
         currentMode === MachineMode.Customization 
           ? <ColorPicker /> 

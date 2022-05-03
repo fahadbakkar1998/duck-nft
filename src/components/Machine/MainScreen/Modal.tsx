@@ -1,34 +1,31 @@
-import { useState, FC, useEffect, ReactNode } from "react";
+import { FC, ReactNode } from "react";
 
 interface ModalProps {
   children: ReactNode;
   open: boolean;
   onClose: () => void;
   className?: string;
+  closeButton?: ReactNode;
 }
 
-const Modal: FC<ModalProps> = ({ children, open, onClose, className }) => {
+const ModalButton = ({ onClose }) => (
+  <div className="flex justify-end w-full">
+    <div
+      onClick={onClose}
+      className="px-4 text-black bg-white cursor-pointer"
+    >
+      Close
+    </div>
+  </div>
+)
+
+const Modal: FC<ModalProps> = ({ children, open, onClose, className, closeButton }) => {
   return open ? (
     <div
-      className={`   
-        ${className}       
-        absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2          
-        black-screen        
-        pixel-font text-white p-10 border-2 border-white
-        w-5/6 h-5/6 text-xl
-        flex flex-col justify-between items-start
-        z-50
-      `}
+      className={className}
     >
       <div>{children}</div>
-      <div className="flex justify-end w-full">
-        <div
-          onClick={onClose}
-          className="px-4 text-black bg-white cursor-pointer"
-        >
-          Close
-        </div>
-      </div>
+      {closeButton || <ModalButton onClose={onClose} />}
     </div>
   ) : null;
 };

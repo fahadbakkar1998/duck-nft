@@ -44,7 +44,8 @@ const FiltersModal: FC<FiltersModalProps> = ({ open, children, onClose }) => {
   };
 
   return (
-    <Modal open={open} onClose={onClose}>
+    <Modal open={open} onClose={onClose} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 black-screen        
+    pixel-font text-white p-10 border-2 border-white w-5/6 h-5/6 text-xl flex flex-col justify-between items-start z-50">
       <div className="mb-4 border-b-4 border-dashed">DUCK FILTERS</div>
       <div className="grid w-full grid-cols-2 gap-2 text-base pixel-font">
         {/* <div className="flex items-center">All Ducks</div>

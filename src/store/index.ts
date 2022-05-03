@@ -55,6 +55,8 @@ type MachineStore = {
   // modal
   openBurnModal: boolean;
   setOpenBurnModal: (val: boolean) => void;
+  isOwnersManalOpen: boolean;
+  setIsOwnersManualOpen: (val: boolean) => void;
 
   // eyedropper
   eyeDropperColor: any;
@@ -199,6 +201,10 @@ export const useMachineStore = create<MachineStore>(
     openBurnModal: false,
     setOpenBurnModal: (val: boolean): void => {
       set({ openBurnModal: val });
+    },
+    isOwnersManalOpen: false,
+    setIsOwnersManualOpen:  (val: boolean): void => {
+      set({ isOwnersManalOpen: val });
     },
 
     // eyedropper
