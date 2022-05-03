@@ -41,6 +41,8 @@ const Keyboard: () => JSX.Element = () => {
   }, [currentDuckId]);
 
   const buttonClick = ( btnName ) => {
+    console.log('btnName-->', btnName);
+    
     if ([MachineMode.Off, MachineMode.Syncing].includes(currentMode)) return;
     if(btnName === 'enter') enterClick(value);
     else if(btnName === 'clear') clearClick();
@@ -49,8 +51,9 @@ const Keyboard: () => JSX.Element = () => {
          }
     vrm.children.forEach( item => {
       if( item.name === btnName ){
-        item.position.z = 0.01;
-      }
+        if( btnName === 'clear') item.position.z = -0.03;
+        else item.position.z = 0.01;
+      }     
     });
   };
 
