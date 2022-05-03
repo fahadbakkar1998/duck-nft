@@ -7,6 +7,7 @@ import { MachineLayout } from "./components/Machine/index";
 import bgImg from "./assets/img/machine-bg.png";
 import { OrbitControls } from "@react-three/drei";
 import Mobile from "./components/Mobile/Mobile";
+import ToggleSwitch from "./components/Machine/MainScreen/ToggleSwitch";
 
 function App() {
   const isMobile =
@@ -35,9 +36,19 @@ function App() {
         </div>
       </div>
       
-      <div className="machine-container">
+      <div className="machine-container relative">
+        <div className="flex gap-3 z-50 absolute top-[77.2%] left-[59%] w-[25%] transform -translate-x-1/2 -translate-y-1/2">
+          <ToggleSwitch />
+          <ToggleSwitch />
+          <ToggleSwitch />
+          <ToggleSwitch />
+          <ToggleSwitch />
+          <ToggleSwitch />
+          <ToggleSwitch />
+          <ToggleSwitch />
+        </div>
         <img className="background" src={bgImg} alt=""></img>
-
+        
         <Canvas
           orthographic
           camera={{ zoom: 100, position: [0, 0, 100] }}
