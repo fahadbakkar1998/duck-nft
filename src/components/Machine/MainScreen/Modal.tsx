@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import { FC, useRef, ReactNode } from "react";
 
 interface ModalProps {
   children: ReactNode;
@@ -20,6 +20,7 @@ const ModalButton = ({ onClose }) => (
 )
 
 const Modal: FC<ModalProps> = ({ children, open, onClose, className, closeButton }) => {
+  const closeRef = useRef<HTMLDivElement>(null);
   return open ? (
     <div
       className={className}

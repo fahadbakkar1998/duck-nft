@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./index.scss";
 import {
   connectWallet,
@@ -21,13 +21,15 @@ const WalletConnect = (props: any) => {
     ducks,
     setDucks,
   } = useMachineStore();
-
+  const ref = useRef<HTMLDivElement>(null);
   const [status, setStatus] = useState<string | JSX.Element>("");
 
   const onConnectWallet = async () => {
-    const { address, status } = await connectWallet();
+    ref.current?.classList.add('animate-blink');      
+    const { address, status } = await connectWallet();    
     setAddress(address);
     setStatus(status);
+    ref.current?.classList.remove('animate-blink');      
   };
 
   const getWalletConnected = async () => {
@@ -82,14 +84,18 @@ const WalletConnect = (props: any) => {
         {currentMode === MachineMode.Off && (
           <div
             className={`
-            btn-connect 
-            text-white hover:text-black hover:bg-white
-            px-4 text-lg
-          `}
+              btn-connect 
+              hover:bg-white hover:text-black
+              px-4 text-lg
+              flex justify-center
+              space-x-2              
+            `}
+            ref={ref}
             onClick={onConnectWallet}
           >
-            <span>{">"}</span>
-            <span className="ml-2">Connect Wallet</span>
+            <div className="animate-pokeRight">{">"}</div>
+            <div>Connect Wallet</div>
+            <div className="animate-pokeLeft">{"<"}</div>
           </div>
         )}
         <div className="flex justify-center opacity-75">

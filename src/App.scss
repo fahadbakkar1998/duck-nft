@@ -8,6 +8,16 @@
   box-shadow: inset 8px 5px 8px -1px rgba(0, 0, 0, 0.5);
 }
 
+body, html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+body {  
+  background: rgb(221,211,201);
+}
+
 .App {
   position: relative;
   display: flex;
@@ -106,6 +116,10 @@ $scan-opacity: 0.75;
 
 .pixel-font {
   font-family: "Nokia Cellphone FC", "Quadrit", monospace, sans-serif;
+}
+
+.pixel-font-thin {
+  font-family: "thin-pixel", monospace, sans-serif;
 }
 
 .lcd-font {  

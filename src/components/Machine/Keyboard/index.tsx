@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import modelObject from '../../../assets/glb/key_pad_2.glb';
+import modelObject from '../../../assets/glb/key_pad.glb';
 import { useThree } from 'react-three-fiber';
 import { MachineMode, minViewLength } from "../../../utils/constants";
 import Display from '../Display';
@@ -23,7 +23,6 @@ const Keyboard: () => JSX.Element = () => {
   };
 
   const clearClick = () => {
-    setCurrentDuckId(0);
     setValue('');
   };
   
@@ -42,6 +41,8 @@ const Keyboard: () => JSX.Element = () => {
   }, [currentDuckId]);
 
   const buttonClick = ( btnName ) => {
+    console.log('btnName-->', btnName);
+    
     if ([MachineMode.Off, MachineMode.Syncing].includes(currentMode)) return;
     if(btnName === 'enter') enterClick(value);
     else if(btnName === 'clear') clearClick();
@@ -50,8 +51,9 @@ const Keyboard: () => JSX.Element = () => {
          }
     vrm.children.forEach( item => {
       if( item.name === btnName ){
-        item.position.z = 0.01;
-      }
+        if( btnName === 'clear') item.position.z = -0.03;
+        else item.position.z = 0.01;
+      }     
     });
   };
 

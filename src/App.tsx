@@ -7,6 +7,7 @@ import bgImg from "./assets/img/machine-bg.jpg";
 import Mobile from "./components/Mobile/Mobile";
 import OwnersManualModal from "./components/OwnersManual/OwnersManualModal";
 import useMachineStore from "./store";
+import ToggleSwitch from "./components/Machine/MainScreen/ToggleSwitch";
 
 function App() {
   const isMobile =
@@ -19,11 +20,8 @@ function App() {
   return isMobile ? (
     <Mobile />
   ) : (
-    <div className="App flex flex-col bg-[#ddd3c9]">      
-      {/* TEST HEADER */}
-      {/* <div className="h-96 w-full bg-[#ddd3c9]" /> */}
-
-      <div className="header"></div>
+    <div>
+    <div className="App flex flex-col">                  
       <div
         className={`
         top-0
@@ -34,20 +32,25 @@ function App() {
         testy-font text-[100pt] phat-purple 
         `}
       >
-        <div
-        // border-2 border-orange-400 shadow-lg bg-orange-500  
-          className={`
-            mt-40 z-30 relative mx-auto  
-            
-            bg-opacity-20 rounded-full
-          `}>
+        <div className={`mt-40 z-30 relative mx-auto bg-opacity-20 rounded-full`}>
             Tozzi ducks
           <span className="text-7xl copy-text ">&copy;</span>
         </div>
       </div>
       
-      <div className="machine-container">
+      <div className="machine-container relative">
+        <div className="flex gap-3 z-50 absolute top-[77.2%] left-[59%] w-[25%] transform -translate-x-1/2 -translate-y-1/2">
+          <ToggleSwitch />
+          <ToggleSwitch />
+          <ToggleSwitch />
+          <ToggleSwitch />
+          <ToggleSwitch />
+          <ToggleSwitch />
+          <ToggleSwitch />
+          <ToggleSwitch />
+        </div>
         <img className="background" src={bgImg} alt=""></img>
+
         <Canvas
           orthographic
           camera={{ zoom: 100, position: [0, 0, 100] }}
@@ -63,6 +66,7 @@ function App() {
       </div>
       <OwnersManualModal modalIsOpen={isOwnersModalOpen} setModalIsOpen={setIsOwnersManualOpen} />
       <div className="h-96 w-full bg-[#d7dad2]" />
+    </div>
     </div>
   );
 }
