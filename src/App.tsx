@@ -2,8 +2,7 @@ import { Suspense } from "react";
 import { Canvas } from "react-three-fiber";
 import "./App.scss";
 import { MachineLayout } from "./components/Machine/index";
-// import bgImg from "./assets/img/duck-base-holepunch.png";
-import bgImg from "./assets/img/machine-bg.jpg";
+import bgImg from "./assets/img/machine-bg.png";
 import Mobile from "./components/Mobile/Mobile";
 import OwnersManualModal from "./components/OwnersManual/OwnersManualModal";
 import useMachineStore from "./store";
@@ -64,8 +63,7 @@ function App() {
           </Suspense>
         </Canvas>
       </div>
-      <OwnersManualModal modalIsOpen={isOwnersModalOpen} setModalIsOpen={setIsOwnersManualOpen} />
-      <div className="h-96 w-full bg-[#d7dad2]" />
+      <OwnersManualModal modalIsOpen={isOwnersModalOpen} setModalIsOpen={setIsOwnersManualOpen} />      
     </div>
     </div>
   );
