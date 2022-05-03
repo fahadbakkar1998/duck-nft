@@ -3,7 +3,8 @@ import { Canvas } from "react-three-fiber";
 import "./App.scss";
 import { MachineLayout } from "./components/Machine/index";
 // import bgImg from "./assets/img/duck-base-holepunch.png";
-import bgImg from "./assets/img/machine-bg.jpg";
+// import bgImg from "./assets/img/machine-bg.jpg";
+import bgImg from "./assets/img/machine-bg.png";
 import { OrbitControls } from "@react-three/drei";
 import Mobile from "./components/Mobile/Mobile";
 
@@ -16,11 +17,8 @@ function App() {
   return isMobile ? (
     <Mobile />
   ) : (
-    <div className="App flex flex-col bg-[#ddd3c9]">      
-      {/* TEST HEADER */}
-      {/* <div className="h-96 w-full bg-[#ddd3c9]" /> */}
-
-      <div className="header"></div>
+    <div>
+    <div className="App flex flex-col">                  
       <div
         className={`
         top-0
@@ -31,13 +29,7 @@ function App() {
         testy-font text-[100pt] phat-purple 
         `}
       >
-        <div
-        // border-2 border-orange-400 shadow-lg bg-orange-500  
-          className={`
-            mt-40 z-30 relative mx-auto  
-            
-            bg-opacity-20 rounded-full
-          `}>
+        <div className={`mt-40 z-30 relative mx-auto bg-opacity-20 rounded-full`}>
             Tozzi ducks
           <span className="text-7xl copy-text ">&copy;</span>
         </div>
@@ -58,11 +50,8 @@ function App() {
             <MachineLayout />
           </Suspense>
         </Canvas>
-      </div>
-
-      {/* <OwnersManual /> */}
-
-      <div className="h-96 w-full bg-[#d7dad2]" />
+      </div>      
+    </div>
     </div>
   );
 }
