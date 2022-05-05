@@ -4,19 +4,18 @@ import DrawingTool from "./CustomizationMode";
 import WalletConnect from "./WalletConnect/index";
 import BrowsingMode from "./BrowsingMode";
 import { FC } from "react";
-import { Html } from "@react-three/drei";
 import { MachineMode } from "../../../utils/constants";
 import ModeSwitcher from "../../common/ModeSwitcher";
+import { Html } from "@react-three/drei";
 
 
 interface ScreenProps {
   screenInverted: boolean;
-  switchModes: () => void;
+  switchModes: (direction: string) => void;
 }
 
-const Screen: FC<ScreenProps> = ({ screenInverted, switchModes }) => {
-  const currentState = useMachineStore((state) => state);
-  const { currentMode } = currentState;
+const MainScreen: FC<ScreenProps> = ({ screenInverted, switchModes }) => {
+  const { currentMode } = useMachineStore();
 
   return (
     <Html
@@ -30,18 +29,18 @@ const Screen: FC<ScreenProps> = ({ screenInverted, switchModes }) => {
       }
       transform
       occlude
-    >
+    > 
       <div className="bottom">
-        <ModeSwitcher switchModes={switchModes}/>
+        <ModeSwitcher nextMode={() => switchModes('next')} prevMode={() => switchModes('prev')}/>
       </div>
       {[MachineMode.Off, MachineMode.Syncing].includes(currentMode) && (
         <WalletConnect />
       )}
-      <BrowsingMode />
-      <DrawingTool />
-      <AdminMain />
+      { currentMode === MachineMode.Shopping && <BrowsingMode /> }
+      { currentMode === MachineMode.Customization && <DrawingTool /> }
+      { currentMode === MachineMode.Admin && <AdminMain /> }
     </Html>
   );
 };
 
-export default Screen;
+export default MainScreen;

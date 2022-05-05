@@ -1,5 +1,4 @@
-.main {
-  display: none;
+.main {  
   flex-direction: column;
   gap: 10px;
   border: 0;
@@ -10,24 +9,8 @@
     border-radius: 15%;    
     width: 435px;
     height: 435px;
-    background-color: rgb(8, 8, 8);
-    .duck-grid {
-      overflow: hidden;
-      &.overflow {
-        overflow: auto;
-      }
-    }
+    background-color: rgb(8, 8, 8);    
   }
-  // .right {
-  //   position: fixed;
-  //   right: -15%;
-  //   width: 10%;
-  //   bottom: 43%;
-  //   display: flex;
-  //   flex-direction: column;
-  //   justify-content: center;
-  //   gap: 22px;
-  // }
   .footer {
     position: absolute;
     bottom: -50px;

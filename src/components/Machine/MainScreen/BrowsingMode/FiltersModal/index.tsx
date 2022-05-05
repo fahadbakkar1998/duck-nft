@@ -44,8 +44,7 @@ const FiltersModal: FC<FiltersModalProps> = ({ open, children, onClose }) => {
   };
 
   return (
-    <Modal open={open} onClose={onClose} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 black-screen        
-    pixel-font text-white p-10 border-2 border-white w-5/6 h-5/6 text-xl flex flex-col justify-between items-start z-50">
+    <Modal open={open} onClose={onClose}>
       <div className="mb-2 pb-2 border-b-2 border-dashed text-base">DUCK FILTERS</div>
       <div className="grid w-full grid-cols-2 text-base pixel-font">
         {/* <div className="flex items-center">All Ducks</div>
@@ -86,10 +85,7 @@ const FiltersModal: FC<FiltersModalProps> = ({ open, children, onClose }) => {
       </div>
       <div className="mb-2 mt-4 pb-2 border-b-2 border-dashed text-base">UI OPTIONS</div>
       <div className="grid w-full grid-cols-2  text-base pixel-font">
-      {/* <div className="flex items-center">All Ducks</div>
-      <div className="flex items-center justify-end">
-        <CheckBox isChecked={all} onToggle={() => toggleFilter("all")} />
-      </div> */}
+ 
         <div className="flex items-center pixel-font-thin text-2xl">Show Duck ID</div>
         <div className="flex items-center justify-end">
           <CheckBox            

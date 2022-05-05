@@ -12,7 +12,7 @@ import { DuckData, DuckFilters } from "../types/types";
 type MachineStore = {
   // main
   currentMode: MachineMode;
-  switchModes: () => void;
+  switchModes: (direction: string) => void;
   isSwitchingModes: boolean;
   setIsSwitchingModes: (isSwitching: boolean) => void;
   setCurrentMode: (val: MachineMode) => void;
@@ -106,7 +106,7 @@ export const useMachineStore = create<MachineStore>(
       set({ isSwitchingModes: isSwitching });
     },
     isSwitchingModes: false,
-    switchModes: (): void => {
+    switchModes: (direction: string): void => {
       set((state) => {
         setTimeout(() => {
           set({ isSwitchingModes: false });
@@ -115,13 +115,19 @@ export const useMachineStore = create<MachineStore>(
         let nextMode: any;
         switch (state.currentMode) {
           case MachineMode.Shopping:
-            nextMode = MachineMode.Customization;
+            nextMode = direction === 'next' 
+              ? MachineMode.Customization
+              : MachineMode.Admin;
             break;
           case MachineMode.Customization:
-            nextMode = MachineMode.Admin;
+            nextMode = direction === 'next' 
+              ? MachineMode.Admin
+              : MachineMode.Shopping;
             break;
           case MachineMode.Admin:
-            nextMode = MachineMode.Shopping;
+            nextMode = direction === 'next' 
+              ? MachineMode.Shopping 
+              : MachineMode.Customization;
             break;
           default:
             nextMode = currentMode;

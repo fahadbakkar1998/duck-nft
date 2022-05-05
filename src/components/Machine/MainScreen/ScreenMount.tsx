@@ -4,7 +4,7 @@ import useMachineStore from "../../../store";
 import { MachineMode, minViewLength } from "../../../utils/constants";
 import { useLoader, useThree, useFrame } from "react-three-fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import Screen from "./Screen";
+import Screen from "./index";
 import { Vector3 } from "three";
 
 let globalRoundCount = 0;
@@ -39,7 +39,7 @@ export const MainScreen = () => {
     },
   }));
 
-  const handleModeSwitch = () => {
+  const handleModeSwitch = (direction: string) => {
     if ([MachineMode.Off, MachineMode.Syncing].includes(currentMode)) return;
     if (screenIsRotating || processing || showTxStatus) return;
     screenIsRotating = true;
@@ -49,7 +49,7 @@ export const MainScreen = () => {
     setSpring({ rotation: [Math.PI * ++globalRoundCount, 0, 0] });
     setIsSwitchingModes(true);
     setTimeout(() => {
-      switchModes();
+      switchModes(direction);
       setScreenInverted(!screenInverted);
     }, 1200);
   };

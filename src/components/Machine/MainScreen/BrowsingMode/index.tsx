@@ -1,48 +1,96 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import DuckCard from "../../../DuckCard/DuckCard";
 import useMachineStore from "../../../../store";
-import { MachineMode } from "../../../../utils/constants";
 import "./index.scss";
 import FiltersModal from "./FiltersModal";
-import cn from "classnames";
 import { useFilteredDucks } from "../../../../hooks";
 import { DuckData } from "../../../../types/types";
 import CircleButton from "../../../../components/common/CircleButton";
 import filterIcon from "../../../../assets/img/icons/filter.svg";
-import PillButton from "@/components/common/ModeSwitcher";
+import KeyboardEventHandler from 'react-keyboard-event-handler';
 
-const HomeScreen = () => {
-  const { isSwitchingModes, currentMode, currentDuckId } = useMachineStore();
+const directionToDuckId = (direction: string, currentDuckId: number) => {
+  let nextDuckId = currentDuckId;
+  switch (direction) {
+    case 'up':
+      nextDuckId -= 3;
+      break;
+    case 'down':
+      nextDuckId += 3;
+      break;
+    case 'left':
+      nextDuckId -= 1;
+      break;
+    case 'right':
+      nextDuckId += 1;
+      break;
+  }
+  return nextDuckId;
+}
+
+const BrowsingMode = () => {
+  const { 
+    isSwitchingModes, 
+    currentMode, 
+    currentDuckId, 
+    setCurrentDuckId,
+    ducks,
+    setCurrentMode 
+  } = useMachineStore();
   const [showFilters, setShowFilters] = useState(false);
   const filteredDucks = useFilteredDucks();
-  console.log('filtered', filteredDucks);
-
+  
   useEffect(() => {
     document.getElementById(`item${filteredDucks[currentDuckId].id}`)?.scrollIntoView({
       behavior: 'smooth',
       block: 'nearest',
-    });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    });  
   }, [currentDuckId]);
+
+  const selectDuckByDirection = (direction: string) => {
+    const nextDuck = directionToDuckId(direction, currentDuckId);
+    if (ducks[nextDuck]) setCurrentDuckId(nextDuck);
+  }
+
+  if (isSwitchingModes) {
+    return (
+      <div
+        className="main scanline"
+      >
+      <div className="mainScreen w-full border-gray-600 border-2 overflow-hidden">
+        <div className="mt-24  scale-[1.8]  opacity-100 overflow-hidden">              
+          <video 
+            id="alt-static"
+            playsInline
+            autoPlay
+            muted
+            loop
+            src="/assets/video/static.mp4"
+          />
+        </div>
+      </div>
+      </div>
+    );
+  }
   
   return (
-    <div
-      className={cn("main scanline", {
-        active: currentMode === MachineMode.Shopping,
-      })}
-    >
-      <div className={cn("mainScreen overflow-scroll w-full border-gray-600 border-2")}>
-        <FiltersModal
-          open={showFilters}
-          onClose={() => { setShowFilters(false) }}
-        />
-        {!isSwitchingModes && (
-          <>
+    <>
+      <KeyboardEventHandler 
+        handleKeys={['up', 'down', 'left', 'right']}
+        onKeyEvent={(key) => selectDuckByDirection(key)}
+      />
+      <div
+        className="main scanline"
+      >
+        <div className="mainScreen overflow-scroll w-full border-gray-600 border-2">
+          <FiltersModal
+            open={showFilters}
+            onClose={() => { setShowFilters(false) }}
+          />        
             <div
               style={{ borderRadius: "15%" }}
               className="absolute z-30 w-full h-full pointer-events-none inner-shadow"
-            />
-            
+            />      
             <div className="right">
               <CircleButton
                 onClick={() => {
@@ -52,12 +100,7 @@ const HomeScreen = () => {
               />
             </div>            
             {/* DUCK GRID */}
-            <div
-              className={cn("relative w-full h-full duck-grid", {
-                overflow:
-                  !isSwitchingModes && currentMode === MachineMode.Shopping,
-              })}
-            >
+            <div className="relative w-full h-full duck-grid">
               <div className="grid grid-cols-3 gap-1">
                 {React.Children.toArray(
                   filteredDucks.map((item: DuckData) => {
@@ -65,12 +108,11 @@ const HomeScreen = () => {
                   })
                 )}
               </div>
-            </div>
-          </>
-        )}
+            </div>        
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
-export default HomeScreen;
+export default BrowsingMode;
