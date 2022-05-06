@@ -26,5 +26,11 @@ export enum DuckType {
 export enum MintStatus {
   Enabled,
   Disabled,
-  Whitelist,
+  Allowance,
+}
+
+export enum AdminTabs {
+  Settings,
+  Allowances,
+  Accounting
 }

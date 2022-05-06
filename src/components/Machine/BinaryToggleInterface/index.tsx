@@ -24,6 +24,7 @@ const BTI = () => {
     return [7, 6, 5, 4, 3, 2, 1, 0].map((num) => {
       return (
         <ToggleSwitch 
+          key={num}
           value={isOn(num)}
           onClick={() => toggleSwitch(num)} 
         />

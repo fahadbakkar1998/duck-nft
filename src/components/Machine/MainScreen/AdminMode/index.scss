@@ -2,12 +2,5 @@
   width: 435px;
   height: 435px;
   border-radius: 15%;  
-  display: none;
-  flex-direction: column;
-  color: white;
-  background-color: rgb(8, 8, 8);
-
-  &.active {
-    display: flex;
-  }
+  color: white; 
 }
