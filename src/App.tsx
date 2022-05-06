@@ -6,7 +6,8 @@ import bgImg from "./assets/img/machine-bg.png";
 import Mobile from "./components/Mobile/Mobile";
 import OwnersManualModal from "./components/OwnersManual/OwnersManualModal";
 import useMachineStore from "./store";
-import ToggleSwitch from "./components/Machine/MainScreen/ToggleSwitch";
+import ToggleSwitch from "./components/Machine/BinaryToggleInterface/ToggleSwitch";
+import BTI from "./components/Machine/BinaryToggleInterface";
 
 function App() {
   const isMobile =
@@ -38,16 +39,7 @@ function App() {
       </div>
       
       <div className="machine-container relative">
-        <div className="flex gap-3 z-50 absolute top-[77.2%] left-[59%] w-[25%] transform -translate-x-1/2 -translate-y-1/2">
-          <ToggleSwitch />
-          <ToggleSwitch />
-          <ToggleSwitch />
-          <ToggleSwitch />
-          <ToggleSwitch />
-          <ToggleSwitch />
-          <ToggleSwitch />
-          <ToggleSwitch />
-        </div>
+        <BTI />
         <img className="background" src={bgImg} alt=""></img>
 
         <Canvas

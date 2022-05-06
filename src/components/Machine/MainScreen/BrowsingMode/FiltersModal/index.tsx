@@ -1,6 +1,6 @@
 import useMachineStore from "../../../../../store";
 import { FC } from "react";
-import Modal from "../../Modal";
+import Modal from "../../OnScreenModal";
 
 interface FiltersModalProps {
   open: boolean;
