@@ -27,18 +27,25 @@ const StatusPanel: () => JSX.Element = () => {
       transform
     >
       <div className="status-panel">
+        
         <div className="graph-bg lcd-font text-black text-opacity-75 text-md inner-shadow rounded-sm font-thin flex items-center  justify-center space-x-10 h-8
-            border-t border-l border-black border-opacity-50
+            border-t border-l border-black border-opacity-50 
           ">
-          <div>
-            duck price: 0.5 eth
-          </div>  
-          <button className="hover:font-bold" onClick={() => {
-            document.body.style.overflow = 'hidden';
-            setIsOwnersManualOpen(!isOwnersModalOpen)
-          }}>
-           View Owners Manaual
-          </button>      
+
+          <div className="absolute w-full h-full overflow-hidden pointer-events-none  ">
+            <div className="shimmer animate-shimmer"/>
+          </div>
+          <div className="flex w-full space-x-4">
+            <div>
+              duck price: 0.5 eth
+            </div>  
+            <button className="hover:font-bold" onClick={() => {
+              document.body.style.overflow = 'hidden';
+              setIsOwnersManualOpen(!isOwnersModalOpen)
+            }}>
+            View Owners Manaual
+            </button>      
+          </div>
         </div>
       </div>
     </Html>

@@ -11,6 +11,7 @@ import "./index.scss";
 import NotConnected from "./NotConnected";
 import AltButton from "./AltButton";
 import { useEffect, useRef } from "react";
+import StatusLights from "./StatusLights";
 
 const AltScreen: () => JSX.Element = () => {
   const { currentMode, altIsStatic } = useMachineStore();
@@ -40,6 +41,7 @@ const AltScreen: () => JSX.Element = () => {
       transform
     >
       <div className="relative">
+        <StatusLights />
         <div
           className={`
             border-[#348476] border 

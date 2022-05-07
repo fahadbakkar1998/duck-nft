@@ -8,12 +8,13 @@ import Screen from "./index";
 import { Vector3 } from "three";
 
 let globalRoundCount = 0;
-let screenIsRotating = false;
+// let screenIsRotating = false;
 
 export const MainScreen = () => {
   const { viewport, scene, mouse } = useThree();
   const min = viewport.width;
   const [screenInverted, setScreenInverted] = useState(false);
+  const [screenIsRotating, setScreenIsRotating] = useState(false);
   const gltfDisk = useLoader(GLTFLoader, "assets/models/DuckDisk.glb");
   const modelRef = useRef();
 
@@ -29,23 +30,24 @@ export const MainScreen = () => {
   const [spring, setSpring] = useSpring(() => ({
     rotation: [0, 0, 0],
     position: [0, 0, 0],
-    config: {
-      duration: 2500,
-      bounce: 2,
+    config: {      
+      duration: 2500,    
       easing: easings.easeInOutElastic,
-    },
-    onRest: () => {
-      screenIsRotating = false;
-    },
+    }, 
   }));
 
   const handleModeSwitch = (direction: string) => {
     if ([MachineMode.Off, MachineMode.Syncing].includes(currentMode)) return;
     if (screenIsRotating || processing || showTxStatus) return;
-    screenIsRotating = true;
+    setScreenIsRotating(true);
     setTimeout(() => {
-      changeChannel(1000);
+      changeChannel(1000);      
     }, 300);
+    setTimeout(() => {
+      setScreenIsRotating(false);
+    }, 1800);
+    
+    
     setSpring({ rotation: [Math.PI * ++globalRoundCount, 0, 0] });
     setIsSwitchingModes(true);
     setTimeout(() => {

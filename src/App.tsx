@@ -39,8 +39,8 @@ function App() {
       </div>
       
       <div className="machine-container relative">
-        <BTI />
-        <img className="background" src={bgImg} alt=""></img>
+        <BTI />        
+        <img className="background" src={bgImg} alt="" />
 
         <Canvas
           orthographic

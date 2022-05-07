@@ -9,6 +9,7 @@ import "./index.scss";
 import Button from "./Button";
 import { BuyIcon, ProfileIcon, ProfileOpenIcon } from "../../common/SvgIcon";
 import { connectWallet } from "../../../utils/interact";
+import ShimmerLayer from "../../../components/common/ShimmerLayer";
 
 const ButtonView = () => {
   const currState = useMachineStore((state) => state);
@@ -151,7 +152,8 @@ const ButtonView = () => {
 
 const AltButton = () => {
   return (
-    <div className="inner-shadow absolute rounded-sm -bottom-[25.5%] left-[5.75%] graph-bg h-[14.75%] w-[48.75%]">
+    <div className="inner-shadow absolute rounded-sm -bottom-[25.5%] left-[5.75%] graph-bg h-[14.75%] w-[48.75%]">    
+      <ShimmerLayer />
       <ButtonView />
     </div>
   );

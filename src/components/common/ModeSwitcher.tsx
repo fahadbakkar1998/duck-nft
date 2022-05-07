@@ -5,6 +5,7 @@ import { FC } from 'react';
 import { SmallCircleButton } from './CircleButton';
 import nextIcon from '../../assets/img/icons/next.svg';
 import prevIcon from '../../assets/img/icons/prev.svg';
+import ShimmerLayer from './ShimmerLayer';
 
 interface ModeSwitcherProps {
   nextMode: () => void;
@@ -29,7 +30,9 @@ const ModeSwitcher: FC<ModeSwitcherProps> = ({ nextMode, prevMode }) => {
     <div className="relative select-none flex justify-center w-full">
       <div className="absolute flex justify-center items-center w-3/5 space-x-2">        
         <SmallCircleButton image={prevIcon} onClick={() => prevMode() }/>
-        <div className="graph-bg  rounded flex-1 text-center px-2 lcd-font text-opacity-80 border inner-shadow border-gray-600">
+        
+        <div className="graph-bg  rounded flex-1 text-center px-2 lcd-font text-opacity-80 border inner-shadow border-gray-600 relative">        
+          <ShimmerLayer className="left-0 rounded" />
           {getModeName(currentMode)}
         </div>
         <SmallCircleButton image={nextIcon} onClick={() => nextMode()} />

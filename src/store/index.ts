@@ -20,6 +20,8 @@ type MachineStore = {
   setCurrentDuckId: (val: number) => void;
   currentAdminDuckId: number;
   setCurrentAdminDuckId: (val: number) => void;
+  machineMood: undefined | 'happy' | 'sad';
+  setMachineMood: (mood: undefined | 'happy' | 'sad') => void;
   
   changeChannel: (duration: number) => void;
   duckFilters: DuckFilters;
@@ -75,7 +77,10 @@ export const useMachineStore = create<MachineStore>(
     setCurrentMode: (mode: MachineMode): void => {
       set({ currentMode: mode });
     },
-
+    machineMood: undefined,
+    setMachineMood: (mood: undefined | 'happy' | 'sad'):void => {
+      set({ machineMood: mood});
+    },
     // alt screen
     altIsStatic: false,
     changeChannel: (duration): void => {
@@ -140,7 +145,12 @@ export const useMachineStore = create<MachineStore>(
     setCurrentDuckId: (id: number): void => {
       set((state) => {        
         state.changeChannel(250);        
-        return { showDuckProfile: false, currentDuckId: id };
+        let duckSold = false;
+        if (state.ducks[id].owner) duckSold = true;        
+        setTimeout(() => {
+          set({ machineMood: undefined, altIsStatic: false });
+        }, 350);
+        return { machineMood: duckSold ? 'sad' : 'happy', showDuckProfile: false, currentDuckId: id };
       });
     },
 
