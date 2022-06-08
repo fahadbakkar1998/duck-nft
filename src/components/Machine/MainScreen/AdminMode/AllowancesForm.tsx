@@ -1,27 +1,34 @@
 import { useState, useEffect } from 'react';
 import { Contract } from 'ethers';
-import { useEthers } from '@usedapp/core';
+import { useContractFunction, useEthers } from '@usedapp/core';
 import { MintStatus } from '../../../../types/types';
 import FormToggle from './common/FormToggle';
 import FormInput from './common/FormInput';
 import FormButton from './common/FormButton';
 import { useMachineContract } from '../../../../hooks/machine';
 import { contractAbi } from '../../../../utils/constants';
+import useMachineStore from '../../../../store';
 
 interface Allowance {
   tozziDucks: string;
   customDucks: string;
 }
-
+// 0x23168EaB692E07114A7949A433408414A18eeEd7
 interface AllowanceFormValues extends Allowance {
   account: string;
 }
 
 const AllowancesForm = () => {
+  const { altMessage, setAltMessage } = useMachineStore();
   const [allowanceAccount, setAllowanceAccount] = useState('');
   const [checkedAllowance, setCheckedAllowance] = useState<Allowance|null>(null);
   const { library } = useEthers();
   const machineContract = new Contract(process.env.REACT_APP_MACHINE_CONTRACT_ADDRESS!, contractAbi, library);
+  const { send, state } = useContractFunction(
+    machineContract,
+    'setDuckAllowance',
+    { transactionName: 'Set Duck Allowance' },
+  );
 
   const [allowanceFormValues, setAllowanceFormValues] = useState<AllowanceFormValues>({
     account: '',
@@ -44,9 +51,33 @@ const AllowancesForm = () => {
     }
   };
 
+  useEffect(() => {
+    if (state?.status === 'Mining') {
+      setAltMessage('Setting Duck Allowance...');
+      // setIsLocked(true);
+      // setMachineMood('happy');
+    } else if (state?.status === 'Success') {
+      setAltMessage('Success!');
+      // setMachineMood(undefined);
+      // setIsLocked(false);
+    } else if (state?.status === 'PendingSignature') {
+      setAltMessage('Signature Pending...');
+    } else if (state?.status === 'Exception') {
+      const denied = 'MetaMask Tx Signature: User denied transaction signature.';
+      if (state?.errorMessage === denied) {
+        setAltMessage('Well, nevermind then...');
+      } else {
+        setAltMessage('Oh Quack! something went wrong!');
+      }
+      // setMachineMood('sad');
+      // setIsLocked(false);
+      // setTimeout(() => setMachineMood(undefined), 500);
+    }
+  }, [state.status]);
+
   const handleSetAllowance = () => {
-    // eslint-disable-next-line no-console
-    console.log('setting allowance');
+    const { account, tozziDucks, customDucks } = allowanceFormValues;
+    send(account, tozziDucks, customDucks);
   };
 
   return (
@@ -68,7 +99,7 @@ const AllowancesForm = () => {
         { checkedAllowance && (
           <div className="pixel-font-thin text-2xl flex justify-between">
             <div>Tozzi Ducks: {checkedAllowance.tozziDucks}</div>
-            <div>Custom Ducks: {checkedAllowance.tozziDucks}</div>
+            <div>Custom Ducks: {checkedAllowance.customDucks}</div>
           </div>
         )}
       </div>
@@ -102,7 +133,7 @@ const AllowancesForm = () => {
           </div>
         </div>
         <div className="absolute -bottom-4 -right-4 flex space-x-2 text-sm">
-          <FormButton label="Save" onClick={() => {}} />
+          <FormButton label="Save" onClick={handleSetAllowance} />
         </div>
       </div>
 

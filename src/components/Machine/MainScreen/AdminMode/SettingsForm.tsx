@@ -115,7 +115,7 @@ const SettingsForm = () => {
             className="w-3/5"
             value={tozziPrice ?? ''}
             overlay="ETH"
-            onChange={(e) => { if (decimalRegex.test(e.currentTarget.value)) setCustomPrice(e.currentTarget.value); }}
+            onChange={(e) => { if (decimalRegex.test(e.currentTarget.value)) setTozziPrice(e.currentTarget.value); }}
           />
         </div>
       </div>
