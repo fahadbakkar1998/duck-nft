@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { shortenAddress } from '@usedapp/core';
 import { constants } from 'ethers';
 import { MintStatus } from '../../../../types/types';
 import FormInput from './common/FormInput';
 import FormButton from './common/FormButton';
+import { useMachineState } from '../../../../state/hooks';
 
 const config = {
   tozziMintStatus: MintStatus.Enabled,
@@ -25,6 +27,7 @@ const owner = constants.AddressZero;
 const balance = '100';
 
 const AccountingForm = () => {
+  const { data: machineState } = useMachineState();
   const [value, setValue] = useState('');
   const handleWithdraw = () => {};
 
@@ -32,11 +35,11 @@ const AccountingForm = () => {
     <div className="flex mt-4 flex-col space-y-2 h-full relative">
       <div>OWNER</div>
       <div className="pixel-font-thin text-xl">
-        {owner}
+        { machineState?.owner ? shortenAddress(machineState.owner) : '--'}
       </div>
       <div>CURRENT BALANCE</div>
       <div className="pixel-font-thin text-xl">
-        {balance} ETH
+        { machineState?.balance ?? '--'} ETH
       </div>
       <div>WITHDRAW ETH</div>
       <div className="pixel-font-thin">
