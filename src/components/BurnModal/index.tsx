@@ -1,26 +1,51 @@
-import { Html } from "@react-three/drei";
-import useMachineStore from "../../store";
-import { minViewLength } from "../../utils/constants";
-import { burnRenegadeDuck } from "../../utils/interact";
-import { useThree } from "react-three-fiber";
-import { useRef } from "react";
-import "./index.scss";
+import { FC, useEffect, useRef } from 'react';
+import { useThree } from 'react-three-fiber';
+import { useQueryClient } from 'react-query';
+import { Html } from '@react-three/drei';
+import { useContractFunction } from '@usedapp/core';
+import useMachineStore from '../../store';
+import { minViewLength } from '../../utils/constants';
+import { contract } from '../../utils/functions';
+import './index.scss';
 
-const BurnModal: (props: any) => JSX.Element = (props: any) => {
+const BurnModal: FC = (props: any) => {
   const {
-    ducks,
-    setDucks,
     currentAdminDuckId,
-    setCurrentAdminDuckId,
     setProcessing,
     setTransactionStatus,
-    // setShowTxStatus,
   } = useMachineStore();
+  const queryClient = useQueryClient();
+  const { send, state } = useContractFunction(contract, 'burnRenegadeDuck');
+  const { onCloseModal } = props;
 
   const { viewport } = useThree();
-  // const min = Math.min(viewport.width, viewport.height);
   const min = viewport.width;
   const reasonRef = useRef<any>(null);
+
+  useEffect(() => {
+    const { status } = state;
+    if (status === 'Mining') {
+      setProcessing(true);
+      setTransactionStatus('processing...');
+    }
+    if (status === 'Success') {
+      setTransactionStatus('None');
+      setProcessing(false);
+      onCloseModal();
+      queryClient.invalidateQueries();
+      // TODO fN to set the setCurrentAdminDuckId
+    }
+  }, [onCloseModal, queryClient, setProcessing, setTransactionStatus, state]);
+
+  const handleBurnRenegadeDuck = () => {
+    const canBurn = currentAdminDuckId && reasonRef.current.value;
+    if (canBurn) {
+      const reason = reasonRef.current.value;
+      send(currentAdminDuckId, reason);
+    } else {
+      reasonRef.current.focus();
+    }
+  };
 
   return (
     <Html
@@ -35,38 +60,12 @@ const BurnModal: (props: any) => JSX.Element = (props: any) => {
     >
       {props.openModal && (
         <div className="BurnModal">
-          <div className="_close" onClick={props.onCloseModal}></div>
+          <div className="_close" onClick={props.onCloseModal} />
           <div className="_container">
-            <textarea className="_reason" ref={reasonRef} rows={5}></textarea>
+            <textarea className="_reason" ref={reasonRef} rows={5} />
             <div
               className="_btn-burn"
-              onClick={async () => {
-                if (currentAdminDuckId < 0) return;
-                if (!reasonRef.current.value) {
-                  reasonRef.current.focus();
-                  return;
-                }
-                setProcessing(true);
-                setTransactionStatus("processing...");
-                // setShowTxStatus(true);
-                const res = await burnRenegadeDuck({
-                  duckId: currentAdminDuckId,
-                  reason: reasonRef.current.value,
-                });
-                if (res.success) {
-                  // remove burned duck data.
-                  const filterDucks = ducks.filter(
-                    (e) => e.id !== currentAdminDuckId
-                  );
-                  setDucks(filterDucks);
-                  setCurrentAdminDuckId(
-                    filterDucks.length ? filterDucks[0].id : -1
-                  );
-                }
-                setTransactionStatus(res.status);
-                setProcessing(false);
-                props.onCloseModal();
-              }}
+              onClick={handleBurnRenegadeDuck}
             >
               Burn
             </div>

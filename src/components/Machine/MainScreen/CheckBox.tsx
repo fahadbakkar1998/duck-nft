@@ -1,5 +1,5 @@
-
 import { FC } from 'react';
+import { CheckIcon } from '@heroicons/react/solid';
 
 interface CheckBoxProps {
   isChecked: boolean;
@@ -16,12 +16,14 @@ const CheckBox: FC<CheckBoxProps> = ({
     <div
       onClick={disabled ? () => {} : onToggle}
       className={`
-        ${disabled ? "opacity-20" : ""}
+        ${disabled ? 'opacity-20' : ''}
         border border-white aspect-square 
         w-4 cursor-pointer
-        ${isChecked ? "bg-white" : ""}
+        ${isChecked ? 'bg-white' : ''}
       `}
-    />
+    >
+      {isChecked && (<CheckIcon className="absolute h-4 flex fill-black" />)}
+    </div>
   );
 };
 

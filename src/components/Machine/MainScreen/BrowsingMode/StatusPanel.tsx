@@ -1,22 +1,47 @@
-import { useEffect, useState } from "react";
-import { HexColorPicker } from "react-colorful";
-import { Html } from "@react-three/drei";
-import { useThree } from "react-three-fiber";
-import { aspectRatio, minViewLength } from "../../../../utils/constants";
-import useMachineStore from "../../../../store";
+import { FC } from 'react';
+import { useThree } from 'react-three-fiber';
+import Screen from '../../common/Screen';
+import { minViewLength } from '../../../../utils/constants';
+import useMachineStore from '../../../../store';
+import { useMachineConfig } from '../../../../state/hooks';
+import ShimmerLayer from '../../../common/ShimmerLayer';
 
-const StatusPanel: () => JSX.Element = () => {
-  const selectedColor = useMachineStore((state) => state.selectedColor);
-  const isOwnersModalOpen = useMachineStore((state) => state.isOwnersManalOpen);
+const StatusPanel = () => {
   const setIsOwnersManualOpen = useMachineStore((state) => state.setIsOwnersManualOpen);
+  const isOwnersModalOpen = useMachineStore((state) => state.isOwnersManualOpen);
+  const { data: machineConfig, isLoading } = useMachineConfig();
 
+  return isLoading ? null : (
+    <div className="status-panel">
+      <ShimmerLayer />
+      <div
+        className="graph-bg lcd-font text-black text-opacity-75 text-md inner-shadow rounded-sm font-thin flex items-center  justify-center space-x-10 h-8
+          border-t border-l border-black border-opacity-50"
+      >
+        <div>
+          {`duck price: ${machineConfig?.tozziMintPrice || ''} eth`}
+        </div>
+        <button
+          type="button"
+          className="hover:font-bold"
+          onClick={() => {
+            document.body.style.overflow = 'hidden';
+            setIsOwnersManualOpen(!isOwnersModalOpen);
+          }}
+        >
+          View Owners Manaual
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const StatusPanelWrap: FC = () => {
   const { viewport } = useThree();
-  // const min = Math.min(viewport.width, viewport.height);
   const min = viewport.width;
-  const bgColor = selectedColor || "#FFFFFF";
 
   return (
-    <Html
+    <Screen
       scale={[
         (0.18 * min) / minViewLength,
         (0.18 * min) / minViewLength,
@@ -26,30 +51,9 @@ const StatusPanel: () => JSX.Element = () => {
       rotation={[0.0, 0.0, 0.0]}
       transform
     >
-      <div className="status-panel">
-        
-        <div className="graph-bg lcd-font text-black text-opacity-75 text-md inner-shadow rounded-sm font-thin flex items-center  justify-center space-x-10 h-8
-            border-t border-l border-black border-opacity-50 
-          ">
-
-          <div className="absolute w-full h-full overflow-hidden pointer-events-none  ">
-            <div className="shimmer animate-shimmer"/>
-          </div>
-          <div className="flex w-full space-x-4">
-            <div>
-              duck price: 0.5 eth
-            </div>  
-            <button className="hover:font-bold" onClick={() => {
-              document.body.style.overflow = 'hidden';
-              setIsOwnersManualOpen(!isOwnersModalOpen)
-            }}>
-            View Owners Manaual
-            </button>      
-          </div>
-        </div>
-      </div>
-    </Html>
+      <StatusPanel />
+    </Screen>
   );
 };
 
-export default StatusPanel;
+export default StatusPanelWrap;

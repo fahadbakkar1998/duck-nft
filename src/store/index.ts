@@ -1,18 +1,19 @@
-import create, { SetState } from "zustand";
+import create, { SetState } from 'zustand';
+import { QueryClient } from 'react-query';
 import {
   MachineMode,
   defaultLayerIndex,
   defaultColorIndex,
   colors,
-} from "../utils/constants";
-import DTool from "./DTool";
-import jsonDucks from "../utils/duck-data.json";
-import { DuckData, DuckFilters } from "../types/types";
+} from '../utils/constants';
+import DTool from './DTool';
+import jsonDucks from '../utils/duckData.json';
+import { DuckData, DuckFilters } from '../types/types';
 
 type MachineStore = {
-  // main
   currentMode: MachineMode;
   switchModes: (direction: string) => void;
+  queryClient: any;
   isSwitchingModes: boolean;
   setIsSwitchingModes: (isSwitching: boolean) => void;
   setCurrentMode: (val: MachineMode) => void;
@@ -22,15 +23,23 @@ type MachineStore = {
   setCurrentAdminDuckId: (val: number) => void;
   machineMood: undefined | 'happy' | 'sad';
   setMachineMood: (mood: undefined | 'happy' | 'sad') => void;
-  
+  isLocked: boolean;
+  setIsLocked: (locked: boolean) => void;
   changeChannel: (duration: number) => void;
   duckFilters: DuckFilters;
   setDuckFilters: (filters: DuckFilters) => void;
-
+  showDuckIdOnDuckCards: boolean;
+  setShowDuckIdOnDuckCards: (val: boolean) => void
+  showAvailabilityOnDuckCards: boolean;
+  setShowAvailabilityOnDuckCards: (val: boolean) => void
   // alt screen
   altIsStatic: boolean;
   showDuckProfile: boolean;
   setShowDuckProfile: (showProfile: boolean) => void;
+  isBurning: boolean;
+  setIsBurning: (isBurning: boolean) => void;
+  altMessage: string;
+  setAltMessage: (message: string) => void;
 
   // color picker
   DToolInst: DTool;
@@ -62,7 +71,7 @@ type MachineStore = {
   // modal
   openBurnModal: boolean;
   setOpenBurnModal: (val: boolean) => void;
-  isOwnersManalOpen: boolean;
+  isOwnersManualOpen: boolean;
   setIsOwnersManualOpen: (val: boolean) => void;
 
   // eyedropper
@@ -79,9 +88,16 @@ export const useMachineStore = create<MachineStore>(
     },
     machineMood: undefined,
     setMachineMood: (mood: undefined | 'happy' | 'sad'):void => {
-      set({ machineMood: mood});
+      set({ machineMood: mood });
+    },
+
+    isLocked: false,
+    setIsLocked: (locked: boolean): void => {
+      set({ isLocked: locked });
     },
     // alt screen
+    queryClient: new QueryClient(),
+
     altIsStatic: false,
     changeChannel: (duration): void => {
       set({ altIsStatic: true });
@@ -95,18 +111,35 @@ export const useMachineStore = create<MachineStore>(
       set({ showDuckProfile: showProfile });
     },
 
+    isBurning: false,
+    setIsBurning: (isBurning: boolean): void => {
+      set({ isBurning });
+    },
+
+    altMessage: '',
+    setAltMessage: (message: string): void => {
+      set({ altMessage: message });
+    },
+
     duckFilters: {
       all: true,
       available: true,
       sold: true,
-      mine: true,
-      custom: true,
+      mine: false,
+      custom: false,
       hideUI: false,
     },
     setDuckFilters: (filters: DuckFilters): void => {
       set({ duckFilters: filters });
     },
-
+    showAvailabilityOnDuckCards: true,
+    setShowAvailabilityOnDuckCards: (show: boolean): void => {
+      set({ showAvailabilityOnDuckCards: show });
+    },
+    showDuckIdOnDuckCards: true,
+    setShowDuckIdOnDuckCards: (show: boolean): void => {
+      set({ showDuckIdOnDuckCards: show });
+    },
     setIsSwitchingModes: (isSwitching: boolean): void => {
       set({ isSwitchingModes: isSwitching });
     },
@@ -116,37 +149,36 @@ export const useMachineStore = create<MachineStore>(
         setTimeout(() => {
           set({ isSwitchingModes: false });
         }, 300);
-        const currentMode = state.currentMode;
+        const { currentMode } = state;
         let nextMode: any;
         switch (state.currentMode) {
           case MachineMode.Shopping:
-            nextMode = direction === 'next' 
+            nextMode = direction === 'next'
               ? MachineMode.Customization
               : MachineMode.Admin;
             break;
           case MachineMode.Customization:
-            nextMode = direction === 'next' 
+            nextMode = direction === 'next'
               ? MachineMode.Admin
               : MachineMode.Shopping;
             break;
           case MachineMode.Admin:
-            nextMode = direction === 'next' 
-              ? MachineMode.Shopping 
+            nextMode = direction === 'next'
+              ? MachineMode.Shopping
               : MachineMode.Customization;
             break;
           default:
             nextMode = currentMode;
         }
-        return { currentMode: nextMode, isSwitchingModes: true };
+        return { currentMode: nextMode, isSwitchingModes: true, isBurning: false, altMessage: '' };
       });
     },
-
     currentDuckId: 0,
     setCurrentDuckId: (id: number): void => {
-      set((state) => {        
-        state.changeChannel(250);        
+      set((state) => {
+        state.changeChannel(250);
         let duckSold = false;
-        if (state.ducks[id].owner) duckSold = true;        
+        if (state.ducks[id].owner) duckSold = true;
         setTimeout(() => {
           set({ machineMood: undefined, altIsStatic: false });
         }, 350);
@@ -191,7 +223,7 @@ export const useMachineStore = create<MachineStore>(
       customDuckMintStatus: 0,
       balance: 0,
       burnWindow: 0,
-      owner: "",
+      owner: '',
     },
     setMachineConfig: (val: any): void => {
       set({ machineConfig: val });
@@ -208,12 +240,12 @@ export const useMachineStore = create<MachineStore>(
       set({ processing: val });
     },
 
-    address: "",
+    address: '',
     setAddress: (val: string): void => {
       set({ address: val });
     },
 
-    transactionStatus: "",
+    transactionStatus: '',
     setTransactionStatus: (val: any): void => {
       set({ transactionStatus: val });
     },
@@ -228,9 +260,9 @@ export const useMachineStore = create<MachineStore>(
     setOpenBurnModal: (val: boolean): void => {
       set({ openBurnModal: val });
     },
-    isOwnersManalOpen: false,
-    setIsOwnersManualOpen:  (val: boolean): void => {
-      set({ isOwnersManalOpen: val });
+    isOwnersManualOpen: false,
+    setIsOwnersManualOpen: (val: boolean): void => {
+      set({ isOwnersManualOpen: val });
     },
 
     // eyedropper
@@ -238,7 +270,7 @@ export const useMachineStore = create<MachineStore>(
     setEyeDropperColor: (eyeDropperColor: boolean): void => {
       set({ eyeDropperColor });
     },
-  })
+  }),
 );
 
 export default useMachineStore;

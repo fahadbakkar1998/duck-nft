@@ -1,36 +1,26 @@
-import { Html } from "@react-three/drei";
-import { useState } from 'react';
-import useMachineStore from "../../../store";
-import { MachineMode, minViewLength } from "../../../utils/constants";
+import { FC } from 'react';
+import { useThree } from 'react-three-fiber';
+import Screen from '../common/Screen';
+import useMachineStore from '../../../store';
+import { MachineMode, minViewLength } from '../../../utils/constants';
+import BrowsingMode from './BrowsingMode';
+import CustomMode from './Custom';
+import AdminMode from './Admin';
+import './index.scss';
+import NotConnected from './NotConnected';
+import AltButton from './AltButton';
+import StatusLights from './StatusLights';
+import MessageModal from './MessageModal';
+import ShadowLayer from '../../common/ShadowLayer';
+import Static from './Static';
 
-import BrowsingMode from "./BrowsingMode";
-import CustomMode from "./Custom";
-import AdminMode from "./Admin";
-import { useThree } from "react-three-fiber";
-import "./index.scss";
-import NotConnected from "./NotConnected";
-import AltButton from "./AltButton";
-import { useEffect, useRef } from "react";
-import StatusLights from "./StatusLights";
-
-const AltScreen: () => JSX.Element = () => {
-  const { currentMode, altIsStatic } = useMachineStore();
+const AltScreen: FC = () => {
+  const { currentMode, altIsStatic, altMessage, setAltMessage } = useMachineStore();
   const { viewport } = useThree();
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const min = viewport.width;  
-
-  useEffect(() => {
-    if (altIsStatic && videoRef.current) {
-      const video: HTMLVideoElement = videoRef.current;
-      video.currentTime = Math.random() * 2;
-      videoRef.current.play();
-    } else {
-      videoRef.current?.pause();
-    }
-  }, [altIsStatic]);
+  const min = viewport.width;
 
   return (
-    <Html
+    <Screen
       scale={[
         (0.165 * min) / minViewLength,
         (0.165 * min) / minViewLength,
@@ -50,34 +40,21 @@ const AltScreen: () => JSX.Element = () => {
             scanline
           `}
         >
-          {altIsStatic && (
-            <div className=" top-[21%] absolute scale-[1.75]  opacity-100 z-50">              
-              <video ref={videoRef}
-                id="alt-static"
-                playsInline
-                autoPlay={altIsStatic}
-                muted
-                loop
-                src="/assets/video/static.mp4"
-              />
-            </div>
-          )}
-          <div
-            className={`
-              absolute pointer-events-none 
-              h-full w-full inner-shadow rounded-lg opacity-70
-            `}
-          />
-          {[MachineMode.Off, MachineMode.Syncing].includes(currentMode) && (
-            <NotConnected />
-          )}
+          <ShadowLayer />
+          {altIsStatic && <Static /> }
+          { [MachineMode.Off, MachineMode.Syncing].includes(currentMode) && <NotConnected /> }
           {currentMode === MachineMode.Shopping && <BrowsingMode />}
           {currentMode === MachineMode.Customization && <CustomMode />}
           {currentMode === MachineMode.Admin && <AdminMode />}
+          <MessageModal
+            open={!!altMessage.length}
+            message={altMessage}
+            onClose={() => setAltMessage('')}
+          />
         </div>
         <AltButton />
       </div>
-    </Html>
+    </Screen>
   );
 };
 

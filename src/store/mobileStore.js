@@ -1,6 +1,6 @@
-import create from "zustand";
+import create from 'zustand';
 
-export const useMobileStore = create((set) => ({
+const useMobileStore = create((set) => ({
   isOpenDuckModal: false,
   setIsOpenDuckModal: (flag) => {
     set({ isOpenDuckModal: flag });

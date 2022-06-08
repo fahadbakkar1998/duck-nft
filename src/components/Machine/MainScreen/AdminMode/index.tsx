@@ -1,13 +1,19 @@
-import "./index.scss";
-import { useState} from "react";
-import { AdminTabs } from "../../../../types/types";
-import SettingsForm from "./SettingsForm";
-import AllowancesForm from "./AllowancesForm";
-import AccountingForm from "./AccountingForm";
-import AdminTabButton from "./AdminTabButton";
+import './index.scss';
+import { useEffect, useState } from 'react';
+import { AdminTabs } from '../../../../types/types';
+import SettingsForm from './SettingsForm';
+import AllowancesForm from './AllowancesForm';
+import AccountingForm from './AccountingForm';
+import AdminTabButton from './AdminTabButton';
+import useMachineStore from '../../../../store';
 
 const AdminMain = () => {
   const [activeTab, setActiveTab] = useState<AdminTabs>(AdminTabs.Settings);
+  const { setAltMessage } = useMachineStore();
+
+  useEffect(() => {
+    setAltMessage('');
+  }, [activeTab]);
 
   return (
     <div className="AdminMain p-7 inner-shadow pixel-font overflow-hidden relative text-sm border-2 border-gray-600 bg-screenBlack">
@@ -16,27 +22,27 @@ const AdminMain = () => {
           <div className="mb-2 pb-1 border-b-2 border-dashed text-base">DUCK ADMINISTRATION</div>
 
           <div className="flex gap-2 pixel-font-thin text-center text-base">
-            <AdminTabButton 
-              title='Settings' 
-              isActive={activeTab === AdminTabs.Settings} 
-              onClick={() => setActiveTab(AdminTabs.Settings)} 
+            <AdminTabButton
+              title="Settings"
+              isActive={activeTab === AdminTabs.Settings}
+              onClick={() => setActiveTab(AdminTabs.Settings)}
             />
-            <AdminTabButton 
-              title='Duck Allowances' 
-              isActive={activeTab === AdminTabs.Allowances} 
-              onClick={() => setActiveTab(AdminTabs.Allowances)} 
+            <AdminTabButton
+              title="Duck Allowances"
+              isActive={activeTab === AdminTabs.Allowances}
+              onClick={() => setActiveTab(AdminTabs.Allowances)}
             />
-            <AdminTabButton 
-              title='Accounting' 
-              isActive={activeTab === AdminTabs.Accounting} 
-              onClick={() => setActiveTab(AdminTabs.Accounting)} 
-            />                     
-          </div>          
+            <AdminTabButton
+              title="Accounting"
+              isActive={activeTab === AdminTabs.Accounting}
+              onClick={() => setActiveTab(AdminTabs.Accounting)}
+            />
+          </div>
           { activeTab === AdminTabs.Settings && <SettingsForm /> }
           { activeTab === AdminTabs.Allowances && <AllowancesForm /> }
-          { activeTab === AdminTabs.Accounting && <AccountingForm /> }          
-        </div>              
-      </div>          
+          { activeTab === AdminTabs.Accounting && <AccountingForm /> }
+        </div>
+      </div>
     </div>
   );
 };

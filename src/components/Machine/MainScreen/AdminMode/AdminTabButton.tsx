@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC } from 'react';
 
 interface AdminTabButtonProps {
   title: string;
@@ -8,7 +8,7 @@ interface AdminTabButtonProps {
 
 const AdminTabButton: FC<AdminTabButtonProps> = ({ title, isActive, onClick }) => {
   return (
-    <div 
+    <div
       className={`
         flex-1 uppercase bg-white cursor-pointer text-screenBlack
         ${isActive ? 'bg-opacity-100' : 'bg-opacity-20'}
@@ -17,7 +17,7 @@ const AdminTabButton: FC<AdminTabButtonProps> = ({ title, isActive, onClick }) =
     >
       {title}
     </div>
-  )
-}
+  );
+};
 
 export default AdminTabButton;

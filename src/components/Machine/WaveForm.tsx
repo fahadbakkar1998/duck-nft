@@ -1,9 +1,10 @@
-import { Html } from "@react-three/drei";
-import { useThree } from "react-three-fiber";
-import {  minViewLength } from "../../utils/constants";
-import ShimmerLayer from "../common/ShimmerLayer";
+import { Html } from '@react-three/drei';
+import { FC } from 'react';
+import { useThree } from 'react-three-fiber';
+import { minViewLength } from '../../utils/constants';
+import ShimmerLayer from '../common/ShimmerLayer';
 
-const WaveForm: () => JSX.Element = () => {  
+const WaveForm: FC = () => {
   const { viewport } = useThree();
   const min = viewport.width;
 
@@ -19,8 +20,8 @@ const WaveForm: () => JSX.Element = () => {
       transform
     >
       <div
-        style={{ borderRadius: 13 }}       
-        className="h-[115px]  w-[110px]  border-gray-600 border-2 overflow-hidden"                
+        style={{ borderRadius: 13 }}
+        className="h-[115px]  w-[110px]  border-gray-600 border-2 overflow-hidden"
       >
         <ShimmerLayer className="z-50 rounded-2xl" />
         <video loop muted autoPlay playsInline className="scale-[200%] mt-7 transform rotate-10 " src="/assets/video/wave.mp4" />

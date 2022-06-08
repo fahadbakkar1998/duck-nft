@@ -50,21 +50,9 @@ code {
 }
 
 @font-face {
-  font-family: "PressStart2P-Regular";
-  src: local("PressStart2P-Regular"),
-    url("./assets/font/PressStart2P-Regular.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "RoughShark";
-  src: local("RoughShark"),
-    url("./assets/font/RoughShark.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "RadioLand";
-  src: local("RadioLand"),
-    url("./assets/font/RadioLand.ttf") format("truetype");
+  font-family: "nokia";
+  src: local("nokia"),
+    url("./assets/font/nokia.ttf") format("truetype");
 }
 
 @font-face {
@@ -74,37 +62,9 @@ code {
 }
 
 @font-face {
-  font-family: "62DRAGZ";
-  src: local("62DRAGZ"),
-    url("./assets/font/62DRAGZ.otf") format("opentype");
-}
-
-@font-face {
-  font-family: "ducky";
-  src: local("ducky"),
-    url("./assets/font/ducky.ttf") format("truetype");
-}
-
-@font-face {
   font-family: "thin-pixel";
   src: local("thin-pixel"),
     url("./assets/font/thin-pixel.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "testy";
-  src: local("testy"),
-  /* url("./assets/font/ducky.ttf") format("truetype"); */
-  /* url("./assets/font/62DRAGZ.otf") format("opentype"); */
-  /* url("./assets/font/RoughShark.ttf") format("truetype"); */
-  url("./assets/font/Cheap-Motel.ttf") format("truetype");
-  /* url("./assets/font/barcade.otf") format("opentype"); */
-}
-
-@font-face {
-  font-family: "copy";
-  src: local("copy"),  
-  url("./assets/font/Gretoon.ttf") format("truetype");  
 }
 
 .absolute-center {

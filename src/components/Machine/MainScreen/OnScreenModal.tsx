@@ -1,11 +1,10 @@
-import { FC, useRef, ReactNode } from "react";
+import { FC, useRef, ReactNode } from 'react';
 
 interface ModalProps {
   children: ReactNode;
   open: boolean;
   onClose: () => void;
   className?: string;
-  closeButton?: ReactNode;
 }
 
 const Modal: FC<ModalProps> = ({ children, open, onClose, className }) => {

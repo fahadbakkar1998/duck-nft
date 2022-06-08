@@ -11,23 +11,18 @@ type LayerButtonProps = {
   selectedLayerIndex: number;
 };
 
-const LayerButton: ({
+const LayerButton = ({
   layer,
   index,
   selectedLayerIndex,
   onSelected,
-}: LayerButtonProps) => JSX.Element = ({
-  layer,
-  index,
-  selectedLayerIndex,
-  onSelected,
-}) => {
+}: LayerButtonProps) => {
   return (
     <div
       className={
-        "layer-button " +
-        (selectedLayerIndex === index ? "selected " : "") +
-        (layer.disabled ? "disabled " : "")
+        `layer-button ${
+          selectedLayerIndex === index ? 'selected ' : ''
+        }${layer.disabled ? 'disabled ' : ''}`
       }
       onClick={() => !layer.disabled && onSelected(index)}
     >
@@ -36,15 +31,11 @@ const LayerButton: ({
   );
 };
 
-const LayerPicker: ({
+const LayerPicker = ({
   layers,
   selectedLayerIndex,
   onSelected,
-}: LayerPickerProps) => JSX.Element = ({
-  layers,
-  selectedLayerIndex,
-  onSelected,
-}) => {
+}: LayerPickerProps) => {
   return (
     <div className="layer-picker">
       <div className="layer-bar">
@@ -53,6 +44,7 @@ const LayerPicker: ({
             <LayerButton
               layer={layer}
               index={i}
+              // eslint-disable-next-line react/no-array-index-key
               key={i}
               onSelected={onSelected}
               selectedLayerIndex={selectedLayerIndex}

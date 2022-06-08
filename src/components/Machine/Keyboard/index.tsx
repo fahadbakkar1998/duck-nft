@@ -1,13 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
+/* eslint-disable no-param-reassign */
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import modelObject from '../../../assets/glb/key_pad.glb';
 import { useThree } from 'react-three-fiber';
-import { MachineMode, minViewLength } from "../../../utils/constants";
-import Display from '../Display';
-import { useMachineStore } from "../../../store";
 import { padStart } from 'lodash';
+import modelObject from '../../../assets/glb/key_pad.glb';
+import { MachineMode, minViewLength } from '../../../utils/constants';
+import Display from '../Display';
+import { useMachineStore } from '../../../store';
 
-const Keyboard: () => JSX.Element = () => {
+const Keyboard: FC = () => {
   const [vrm, setVrm] = useState<any>(null);
   const { current: loader } = useRef(new GLTFLoader());
   const { viewport } = useThree();
@@ -16,16 +17,16 @@ const Keyboard: () => JSX.Element = () => {
   const { currentDuckId, currentMode } = useMachineStore();
 
   const { setCurrentDuckId } = useMachineStore((state) => state);
-  
+
   const enterClick = (value: string) => {
-    if( Number(value) <= 199 ) setCurrentDuckId(Number(value));    
+    if (Number(value) <= 199) setCurrentDuckId(Number(value));
     else setValue('');
   };
 
   const clearClick = () => {
     setValue('');
   };
-  
+
   const loadObject = () => {
     loader.load(modelObject, (gltf: any) => {
       setVrm(gltf.scene);
@@ -40,20 +41,21 @@ const Keyboard: () => JSX.Element = () => {
     setValue(padStart(currentDuckId, 3, '0'));
   }, [currentDuckId]);
 
-  const buttonClick = ( btnName ) => {
-    console.log('btnName-->', btnName);
-    
+  const buttonClick = (btnName) => {
     if ([MachineMode.Off, MachineMode.Syncing].includes(currentMode)) return;
-    if(btnName === 'enter') enterClick(value);
-    else if(btnName === 'clear') clearClick();
-         else {
-           setValue(value + Number(btnName).toString());
-         }
-    vrm.children.forEach( item => {
-      if( item.name === btnName ){
-        if( btnName === 'clear') item.position.z = -0.03;
-        else item.position.z = 0.01;
-      }     
+    if (btnName === 'enter') enterClick(value);
+    else if (btnName === 'clear') clearClick();
+    else {
+      setValue(value + Number(btnName).toString());
+    }
+    vrm.children.forEach((item) => {
+      if (item.name === btnName) {
+        if (btnName === 'clear') {
+          item.position.z = -0.03;
+        } else {
+          item.position.z = 0.01;
+        }
+      }
     });
   };
 
@@ -66,34 +68,31 @@ const Keyboard: () => JSX.Element = () => {
   };
 
   return (
-    <>
-      {vrm && (
-        <group
-          scale={[
-            (0.342 * min) / minViewLength,
-            (0.342 * min) / minViewLength,
-            (0.342 * min) / minViewLength,
-          ]}
-        >
-          <Display value={value} />
-          <mesh
-            onPointerDown={(e) => {
-              if (e.object.name !== "pad_1" && e.object.name !== "pad_2")
-                buttonClick(e.object.name);
-            }}
-            onPointerUp={(e) => {
-              buttonSetDefault(e.intersections[0].object.name);
-            }}
-          >
-            <primitive
-              object={vrm}
-              position={[6.158, -0.4, 0]}
-              scale={[1, 1, 1]}
-            />
-          </mesh>
-        </group>
-      )}
-    </>
+    vrm && (
+    <group
+      scale={[
+        (0.342 * min) / minViewLength,
+        (0.342 * min) / minViewLength,
+        (0.342 * min) / minViewLength,
+      ]}
+    >
+      <Display value={value} />
+      <mesh
+        onPointerDown={(e) => {
+          if (e.object.name !== 'pad_1' && e.object.name !== 'pad_2') buttonClick(e.object.name);
+        }}
+        onPointerUp={(e) => {
+          buttonSetDefault(e.intersections[0].object.name);
+        }}
+      >
+        <primitive
+          object={vrm}
+          position={[6.158, -0.4, 0]}
+          scale={[1, 1, 1]}
+        />
+      </mesh>
+    </group>
+    )
   );
 };
 

@@ -1,12 +1,19 @@
-import { FC } from "react";
+import { FC, useState } from 'react';
 
 interface ShimmerLayerProps {
   className?: string;
+  targetHovered?: boolean;
 }
-const ShimmerLayer: FC<ShimmerLayerProps> = ({ className }) => {
+const ShimmerLayer: FC<ShimmerLayerProps> = ({ className, targetHovered = false }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <div className={`absolute w-full h-full overflow-hidden pointer-events-none ${className}`}>
-      <div className="shimmer animate-shimmer"/>
+    <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className={`absolute w-full h-full overflow-hidden  ${className}`}
+    >
+      <div className={`${isHovered || targetHovered ? 'shimmer animate-shimmer' : ''}`} />
     </div>
   );
 };

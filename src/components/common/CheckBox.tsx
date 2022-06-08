@@ -1,4 +1,3 @@
-
 import { FC } from 'react';
 
 interface CheckBoxProps {
@@ -8,18 +7,18 @@ interface CheckBoxProps {
   className?: string;
 }
 
-const CheckBox: FC<CheckBoxProps> = ({isSelected, onClick, label, className}) => {
+const CheckBox: FC<CheckBoxProps> = ({ isSelected, onClick, label, className }) => {
   return (
-    <div 
+    <div
       onClick={onClick}
       className={`
         cursor-pointer
         ${className}
         inline
         pixel-font
-        ${ 
-          isSelected ? 
-            'opacity-100 bg-orange-500 text-[#080808]' : 
+        ${
+          isSelected ?
+            'opacity-100 bg-orange-500 text-[#080808]' :
             'opacity-20 bg-white text-[#080808]'
         }
             py-1
@@ -28,8 +27,6 @@ const CheckBox: FC<CheckBoxProps> = ({isSelected, onClick, label, className}) =>
       { label ?? <div>yes</div> }
     </div>
   );
-}
-
-
+};
 
 export default CheckBox;

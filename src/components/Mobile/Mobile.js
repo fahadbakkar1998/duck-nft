@@ -1,16 +1,16 @@
-import Logo from "./Logo";
-import Header from "./Header";
-import Ducks from "./Ducks";
-import "./Mobile.scss";
+import Logo from './Logo';
+import Header from './Header';
+import Ducks from './Ducks';
+import './Mobile.scss';
 
-function Mobile() {
+const Mobile = () => {
   return (
     <div className="Mobile">
-      <Logo></Logo>
-      <Header></Header>
-      <Ducks></Ducks>
+      <Logo />
+      <Header />
+      <Ducks />
     </div>
   );
-}
+};
 
 export default Mobile;

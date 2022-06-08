@@ -1,35 +1,39 @@
-import { useEffect, useState, useRef, FC } from "react";
-import MessageModal from "./MessageModal";
+/* eslint-disable global-require */
+/* eslint-disable import/no-dynamic-require */
+import { FC, useEffect, useState } from 'react';
+import useMachineStore from '../../../store';
 
-const NotConnected = () => {
+const NotConnected: FC = () => {
   const [duckIndex, setDuckIndex] = useState(1);
   const [flipper, setFlipper] = useState(true);
-  const [modalOpen, setModalOpen] = useState(true);
+  const { changeChannel, setMachineMood, setAltMessage } = useMachineStore();
 
   useEffect(() => {
     let isMounted = true;
-    setDuckIndex(Math.ceil(Math.random() * 200));
-    setTimeout(() => isMounted && setFlipper(!flipper), 8000);
+    if (isMounted) {
+      setDuckIndex(Math.ceil(Math.random() * 200));
+      changeChannel(300);
+      setMachineMood('happy');
+      setTimeout(() => setMachineMood(undefined), 250);
+      setTimeout(() => setFlipper(!flipper), 8000);
+    }
     return () => {
       isMounted = false;
     };
   }, [flipper]);
 
+  useEffect(() => {
+    setAltMessage('Hey! Connect your wallet to get started, quacks!');
+  }, []);
+
   return (
-    <>
-      <MessageModal
-        open={modalOpen}
-        message="Connect your wallet to get started."
-        onClose={() => setModalOpen(false)}
+    <div className="absolute w-full h-full z-10">
+      <img
+        style={{ width: '100%' }}
+        alt=""
+        src={require(`../../../assets/img/ducks/crypto_duck_${duckIndex}.svg`)}
       />
-      <div className="z-50">
-        <img
-          style={{ width: "100%" }}
-          alt={""}
-          src={require(`../../../assets/img/ducks/crypto_duck_${duckIndex}.svg`)}
-        />
-      </div>
-    </>
+    </div>
   );
 };
 

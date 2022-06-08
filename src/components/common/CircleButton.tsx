@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 const CircleButton = (props) => {
   return (
     <div className="relative flex justify-center w-full select-none">
@@ -11,8 +12,8 @@ const CircleButton = (props) => {
         className="relative z-20 circle-button w-11 rounded-full"
         onClick={props.onClick}
       >
-        <div className="flex justify-center items-center">          
-          <img className="mt-1 w-6 h-6" alt="" src={props.image} />        
+        <div className="flex justify-center items-center">
+          <img className="mt-1 w-6 h-6" alt="" src={props.image} />
         </div>
         {props.name}
         {props.children}
@@ -35,8 +36,8 @@ export const SmallCircleButton = (props) => {
         className="relative z-20 circle-button small w-11 rounded"
         onClick={props.onClick}
       >
-        <div className="flex justify-center items-center">          
-          <img className="mt-[1px] opacity-90 w-4 h-4" alt="" src={props.image} />        
+        <div className="flex justify-center items-center">
+          <img className="mt-[1px] opacity-90 w-4 h-4" alt="" src={props.image} />
         </div>
         {/* {props.name} */}
         {/* {props.children} */}

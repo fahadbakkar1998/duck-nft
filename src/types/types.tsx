@@ -5,8 +5,7 @@ export interface DuckData {
   owner: string; // account or ""
   salePrice: number; // sale price in ETH or 0
   isCustom: boolean; // defaults to false
-  restTimestamp: number;
-  image: string;
+  hatched: number;
 }
 
 export interface DuckFilters {
@@ -33,4 +32,20 @@ export enum AdminTabs {
   Settings,
   Allowances,
   Accounting
+}
+export interface MachineConfig {
+  tozziMintStatus: MintStatus;
+  tozziMintPrice: string; // current price in ETH
+  customMintStatus: MintStatus;
+  customMintPrice: string; // current price in ETH
+  maxCustomDucks: number; // current cap for custom ducks
+}
+
+export interface MachineState {
+  owner: string; // account # of current owner
+  tozziMints: number; // # tozzi ducks minted
+  customMints: number; // # custom ducks minted
+  balance: string; // current balance in ETH
+  totalSales: string; // total revenue from selling ducks
+  config: MachineConfig;
 }

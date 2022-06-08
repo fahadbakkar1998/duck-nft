@@ -1,14 +1,14 @@
-import { FC } from "react";
+import { FC } from 'react';
 
 interface FormButtonProps {
   label: string;
   onClick: () => void;
 }
 
-const FormButton: FC<FormButtonProps> = ({label, onClick}) => {
+const FormButton: FC<FormButtonProps> = ({ label, onClick }) => {
   return (
-    <div       
-      onClick={onClick} 
+    <div
+      onClick={onClick}
       className={`            
         px-2  py-1   
         text-screenBlack  bg-white bg-opacity-20 cursor-pointer
@@ -16,8 +16,8 @@ const FormButton: FC<FormButtonProps> = ({label, onClick}) => {
       `}
     >
       {label}
-    </div> 
-  )
-}
+    </div>
+  );
+};
 
 export default FormButton;

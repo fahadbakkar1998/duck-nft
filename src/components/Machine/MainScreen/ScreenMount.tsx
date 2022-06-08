@@ -1,21 +1,22 @@
-import { useState, useRef, useEffect } from "react";
-import { a, useSpring, easings } from "@react-spring/three";
-import useMachineStore from "../../../store";
-import { MachineMode, minViewLength } from "../../../utils/constants";
-import { useLoader, useThree, useFrame } from "react-three-fiber";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import Screen from "./index";
-import { Vector3 } from "three";
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-plusplus */
+import { useState, useRef } from 'react';
+import { a, useSpring, easings } from '@react-spring/three';
+import { useLoader, useThree } from 'react-three-fiber';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import useMachineStore from '../../../store';
+import { MachineMode, minViewLength } from '../../../utils/constants';
+import Screen from './index';
 
 let globalRoundCount = 0;
 // let screenIsRotating = false;
 
 export const MainScreen = () => {
-  const { viewport, scene, mouse } = useThree();
+  const { viewport } = useThree();
   const min = viewport.width;
   const [screenInverted, setScreenInverted] = useState(false);
   const [screenIsRotating, setScreenIsRotating] = useState(false);
-  const gltfDisk = useLoader(GLTFLoader, "assets/models/DuckDisk.glb");
+  const gltfDisk = useLoader(GLTFLoader, 'assets/models/DuckDisk.glb');
   const modelRef = useRef();
 
   const {
@@ -30,10 +31,10 @@ export const MainScreen = () => {
   const [spring, setSpring] = useSpring(() => ({
     rotation: [0, 0, 0],
     position: [0, 0, 0],
-    config: {      
-      duration: 2500,    
+    config: {
+      duration: 2500,
       easing: easings.easeInOutElastic,
-    }, 
+    },
   }));
 
   const handleModeSwitch = (direction: string) => {
@@ -41,13 +42,12 @@ export const MainScreen = () => {
     if (screenIsRotating || processing || showTxStatus) return;
     setScreenIsRotating(true);
     setTimeout(() => {
-      changeChannel(1000);      
+      changeChannel(1000);
     }, 300);
     setTimeout(() => {
       setScreenIsRotating(false);
     }, 1800);
-    
-    
+
     setSpring({ rotation: [Math.PI * ++globalRoundCount, 0, 0] });
     setIsSwitchingModes(true);
     setTimeout(() => {
@@ -70,9 +70,9 @@ export const MainScreen = () => {
       >
         <primitive
           object={gltfDisk.scene}
-          scale={[0.25, 0.6, 0.6]}      
+          scale={[0.25, 0.6, 0.6]}
           rotation={[0, 0, Math.PI / 2]}
-        />        
+        />
         <Screen screenInverted={screenInverted} switchModes={handleModeSwitch} />
       </group>
     </a.group>

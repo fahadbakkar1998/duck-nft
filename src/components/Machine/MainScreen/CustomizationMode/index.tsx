@@ -1,38 +1,37 @@
-import { Suspense, useEffect, useRef } from "react";
-import { useMachineStore } from "../../../../store";
-import { colors } from "../../../../utils/constants";
-import duckbill from "../../../../assets/duck-bill.png";
-import CircleButton from "../../../common/CircleButton";
-import { MachineMode } from "../../../../utils/constants";
-import pencilIcon from "../../../../assets/img/icons/pencil.svg";
-import paintBucketIcon from "../../../../assets/img/icons/paintbucket.svg";
-import eraserIcon from "../../../../assets/img/icons/eraser.svg";
-import dropperIcon from "../../../../assets/img/icons/eye-dropper.svg";
-import trashIcon from "../../../../assets/img/icons/trash.svg";
-import undoIcon from "../../../../assets/img/icons/undo.svg";
-import redoIcon from "../../../../assets/img/icons/redo.svg";
-import randomIcon from "../../../../assets/img/icons/random.svg";
-import cn from "classnames";
-import "./index.scss";
+import { FC, Suspense, useEffect, useRef } from 'react';
+import cn from 'classnames';
+import { useMachineStore } from '../../../../store';
+import { colors, MachineMode } from '../../../../utils/constants';
+import duckbill from '../../../../assets/duck-bill.png';
+import CircleButton from '../../../common/CircleButton';
+import pencilIcon from '../../../../assets/img/icons/pencil.svg';
+import paintBucketIcon from '../../../../assets/img/icons/paintbucket.svg';
+import eraserIcon from '../../../../assets/img/icons/eraser.svg';
+import dropperIcon from '../../../../assets/img/icons/eye-dropper.svg';
+import trashIcon from '../../../../assets/img/icons/trash.svg';
+import undoIcon from '../../../../assets/img/icons/undo.svg';
+import redoIcon from '../../../../assets/img/icons/redo.svg';
+import randomIcon from '../../../../assets/img/icons/random.svg';
+import './index.scss';
 
 const layers: Object[] = [
-  { label: "Head" },
+  { label: 'Head' },
   {
-    label: "Bill",
+    label: 'Bill',
     preset: duckbill,
     disabled: true,
-    bannedColors: ["#000000", "#ffffff"],
+    bannedColors: ['#000000', '#ffffff'],
     fillPoints: [
-      { name: "tongue", points: [[19, 24]] },
+      { name: 'tongue', points: [[19, 24]] },
       {
-        name: "mouth",
+        name: 'mouth',
         points: [
           [20, 26],
           [17, 23],
         ],
       },
       {
-        name: "beak",
+        name: 'beak',
         points: [
           [10, 17],
           [16, 18],
@@ -53,7 +52,7 @@ const layers: Object[] = [
   },
 ];
 
-const DrawingTool: (props: any) => JSX.Element = (props: any) => {
+const DrawingTool: FC = (props: any) => {
   const drawingCanvas = useRef<HTMLCanvasElement>(null);
   const currentState = useMachineStore((state) => state);
   const {
@@ -69,14 +68,14 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
 
   const toggleEyeDrop = (flag: boolean) => {
     drawingCanvas!.current!.style.cursor = flag
-      ? "crosshair"
+      ? 'crosshair'
       : "url('/assets/images/pencil.png'), default";
     if (flag) {
-      drawingCanvas!.current?.addEventListener("mousedown", onCanvasMouseDown);
+      drawingCanvas!.current?.addEventListener('mousedown', onCanvasMouseDown);
     } else {
       drawingCanvas!.current?.removeEventListener(
-        "mousedown",
-        onCanvasMouseDown
+        'mousedown',
+        onCanvasMouseDown,
       );
     }
     DToolInst.disableDrawing = flag;
@@ -93,13 +92,12 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
     DToolInst.init(layers, setHistoryButtonsState);
     DToolInst.selectColor(colors[selectedColorIndex]);
     DToolInst.selectLayer(selectedLayerIndex);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <Suspense fallback={null}>
       <div
-        className={cn("DrawingTool relative border-2 border-gray-600", {
+        className={cn('DrawingTool relative border-2 border-gray-600', {
           active: currentMode === MachineMode.Customization,
         })}
       >
@@ -111,7 +109,7 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
           id="drawingtool_canvas"
         />
         <div className="right">
-        <CircleButton
+          <CircleButton
             onClick={() => {
               DToolInst.fillWithRandomColor(1);
             }}
@@ -148,10 +146,10 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
                 "url('/assets/images/eraser.png'), default";
             }}
             image={eraserIcon}
-          />          
+          />
         </div>
 
-        <div className="left">          
+        <div className="left">
           <CircleButton
             onClick={() => toggleEyeDrop(true)}
             image={dropperIcon}
@@ -174,7 +172,7 @@ const DrawingTool: (props: any) => JSX.Element = (props: any) => {
               DToolInst.eraseCurrentLayer();
             }}
             image={trashIcon}
-          />          
+          />
         </div>
       </div>
     </Suspense>

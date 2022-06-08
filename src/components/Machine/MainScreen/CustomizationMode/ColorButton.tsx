@@ -5,25 +5,20 @@ type ColorButtonProps = {
   index: number;
 };
 
-const ColorButton: ({
+const ColorButton = ({
   color,
   index,
   selectedColorIndex,
   onSelected,
-}: ColorButtonProps) => JSX.Element = ({
-  color,
-  index,
-  selectedColorIndex,
-  onSelected,
-}) => {
+}: ColorButtonProps) => {
   return (
     <div
       className={
-        "ColorButton " + (selectedColorIndex === index ? "selected " : "")
+        `ColorButton ${selectedColorIndex === index ? 'selected ' : ''}`
       }
       onClick={() => onSelected(index, color)}
       style={{ backgroundColor: color }}
-    ></div>
+    />
   );
 };
 

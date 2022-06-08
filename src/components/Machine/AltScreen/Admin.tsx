@@ -1,10 +1,10 @@
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import useMachineStore from "../../../store";
-import { MachineMode } from "../../../utils/constants";
-import { DuckData } from "../../../types/types";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, FC } from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import useMachineStore from '../../../store';
+import { MachineMode } from '../../../utils/constants';
+import { DuckData } from '../../../types/types';
 
 const SampleNextArrow = (props: any) => {
   const { className, style, onClick } = props;
@@ -15,8 +15,8 @@ const SampleNextArrow = (props: any) => {
         ...style,
         right: 0,
         zIndex: 1,
-        backgroundColor: "grey",
-        borderRadius: "100px",
+        backgroundColor: 'grey',
+        borderRadius: '100px',
       }}
       onClick={onClick}
     />
@@ -32,15 +32,15 @@ const SamplePrevArrow = (props: any) => {
         ...style,
         left: 0,
         zIndex: 1,
-        backgroundColor: "grey",
-        borderRadius: "100px",
+        backgroundColor: 'grey',
+        borderRadius: '100px',
       }}
       onClick={onClick}
     />
   );
 };
 
-const Admin: () => JSX.Element = () => {
+const Admin: FC = () => {
   const { currentMode, ducks, setCurrentAdminDuckId } = useMachineStore();
 
   const [sortedCustomDuckData, setSortedCustomDuckData] = useState<
@@ -50,9 +50,11 @@ const Admin: () => JSX.Element = () => {
   useEffect(() => {
     const SCDD = ducks
       .filter((e) => e.isCustom)
-      .sort((a, b) => a.restTimestamp - b.restTimestamp);
+      .sort((a, b) => a.hatched - b.hatched);
     setSortedCustomDuckData(SCDD);
-    SCDD.length && setCurrentAdminDuckId(SCDD[0].id);
+    if (SCDD.length) {
+      setCurrentAdminDuckId(SCDD[0].id);
+    }
   }, [ducks, setCurrentAdminDuckId]);
 
   const settings = {
@@ -70,19 +72,19 @@ const Admin: () => JSX.Element = () => {
   return (
     <div
       className={`Admin ${
-        currentMode === MachineMode.Admin ? "fadeIn" : "fadeOut"
+        currentMode === MachineMode.Admin ? 'fadeIn' : 'fadeOut'
       }`}
     >
       <Slider {...settings}>
         {React.Children.toArray(
-          sortedCustomDuckData.map((e: DuckData, i: number) => (
+          sortedCustomDuckData.map((duck: DuckData, i: number) => (
             <div className="slider-container">
-              <img className="slider-image" key={i} alt="" src={e.image}></img>
+              <img className="slider-image" key={duck.webp} alt="" src={duck.webp} />
               <div className="slider-content">
-                <div className="slider-description">{e.restTimestamp}s</div>
+                <div className="slider-description">{duck.hatched}s</div>
               </div>
             </div>
-          ))
+          )),
         )}
       </Slider>
     </div>

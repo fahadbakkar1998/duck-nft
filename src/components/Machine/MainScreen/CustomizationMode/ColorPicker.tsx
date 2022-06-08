@@ -1,18 +1,17 @@
-import { useEffect } from "react";
-import { HexColorPicker } from "react-colorful";
-import { Html } from "@react-three/drei";
-import { useThree } from "react-three-fiber";
-import { aspectRatio, minViewLength } from "../../../../utils/constants";
-import useMachineStore from "../../../../store";
+import { FC, useEffect } from 'react';
+import { HexColorPicker } from 'react-colorful';
+import { Html } from '@react-three/drei';
+import { useThree } from 'react-three-fiber';
+import { minViewLength } from '../../../../utils/constants';
+import useMachineStore from '../../../../store';
 
-const ColorPicker: () => JSX.Element = () => {
+const ColorPicker: FC = () => {
   const DToolInst = useMachineStore((state) => state.DToolInst);
   const selectedColor = useMachineStore((state) => state.selectedColor);
   const setSelectedColor = useMachineStore((state) => state.setSelectedColor);
   const { viewport } = useThree();
-  // const min = Math.min(viewport.width, viewport.height);
   const min = viewport.width;
-  const bgColor = selectedColor || "#FFFFFF";
+  const bgColor = selectedColor || '#FFFFFF';
 
   useEffect(() => {
     // const satElements = Array.from(
@@ -57,7 +56,6 @@ const ColorPicker: () => JSX.Element = () => {
           color={bgColor}
           onChange={(color) => {
             if (!color) return;
-            console.log("ColorPicker_color: ", color);
             setSelectedColor(color);
             DToolInst.selectColor(color);
           }}

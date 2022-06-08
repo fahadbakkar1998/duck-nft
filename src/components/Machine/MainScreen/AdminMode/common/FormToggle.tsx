@@ -6,7 +6,7 @@ interface FormToggleProps {
   onToggle: () => void;
 }
 
-const FormToggle: FC<FormToggleProps> = ({ label, isSelected, onToggle }) => {  
+const FormToggle: FC<FormToggleProps> = ({ label, isSelected, onToggle }) => {
   return (
     <div
       onClick={onToggle}
@@ -18,6 +18,6 @@ const FormToggle: FC<FormToggleProps> = ({ label, isSelected, onToggle }) => {
       {label}
     </div>
   );
-}
+};
 
 export default FormToggle;

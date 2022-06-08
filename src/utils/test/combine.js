@@ -1,4 +1,4 @@
-import ducks from "./duck-data(step2).json";
+import ducks from './duck-data(step2).json';
 
 const combineStep2 = () => {
   const combineValues = ducks.map((duck, index) => {
@@ -6,11 +6,11 @@ const combineStep2 = () => {
       id: index,
       proof: duck.proof,
       webp: duck.webp,
-      owner: "",
+      owner: '',
       salePrice: 0,
       isCustom: false,
     };
-  });  
+  });
 };
 
 combineStep2();

@@ -1,25 +1,24 @@
-import { DuckData, DuckFilters } from "@/types/types";
+import { useEthers } from '@usedapp/core';
+import { DuckData, DuckFilters } from '../types/types';
 
-export const filterDucks = (
-  ducks: DuckData[],
-  filters: DuckFilters
-): DuckData[] => {
-  return ducks
-    .filter((d) => d.id !== undefined)
-    .filter((duck) => {
-      if (filters.available && !filters.sold) {
-        if (duck.owner) return false;
-      }
-      if (!filters.available && filters.sold) {
-        if (!duck.owner) return false;
-      }
-      return true;
-    });
+export const filterDucks = ({ ducks = [], filters } : {ducks: DuckData[], filters: DuckFilters}): DuckData[] => {
+  const { account } = useEthers();
+  let filteredDucks = ducks;
 
-  // all: boolean;
-  // available: boolean;
-  // sold: boolean;
-  // mine: boolean;
-  // custom: boolean;
-  // hideUI: boolean;
+  if (!filters.available && filters.sold) {
+    filteredDucks = filteredDucks.filter((duck) => duck.owner);
+  }
+
+  if (!filters.sold && filters.available) {
+    filteredDucks = filteredDucks.filter((duck) => !duck.owner);
+  }
+
+  if (filters.custom) {
+    filteredDucks = filteredDucks.filter((duck) => duck.isCustom);
+  }
+
+  if (filters.mine) {
+    filteredDucks = filteredDucks.filter((duck) => duck.owner === account);
+  }
+  return filteredDucks;
 };
