@@ -50,3 +50,12 @@ export interface MachineState {
   totalSales: string; // total revenue from selling ducks
   config: MachineConfig;
 }
+
+export interface DuckProfile {
+  name?: string;
+  description?: string;
+  status?: string;
+  complexity?: string;
+  owner?: string;
+  creator?: string;
+}
