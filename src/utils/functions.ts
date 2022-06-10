@@ -23,10 +23,19 @@ const getMachineConfig = async () => {
 const getMintedDucks = async () => {
   const eventFilter = duckMachineContract.filters.DuckMinted();
   const events = await duckMachineContract.queryFilter(eventFilter);
+
+  const burnedFilter = duckMachineContract.filters.CustomDuckBurned();
+  const burnEvents = await duckMachineContract.queryFilter(burnedFilter);
+
   let parsedEvents;
 
+  parsedEvents = events.filter((event) => {
+    const burned = burnEvents.find((burnEvent) => burnEvent?.args?.duckId.toNumber() === event?.args?.tokenId.toNumber());
+    return !burned;
+  });
+
   if (events.length) {
-    parsedEvents = await Promise.all(events.map(async (event) => {
+    parsedEvents = await Promise.all(parsedEvents.map(async (event) => {
       const tokenId = parseInt(event?.args?.tokenId._hex);
       const salePrice = parseInt(event?.args?.price._hex);
       const duckType = event?.args?.duckType;
@@ -86,8 +95,6 @@ const fetchDucks = async () => {
       burnable: hatched > 0 && hatched + BURN_WINDOW < Date.now(),
     };
   });
-
-  // TODO - filter out burned ducks
   const mintedDucks = formatedMintedDucks.filter((duck) => duck.id !== 420);
   const mintedTozziDucks = mintedDucks.filter((duck) => !duck.isCustom);
   const mintedCustomDucks = mintedDucks.filter((duck) => duck.isCustom);
