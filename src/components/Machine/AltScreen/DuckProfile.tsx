@@ -64,7 +64,7 @@ const DuckProfile: FC<DuckProfileProps> = ({ duck }) => {
               </div>
               <div className="p-1">
                 <FieldLabel text="Hatched" />
-                <Field text={padStart(duck.id, 3, '0')} />
+                <Field text={(new Date(duck.hatched).toLocaleDateString())} />
               </div>
             </div>
           </div>
