@@ -1,3 +1,9 @@
+export interface DuckMetadata {
+  name: string,
+  description: string,
+  attributes: any[],
+}
+
 export interface DuckData {
   id: number; // token ID
   proof: string[]; // merkle proof
@@ -6,7 +12,7 @@ export interface DuckData {
   salePrice: number; // sale price in ETH or 0
   isCustom: boolean; // defaults to false
   hatched: number;
-  metadata?: Object;
+  metadata?: DuckMetadata;
   burnable?: boolean;
 }
 

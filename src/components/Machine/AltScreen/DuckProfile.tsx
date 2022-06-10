@@ -6,7 +6,6 @@ import { shortenAddress } from '@usedapp/core';
 import { motion, AnimatePresence } from '../../../../node_modules/framer-motion/dist/framer-motion';
 import { DuckData } from '../../../types/types';
 import { useDuckProfile } from '../../../hooks/ducks';
-import { useDuck } from '../../../hooks';
 
 const FieldLabel = ({ text }: {text:string}) => {
   return <div className="pixel-font text-sm">{text.toUpperCase()}</div>;
@@ -20,9 +19,6 @@ interface DuckProfileProps {
   duck: DuckData;
 }
 const DuckProfile: FC<DuckProfileProps> = ({ duck }) => {
-  const duckData = useDuck(duck.id);
-
-  console.log('duckData', duckData);
   const profile = useDuckProfile(duck.id);
 
   return (
@@ -82,10 +78,10 @@ const DuckProfile: FC<DuckProfileProps> = ({ duck }) => {
               <Field text={profile?.creator ?? 'N/A'} />
             </div>
           </div>
-          {/* <div className="col-span-2 p-1 bg-white bg-opacity-10 ">
+          <div className="col-span-2 p-1 bg-white bg-opacity-10 ">
             <FieldLabel text="Duck Complexity" />
             <Field text={profile?.complexity ?? 'N/A'} />
-          </div> */}
+          </div>
         </div>
       </div>
     </motion.div>

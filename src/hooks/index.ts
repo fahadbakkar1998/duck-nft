@@ -13,7 +13,7 @@ export const useFilteredDucks = (ducks): DuckData[] => {
   return filterDucks({ ducks, filters });
 };
 
-export const useDuck = (tokenId: number): DuckData | undefined => {
+export const useDuck = (tokenId: number): DuckData => {
   const ducks = useDucks();
   return ducks.data[tokenId];
 };
