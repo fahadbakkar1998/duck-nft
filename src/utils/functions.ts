@@ -44,8 +44,10 @@ const getMintedDucks = async () => {
       const tokenURIRes = await axios.get(tokenURI);
       const timestamp = await (await (event.getBlock())).timestamp;
       let webp;
+      let metadata = {};
       if (tokenURIRes.statusText === 'OK') {
         webp = tokenURIRes.data.image;
+        metadata = tokenURIRes.data;
       }
       return {
         id: tokenId,
@@ -53,6 +55,7 @@ const getMintedDucks = async () => {
         isCustom: !!duckType,
         owner,
         webp,
+        metadata,
         hatched: timestamp * 1000,
       };
     }));
@@ -81,13 +84,14 @@ const fetchDucks = async () => {
   let mintedDuckIds: number[] = [];
   const ducksMinted = await getMintedDucks() ?? [];
   const formatedMintedDucks = ducksMinted.map((duck, index) => {
-    const { id, salePrice, isCustom, owner, webp, hatched } = duck;
+    const { id, salePrice, isCustom, owner, webp, hatched, metadata } = duck;
     const { proof } = staticDuckData[index];
     mintedDuckIds = [...mintedDuckIds, id];
     return {
       id,
       proof,
       webp: isCustom ? webp : staticDuckData.find((duck) => duck.id === id)?.webp,
+      metadata,
       owner,
       salePrice,
       isCustom,
