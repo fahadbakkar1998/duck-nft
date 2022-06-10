@@ -6,6 +6,7 @@ export const useDucks = (): DuckData | any => {
   const response = useQuery('ducks', async () => fetchDucks(), {
     refetchOnWindowFocus: false,
   });
+  const ducks = response.data;
   return response;
 };
 

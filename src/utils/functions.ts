@@ -3,7 +3,7 @@
 import axios from 'axios';
 import { ethers } from 'ethers';
 import { Contract } from '@ethersproject/contracts';
-import { contractAbi } from './constants';
+import { BURN_WINDOW, contractAbi } from './constants';
 import staticDuckData from './duckData.json';
 import { MachineConfig, MachineState } from '../types/types';
 
@@ -33,6 +33,7 @@ const getMintedDucks = async () => {
       const owner = event?.args?.who;
       const tokenURI = await duckMachineContract.tokenURI(tokenId);
       const tokenURIRes = await axios.get(tokenURI);
+      const timestamp = await (await (event.getBlock())).timestamp;
       let webp;
       if (tokenURIRes.statusText === 'OK') {
         webp = tokenURIRes.data.image;
@@ -43,6 +44,7 @@ const getMintedDucks = async () => {
         isCustom: !!duckType,
         owner,
         webp,
+        hatched: timestamp * 1000,
       };
     }));
   }
@@ -70,7 +72,7 @@ const fetchDucks = async () => {
   let mintedDuckIds: number[] = [];
   const ducksMinted = await getMintedDucks() ?? [];
   const formatedMintedDucks = ducksMinted.map((duck, index) => {
-    const { id, salePrice, isCustom, owner, webp } = duck;
+    const { id, salePrice, isCustom, owner, webp, hatched } = duck;
     const { proof } = staticDuckData[index];
     mintedDuckIds = [...mintedDuckIds, id];
     return {
@@ -80,9 +82,12 @@ const fetchDucks = async () => {
       owner,
       salePrice,
       isCustom,
-      hatched: 0, // Todo add real value for hatched
+      hatched: hatched as number,
+      burnable: hatched > 0 && hatched + BURN_WINDOW < Date.now(),
     };
   });
+
+  // TODO - filter out burned ducks
   const mintedDucks = formatedMintedDucks.filter((duck) => duck.id !== 420);
   const mintedTozziDucks = mintedDucks.filter((duck) => !duck.isCustom);
   const mintedCustomDucks = mintedDucks.filter((duck) => duck.isCustom);

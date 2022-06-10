@@ -6,6 +6,7 @@ export interface DuckData {
   salePrice: number; // sale price in ETH or 0
   isCustom: boolean; // defaults to false
   hatched: number;
+  burnable?: boolean;
 }
 
 export interface DuckFilters {
