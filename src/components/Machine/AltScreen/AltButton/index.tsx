@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useCallback, useEffect, useState } from 'react';
 import { useQueryClient } from 'react-query';
 import { useContractFunction, useEthers } from '@usedapp/core';
@@ -32,8 +33,8 @@ const ButtonView = () => {
   } = useMachineStore();
   const { data = [], isLoading } = useDucks();
   const ducks = !isLoading ? data : [];
+  const selectedDuck = ducks?.find((d) => d.id === currentDuckId);
 
-  const selectedDuck = ducks[currentDuckId];
   const { activateBrowserWallet, account } = useEthers();
   const { send: sendFnTozziDuck, state: mintTozziDuckState } = useContractFunction(contract, 'mintTozziDuck');
   const { send: sendFnCustomTozziDuck, state: mintCustomTozziDuckState } = useContractFunction(contract, 'mintCustomDuck');
@@ -114,7 +115,7 @@ const ButtonView = () => {
   if (currentMode === MachineMode.Syncing) return <div>Syncing...</div>;
 
   if (currentMode === MachineMode.Shopping) {
-    if (selectedDuck?.owner) {
+    if (selectedDuck?.owner || selectedDuck?.isCustom) {
       return (
         <Button onClick={() => setShowDuckProfile(!showDuckProfile)}>
           <div className="flex space-x-2 justify-center items-center lcd-font text-black opacity-75 hover:font-bold ">

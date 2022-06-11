@@ -11,7 +11,6 @@ const Shopping = () => {
   const { data: ducksData = [], isLoading } = useDucks();
   const ducks = !isLoading ? ducksData : [];
   const duck = ducks?.find((d) => d.id === currentDuckId);
-  console.log('selected duck', duck);
 
   return (
     <div className="absolute z-10">
