@@ -14,11 +14,11 @@ const WalletConnect = () => {
   const handleConnectWallet = async () => {
     if (chainId !== parseInt(process.env.REACT_APP_CHAIN_ID!)) {
       setAltMessage('Please connect to Mainnet Ethereum!');
-      // console.log('wrong network', chainId, process.env.REACT_APP_CHAIN_ID);
       return;
     }
     ref.current?.classList.add('animate-blink');
     setTimeout(() => { ref.current?.classList.remove('animate-blink'); }, 300);
+    setAltMessage('');
     activateBrowserWallet();
   };
 
