@@ -1,3 +1,4 @@
+import { FC } from 'react';
 // eslint-disable-next-line import/no-relative-packages
 import { motion, AnimatePresence } from '../../../../node_modules/framer-motion/dist/framer-motion';
 import { useDucks } from '../../../state/hooks';
@@ -12,11 +13,7 @@ const Shopping = () => {
 
   return (
     <div className="relative">
-      <AnimatePresence>
-        { showDuckProfile && (
-          <DuckProfile duck={duck} />
-        )}
-      </AnimatePresence>
+      <DuckProfile show={showDuckProfile} duck={duck} />
       { true && (
         <div className="h-full">
           <AnimatePresence>

@@ -18,7 +18,7 @@ const Field = ({ text }: {text:string}) => {
 interface DuckProfileProps {
   duck: DuckData;
 }
-const DuckProfile: FC<DuckProfileProps> = ({ duck }) => {
+const DuckProfileView: FC<DuckProfileProps> = ({ duck }) => {
   const profile = useDuckProfile(duck.id);
 
   return (
@@ -85,6 +85,14 @@ const DuckProfile: FC<DuckProfileProps> = ({ duck }) => {
         </div>
       </div>
     </motion.div>
+  );
+};
+
+const DuckProfile: FC<{duck: DuckData, show: boolean}> = ({ duck, show }) => {
+  return (
+    <AnimatePresence>
+      { show && <DuckProfileView duck={duck} /> }
+    </AnimatePresence>
   );
 };
 
