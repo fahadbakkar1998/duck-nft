@@ -27,10 +27,6 @@ const Machine = () => {
             </>
           )
       }
-      {/* <BurnModal
-        openModal={openBurnModal}
-        onCloseModal={() => { setOpenBurnModal(false)}}
-      /> */}
     </group>
   );
 };
