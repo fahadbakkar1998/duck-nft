@@ -105,7 +105,7 @@ const AllowancesForm = () => {
       </div>
 
       <div className="">
-        <div>SET / EDIT ALLOWANCE</div>
+        <div>SET DUCK ALLOWANCE</div>
         <div className="pixel-font-thin">
           <div className="items-center flex text-2xl">Account</div>
           <FormInput
@@ -133,7 +133,7 @@ const AllowancesForm = () => {
           </div>
         </div>
         <div className="absolute -bottom-4 -right-4 flex space-x-2 text-sm">
-          <FormButton label="Save" onClick={handleSetAllowance} />
+          <FormButton label="Submit" onClick={handleSetAllowance} />
         </div>
       </div>
 

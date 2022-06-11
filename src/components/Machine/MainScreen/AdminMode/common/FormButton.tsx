@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useRef } from 'react';
 
 interface FormButtonProps {
   label: string;
@@ -6,9 +6,17 @@ interface FormButtonProps {
 }
 
 const FormButton: FC<FormButtonProps> = ({ label, onClick }) => {
+  const ref = useRef<any>();
+  const handleClick = () => {
+    ref.current?.classList.add('animate-blink');
+    setTimeout(() => { ref.current?.classList.remove('animate-blink'); }, 300);
+    onClick();
+  };
+
   return (
     <div
-      onClick={onClick}
+      ref={ref}
+      onClick={handleClick}
       className={`            
         px-2  py-1   
         text-screenBlack  bg-white bg-opacity-20 cursor-pointer
