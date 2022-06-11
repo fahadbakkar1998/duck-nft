@@ -12,6 +12,9 @@ export enum MachineMode {
   Admin,
 }
 
+export const numberRegex = /^\d*(?:\d*)?$/;
+export const decimalRegex = /^\d*(?:[.,]\d*)?$/;
+
 export const defaultLayerIndex = 0;
 export const defaultColorIndex = 0;
 export const colors = [

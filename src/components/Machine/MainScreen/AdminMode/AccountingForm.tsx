@@ -9,8 +9,7 @@ import AdminFormWrapper from './AdminFormWrapper';
 import { useEnsOrShort } from '../../../../hooks';
 import { useMachineContract } from '../../../../hooks/machine';
 import useMachineStore from '../../../../store';
-
-const decimalRegex = /^\d*(?:[.,]\d*)?$/;
+import { decimalRegex } from '../../../../utils/constants';
 
 const AccountingForm = () => {
   const [value, setValue] = useState('');

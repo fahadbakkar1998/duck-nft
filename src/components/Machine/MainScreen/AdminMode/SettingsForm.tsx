@@ -8,9 +8,7 @@ import FormButton from './common/FormButton';
 import { useMachineConfig, useMachineContract } from '../../../../hooks/machine';
 import useMachineStore from '../../../../store';
 import AdminFormWrapper from './AdminFormWrapper';
-
-const numberRegex = /^\d*(?:\d*)?$/;
-const decimalRegex = /^\d*(?:[.,]\d*)?$/;
+import { numberRegex, decimalRegex } from '../../../../utils/constants';
 
 const SettingsForm = () => {
   const config = useMachineConfig();

@@ -1,12 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Contract } from 'ethers';
 import { useContractFunction, useEthers } from '@usedapp/core';
-import { MintStatus } from '../../../../types/types';
-import FormToggle from './common/FormToggle';
 import FormInput from './common/FormInput';
 import FormButton from './common/FormButton';
-import { useMachineContract } from '../../../../hooks/machine';
-import { contractAbi } from '../../../../utils/constants';
+import { contractAbi, numberRegex } from '../../../../utils/constants';
 import useMachineStore from '../../../../store';
 import AdminFormWrapper from './AdminFormWrapper';
 
@@ -14,10 +11,16 @@ interface Allowance {
   tozziDucks: string;
   customDucks: string;
 }
-// 0x23168EaB692E07114A7949A433408414A18eeEd7
+
 interface AllowanceFormValues extends Allowance {
   account: string;
 }
+
+const emptyAllowance = {
+  account: '',
+  tozziDucks: '',
+  customDucks: '',
+};
 
 const AllowancesForm = () => {
   const { altMessage, setAltMessage } = useMachineStore();
@@ -31,11 +34,7 @@ const AllowancesForm = () => {
     { transactionName: 'Set Duck Allowance' },
   );
 
-  const [allowanceFormValues, setAllowanceFormValues] = useState<AllowanceFormValues>({
-    account: '',
-    tozziDucks: '',
-    customDucks: '',
-  });
+  const [allowanceFormValues, setAllowanceFormValues] = useState<AllowanceFormValues>(emptyAllowance);
 
   useEffect(() => {
     setCheckedAllowance(null);
@@ -43,12 +42,16 @@ const AllowancesForm = () => {
 
   const handleCheckAllowance = async () => {
     if (machineContract) {
-      const result = await machineContract.duckAllowances(allowanceAccount);
-      const allowance = {
-        tozziDucks: result.tozziDuckAllowance.toNumber(),
-        customDucks: result.customDuckAllowance.toNumber(),
-      };
-      setCheckedAllowance(allowance);
+      try {
+        const result = await machineContract.duckAllowances(allowanceAccount);
+        const allowance = {
+          tozziDucks: result.tozziDuckAllowance.toNumber(),
+          customDucks: result.customDuckAllowance.toNumber(),
+        };
+        setCheckedAllowance(allowance);
+      } catch {
+        setAltMessage('Oh Quack! Something went wrong!');
+      }
     }
   };
 
@@ -79,6 +82,11 @@ const AllowancesForm = () => {
   const handleSetAllowance = () => {
     const { account, tozziDucks, customDucks } = allowanceFormValues;
     send(account, tozziDucks, customDucks);
+  };
+
+  const handleReset = () => {
+    setAllowanceAccount('');
+    setAllowanceFormValues(emptyAllowance);
   };
 
   return (
@@ -122,7 +130,13 @@ const AllowancesForm = () => {
               <FormInput
                 className="w-full"
                 value={allowanceFormValues.tozziDucks.toString()}
-                onChange={(e) => { setAllowanceFormValues({ ...allowanceFormValues, tozziDucks: e.currentTarget.value }); }}
+                onChange={
+                  (e) => {
+                    if (numberRegex.test(e.currentTarget.value)) {
+                      setAllowanceFormValues({ ...allowanceFormValues, tozziDucks: e.currentTarget.value });
+                    }
+                  }
+                }
               />
             </div>
             <div className="flex-1">
@@ -130,11 +144,18 @@ const AllowancesForm = () => {
               <FormInput
                 className="w-full"
                 value={allowanceFormValues.customDucks.toString()}
-                onChange={(e) => { setAllowanceFormValues({ ...allowanceFormValues, customDucks: e.currentTarget.value }); }}
+                onChange={
+                  (e) => {
+                    if (numberRegex.test(e.currentTarget.value)) {
+                      setAllowanceFormValues({ ...allowanceFormValues, customDucks: e.currentTarget.value });
+                    }
+                  }
+                }
               />
             </div>
           </div>
           <div className="absolute -bottom-4 -right-4 flex space-x-2 text-sm">
+            <FormButton label="Reset" onClick={handleReset} />
             <FormButton label="Submit" onClick={handleSetAllowance} />
           </div>
         </div>
