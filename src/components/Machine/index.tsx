@@ -6,11 +6,11 @@ import { MachineMode } from '../../utils/constants';
 import WaveForm from './WaveForm';
 import StatusPanel from './MainScreen/BrowsingMode/StatusPanel';
 import Keyboard from './Keyboard';
+// eslint-disable-next-line import/no-relative-packages
+import { motion, AnimatePresence } from '../../../node_modules/framer-motion/dist/framer-motion';
 
 const Machine = () => {
-  const { currentMode } = useMachineStore(
-    (state) => state,
-  );
+  const { currentMode } = useMachineStore();
 
   return (
     <group>
@@ -19,7 +19,9 @@ const Machine = () => {
       <Keyboard />
       {
         currentMode === MachineMode.Customization
-          ? <ColorPicker />
+          ? (
+            <ColorPicker />
+          )
           : (
             <>
               <WaveForm />
