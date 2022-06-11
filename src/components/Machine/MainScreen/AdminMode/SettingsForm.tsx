@@ -7,6 +7,7 @@ import FormInput from './common/FormInput';
 import FormButton from './common/FormButton';
 import { useMachineConfig, useMachineContract } from '../../../../hooks/machine';
 import useMachineStore from '../../../../store';
+import AdminFormWrapper from './AdminFormWrapper';
 
 const numberRegex = /^\d*(?:\d*)?$/;
 const decimalRegex = /^\d*(?:[.,]\d*)?$/;
@@ -86,85 +87,87 @@ const SettingsForm = () => {
   };
 
   return (
-    <div className="flex mt-4 flex-col h-full space-y-2 relative">
-      <div>
-        <div>TOZZI DUCKS</div>
-        <div className="flex justify-between pixel-font-thin">
-          <div className="items-center flex text-2xl">Minting</div>
-          <div className="flex w-3/5 space-x-2 items-center">
-            <FormToggle
-              label="Enabled"
-              isSelected={tozziStatus === MintStatus.Enabled}
-              onToggle={() => setTozziStatus(MintStatus.Enabled)}
-            />
-            <FormToggle
-              label="Disabled"
-              isSelected={tozziStatus === MintStatus.Disabled}
-              onToggle={() => setTozziStatus(MintStatus.Disabled)}
-            />
-            <FormToggle
-              label="Allowance"
-              isSelected={tozziStatus === MintStatus.Allowance}
-              onToggle={() => setTozziStatus(MintStatus.Allowance)}
+    <AdminFormWrapper>
+      <div className="flex flex-col h-full space-y-2 relative">
+        <div>
+          <div>TOZZI DUCKS</div>
+          <div className="flex justify-between pixel-font-thin">
+            <div className="items-center flex text-2xl">Minting</div>
+            <div className="flex w-3/5 space-x-2 items-center">
+              <FormToggle
+                label="Enabled"
+                isSelected={tozziStatus === MintStatus.Enabled}
+                onToggle={() => setTozziStatus(MintStatus.Enabled)}
+              />
+              <FormToggle
+                label="Disabled"
+                isSelected={tozziStatus === MintStatus.Disabled}
+                onToggle={() => setTozziStatus(MintStatus.Disabled)}
+              />
+              <FormToggle
+                label="Allowance"
+                isSelected={tozziStatus === MintStatus.Allowance}
+                onToggle={() => setTozziStatus(MintStatus.Allowance)}
+              />
+            </div>
+          </div>
+          <div className="flex justify-between pixel-font-thin mt-2">
+            <div className="items-center flex text-2xl">Price</div>
+            <FormInput
+              className="w-3/5"
+              value={tozziPrice ?? ''}
+              overlay="ETH"
+              onChange={(e) => { if (decimalRegex.test(e.currentTarget.value)) setTozziPrice(e.currentTarget.value); }}
             />
           </div>
         </div>
-        <div className="flex justify-between pixel-font-thin mt-2">
-          <div className="items-center flex text-2xl">Price</div>
-          <FormInput
-            className="w-3/5"
-            value={tozziPrice ?? ''}
-            overlay="ETH"
-            onChange={(e) => { if (decimalRegex.test(e.currentTarget.value)) setTozziPrice(e.currentTarget.value); }}
-          />
-        </div>
-      </div>
 
-      <div>
-        <div>CUSTOM DUCKS</div>
-        <div className="flex justify-between pixel-font-thin">
-          <div className="items-center  text-2xl">Minting</div>
-          <div className="flex w-3/5  space-x-2 items-center">
-            <FormToggle
-              label="Enabled"
-              isSelected={customStatus === MintStatus.Enabled}
-              onToggle={() => setCustomStatus(MintStatus.Enabled)}
+        <div>
+          <div>CUSTOM DUCKS</div>
+          <div className="flex justify-between pixel-font-thin">
+            <div className="items-center  text-2xl">Minting</div>
+            <div className="flex w-3/5  space-x-2 items-center">
+              <FormToggle
+                label="Enabled"
+                isSelected={customStatus === MintStatus.Enabled}
+                onToggle={() => setCustomStatus(MintStatus.Enabled)}
+              />
+              <FormToggle
+                label="Disabled"
+                isSelected={customStatus === MintStatus.Disabled}
+                onToggle={() => setCustomStatus(MintStatus.Disabled)}
+              />
+              <FormToggle
+                label="Allowance"
+                isSelected={customStatus === MintStatus.Allowance}
+                onToggle={() => setCustomStatus(MintStatus.Allowance)}
+              />
+            </div>
+          </div>
+          <div className="flex justify-between pixel-font-thin mt-2">
+            <div className="items-center flex text-2xl">Price</div>
+            <FormInput
+              className="w-3/5"
+              value={customPrice ?? ''}
+              overlay="ETH"
+              onChange={(e) => { if (decimalRegex.test(e.currentTarget.value)) setCustomPrice(e.currentTarget.value); }}
             />
-            <FormToggle
-              label="Disabled"
-              isSelected={customStatus === MintStatus.Disabled}
-              onToggle={() => setCustomStatus(MintStatus.Disabled)}
-            />
-            <FormToggle
-              label="Allowance"
-              isSelected={customStatus === MintStatus.Allowance}
-              onToggle={() => setCustomStatus(MintStatus.Allowance)}
+          </div>
+          <div className="flex justify-between pixel-font-thin mt-2">
+            <div className="items-center flex text-2xl">Max Ducks</div>
+            <FormInput
+              className="w-3/5"
+              value={maxDucks ?? ''}
+              onChange={(e) => { if (numberRegex.test(e.currentTarget.value)) setMaxDucks(e.currentTarget.value); }}
             />
           </div>
         </div>
-        <div className="flex justify-between pixel-font-thin mt-2">
-          <div className="items-center flex text-2xl">Price</div>
-          <FormInput
-            className="w-3/5"
-            value={customPrice ?? ''}
-            overlay="ETH"
-            onChange={(e) => { if (decimalRegex.test(e.currentTarget.value)) setCustomPrice(e.currentTarget.value); }}
-          />
-        </div>
-        <div className="flex justify-between pixel-font-thin mt-2">
-          <div className="items-center flex text-2xl">Max Ducks</div>
-          <FormInput
-            className="w-3/5"
-            value={maxDucks ?? ''}
-            onChange={(e) => { if (numberRegex.test(e.currentTarget.value)) setMaxDucks(e.currentTarget.value); }}
-          />
+        <div className="absolute -bottom-4 -right-4 flex space-x-2 text-sm">
+          <FormButton label="Reset" onClick={resetForm} />
+          <FormButton label="Submit" onClick={handleSubmission} />
         </div>
       </div>
-      <div className="absolute -bottom-4 -right-4 flex space-x-2 text-sm">
-        <FormButton label="Reset" onClick={resetForm} />
-        <FormButton label="Submit" onClick={handleSubmission} />
-      </div>
-    </div>
+    </AdminFormWrapper>
   );
 };
 

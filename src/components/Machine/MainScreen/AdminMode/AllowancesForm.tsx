@@ -8,6 +8,7 @@ import FormButton from './common/FormButton';
 import { useMachineContract } from '../../../../hooks/machine';
 import { contractAbi } from '../../../../utils/constants';
 import useMachineStore from '../../../../store';
+import AdminFormWrapper from './AdminFormWrapper';
 
 interface Allowance {
   tozziDucks: string;
@@ -81,63 +82,65 @@ const AllowancesForm = () => {
   };
 
   return (
-    <div className="flex mt-2 flex-col h-full space-y-4 relative">
-      <div>
-        <div className="pixel-font-thin mt-1">
-          <FormInput
-            className="w-full"
-            placeholder="Account #"
-            value={allowanceAccount}
-            onChange={(e) => { setAllowanceAccount(e.currentTarget.value); }}
-          />
-        </div>
-        { !checkedAllowance && (
-          <div className="mt-2 text-center">
-            <FormButton label="Check Allowance" onClick={handleCheckAllowance} />
-          </div>
-        )}
-        { checkedAllowance && (
-          <div className="pixel-font-thin text-2xl flex justify-between">
-            <div>Tozzi Ducks: {checkedAllowance.tozziDucks}</div>
-            <div>Custom Ducks: {checkedAllowance.customDucks}</div>
-          </div>
-        )}
-      </div>
-
-      <div className="">
-        <div>SET DUCK ALLOWANCE</div>
-        <div className="pixel-font-thin">
-          <div className="items-center flex text-2xl">Account</div>
-          <FormInput
-            className="w-full"
-            value={allowanceFormValues.account}
-            onChange={(e) => { setAllowanceFormValues({ ...allowanceFormValues, account: e.currentTarget.value }); }}
-          />
-        </div>
-        <div className="pixel-font-thin space-x-2 text-2xl flex justify-between">
-          <div className="flex-1">
-            <div>Tozzi Ducks:</div>
+    <AdminFormWrapper>
+      <div className="flex flex-col h-full space-y-4 relative">
+        <div>
+          <div className="pixel-font-thin mt-1">
             <FormInput
               className="w-full"
-              value={allowanceFormValues.tozziDucks.toString()}
-              onChange={(e) => { setAllowanceFormValues({ ...allowanceFormValues, tozziDucks: e.currentTarget.value }); }}
+              placeholder="Account #"
+              value={allowanceAccount}
+              onChange={(e) => { setAllowanceAccount(e.currentTarget.value); }}
             />
           </div>
-          <div className="flex-1">
-            <div>Custom Ducks:</div>
+          { !checkedAllowance && (
+            <div className="mt-2 text-center">
+              <FormButton label="Check Allowance" onClick={handleCheckAllowance} />
+            </div>
+          )}
+          { checkedAllowance && (
+            <div className="pixel-font-thin text-2xl flex justify-between">
+              <div>Tozzi Ducks: {checkedAllowance.tozziDucks}</div>
+              <div>Custom Ducks: {checkedAllowance.customDucks}</div>
+            </div>
+          )}
+        </div>
+
+        <div className="">
+          <div>SET DUCK ALLOWANCE</div>
+          <div className="pixel-font-thin">
+            <div className="items-center flex text-2xl">Account</div>
             <FormInput
               className="w-full"
-              value={allowanceFormValues.customDucks.toString()}
-              onChange={(e) => { setAllowanceFormValues({ ...allowanceFormValues, customDucks: e.currentTarget.value }); }}
+              value={allowanceFormValues.account}
+              onChange={(e) => { setAllowanceFormValues({ ...allowanceFormValues, account: e.currentTarget.value }); }}
             />
           </div>
+          <div className="pixel-font-thin space-x-2 text-2xl flex justify-between">
+            <div className="flex-1">
+              <div>Tozzi Ducks:</div>
+              <FormInput
+                className="w-full"
+                value={allowanceFormValues.tozziDucks.toString()}
+                onChange={(e) => { setAllowanceFormValues({ ...allowanceFormValues, tozziDucks: e.currentTarget.value }); }}
+              />
+            </div>
+            <div className="flex-1">
+              <div>Custom Ducks:</div>
+              <FormInput
+                className="w-full"
+                value={allowanceFormValues.customDucks.toString()}
+                onChange={(e) => { setAllowanceFormValues({ ...allowanceFormValues, customDucks: e.currentTarget.value }); }}
+              />
+            </div>
+          </div>
+          <div className="absolute -bottom-4 -right-4 flex space-x-2 text-sm">
+            <FormButton label="Submit" onClick={handleSetAllowance} />
+          </div>
         </div>
-        <div className="absolute -bottom-4 -right-4 flex space-x-2 text-sm">
-          <FormButton label="Submit" onClick={handleSetAllowance} />
-        </div>
-      </div>
 
-    </div>
+      </div>
+    </AdminFormWrapper>
   );
 };
 

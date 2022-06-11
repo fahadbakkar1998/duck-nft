@@ -6,6 +6,8 @@ import AllowancesForm from './AllowancesForm';
 import AccountingForm from './AccountingForm';
 import AdminTabButton from './AdminTabButton';
 import useMachineStore from '../../../../store';
+// eslint-disable-next-line import/no-relative-packages
+import { motion, AnimatePresence } from '../../../../../node_modules/framer-motion/dist/framer-motion';
 
 const AdminMain = () => {
   const [activeTab, setActiveTab] = useState<AdminTabs>(AdminTabs.Settings);
