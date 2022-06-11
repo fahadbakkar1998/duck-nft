@@ -40,7 +40,7 @@ const App = () => {
         </div>
         <img
           className={`
-            ${!isBurning ? 'animate-wow' : ''} top-[25%] left-[13%] w-[60%] 
+            ${!isBurning ? 'animate-wow' : ''} top-[25.3%] left-[10%] w-[60%] 
             absolute z-50
           `}
           src={logo}
