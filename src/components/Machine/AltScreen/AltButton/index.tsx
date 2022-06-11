@@ -11,15 +11,13 @@ import { BuyIcon, ProfileIcon, ProfileOpenIcon } from '../../../common/SvgIcon';
 import ShimmerLayer from '../../../common/ShimmerLayer';
 import { contract, fetchMachineConfig } from '../../../../utils/functions';
 import AltButtonLoader from './AltButtonLoader';
-import BuyButton from './BuyButton';
 
 const ButtonView = () => {
-  const currState = useMachineStore((state) => state);
   const queryClient = useQueryClient();
   const {
     currentDuckId,
     setProcessing,
-    setTransactionStatus,
+    setAltMessage,
     currentMode,
     setOpenBurnModal,
     DToolInst,
@@ -28,7 +26,10 @@ const ButtonView = () => {
     setIsBurning,
     setShowTxStatus,
     setCurrentMode,
-  } = currState;
+    isLocked,
+    setIsLocked,
+    setMachineMood,
+  } = useMachineStore();
   const { data = [], isLoading } = useDucks();
   const ducks = !isLoading ? data : [];
 
@@ -37,17 +38,22 @@ const ButtonView = () => {
   const { send: sendFnTozziDuck, state: mintTozziDuckState } = useContractFunction(contract, 'mintTozziDuck');
   const { send: sendFnCustomTozziDuck, state: mintCustomTozziDuckState } = useContractFunction(contract, 'mintCustomDuck');
 
-  const handleOnMining = useCallback(() => {
-    setShowTxStatus(true);
-    setProcessing(true);
-    setTransactionStatus('processing...');
-  }, [setProcessing, setShowTxStatus, setTransactionStatus]);
+  const handleOnSigning = useCallback(() => {
+    setAltMessage('Signature Pending...');
+  }, [setAltMessage]);
+
+  const handleOnMining = useCallback((message?: string) => {
+    setAltMessage(message || 'mining...');
+    setIsLocked(true);
+    setMachineMood('happy');
+  }, [setAltMessage, isLocked, setMachineMood, setIsLocked]);
 
   const handleOnSuccess = useCallback(() => {
     queryClient.invalidateQueries();
-    setTransactionStatus('None');
-    setProcessing(false);
-  }, [queryClient, setProcessing, setTransactionStatus]);
+    setAltMessage('Success! Duck Purchased!');
+    setMachineMood(undefined);
+    setIsLocked(false);
+  }, [queryClient, setProcessing, setAltMessage]);
 
   useEffect(() => {
     if (account) {
@@ -57,18 +63,35 @@ const ButtonView = () => {
   }, [account]);
 
   useEffect(() => {
+    const { status } = mintTozziDuckState;
+    if (status === 'PendingSignature') handleOnSigning();
+    if (status === 'Mining') handleOnMining('Duck purchase processing...');
+    if (status === 'Success') handleOnSuccess();
+  }, [mintTozziDuckState, handleOnMining, handleOnSuccess]);
+
+  useEffect(() => {
     const { status } = mintCustomTozziDuckState;
     if (status === 'Mining') {
       setShowTxStatus(true);
       setProcessing(true);
-      setTransactionStatus('processing...');
+      setAltMessage('processing...');
     }
     if (status === 'Success') {
       queryClient.invalidateQueries();
-      setTransactionStatus('None');
+      setAltMessage('None');
       setProcessing(false);
     }
-  }, [queryClient, setProcessing, setShowTxStatus, setTransactionStatus, mintCustomTozziDuckState]);
+  }, [queryClient, setProcessing, setShowTxStatus, setAltMessage, mintCustomTozziDuckState]);
+
+  const handleMintTozziDuck = async () => {
+    const canMint = currentDuckId && ducks[currentDuckId] && !ducks[currentDuckId].owner;
+    if (canMint) {
+      const { tozziMintPrice } = await fetchMachineConfig();
+      const price = utils.parseEther(tozziMintPrice.toString());
+      const { webp, proof } = ducks[currentDuckId];
+      sendFnTozziDuck(currentDuckId, webp, proof, { value: price });
+    }
+  };
 
   const handleMintCustomTozziDuck = async () => {
     // const canMint = true; //TODO handle this case. check to see if custom minting is even enabled
@@ -91,11 +114,27 @@ const ButtonView = () => {
   if (currentMode === MachineMode.Syncing) return <div>Syncing...</div>;
 
   if (currentMode === MachineMode.Shopping) {
+    if (selectedDuck?.owner) {
+      return (
+        <Button onClick={() => setShowDuckProfile(!showDuckProfile)}>
+          <div className="flex space-x-2 justify-center items-center lcd-font text-black opacity-75 hover:font-bold ">
+            <div>profile</div>
+            { showDuckProfile ? (
+              <ProfileOpenIcon wrapperClassName="w-5 mb-[1px]" className="stroke-black" />
+            ) : (
+              <ProfileIcon wrapperClassName="w-5 mb-[1px]" className="stroke-black" />
+            )}
+          </div>
+        </Button>
+      );
+    }
     return (
-      <BuyButton
-        handleOnMining={handleOnMining}
-        handleOnSuccess={handleOnSuccess}
-      />
+      <Button onClick={handleMintTozziDuck}>
+        <div className="flex space-x-2 justify-center items-center lcd-font text-black opacity-75 hover:font-bold">
+          <div>buy duck</div>
+          <BuyIcon wrapperClassName="w-5 mb-[3px]" className="stroke-black" />
+        </div>
+      </Button>
     );
   }
 
@@ -131,7 +170,7 @@ const AltButton = () => {
       className="inner-shadow absolute rounded-sm -bottom-[25.5%] left-[5.75%] graph-bg h-[14.75%] w-[48.75%] pointer-events-auto"
     >
       <ShimmerLayer targetHovered={isHovered} />
-      { isLocked ? <AltButtonLoader /> : <ButtonView /> }
+      { isLocked && false ? <AltButtonLoader /> : <ButtonView /> }
     </div>
   );
 };

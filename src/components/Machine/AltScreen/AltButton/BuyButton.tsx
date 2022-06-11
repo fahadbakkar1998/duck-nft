@@ -10,36 +10,36 @@ import { ActionButtonProps } from '../../../../types/types';
 import { BuyIcon, ProfileIcon, ProfileOpenIcon } from '../../../common/SvgIcon';
 import AltButtonLoader from './AltButtonLoader';
 
-const useStateHandler = (state: TransactionStatus) => {
-  const {
-    setAltMessage,
-    setIsLocked,
-    setMachineMood,
-  } = useMachineStore();
-  useEffect(() => {
-    if (state?.status === 'Mining') {
-      setAltMessage('Update Processing...');
-      setIsLocked(true);
-      setMachineMood('happy');
-    } else if (state?.status === 'Success') {
-      setAltMessage('Settings Updated!');
-      setMachineMood(undefined);
-      setIsLocked(false);
-    } else if (state?.status === 'PendingSignature') {
-      setAltMessage('Signature Pending...');
-    } else if (state?.status === 'Exception') {
-      const denied = 'MetaMask Tx Signature: User denied transaction signature.';
-      if (state?.errorMessage === denied) {
-        setAltMessage('Well, nevermind then...');
-      } else {
-        setAltMessage('Oh Quack! something went wrong!');
-      }
-      setMachineMood('sad');
-      setIsLocked(false);
-      setTimeout(() => setMachineMood(undefined), 500);
-    }
-  }, [state.status]);
-};
+// const useStateHandler = (state: TransactionStatus) => {
+//   const {
+//     setAltMessage,
+//     setIsLocked,
+//     setMachineMood,
+//   } = useMachineStore();
+//   useEffect(() => {
+//     if (state?.status === 'Mining') {
+//       setAltMessage('Update Processing...');
+//       setIsLocked(true);
+//       setMachineMood('happy');
+//     } else if (state?.status === 'Success') {
+//       setAltMessage('Settings Updated!');
+//       setMachineMood(undefined);
+//       setIsLocked(false);
+//     } else if (state?.status === 'PendingSignature') {
+//       setAltMessage('Signature Pending...');
+//     } else if (state?.status === 'Exception') {
+//       const denied = 'MetaMask Tx Signature: User denied transaction signature.';
+//       if (state?.errorMessage === denied) {
+//         setAltMessage('Well, nevermind then...');
+//       } else {
+//         setAltMessage('Oh Quack! something went wrong!');
+//       }
+//       setMachineMood('sad');
+//       setIsLocked(false);
+//       setTimeout(() => setMachineMood(undefined), 500);
+//     }
+//   }, [state.status]);
+// };
 
 const BuyButton: FC<ActionButtonProps> = ({ handleOnMining, handleOnSuccess }) => {
   const {
@@ -58,7 +58,7 @@ const BuyButton: FC<ActionButtonProps> = ({ handleOnMining, handleOnSuccess }) =
     state: mintTozziDuckState,
   } = useContractFunction(contract, 'mintTozziDuck');
 
-  useStateHandler(mintTozziDuckState);
+  // useStateHandler(mintTozziDuckState);
 
   const handleMintTozziDuck = async () => {
     const canMint = currentDuckId && ducks[currentDuckId] && !ducks[currentDuckId].owner;
@@ -76,29 +76,60 @@ const BuyButton: FC<ActionButtonProps> = ({ handleOnMining, handleOnSuccess }) =
     if (status === 'Success') handleOnSuccess();
   }, [mintTozziDuckState, handleOnMining, handleOnSuccess]);
 
-  if (isLocked) return <AltButtonLoader />;
+  const {
+    setAltMessage,
+    setIsLocked,
+    setMachineMood,
+  } = useMachineStore();
 
-  if (selectedDuck?.owner) {
-    return (
-      <Button onClick={() => setShowDuckProfile(!showDuckProfile)}>
-        <div className="flex space-x-2 justify-center items-center lcd-font text-black opacity-75 hover:font-bold ">
-          <div>profile</div>
-          { showDuckProfile ? (
-            <ProfileOpenIcon wrapperClassName="w-5 mb-[1px]" className="stroke-black" />
-          ) : (
-            <ProfileIcon wrapperClassName="w-5 mb-[1px]" className="stroke-black" />
-          )}
-        </div>
-      </Button>
-    );
-  }
+  useEffect(() => {
+    if (mintTozziDuckState?.status === 'Mining') {
+      setAltMessage('Update Processing...');
+      setIsLocked(true);
+      setMachineMood('happy');
+    } else if (mintTozziDuckState?.status === 'Success') {
+      setAltMessage('Settings Updated!');
+      setMachineMood(undefined);
+      setIsLocked(false);
+    } else if (mintTozziDuckState?.status === 'PendingSignature') {
+      setAltMessage('Signature Pending...');
+    } else if (mintTozziDuckState?.status === 'Exception') {
+      const denied = 'MetaMask Tx Signature: User denied transaction signature.';
+      if (mintTozziDuckState?.errorMessage === denied) {
+        setAltMessage('Well, nevermind then...');
+      } else {
+        setAltMessage('Oh Quack! something went wrong!');
+      }
+      setMachineMood('sad');
+      setIsLocked(false);
+      setTimeout(() => setMachineMood(undefined), 500);
+    }
+  }, [mintTozziDuckState.status]);
+
   return (
-    <Button onClick={handleMintTozziDuck}>
-      <div className="flex space-x-2 justify-center items-center lcd-font text-black opacity-75 hover:font-bold">
-        <div>buy duck</div>
-        <BuyIcon wrapperClassName="w-5 mb-[3px]" className="stroke-black" />
-      </div>
-    </Button>
+    <>
+      { isLocked && <AltButtonLoader />}
+      { !isLocked && selectedDuck?.owner && (
+        <Button onClick={() => setShowDuckProfile(!showDuckProfile)}>
+          <div className="flex space-x-2 justify-center items-center lcd-font text-black opacity-75 hover:font-bold ">
+            <div>profile</div>
+            { showDuckProfile ? (
+              <ProfileOpenIcon wrapperClassName="w-5 mb-[1px]" className="stroke-black" />
+            ) : (
+              <ProfileIcon wrapperClassName="w-5 mb-[1px]" className="stroke-black" />
+            )}
+          </div>
+        </Button>
+      )}
+      {!isLocked && !selectedDuck?.owner && (
+        <Button onClick={handleMintTozziDuck}>
+          <div className="flex space-x-2 justify-center items-center lcd-font text-black opacity-75 hover:font-bold">
+            <div>buy duck</div>
+            <BuyIcon wrapperClassName="w-5 mb-[3px]" className="stroke-black" />
+          </div>
+        </Button>
+      )}
+    </>
   );
 };
 
