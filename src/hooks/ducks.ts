@@ -14,7 +14,6 @@ const getMetadataAttribute = (metadata: DuckMetadata | undefined, traitType: str
 export const useDuckProfile = (tokenId: number): DuckProfile | undefined => {
   const duckMachine = useMachineContract();
   const { metadata } = useDuck(tokenId);
-  console.log(metadata);
   const creator = getMetadataAttribute(metadata, 'Creator');
   const complexity = getMetadataAttribute(metadata, 'Duck Image Complexity');
 

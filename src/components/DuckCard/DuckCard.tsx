@@ -29,7 +29,7 @@ const DuckCard: FC<DuckData> = (data) => {
       )}
       {showSoldOverlay && (
         <div
-          className="flex pl-2 pt-2 items-start justify-left w-full h-full text-2xl text-white bg-black pixel-font text-opacity-90 absolute-center bg-opacity-60"
+          className="flex items-center justify-center w-full h-full text-2xl text-white bg-black pixel-font text-opacity-80 absolute-center bg-opacity-60"
         >
           SOLD
         </div>

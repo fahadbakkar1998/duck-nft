@@ -66,3 +66,8 @@ export interface DuckProfile {
   owner?: string;
   creator?: string;
 }
+
+export interface ActionButtonProps {
+  handleOnMining: () => void;
+  handleOnSuccess: () => void;
+}

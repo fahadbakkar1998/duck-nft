@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { DuckIcon } from '../../common/SvgIcon';
+import { DuckIcon } from '../../../common/SvgIcon';
 
 const numCells = 5;
 
