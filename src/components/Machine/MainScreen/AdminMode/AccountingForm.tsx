@@ -1,19 +1,13 @@
+/* eslint-disable no-console */
 import { useState } from 'react';
-import { shortenAddress } from '@usedapp/core';
+import { shortenAddress, useContractFunction, useLookupAddress } from '@usedapp/core';
 import { constants } from 'ethers';
 import { MintStatus } from '../../../../types/types';
 import FormInput from './common/FormInput';
 import FormButton from './common/FormButton';
-import { useMachineState } from '../../../../state/hooks';
+import { useMachineState, useMachineConfig } from '../../../../state/hooks';
 import AdminFormWrapper from './AdminFormWrapper';
-
-const config = {
-  tozziMintStatus: MintStatus.Enabled,
-  tozziMintPrice: '0.5',
-  customMintStatus: MintStatus.Disabled,
-  customMintPrice: '0.5',
-  maxCustomDucks: 10,
-};
+import { useEnsOrShort } from '../../../../hooks';
 
 interface Allowance {
   tozziDucks: string;
@@ -25,16 +19,17 @@ interface AllowanceFormValues extends Allowance {
 }
 
 const AccountingForm = () => {
-  const { data: machineState } = useMachineState();
   const [value, setValue] = useState('');
   const handleWithdraw = () => {};
+  const { data: machineState, isLoading } = useMachineState();
+  const owner = useEnsOrShort(machineState?.owner);
 
   return (
     <AdminFormWrapper>
       <div className="flex flex-col space-y-2 h-full relative">
         <div>OWNER</div>
         <div className="pixel-font-thin text-xl">
-          { machineState?.owner ? shortenAddress(machineState.owner) : '--'}
+          { owner || '--' }
         </div>
         <div>CURRENT BALANCE</div>
         <div className="pixel-font-thin text-xl">

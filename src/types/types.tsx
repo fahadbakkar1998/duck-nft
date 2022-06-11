@@ -54,8 +54,8 @@ export interface MachineState {
   tozziMints: number; // # tozzi ducks minted
   customMints: number; // # custom ducks minted
   balance: string; // current balance in ETH
-  totalSales: string; // total revenue from selling ducks
-  config: MachineConfig;
+  totalSales?: string; // total revenue from selling ducks
+  config?: MachineConfig;
 }
 
 export interface DuckProfile {

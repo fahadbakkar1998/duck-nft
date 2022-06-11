@@ -21,7 +21,12 @@ const SettingsForm = () => {
   const [customPrice, setCustomPrice] = useState<string>();
   const [maxDucks, setMaxDucks] = useState<string>();
   const contract = useMachineContract();
-  const { send, state } = useContractFunction(contract, 'setMachineConfig', { transactionName: 'Update Config' });
+  const { send, state } = useContractFunction(
+    contract,
+    'setMachineConfig',
+    { transactionName: 'Update Config' },
+  );
+
   const {
     altMessage,
     setAltMessage,

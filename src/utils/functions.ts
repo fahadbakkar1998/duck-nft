@@ -125,16 +125,19 @@ const fetchMachineState = async (): Promise<MachineState> => {
   const ownershipTokenId = await duckMachineContract.OWNERSHIP_TOKEN_ID();
   const machineOwner = await duckMachineContract.ownerOf(ownershipTokenId);
   const balance = await ethereumProvider.getBalance(contractAddress);
-  const totalSales = await getTotalSales();
+  // const totalSales = await getTotalSales();
   const duckMintsCount = await getMintsCount();
   const machineConfig = await fetchMachineConfig();
+
+  console.log('owner', machineOwner);
+
   return {
     owner: machineOwner,
     tozziMints: duckMintsCount.tozzi,
     customMints: duckMintsCount.custom,
     balance: ethers.utils.formatEther(balance),
     config: machineConfig,
-    totalSales,
+    // totalSales,
   };
 };
 
