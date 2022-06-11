@@ -12,7 +12,7 @@ const Shopping = () => {
   const duck = ducks?.[currentDuckId];
 
   return (
-    <div className="relative">
+    <div className="absolute z-10">
       <DuckProfile show={showDuckProfile} duck={duck} />
       { true && (
         <div className="h-full">
