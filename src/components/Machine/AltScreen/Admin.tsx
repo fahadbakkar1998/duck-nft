@@ -73,11 +73,16 @@ const Admin: FC = () => {
   };
 
   return (
-    <div
-      className={`Admin ${
-        currentMode === MachineMode.Admin ? 'fadeIn' : 'fadeOut'
-      }`}
-    >
+    <div className="absolute z-10 h-full w-full">
+      <div
+        className="
+          pointer-events-none
+          absolute bottom-0 right-0 px-4 py-2 rounded-l-md border-white border-2 shadow-md  pixel-font z-20 border-r-0 border-b-0
+          bg-orange-500
+        "
+      >
+        DUCK REVIEW
+      </div>
       <Slider {...settings}>
         {React.Children.toArray(
           sortedCustomDuckData.map((duck: DuckData, i: number) => (
