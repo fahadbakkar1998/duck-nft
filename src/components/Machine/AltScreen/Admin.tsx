@@ -5,6 +5,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import useMachineStore from '../../../store';
 import { MachineMode } from '../../../utils/constants';
 import { DuckData } from '../../../types/types';
+import { useDucks } from '../../../state/hooks';
 
 const SampleNextArrow = (props: any) => {
   const { className, style, onClick } = props;
@@ -41,7 +42,9 @@ const SamplePrevArrow = (props: any) => {
 };
 
 const Admin: FC = () => {
-  const { currentMode, ducks, setCurrentAdminDuckId } = useMachineStore();
+  const { currentMode, setCurrentAdminDuckId } = useMachineStore();
+  const { data: ducksData = [], isLoading } = useDucks();
+  const ducks = !isLoading ? ducksData : [];
 
   const [sortedCustomDuckData, setSortedCustomDuckData] = useState<
     Array<DuckData>

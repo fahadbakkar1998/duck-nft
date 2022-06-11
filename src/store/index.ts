@@ -9,6 +9,7 @@ import {
 import DTool from './DTool';
 import jsonDucks from '../utils/duckData.json';
 import { DuckData, DuckFilters } from '../types/types';
+import { useDucks } from '../state/hooks';
 
 type MachineStore = {
   currentMode: MachineMode;
@@ -55,8 +56,6 @@ type MachineStore = {
   // contract data
   machineConfig: any;
   setMachineConfig: (val: any) => void;
-  ducks: Array<DuckData>;
-  setDucks: (val: Array<DuckData>) => void;
 
   // contract status
   processing: boolean;
@@ -177,12 +176,10 @@ export const useMachineStore = create<MachineStore>(
     setCurrentDuckId: (id: number): void => {
       set((state) => {
         state.changeChannel(250);
-        let duckSold = false;
-        if (state.ducks[id].owner) duckSold = true;
         setTimeout(() => {
           set({ machineMood: undefined, altIsStatic: false });
         }, 350);
-        return { machineMood: duckSold ? 'sad' : 'happy', showDuckProfile: false, currentDuckId: id };
+        return { showDuckProfile: false, currentDuckId: id };
       });
     },
 
@@ -227,11 +224,6 @@ export const useMachineStore = create<MachineStore>(
     },
     setMachineConfig: (val: any): void => {
       set({ machineConfig: val });
-    },
-
-    ducks: jsonDucks,
-    setDucks: (val: Array<DuckData>): void => {
-      set({ ducks: val });
     },
 
     // contract status

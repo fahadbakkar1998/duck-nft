@@ -1,4 +1,5 @@
-import { FC } from 'react';
+/* eslint-disable no-console */
+import { FC, useEffect } from 'react';
 // eslint-disable-next-line import/no-relative-packages
 import { motion, AnimatePresence } from '../../../../node_modules/framer-motion/dist/framer-motion';
 import { useDucks } from '../../../state/hooks';
@@ -9,7 +10,8 @@ const Shopping = () => {
   const { altIsStatic, showDuckProfile, currentDuckId, setAltMessage } = useMachineStore();
   const { data: ducksData = [], isLoading } = useDucks();
   const ducks = !isLoading ? ducksData : [];
-  const duck = ducks?.[currentDuckId];
+  const duck = ducks?.find((d) => d.id === currentDuckId);
+  console.log('selected duck', duck);
 
   return (
     <div className="absolute z-10">

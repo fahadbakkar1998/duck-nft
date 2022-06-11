@@ -33,10 +33,8 @@ const directionToDuckId = (direction: string, currentDuckId: number) => {
 const BrowsingMode = () => {
   const {
     isSwitchingModes,
-    currentMode,
     currentDuckId,
     setCurrentDuckId,
-    setCurrentMode,
   } = useMachineStore();
   const [showFilters, setShowFilters] = useState(false);
   const { data: ducks } = useDucks();
