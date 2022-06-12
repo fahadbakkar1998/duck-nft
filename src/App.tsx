@@ -15,13 +15,17 @@ const App = () => {
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent,
     );
-  const { isBurning, isOwnersManualOpen, setIsOwnersManualOpen } = useMachineStore();
+  const { isBurning, isOwnersManualOpen, setIsOwnersManualOpen, isLocked } = useMachineStore();
 
   return isMobile ? (
     <Mobile />
   ) : (
     <div className="App flex flex-col">
       <div className="machine-container relative w-full">
+        {/* TEST DISPLAY */}
+        <div className="absolute top-5 left-5">
+          <div>LOCKED: {isLocked ? 'true' : 'false'} </div>
+        </div>
         <div className={`
             bg-gradient-to-b from-[black] via-[black] to-[#d8d8d8]
             w-[85%] h-[55%] rounded-2xl absolute top-[32%] left-1/2 transform -translate-x-1/2  overflow-hidden  border-[#232035] border-[4px]
