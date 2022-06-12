@@ -19,8 +19,7 @@ interface DuckProfileProps {
   duck: DuckData;
 }
 const DuckProfileView: FC<DuckProfileProps> = ({ duck }) => {
-  const profile = useDuckProfile(duck.id);
-
+  const profile = useDuckProfile(duck);
   return (
     <motion.div
       initial={{ y: '100%' }}
@@ -36,7 +35,7 @@ const DuckProfileView: FC<DuckProfileProps> = ({ duck }) => {
               <img
                 className="border-2 border-white rounded-full"
                 alt={`Duck ${duck.id}`}
-                src={`data:image/webp;base64,${duck.webp}`}
+                src={duck.isCustom ? duck.webp : `data:image/webp;base64,${duck.webp}`}
               />
             </div>
 
@@ -89,6 +88,7 @@ const DuckProfileView: FC<DuckProfileProps> = ({ duck }) => {
 };
 
 const DuckProfile: FC<{duck: DuckData, show: boolean}> = ({ duck, show }) => {
+  console.log('foo', duck);
   return (
     <AnimatePresence>
       { show && <DuckProfileView duck={duck} /> }

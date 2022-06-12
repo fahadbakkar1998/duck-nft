@@ -3,7 +3,7 @@ import { shortenAddress, useCall } from '@usedapp/core';
 import { BigNumber, utils } from 'ethers';
 import { useDuck } from '.';
 import { useDucks } from '../state/hooks';
-import { DuckMetadata, DuckProfile } from '../types/types';
+import { DuckData, DuckMetadata, DuckProfile } from '../types/types';
 import { useMachineContract } from './machine';
 
 const getMetadataAttribute = (metadata: DuckMetadata | undefined, traitType: string): string | undefined => {
@@ -11,16 +11,17 @@ const getMetadataAttribute = (metadata: DuckMetadata | undefined, traitType: str
   return attribute?.value;
 };
 
-export const useDuckProfile = (tokenId: number): DuckProfile | undefined => {
+export const useDuckProfile = (duck: DuckData): DuckProfile | undefined => {
   const duckMachine = useMachineContract();
-  const { metadata } = useDuck(tokenId);
+  const { metadata } = duck;
+  const { name, description } = metadata!;
   const creator = getMetadataAttribute(metadata, 'Creator');
   const complexity = getMetadataAttribute(metadata, 'Duck Image Complexity');
 
-  const { value, error } = useCall(tokenId && {
+  const { value, error } = useCall(duck && {
     contract: duckMachine,
     method: 'duckProfiles',
-    args: [tokenId],
+    args: [duck.id],
   }) ?? {};
 
   if (error) {
@@ -29,11 +30,11 @@ export const useDuckProfile = (tokenId: number): DuckProfile | undefined => {
   }
 
   const profile: DuckProfile = {
-    name: value?.name || `Tozzi Duck ${tokenId}`,
+    name,
     description: value?.description || 'N/A - Contact the owner of this device to customize your duck\'s profile!',
     status: value?.stance[0] || 'N/A',
-    creator: tokenId < 200 ? creator : shortenAddress(creator!),
-    complexity: `${complexity} Bytes`,
+    creator: !duck.isCustom ? creator : shortenAddress(creator!),
+    complexity: `${complexity} Quacks`,
   };
   return profile;
 };
