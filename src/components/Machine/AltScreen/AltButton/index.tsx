@@ -47,14 +47,14 @@ const ButtonView = () => {
     setAltMessage(message || 'mining...');
     setIsLocked(true);
     setMachineMood('happy');
-  }, [setAltMessage, isLocked, setMachineMood, setIsLocked]);
+  }, [setAltMessage, setIsLocked]);
 
   const handleOnSuccess = useCallback(() => {
     queryClient.invalidateQueries();
     setAltMessage('Success! Duck Purchased!');
     setMachineMood(undefined);
     setIsLocked(false);
-  }, [queryClient, setProcessing, setAltMessage]);
+  }, [queryClient, setAltMessage]);
 
   useEffect(() => {
     if (account) {
@@ -72,17 +72,10 @@ const ButtonView = () => {
 
   useEffect(() => {
     const { status } = mintCustomTozziDuckState;
-    if (status === 'Mining') {
-      setShowTxStatus(true);
-      setProcessing(true);
-      setAltMessage('processing...');
-    }
-    if (status === 'Success') {
-      queryClient.invalidateQueries();
-      setAltMessage('None');
-      setProcessing(false);
-    }
-  }, [queryClient, setProcessing, setShowTxStatus, setAltMessage, mintCustomTozziDuckState]);
+    if (status === 'PendingSignature') handleOnSigning();
+    if (status === 'Mining') handleOnMining('Custom duck minting in progress..');
+    if (status === 'Success') handleOnSuccess();
+  }, [mintCustomTozziDuckState, handleOnMining, handleOnSuccess]);
 
   const handleMintTozziDuck = async () => {
     const selectedDuck = ducks?.find((d) => d.id === currentDuckId);
@@ -114,6 +107,8 @@ const ButtonView = () => {
   }
 
   if (currentMode === MachineMode.Syncing) return <div>Syncing...</div>;
+
+  if (isLocked) return <AltButtonLoader />;
 
   if (currentMode === MachineMode.Shopping) {
     if (selectedDuck?.owner || selectedDuck?.isCustom) {
@@ -172,7 +167,7 @@ const AltButton = () => {
       className="inner-shadow absolute rounded-sm -bottom-[25.5%] left-[5.75%] graph-bg h-[14.75%] w-[48.75%] pointer-events-auto"
     >
       <ShimmerLayer targetHovered={isHovered} />
-      { isLocked && false ? <AltButtonLoader /> : <ButtonView /> }
+      <ButtonView />
     </div>
   );
 };
