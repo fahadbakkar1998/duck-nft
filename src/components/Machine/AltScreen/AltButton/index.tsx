@@ -85,11 +85,12 @@ const ButtonView = () => {
   }, [queryClient, setProcessing, setShowTxStatus, setAltMessage, mintCustomTozziDuckState]);
 
   const handleMintTozziDuck = async () => {
-    const canMint = currentDuckId && ducks[currentDuckId] && !ducks[currentDuckId].owner;
+    const selectedDuck = ducks?.find((d) => d.id === currentDuckId);
+    const canMint = selectedDuck && !selectedDuck.owner;
     if (canMint) {
       const { tozziMintPrice } = await fetchMachineConfig();
       const price = utils.parseEther(tozziMintPrice.toString());
-      const { webp, proof } = ducks[currentDuckId];
+      const { webp, proof } = selectedDuck;
       sendFnTozziDuck(currentDuckId, webp, proof, { value: price });
     }
   };
