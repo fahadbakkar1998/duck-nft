@@ -7,11 +7,6 @@ import useMachineStore from '../../../store';
 const ScreenWrapper: FC<{children: ReactNode}> = ({ children }) => {
   const { account } = useEthers();
   const { setCurrentMode } = useMachineStore();
-  useEffect(() => {
-    if (account === undefined) {
-      setCurrentMode(MachineMode.Off);
-    }
-  }, [account]);
 
   return (
     <>
