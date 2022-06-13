@@ -105,7 +105,6 @@ const ButtonView = () => {
       </Button>
     );
   }
-  
   if (isLocked) return <AltButtonLoader />;
 
   if (currentMode === MachineMode.Shopping) {

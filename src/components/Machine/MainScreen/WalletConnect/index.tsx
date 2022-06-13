@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react';
 import { useEthers } from '@usedapp/core';
 import './index.scss';
 import useMachineStore from '../../../../store';
-import hourglass from '../../../../assets/img/hourglass.gif';
 import { MachineMode } from '../../../../utils/constants';
 import { DuckLogo } from '../../../common/SvgIcon';
 
@@ -24,9 +23,7 @@ const WalletConnect = () => {
 
   useEffect(() => {
     if (account) {
-      (async () => {
-        setCurrentMode(MachineMode.Shopping);
-      })();
+      setCurrentMode(MachineMode.Shopping);
     } else {
       setCurrentMode(MachineMode.Off);
     }

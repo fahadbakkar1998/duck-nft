@@ -10,15 +10,19 @@ const NotConnected: FC = () => {
 
   useEffect(() => {
     let isMounted = true;
+    let timeout;
+    let timeout2;
     if (isMounted) {
       setDuckIndex(Math.ceil(Math.random() * 200));
       changeChannel(300);
       setMachineMood('happy');
-      setTimeout(() => setMachineMood(undefined), 250);
-      setTimeout(() => setFlipper(!flipper), 8000);
+      timeout = setTimeout(() => setMachineMood(undefined), 250);
+      timeout2 = setTimeout(() => setFlipper(!flipper), 8000);
     }
     return () => {
       isMounted = false;
+      clearTimeout(timeout);
+      clearTimeout(timeout2);
     };
   }, [flipper]);
 
