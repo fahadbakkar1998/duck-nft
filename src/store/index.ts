@@ -148,7 +148,9 @@ export const useMachineStore = create<MachineStore>(
         setTimeout(() => {
           set({ isSwitchingModes: false });
         }, 300);
-        const { currentMode } = state;
+        if (direction === 'off') {
+          return { currentMode: MachineMode.Off, isSwitchingModes: true, isBurning: false, altMessage: '' };
+        }
         let nextMode: any;
         switch (state.currentMode) {
           case MachineMode.Shopping:
@@ -167,7 +169,7 @@ export const useMachineStore = create<MachineStore>(
               : MachineMode.Customization;
             break;
           default:
-            nextMode = currentMode;
+            nextMode = MachineMode.Shopping;
         }
         return { currentMode: nextMode, isSwitchingModes: true, isBurning: false, altMessage: '' };
       });

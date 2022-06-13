@@ -47,10 +47,10 @@ export function useEnsOrShort(account: string | undefined) {
 
 export const useAccountChange = () => {
   const { account } = useEthers();
-  const { setCurrentMode } = useMachineStore();
+  const { switchModes } = useMachineStore();
   useEffect(() => {
     if (!account) {
-      setCurrentMode(MachineMode.Off);
+      switchModes('off');
     }
   }, [account]);
 };

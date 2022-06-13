@@ -6,7 +6,7 @@ import { MachineMode } from '../../../../utils/constants';
 import { DuckLogo } from '../../../common/SvgIcon';
 
 const WalletConnect = () => {
-  const { currentMode, setCurrentMode, setAltMessage, setIsSwitchingModes, isSwitchingModes } = useMachineStore();
+  const { currentMode, setCurrentMode, setAltMessage, setIsSwitchingModes, isSwitchingModes, switchModes } = useMachineStore();
   const ref = useRef<HTMLDivElement>(null);
   const { activateBrowserWallet, account, chainId } = useEthers();
 
@@ -23,13 +23,7 @@ const WalletConnect = () => {
 
   useEffect(() => {
     if (account) {
-      setIsSwitchingModes(true);
-      setTimeout(() => {
-        setIsSwitchingModes(false);
-        setCurrentMode(MachineMode.Shopping);
-      }, 200);
-    } else {
-      setCurrentMode(MachineMode.Off);
+      switchModes('next');
     }
   }, [account]);
 
