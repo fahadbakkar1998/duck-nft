@@ -38,7 +38,7 @@ export const MainScreen = () => {
   }));
 
   const handleModeSwitch = (direction: string) => {
-    if ([MachineMode.Off, MachineMode.Syncing].includes(currentMode)) return;
+    if (currentMode === MachineMode.Off) return;
     if (screenIsRotating || processing || showTxStatus) return;
     setScreenIsRotating(true);
     setTimeout(() => {

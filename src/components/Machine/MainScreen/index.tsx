@@ -29,7 +29,7 @@ const MainScreen: FC<MainScreenProps> = ({ screenInverted, switchModes }) => {
       transform
       occlude
     >
-      { [MachineMode.Off, MachineMode.Syncing].includes(currentMode) && <WalletConnect /> }
+      { currentMode === MachineMode.Off && <WalletConnect /> }
       { currentMode === MachineMode.Shopping && <BrowsingMode /> }
       { currentMode === MachineMode.Customization && <DrawingTool /> }
       { currentMode === MachineMode.Admin && <AdminMain /> }

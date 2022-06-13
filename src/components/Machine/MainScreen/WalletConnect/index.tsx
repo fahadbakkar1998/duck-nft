@@ -25,7 +25,6 @@ const WalletConnect = () => {
   useEffect(() => {
     if (account) {
       (async () => {
-        setCurrentMode(MachineMode.Syncing);
         setCurrentMode(MachineMode.Shopping);
       })();
     } else {
@@ -37,14 +36,6 @@ const WalletConnect = () => {
     <div className="inner-shadow WalletConnect scanline">
       <DuckLogo className="w-full" wrapperClassName="w-full" />
       <div className="text-white flex flex-col space-y-1 text-sm mb-2">
-        {currentMode === MachineMode.Syncing && (
-          <div className="btn-connect hover:text-black hover:bg-white px-4 text-lg">
-            <span className="ml-2">Syncing Duck Data</span>
-            <div className="inline-block w-6 h-6 pt-1">
-              <img src={hourglass} alt="Hourglass" />
-            </div>
-          </div>
-        )}
         {currentMode === MachineMode.Off && (
           <div
             className="btn-connect hover:bg-white hover:text-black px-4 text-lg flex justify-center space-x-2"

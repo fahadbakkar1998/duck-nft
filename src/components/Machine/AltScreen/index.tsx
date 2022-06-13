@@ -42,7 +42,7 @@ const AltScreen: FC = () => {
         >
           <ShadowLayer />
           {altIsStatic && <Static /> }
-          { [MachineMode.Off, MachineMode.Syncing].includes(currentMode) && <NotConnected /> }
+          {currentMode === MachineMode.Off && <NotConnected />}
           {currentMode === MachineMode.Shopping && <BrowsingMode />}
           {currentMode === MachineMode.Customization && <CustomMode />}
           {currentMode === MachineMode.Admin && <AdminMode />}

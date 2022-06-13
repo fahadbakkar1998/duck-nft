@@ -42,7 +42,7 @@ const Keyboard: FC = () => {
   }, [currentDuckId]);
 
   const buttonClick = (btnName) => {
-    if ([MachineMode.Off, MachineMode.Syncing].includes(currentMode)) return;
+    if (currentMode === MachineMode.Off) return;
     if (btnName === 'enter') enterClick(value);
     else if (btnName === 'clear') clearClick();
     else {
