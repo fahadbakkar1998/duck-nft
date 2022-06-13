@@ -52,26 +52,26 @@ const BrowsingMode = () => {
     if (ducks?.[nextDuck]) setCurrentDuckId(nextDuck);
   };
 
-  if (isSwitchingModes) {
-    return (
-      <div
-        className="main scanline"
-      >
-        <div className="mainScreen w-full border-gray-600 border-2 overflow-hidden">
-          <div className="mt-24  scale-[1.8]  opacity-100 overflow-hidden">
-            <video
-              id="alt-static"
-              playsInline
-              autoPlay
-              muted
-              loop
-              src="/assets/video/static.mp4"
-            />
-          </div>
-        </div>
-      </div>
-    );
-  }
+  // if (isSwitchingModes) {
+  //   return (
+  //     <div
+  //       className="main scanline"
+  //     >
+  //       <div className="mainScreen w-full border-gray-600 border-2 overflow-hidden">
+  //         <div className="mt-24  scale-[1.8]  opacity-100 overflow-hidden">
+  //           <video
+  //             id="alt-static"
+  //             playsInline
+  //             autoPlay
+  //             muted
+  //             loop
+  //             src="/assets/video/static.mp4"
+  //           />
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <>
@@ -100,15 +100,29 @@ const BrowsingMode = () => {
             />
           </div>
           {/* DUCK GRID */}
-          <div className="relative w-full h-full duck-grid">
-            <div className="grid grid-cols-3 gap-1">
-              {React.Children.toArray(
-                filteredDucks.map((item: DuckData) => {
-                  return <DuckCard {...item} />;
-                }),
-              )}
+          { !isSwitchingModes && (
+            <div className="relative w-full h-full duck-grid">
+              <div className="grid grid-cols-3 gap-1">
+                {React.Children.toArray(
+                  filteredDucks.map((item: DuckData) => {
+                    return <DuckCard {...item} />;
+                  }),
+                )}
+              </div>
             </div>
-          </div>
+          )}
+          { isSwitchingModes && (
+            <div className="mt-24  scale-[1.8]  opacity-100 overflow-hidden">
+              <video
+                id="alt-static"
+                playsInline
+                autoPlay
+                muted
+                loop
+                src="/assets/video/static.mp4"
+              />
+            </div>
+          )}
         </div>
       </div>
     </>
