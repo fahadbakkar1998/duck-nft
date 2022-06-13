@@ -88,7 +88,6 @@ const DuckProfileView: FC<DuckProfileProps> = ({ duck }) => {
 };
 
 const DuckProfile: FC<{duck: DuckData, show: boolean}> = ({ duck, show }) => {
-  console.log('foo', duck);
   return (
     <AnimatePresence>
       { show && <DuckProfileView duck={duck} /> }
