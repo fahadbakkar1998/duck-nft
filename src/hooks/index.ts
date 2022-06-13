@@ -4,7 +4,7 @@ import { Contract } from 'ethers';
 import useMachineStore from '../store';
 import { filterDucks } from '../utils/helpers';
 import { DuckData } from '../types/types';
-import { contractAbi } from '../utils/constants';
+import { contractAbi, MachineMode } from '../utils/constants';
 import { useDucks } from '../state/hooks';
 
 const { REACT_APP_MACHINE_CONTRACT_ADDRESS: contractAddress = '' } = process.env;
@@ -44,3 +44,13 @@ export function useEnsOrShort(account: string | undefined) {
 
   return ens;
 }
+
+export const useAccountChange = () => {
+  const { account } = useEthers();
+  const { setCurrentMode } = useMachineStore();
+  useEffect(() => {
+    if (!account) {
+      setCurrentMode(MachineMode.Off);
+    }
+  }, [account]);
+};

@@ -1,11 +1,12 @@
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 import React, { useEffect, useState } from 'react';
+import { useEthers } from '@usedapp/core';
 import DuckCard from '../../../DuckCard/DuckCard';
 import useMachineStore from '../../../../store';
 import './index.scss';
 import FiltersModal from './FiltersModal';
 import { useDucks } from '../../../../state/hooks';
-import { useFilteredDucks } from '../../../../hooks';
+import { useAccountChange, useFilteredDucks } from '../../../../hooks';
 import { DuckData } from '../../../../types/types';
 import CircleButton from '../../../common/CircleButton';
 import filterIcon from '../../../../assets/img/icons/filter.svg';
@@ -31,10 +32,12 @@ const directionToDuckId = (direction: string, currentDuckId: number) => {
 };
 
 const BrowsingMode = () => {
+  useAccountChange();
   const {
     isSwitchingModes,
     currentDuckId,
     setCurrentDuckId,
+    setCurrentMode,
   } = useMachineStore();
   const [showFilters, setShowFilters] = useState(false);
   const { data: ducks } = useDucks();

@@ -13,6 +13,7 @@ import undoIcon from '../../../../assets/img/icons/undo.svg';
 import redoIcon from '../../../../assets/img/icons/redo.svg';
 import randomIcon from '../../../../assets/img/icons/random.svg';
 import './index.scss';
+import { useAccountChange } from '../../../../hooks';
 
 const layers: Object[] = [
   { label: 'Head' },
@@ -54,7 +55,6 @@ const layers: Object[] = [
 
 const DrawingTool: FC = (props: any) => {
   const drawingCanvas = useRef<HTMLCanvasElement>(null);
-  const currentState = useMachineStore((state) => state);
   const {
     currentMode,
     DToolInst,
@@ -64,7 +64,9 @@ const DrawingTool: FC = (props: any) => {
     setHistoryButtonsState,
     selectedColor,
     setSelectedColor,
-  } = currentState;
+  } = useMachineStore();
+
+  useAccountChange();
 
   const toggleEyeDrop = (flag: boolean) => {
     drawingCanvas!.current!.style.cursor = flag
