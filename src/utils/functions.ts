@@ -129,8 +129,6 @@ const fetchMachineState = async (): Promise<MachineState> => {
   const duckMintsCount = await getMintsCount();
   const machineConfig = await fetchMachineConfig();
 
-  console.log('owner', machineOwner);
-
   return {
     owner: machineOwner,
     tozziMints: duckMintsCount.tozzi,

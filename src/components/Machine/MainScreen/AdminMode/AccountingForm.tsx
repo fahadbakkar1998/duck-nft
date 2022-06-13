@@ -34,7 +34,6 @@ const AccountingForm = () => {
       return;
     }
     if (contract && machineState?.owner) {
-      console.log('withdraw it');
       try {
         send(
           machineState.owner,
@@ -47,7 +46,6 @@ const AccountingForm = () => {
   };
 
   useEffect(() => {
-    console.log(state);
     if (state?.status === 'Mining') {
       setAltMessage('Withdrawal Processing...');
       setIsLocked(true);
