@@ -15,30 +15,32 @@ const App = () => {
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent,
     );
-  const { isBurning, isOwnersManualOpen, setIsOwnersManualOpen, isLocked } = useMachineStore();
+  const {
+    isBurning,
+    openBurnForm,
+    isOwnersManualOpen,
+    setIsOwnersManualOpen,
+    isLocked,
+  } = useMachineStore();
 
   return isMobile ? (
     <Mobile />
   ) : (
     <div className="App flex flex-col">
       <div className="machine-container relative w-full">
-        {/* TEST DISPLAY */}
-        <div className="absolute top-5 left-5">
-          <div>LOCKED: {isLocked ? 'true' : 'false'} </div>
-        </div>
         <div className={`
             bg-gradient-to-b from-[black] via-[black] to-[#d8d8d8]
             w-[85%] h-[55%] rounded-2xl absolute top-[32%] left-1/2 transform -translate-x-1/2  overflow-hidden  border-[#232035] border-[4px]
           `}
         >
           <video
-            className={`${!isBurning ? 'animate-wow' : ''} w-full -mt-12 shadow-lg border-b-2 z-20 border-black border-opacity-25 absolute`}
+            className={`${!openBurnForm ? 'animate-wow -mt-12' : 'mt-1'} w-full  shadow-lg border-b-1 z-20 border-black border-opacity-25 absolute`}
             id="alt-static"
             playsInline
             autoPlay
             muted
             loop
-            src={`/assets/video/${isBurning ? 'fire.mp4' : 'scum.mp4'}`}
+            src={`/assets/video/${openBurnForm ? 'fire.mp4' : 'scum.mp4'}`}
           />
           <div className="absolute h-full w-full machine-shadow z-10" />
         </div>

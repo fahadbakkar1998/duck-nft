@@ -39,7 +39,8 @@ export enum MintStatus {
 export enum AdminTabs {
   Settings,
   Allowances,
-  Accounting
+  Accounting,
+  Burn,
 }
 export interface MachineConfig {
   tozziMintStatus: MintStatus;

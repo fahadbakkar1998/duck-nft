@@ -21,7 +21,6 @@ const ButtonView = () => {
     setProcessing,
     setAltMessage,
     currentMode,
-    setOpenBurnModal,
     DToolInst,
     showDuckProfile,
     setShowDuckProfile,

@@ -14,7 +14,7 @@ const NoDucks = () => {
   );
 };
 
-const DuckReviewLabel: FC<{duckNum: number, numDucks: number}> = ({ duckNum, numDucks}) => {
+const DuckReviewLabel: FC<{duckNum: number, numDucks: number}> = ({ duckNum, numDucks }) => {
   return (
     <motion.div
       className="

@@ -68,8 +68,8 @@ type MachineStore = {
   setShowTxStatus: (val: boolean) => void;
 
   // modal
-  openBurnModal: boolean;
-  setOpenBurnModal: (val: boolean) => void;
+  openBurnForm: boolean;
+  setOpenBurnForm: (val: boolean) => void;
   isOwnersManualOpen: boolean;
   setIsOwnersManualOpen: (val: boolean) => void;
 
@@ -256,9 +256,9 @@ export const useMachineStore = create<MachineStore>(
     },
 
     // modal
-    openBurnModal: false,
-    setOpenBurnModal: (val: boolean): void => {
-      set({ openBurnModal: val });
+    openBurnForm: false,
+    setOpenBurnForm: (val: boolean): void => {
+      set({ openBurnForm: val });
     },
     isOwnersManualOpen: false,
     setIsOwnersManualOpen: (val: boolean): void => {

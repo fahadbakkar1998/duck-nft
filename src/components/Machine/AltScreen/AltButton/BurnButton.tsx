@@ -28,7 +28,8 @@ const DuckNavButton: FC<DuckNavButtonProps> = ({ onClick, disabled = false, flip
 
 const BurnButton = () => {
   const {
-    setOpenBurnModal,
+    setOpenBurnForm,
+    openBurnForm,
     setIsBurning,
     setCurrentAdminDuckId,
     currentAdminDuckId,
@@ -55,10 +56,10 @@ const BurnButton = () => {
     }
   };
 
-  return (
+  return !openBurnForm ? (
     <div className="flex justify-between items-center h-full w-full px-3">
       <DuckNavButton disabled={duckIndex === 0} onClick={handleClickPrev} />
-      <Button onClick={() => setOpenBurnModal(true)}>
+      <Button onClick={() => setOpenBurnForm(true)}>
         <div
           onMouseEnter={() => setIsBurning(true)}
           onMouseLeave={() => setIsBurning(false)}
@@ -73,7 +74,7 @@ const BurnButton = () => {
         onClick={handleClickNext}
       />
     </div>
-  );
+  ) : <div className="lcd-font h-full w-full flex justify-center items-center opacity-50">USE FORM --&gt;</div>;
 };
 
 export default BurnButton;
