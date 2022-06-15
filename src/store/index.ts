@@ -187,7 +187,13 @@ export const useMachineStore = create<MachineStore>(
 
     currentAdminDuckId: -1,
     setCurrentAdminDuckId: (id: number): void => {
-      set({ currentAdminDuckId: id });
+      set((state) => {
+        state.changeChannel(250);
+        setTimeout(() => {
+          set({ machineMood: undefined, altIsStatic: false });
+        }, 350);
+        return { currentAdminDuckId: id };
+      });
     },
 
     // color picker

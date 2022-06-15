@@ -96,7 +96,7 @@ const fetchDucks = async () => {
       salePrice,
       isCustom,
       hatched: hatched as number,
-      burnable: hatched > 0 && hatched + BURN_WINDOW < Date.now(),
+      burnable: isCustom && hatched > 0 && hatched + BURN_WINDOW < Date.now(),
     };
   });
   const mintedDucks = formatedMintedDucks.filter((duck) => duck.id !== 420);
