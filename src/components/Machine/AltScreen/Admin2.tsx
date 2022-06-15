@@ -8,28 +8,37 @@ import useMachineStore from '../../../store';
 import DuckProfile from './DuckProfile';
 import { DuckData } from '../../../types/types';
 
+const NoDucks = () => {
+  return (
+    <div className="w-full h-full bg-screenBlack pixel-font flex justify-center items-center">
+      NO DUCKS TO REVIEW ATM
+    </div>
+  );
+};
+
+const DuckReviewLabel = () => {
+  return (
+    <div
+      className="
+        pointer-events-none
+        absolute bottom-2 right-0 px-4 py-2 rounded-l-md border-white border-2 shadow-md  pixel-font z-20 border-r-0 border-b-0
+        bg-orange-500
+      "
+    >
+      DUCK REVIEW
+    </div>
+  );
+};
+
 const Admin: FC = () => {
   const {
     altIsStatic,
-    currentDuckId,
-    setCurrentDuckId,
     setCurrentAdminDuckId,
     currentAdminDuckId,
-    changeChannel,
   } = useMachineStore();
   const { data: ducksData = [], isLoading } = useDucks();
   const ducks = !isLoading ? ducksData.filter((d) => d.burnable) : [];
   const duck = ducks?.find((d) => d.id === currentAdminDuckId);
-
-  // const handleSetDuck: (id: number): void => {
-  //   set((state) => {
-  //     state.changeChannel(250);
-  //     setTimeout(() => {
-  //       set({ machineMood: undefined, altIsStatic: false });
-  //     }, 350);
-  //     return { showDuckProfile: false, currentDuckId: id };
-  //   });
-  // },
 
   useEffect(() => {
     if (ducks.length) {
@@ -41,22 +50,14 @@ const Admin: FC = () => {
     setCurrentAdminDuckId(sample(ducks).id);
   };
 
-  return (
+  return ducks.length ? (
     <div className="absolute z-10">
       { !!duck && (
-        <div className="h-full" onClick={handleClick}>          
+        <div className="h-full" onClick={handleClick}>
           <AnimatePresence>
             { !altIsStatic && (
               <div className="overflow-hidden bg-white bg-opacity-80">
-                <div
-                  className="
-                    pointer-events-none
-                    absolute bottom-2 right-2 px-4 py-2 rounded-l-md border-white border-2 shadow-md  pixel-font z-20 border-r-0 border-b-0
-                    bg-orange-500
-                  "
-                >
-                  DUCK REVIEW
-                </div>
+                <DuckReviewLabel />
                 <motion.img
                   initial={{ scale: 0, opacity: 0, borderRadius: '100%' }}
                   animate={{ scale: 1, opacity: 1, borderRadius: '0%' }}
@@ -69,9 +70,9 @@ const Admin: FC = () => {
           </AnimatePresence>
           <div className="w-full h-full" />
         </div>
-      )} 
+      )}
     </div>
-  );
+  ) : <NoDucks />;
 };
 
 export default Admin;

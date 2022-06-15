@@ -12,6 +12,7 @@ import { BuyIcon, ProfileIcon, ProfileOpenIcon } from '../../../common/SvgIcon';
 import ShimmerLayer from '../../../common/ShimmerLayer';
 import { contract, fetchMachineConfig } from '../../../../utils/functions';
 import AltButtonLoader from './AltButtonLoader';
+import { PixelArrow } from '../../../../icons';
 
 const ButtonView = () => {
   const queryClient = useQueryClient();
@@ -141,16 +142,31 @@ const ButtonView = () => {
       </Button>
     );
   }
+
   return (
-    <Button onClick={() => setOpenBurnModal(true)}>
+    <div className="flex justify-between items-center h-full w-full px-3">
       <div
-        onMouseEnter={() => setIsBurning(true)}
-        onMouseLeave={() => setIsBurning(false)}
-        className="flex space-x-2 justify-center items-center lcd-font text-black opacity-75 hover:font-bold"
+        className="w-6 h-6 opacity-75 hover:opacity-100 transition cursor-pointer relative"
+        onClick={() => alert('foo')}
       >
-        burn duck
+        <PixelArrow className="w-full h-full transform rotate-180" />
       </div>
-    </Button>
+      <Button onClick={() => setOpenBurnModal(true)}>
+        <div
+          onMouseEnter={() => setIsBurning(true)}
+          onMouseLeave={() => setIsBurning(false)}
+          className="lcd-font text-black opacity-75 hover:font-bold relative"
+        >
+          burn
+        </div>
+      </Button>
+      <div
+        className="w-6 h-6 opacity-75 hover:opacity-100 transition cursor-pointer relative"
+        onClick={() => alert('foo')}
+      >
+        <PixelArrow className="w-full h-full" />
+      </div>
+    </div>
   );
 };
 
