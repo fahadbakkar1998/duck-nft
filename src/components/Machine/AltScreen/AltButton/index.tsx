@@ -38,6 +38,7 @@ const ButtonView = () => {
   const { activateBrowserWallet, account } = useEthers();
   const { send: sendFnTozziDuck, state: mintTozziDuckState } = useContractFunction(contract, 'mintTozziDuck');
   const { send: sendFnCustomTozziDuck, state: mintCustomTozziDuckState } = useContractFunction(contract, 'mintCustomDuck');
+  const { send: burn, state: burnState } = useContractFunction(contract, 'burnRenegadeDuck');
 
   const handleOnSigning = useCallback(() => {
     setAltMessage('Signature Pending...');
