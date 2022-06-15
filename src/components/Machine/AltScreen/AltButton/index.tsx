@@ -12,7 +12,7 @@ import { BuyIcon, ProfileIcon, ProfileOpenIcon } from '../../../common/SvgIcon';
 import ShimmerLayer from '../../../common/ShimmerLayer';
 import { contract, fetchMachineConfig } from '../../../../utils/functions';
 import AltButtonLoader from './AltButtonLoader';
-import { PixelArrow } from '../../../../icons';
+import BurnButton from './BurnButton';
 
 const ButtonView = () => {
   const queryClient = useQueryClient();
@@ -143,31 +143,7 @@ const ButtonView = () => {
     );
   }
 
-  return (
-    <div className="flex justify-between items-center h-full w-full px-3">
-      <div
-        className="w-6 h-6 opacity-75 hover:opacity-100 transition cursor-pointer relative"
-        onClick={() => alert('foo')}
-      >
-        <PixelArrow className="w-full h-full transform rotate-180" />
-      </div>
-      <Button onClick={() => setOpenBurnModal(true)}>
-        <div
-          onMouseEnter={() => setIsBurning(true)}
-          onMouseLeave={() => setIsBurning(false)}
-          className="lcd-font text-black opacity-75 hover:font-bold relative"
-        >
-          burn
-        </div>
-      </Button>
-      <div
-        className="w-6 h-6 opacity-75 hover:opacity-100 transition cursor-pointer relative"
-        onClick={() => alert('foo')}
-      >
-        <PixelArrow className="w-full h-full" />
-      </div>
-    </div>
-  );
+  return <BurnButton />;
 };
 
 const AltButton = () => {

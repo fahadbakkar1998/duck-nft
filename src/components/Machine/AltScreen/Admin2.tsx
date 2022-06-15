@@ -1,12 +1,10 @@
 /* eslint-disable no-console */
 import { FC, useEffect, useState } from 'react';
-import { sample } from 'lodash';
+import { indexOf } from 'lodash';
 // eslint-disable-next-line import/no-relative-packages
 import { motion, AnimatePresence } from '../../../../node_modules/framer-motion/dist/framer-motion';
 import { useDucks } from '../../../state/hooks';
 import useMachineStore from '../../../store';
-import DuckProfile from './DuckProfile';
-import { DuckData } from '../../../types/types';
 
 const NoDucks = () => {
   return (
@@ -16,17 +14,17 @@ const NoDucks = () => {
   );
 };
 
-const DuckReviewLabel = () => {
+const DuckReviewLabel: FC<{duckNum: number, numDucks: number}> = ({ duckNum, numDucks}) => {
   return (
-    <div
+    <motion.div
       className="
         pointer-events-none
         absolute bottom-2 right-0 px-4 py-2 rounded-l-md border-white border-2 shadow-md  pixel-font z-20 border-r-0 border-b-0
         bg-orange-500
       "
     >
-      DUCK REVIEW
-    </div>
+      DUCK REVIEW {`(${duckNum}/${numDucks})`}
+    </motion.div>
   );
 };
 
@@ -39,6 +37,8 @@ const Admin: FC = () => {
   const { data: ducksData = [], isLoading } = useDucks();
   const ducks = !isLoading ? ducksData.filter((d) => d.burnable) : [];
   const duck = ducks?.find((d) => d.id === currentAdminDuckId);
+  const duckIndex = indexOf(ducks, duck);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     if (ducks.length) {
@@ -46,18 +46,20 @@ const Admin: FC = () => {
     }
   }, []);
 
-  const handleClick = () => {
-    setCurrentAdminDuckId(sample(ducks).id);
-  };
-
   return ducks.length ? (
-    <div className="absolute z-10">
+    <div
+      className="absolute z-10"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       { !!duck && (
-        <div className="h-full" onClick={handleClick}>
+        <div className="h-full">
           <AnimatePresence>
             { !altIsStatic && (
               <div className="overflow-hidden bg-white bg-opacity-80">
-                <DuckReviewLabel />
+                <AnimatePresence>
+                  { !isHovered && <DuckReviewLabel duckNum={duckIndex + 1} numDucks={ducks.length} /> }
+                </AnimatePresence>
                 <motion.img
                   initial={{ scale: 0, opacity: 0, borderRadius: '100%' }}
                   animate={{ scale: 1, opacity: 1, borderRadius: '0%' }}
