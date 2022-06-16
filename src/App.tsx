@@ -16,7 +16,6 @@ const App = () => {
       navigator.userAgent,
     );
   const {
-    isBurning,
     openBurnForm,
     isOwnersManualOpen,
     setIsOwnersManualOpen,
@@ -46,7 +45,7 @@ const App = () => {
         </div>
         <img
           className={`
-            ${!isBurning ? 'animate-wow' : ''} top-[25.3%] left-[10%] w-[60%] 
+            ${!openBurnForm ? 'animate-wow' : ''} top-[25.3%] left-[10%] w-[60%] 
             absolute z-50
           `}
           src={logo}

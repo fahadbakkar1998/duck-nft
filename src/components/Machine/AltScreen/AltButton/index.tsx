@@ -24,7 +24,6 @@ const ButtonView = () => {
     DToolInst,
     showDuckProfile,
     setShowDuckProfile,
-    setIsBurning,
     setShowTxStatus,
     setCurrentMode,
     isLocked,

@@ -37,8 +37,6 @@ type MachineStore = {
   altIsStatic: boolean;
   showDuckProfile: boolean;
   setShowDuckProfile: (showProfile: boolean) => void;
-  isBurning: boolean;
-  setIsBurning: (isBurning: boolean) => void;
   altMessage: string;
   setAltMessage: (message: string) => void;
 
@@ -110,11 +108,6 @@ export const useMachineStore = create<MachineStore>(
       set({ showDuckProfile: showProfile });
     },
 
-    isBurning: false,
-    setIsBurning: (isBurning: boolean): void => {
-      set({ isBurning });
-    },
-
     altMessage: '',
     setAltMessage: (message: string): void => {
       set({ altMessage: message });
@@ -149,7 +142,10 @@ export const useMachineStore = create<MachineStore>(
           set({ isSwitchingModes: false });
         }, 300);
         if (direction === 'off') {
-          return { currentMode: MachineMode.Off, isSwitchingModes: true, isBurning: false, altMessage: '' };
+          return { currentMode: MachineMode.Off, isSwitchingModes: true, altMessage: '' };
+        }
+        if (direction === 'shopping') {
+          return { currentMode: MachineMode.Shopping, isSwitchingModes: true, altMessage: '' };
         }
         let nextMode: any;
         switch (state.currentMode) {
@@ -171,7 +167,7 @@ export const useMachineStore = create<MachineStore>(
           default:
             nextMode = MachineMode.Shopping;
         }
-        return { currentMode: nextMode, isSwitchingModes: true, isBurning: false, altMessage: '' };
+        return { currentMode: nextMode, isSwitchingModes: true, altMessage: '' };
       });
     },
     currentDuckId: 0,

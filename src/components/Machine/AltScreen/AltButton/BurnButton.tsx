@@ -30,7 +30,6 @@ const BurnButton = () => {
   const {
     setOpenBurnForm,
     openBurnForm,
-    setIsBurning,
     setCurrentAdminDuckId,
     currentAdminDuckId,
   } = useMachineStore();
@@ -67,8 +66,6 @@ const BurnButton = () => {
       <DuckNavButton disabled={duckIndex <= 0} onClick={handleClickPrev} />
       <Button onClick={handleClickBurn}>
         <div
-          onMouseEnter={() => setIsBurning(true)}
-          onMouseLeave={() => setIsBurning(false)}
           className={`
             lcd-font text-black relative
             ${duckIndex >= 0 ? 'opacity-75 hover:font-bold' : 'opacity-30'}
