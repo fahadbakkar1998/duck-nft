@@ -56,14 +56,23 @@ const BurnButton = () => {
     }
   };
 
+  const handleClickBurn = () => {
+    if (duckIndex >= 0) {
+      setOpenBurnForm(true);
+    }
+  };
+
   return !openBurnForm ? (
     <div className="flex justify-between items-center h-full w-full px-3">
-      <DuckNavButton disabled={duckIndex === 0} onClick={handleClickPrev} />
-      <Button onClick={() => setOpenBurnForm(true)}>
+      <DuckNavButton disabled={duckIndex <= 0} onClick={handleClickPrev} />
+      <Button onClick={handleClickBurn}>
         <div
           onMouseEnter={() => setIsBurning(true)}
           onMouseLeave={() => setIsBurning(false)}
-          className="lcd-font text-black opacity-75 hover:font-bold relative"
+          className={`
+            lcd-font text-black relative
+            ${duckIndex >= 0 ? 'opacity-75 hover:font-bold' : 'opacity-30'}
+          `}
         >
           burn
         </div>

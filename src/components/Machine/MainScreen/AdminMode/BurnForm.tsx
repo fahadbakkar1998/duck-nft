@@ -1,19 +1,20 @@
 /* eslint-disable no-console */
-import { useState, useEffect } from 'react';
-import { utils } from 'ethers';
+import { useState, useEffect, useRef } from 'react';
+import { useQueryClient } from 'react-query';
 import { useContractFunction, useEthers } from '@usedapp/core';
-import FormInput from './common/FormInput';
 import FormButton from './common/FormButton';
-import { useMachineState, useMachineConfig } from '../../../../state/hooks';
+import { useDucks, useMachineState } from '../../../../state/hooks';
 import AdminFormWrapper from './AdminFormWrapper';
-import { useEnsOrShort } from '../../../../hooks';
 import { useMachineContract } from '../../../../hooks/machine';
 import useMachineStore from '../../../../store';
-import { decimalRegex } from '../../../../utils/constants';
 
 const BurnForm = () => {
+  const queryClient = useQueryClient();
   const [burnReason, setBurnReason] = useState('');
-  const { data: machineState, isLoading } = useMachineState();
+  const { data: machineState } = useMachineState();
+  const { data: ducksData = [], isLoading } = useDucks();
+  const ducks = !isLoading ? ducksData.filter((d) => d.burnable) : [];
+
   const { account } = useEthers();
   const {
     setAltMessage,
@@ -21,7 +22,9 @@ const BurnForm = () => {
     setMachineMood,
     setOpenBurnForm,
     currentAdminDuckId,
+    setCurrentAdminDuckId,
   } = useMachineStore();
+  const textRef = useRef<HTMLTextAreaElement>(null);
 
   const contract = useMachineContract();
   const { send, state } = useContractFunction(
@@ -39,14 +42,27 @@ const BurnForm = () => {
   };
 
   useEffect(() => {
+    if (textRef.current) {
+      textRef.current.focus();
+    }
+  }, []);
+
+  useEffect(() => {
     if (state?.status === 'Mining') {
       setAltMessage('Duck Burn Processing...');
       setIsLocked(true);
       setMachineMood('happy');
     } else if (state?.status === 'Success') {
-      setAltMessage('Successful! That duck won\t be bothering you anymore.');
-      setMachineMood(undefined);
-      setIsLocked(false);
+      (async () => {
+        const nextDuck = ducks[0].id === currentAdminDuckId
+          ? ducks[1] : ducks[0];
+        await queryClient.invalidateQueries();
+        setOpenBurnForm(false);
+        setMachineMood(undefined);
+        setIsLocked(false);
+        setCurrentAdminDuckId(nextDuck?.id ?? -1);
+        setAltMessage('Success! That duck won\t be bothering you anymore.');
+      })();
     } else if (state?.status === 'PendingSignature') {
       setAltMessage('Signature Pending...');
     } else if (state?.status === 'Exception') {
@@ -70,6 +86,7 @@ const BurnForm = () => {
           You sure about this, ser? Please say a few words about why this duck deserves to burn:
         </div>
         <textarea
+          ref={textRef}
           onChange={(e) => setBurnReason(e.currentTarget.value)}
           value={burnReason}
           className="resize-none p-4 focus:outline-none focus:border-2 focus:ring-0 focus:rounded-none w-full h-full bg-screenBlack border text-base text-red-300"
