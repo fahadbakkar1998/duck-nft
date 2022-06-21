@@ -15,7 +15,10 @@ const BTI = () => {
   const toggleSwitch = (index: number) => {
     const valence = isOn(index) ? -1 : 1;
     const newDuckId = currentDuckId + (valence * (2 ** index));
-    if (newDuckId <= 199) setCurrentDuckId(newDuckId);
+    if (newDuckId <= 199) {
+      setCurrentDuckId(newDuckId);
+      document.getElementById(`item${newDuckId}`)?.scrollIntoView({ block: 'end' });
+    }
   };
 
   const renderSwitches = () => {

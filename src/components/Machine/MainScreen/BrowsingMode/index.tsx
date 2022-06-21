@@ -45,13 +45,6 @@ const BrowsingMode = () => {
   const filteredDucks = useFilteredDucks(ducks);
   const [scrollPosition, setScrollPosition] = useState(0.0);
 
-  useEffect(() => {
-    document.getElementById(`item${filteredDucks[currentDuckId]?.id}`)?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-    });
-  }, [currentDuckId]);
-
   const selectDuckByDirection = (direction: string) => {
     const nextDuck = directionToDuckId(direction, currentDuckId);
     if (ducks?.[nextDuck]) setCurrentDuckId(nextDuck);

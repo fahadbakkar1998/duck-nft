@@ -7,6 +7,7 @@ import modelObject from '../../../assets/glb/key_pad.glb';
 import { MachineMode, minViewLength } from '../../../utils/constants';
 import Display from '../Display';
 import { useMachineStore } from '../../../store';
+import { useDucks } from '../../../state/hooks';
 
 const Keyboard: FC = () => {
   const [vrm, setVrm] = useState<any>(null);
@@ -15,12 +16,23 @@ const Keyboard: FC = () => {
   const min = viewport.width;
   const [value, setValue] = useState<string>('');
   const { currentDuckId, currentMode } = useMachineStore();
-
-  const { setCurrentDuckId } = useMachineStore((state) => state);
+  const { data: ducksData = [], isLoading } = useDucks();
+  const ducks = !isLoading ? ducksData : [];
+  const [clearOnNext, setClearOnNext] = useState(true);
+  const { setCurrentDuckId, setAltMessage } = useMachineStore();
 
   const enterClick = (value: string) => {
-    if (Number(value) <= 199) setCurrentDuckId(Number(value));
-    else setValue('');
+    // TODO - find better way to do this that doesn't require all ducks
+    const duckExists = ducks.find((d) => d.id === Number(value));
+    if (duckExists) {
+      setCurrentDuckId(Number(value));
+      document.getElementById(`item${value}`)?.scrollIntoView({
+        block: 'end',
+      });
+    } else {
+      setAltMessage('Invalid duck ID!');
+    }
+    setClearOnNext(true);
   };
 
   const clearClick = () => {
@@ -45,7 +57,10 @@ const Keyboard: FC = () => {
     if (currentMode === MachineMode.Off) return;
     if (btnName === 'enter') enterClick(value);
     else if (btnName === 'clear') clearClick();
-    else {
+    else if (clearOnNext) {
+      setClearOnNext(false);
+      setValue(Number(btnName).toString());
+    } else {
       setValue(value + Number(btnName).toString());
     }
     vrm.children.forEach((item) => {

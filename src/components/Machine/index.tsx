@@ -8,15 +8,18 @@ import StatusPanel from './MainScreen/BrowsingMode/StatusPanel';
 import Keyboard from './Keyboard';
 // eslint-disable-next-line import/no-relative-packages
 import { motion, AnimatePresence } from '../../../node_modules/framer-motion/dist/framer-motion';
+import Providers from '../../Providers';
 
 const Machine = () => {
   const { currentMode } = useMachineStore();
 
   return (
     <group>
-      <AltScreen />
-      <MainScreen />
-      <Keyboard />
+      <Providers>
+        <AltScreen />
+        <MainScreen />
+        <Keyboard />
+      </Providers>
       {
         currentMode === MachineMode.Customization
           ? (
