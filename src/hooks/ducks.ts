@@ -16,8 +16,6 @@ export const useDuckProfile = (duck: DuckData): DuckProfile | undefined => {
   const { metadata } = duck;
   const { name, description } = metadata!;
   const creator = getMetadataAttribute(metadata, 'Creator');
-  const complexity = getMetadataAttribute(metadata, 'Duck Image Complexity');
-
   const { value, error } = useCall(duck && {
     contract: duckMachine,
     method: 'duckProfiles',
@@ -34,7 +32,6 @@ export const useDuckProfile = (duck: DuckData): DuckProfile | undefined => {
     description: value?.description || 'N/A - Contact the owner of this device to customize your duck\'s profile!',
     status: value?.stance[0] || 'N/A',
     creator: !duck.isCustom ? creator : shortenAddress(creator!),
-    complexity: `${complexity} Quacks`,
   };
   return profile;
 };

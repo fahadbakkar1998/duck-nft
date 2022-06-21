@@ -63,7 +63,6 @@ export interface DuckProfile {
   name?: string;
   description?: string;
   status?: string;
-  complexity?: string;
   owner?: string;
   creator?: string;
 }

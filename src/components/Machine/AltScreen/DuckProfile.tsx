@@ -77,10 +77,6 @@ const DuckProfileView: FC<DuckProfileProps> = ({ duck }) => {
               <Field text={profile?.creator ?? 'N/A'} />
             </div>
           </div>
-          <div className="col-span-2 p-1 bg-white bg-opacity-10 ">
-            <FieldLabel text="Duck Complexity" />
-            <Field text={profile?.complexity ?? 'N/A'} />
-          </div>
         </div>
       </div>
     </motion.div>
