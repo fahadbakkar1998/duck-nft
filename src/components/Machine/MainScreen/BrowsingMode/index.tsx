@@ -47,7 +47,10 @@ const BrowsingMode = () => {
 
   const selectDuckByDirection = (direction: string) => {
     const nextDuck = directionToDuckId(direction, currentDuckId);
-    if (ducks?.[nextDuck]) setCurrentDuckId(nextDuck);
+    if (ducks?.[nextDuck]) {
+      setCurrentDuckId(nextDuck);
+      document.getElementById(`item${nextDuck}`)?.scrollIntoView({ block: 'nearest' });
+    }
   };
 
   const handleScroll = (e: UIEvent<HTMLDivElement>) => {
