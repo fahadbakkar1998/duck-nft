@@ -12,7 +12,10 @@ const { REACT_APP_MACHINE_CONTRACT_ADDRESS: contractAddress = '', REACT_APP_INFU
 const CHAIN_ID = process.env.REACT_PUBLIC_ENV === 'production' ? ChainId.Mainnet : ChainId.Rinkeby;
 const CHAIN_NAME = CHAIN_ID === 1 ? 'mainnet' : 'rinkeby';
 
-const ethereumProvider = new ethers.providers.InfuraProvider(CHAIN_NAME, REACT_APP_INFURA_API_KEY);
+declare const window: any;
+const injectedProvider = window.ethereum ? new ethers.providers.Web3Provider(window.ethereum) : undefined;
+const infuraProvider = new ethers.providers.InfuraProvider(CHAIN_NAME, REACT_APP_INFURA_API_KEY);
+const ethereumProvider = injectedProvider ? injectedProvider.getSigner() : infuraProvider;
 const duckMachineContract = new ethers.Contract(contractAddress, contractAbi, ethereumProvider);
 export const contract = new Contract(contractAddress, contractAbi, ethereumProvider) as any;
 

@@ -15,9 +15,9 @@ const Machine = () => {
 
   return (
     <group>
+      <AltScreen />
+      <MainScreen />
       <Providers>
-        <AltScreen />
-        <MainScreen />
         <Keyboard />
       </Providers>
       {
