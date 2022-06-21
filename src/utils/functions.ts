@@ -2,18 +2,19 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import axios from 'axios';
 import { ethers } from 'ethers';
+import { ChainId } from '@usedapp/core';
 import { Contract } from '@ethersproject/contracts';
 import { BURN_WINDOW, contractAbi } from './constants';
 import staticDuckData from './duckData.json';
 import { MachineConfig, MachineState } from '../types/types';
 
-declare let window: any;
+const { REACT_APP_MACHINE_CONTRACT_ADDRESS: contractAddress = '', REACT_APP_INFURA_API_KEY, REACT_APP_CHAIN_ID } = process.env;
+const CHAIN_ID = process.env.REACT_PUBLIC_ENV === 'production' ? ChainId.Mainnet : ChainId.Rinkeby;
+const CHAIN_NAME = CHAIN_ID === 1 ? 'mainnet' : 'rinkeby';
 
-const { REACT_APP_MACHINE_CONTRACT_ADDRESS: contractAddress = '' } = process.env;
-
-const ethereumProvider = new ethers.providers.Web3Provider(window.ethereum);
+const ethereumProvider = new ethers.providers.InfuraProvider(CHAIN_NAME, REACT_APP_INFURA_API_KEY);
 const duckMachineContract = new ethers.Contract(contractAddress, contractAbi, ethereumProvider);
-export const contract = new Contract(contractAddress, contractAbi, ethereumProvider.getSigner()) as any;
+export const contract = new Contract(contractAddress, contractAbi, ethereumProvider) as any;
 
 const getMachineConfig = async () => {
   const config = await duckMachineContract.machineConfig();
