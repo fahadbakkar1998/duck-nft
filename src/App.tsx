@@ -55,6 +55,7 @@ const App = () => {
         <SideButtons />
         <img className="background pointer-events-none" src={bgImg} alt="" />
         <Canvas
+          className="select-none"
           orthographic
           camera={{ zoom: 100, position: [0, 0, 100] }}
           shadows

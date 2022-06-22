@@ -1,36 +1,28 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useThree } from 'react-three-fiber';
-import Screen from '../../common/Screen';
-import { minViewLength } from '../../../../utils/constants';
-import useMachineStore from '../../../../store';
-import { useMachineConfig } from '../../../../state/hooks';
-import ShimmerLayer from '../../../common/ShimmerLayer';
+import Screen from '../../../common/Screen';
+import { minViewLength } from '../../../../../utils/constants';
+import useMachineStore from '../../../../../store';
+import { useMachineConfig } from '../../../../../state/hooks';
+import ShimmerLayer from '../../../../common/ShimmerLayer';
+import StatusSlides from './StatusSlides';
 
 const StatusPanel = () => {
   const setIsOwnersManualOpen = useMachineStore((state) => state.setIsOwnersManualOpen);
   const isOwnersModalOpen = useMachineStore((state) => state.isOwnersManualOpen);
-  const { data: machineConfig, isLoading } = useMachineConfig();
+  const { data: machineConfig } = useMachineConfig();
+  const [isHovered, setIsHovered] = useState(false);
 
-  return isLoading ? null : (
+  return (
     <div className="status-panel">
-      <ShimmerLayer />
       <div
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         className="graph-bg lcd-font text-black text-opacity-75 text-md inner-shadow rounded-sm font-thin flex items-center  justify-center space-x-10 h-8
-          border-t border-l border-black border-opacity-50"
+          border-t border-l border-black border-opacity-50 pointer-events-auto"
       >
-        <div>
-          {`duck price: ${machineConfig?.tozziMintPrice || ''} eth`}
-        </div>
-        <button
-          type="button"
-          className="hover:font-bold"
-          onClick={() => {
-            document.body.style.overflow = 'hidden';
-            setIsOwnersManualOpen(!isOwnersModalOpen);
-          }}
-        >
-          View Owners Manaual
-        </button>
+        <ShimmerLayer targetHovered={isHovered} />
+        <StatusSlides config={machineConfig} />
       </div>
     </div>
   );

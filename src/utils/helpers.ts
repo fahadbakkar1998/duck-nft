@@ -1,5 +1,5 @@
 import { useEthers } from '@usedapp/core';
-import { DuckData, DuckFilters } from '../types/types';
+import { DuckData, DuckFilters, MintStatus } from '../types/types';
 
 export const filterDucks = ({ ducks = [], filters } : {ducks: DuckData[], filters: DuckFilters}): DuckData[] => {
   const { account } = useEthers();
@@ -21,4 +21,15 @@ export const filterDucks = ({ ducks = [], filters } : {ducks: DuckData[], filter
     filteredDucks = filteredDucks.filter((duck) => duck.owner === account);
   }
   return filteredDucks;
+};
+
+export const mintStatusName = (status: MintStatus) => {
+  switch (status) {
+    case MintStatus.Enabled:
+      return 'on';
+    case MintStatus.Allowance:
+      return 'allow';
+    default:
+      return 'off';
+  }
 };

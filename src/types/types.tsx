@@ -71,3 +71,9 @@ export interface ActionButtonProps {
   handleOnMining: () => void;
   handleOnSuccess: () => void;
 }
+
+export interface LcdNavButtonProps {
+  onClick: () => void;
+  disabled: boolean;
+  flipped?: boolean;
+}
