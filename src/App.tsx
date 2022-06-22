@@ -4,7 +4,7 @@ import './App.scss';
 import Machine from './components/Machine/index';
 import bgImg from './assets/img/machine-bg.png';
 import logo from './assets/img/logo-base.png';
-import Mobile from './components/Mobile/Mobile';
+import Mobile from './components/Mobile';
 import OwnersManualModal from './components/OwnersManual/OwnersManualModal';
 import useMachineStore from './store';
 import BTI from './components/Machine/BinaryToggleInterface';
