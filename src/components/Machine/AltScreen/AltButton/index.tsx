@@ -13,6 +13,7 @@ import ShimmerLayer from '../../../common/ShimmerLayer';
 import { contract, fetchMachineConfig } from '../../../../utils/functions';
 import AltButtonLoader from './AltButtonLoader';
 import BurnButton from './BurnButton';
+import { getCustomErrorText } from '../../../../utils/helpers';
 
 const ButtonView = () => {
   const queryClient = useQueryClient();
@@ -55,6 +56,16 @@ const ButtonView = () => {
     setIsLocked(false);
   }, [queryClient, setAltMessage]);
 
+  const handleOnException = useCallback(() => {
+    const { errorMessage } = mintTozziDuckState;
+    setAltMessage(getCustomErrorText(errorMessage));
+    setMachineMood('sad');
+    setTimeout(() => {
+      setMachineMood(undefined);
+    }, 200);
+    setIsLocked(false);
+  }, [mintTozziDuckState, setAltMessage]);
+
   useEffect(() => {
     if (account) {
       setCurrentMode(MachineMode.Shopping);
@@ -67,6 +78,7 @@ const ButtonView = () => {
     if (status === 'PendingSignature') handleOnSigning();
     if (status === 'Mining') handleOnMining('Duck purchase processing...');
     if (status === 'Success') handleOnSuccess();
+    if (status === 'Exception') handleOnException();
   }, [mintTozziDuckState, handleOnMining, handleOnSuccess]);
 
   useEffect(() => {
@@ -74,6 +86,7 @@ const ButtonView = () => {
     if (status === 'PendingSignature') handleOnSigning();
     if (status === 'Mining') handleOnMining('Custom duck minting in progress..');
     if (status === 'Success') handleOnSuccess();
+    if (status === 'Exception') handleOnException();
   }, [mintCustomTozziDuckState, handleOnMining, handleOnSuccess]);
 
   const handleMintTozziDuck = async () => {

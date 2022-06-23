@@ -33,3 +33,12 @@ export const mintStatusName = (status: MintStatus) => {
       return 'off';
   }
 };
+
+export const getCustomErrorText = (errorMessage: string | undefined) => {
+  const defaultMsg = 'Oh quack! Something went wrong!';
+  if (!errorMessage) return defaultMsg;
+  if (errorMessage.includes('insufficient funds')) {
+    return 'Error: Insufficient funds. Plz check the current duck price.';
+  }
+  return defaultMsg;
+};

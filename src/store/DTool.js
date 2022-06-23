@@ -349,7 +349,7 @@ export default class DTool {
     const blob = await fetch(inMemoryCanvas.toDataURL('image/webp', 1))
       .then((response) => response.blob())
       .catch(console.error);
-    const base64data = await this.readAsDataURLAsync(blob);
+    const base64data = (await this.readAsDataURLAsync(blob)).slice(23);
     return base64data;
   }
 
