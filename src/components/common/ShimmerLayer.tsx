@@ -11,7 +11,7 @@ const ShimmerLayer: FC<ShimmerLayerProps> = ({ className, targetHovered = false 
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={`absolute pointer-events-none w-full h-full overflow-hidden  ${className}`}
+      className={`absolute pointer-events-auto w-full h-full overflow-hidden  ${className}`}
     >
       <div className={`${isHovered || targetHovered ? 'shimmer animate-shimmer' : ''}`} />
     </div>
