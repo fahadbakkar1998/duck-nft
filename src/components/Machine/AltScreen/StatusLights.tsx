@@ -10,7 +10,7 @@ const StatusLights = () => {
   useEffect(() => {
     const getActiveDuck = () => ducks?.length && ducks.find((duck) => duck.id === currentDuckId);
     const activeDuck = getActiveDuck();
-    if (currentDuckId && activeDuck) {
+    if (activeDuck) {
       if (activeDuck?.owner) {
         setMachineMood('sad');
       } else {

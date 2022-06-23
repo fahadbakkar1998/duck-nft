@@ -16,8 +16,6 @@ const FiltersModal: FC<FiltersModalProps> = ({ open, children, onClose }) => {
     if (duckFilters[filterName] !== undefined) {
       const newFilters = { ...duckFilters };
       newFilters[filterName] = !newFilters[filterName];
-      // eslint-disable-next-line no-console
-      console.log('filters', newFilters);
       setDuckFilters(newFilters);
     }
   };
