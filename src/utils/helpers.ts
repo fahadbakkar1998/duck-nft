@@ -9,12 +9,16 @@ export const filterDucks = ({ ducks = [], filters } : {ducks: DuckData[], filter
     filteredDucks = filteredDucks.filter((duck) => duck.owner);
   }
 
+  if (!filters.available && !filters.sold) {
+    filteredDucks = filteredDucks.filter((duck) => false);
+  }
+
   if (!filters.sold && filters.available) {
     filteredDucks = filteredDucks.filter((duck) => !duck.owner);
   }
 
-  if (filters.custom) {
-    filteredDucks = filteredDucks.filter((duck) => duck.isCustom);
+  if (!filters.custom) {
+    filteredDucks = filteredDucks.filter((duck) => !duck.isCustom);
   }
 
   if (filters.mine) {

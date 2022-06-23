@@ -16,6 +16,8 @@ const FiltersModal: FC<FiltersModalProps> = ({ open, children, onClose }) => {
     if (duckFilters[filterName] !== undefined) {
       const newFilters = { ...duckFilters };
       newFilters[filterName] = !newFilters[filterName];
+      // eslint-disable-next-line no-console
+      console.log('filters', newFilters);
       setDuckFilters(newFilters);
     }
   };
@@ -38,7 +40,7 @@ const FiltersModal: FC<FiltersModalProps> = ({ open, children, onClose }) => {
             onToggle={() => toggleFilter('sold')}
           />
         </div>
-        <div className="flex items-center pixel-font-thin text-2xl">Custom Ducks</div>
+        <div className="flex items-center pixel-font-thin text-2xl">Include Custom Ducks</div>
         <div className="flex items-center justify-end">
           <CheckBox
             isChecked={custom}
