@@ -9,7 +9,7 @@ interface MessageModalProps {
 }
 
 const MessageModal: FC<MessageModalProps> = ({ message, open, onClose }) => {
-  return open || true ? (
+  return (
     <AnimatePresence>
       { open && (
       <motion.div
@@ -40,7 +40,7 @@ const MessageModal: FC<MessageModalProps> = ({ message, open, onClose }) => {
       </motion.div>
       )}
     </AnimatePresence>
-  ) : null;
+  );
 };
 
 export default MessageModal;
