@@ -30,7 +30,7 @@ export const useDuckProfile = (duck: DuckData): DuckProfile | undefined => {
   const profile: DuckProfile = {
     name,
     description: value?.description || 'N/A - Contact the owner of this device to customize your duck\'s profile!',
-    status: value?.stance[0] || 'N/A',
+    status: 'N/A',
     creator: !duck.isCustom ? creator : shortenAddress(creator!),
   };
   return profile;

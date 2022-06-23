@@ -4,7 +4,7 @@ import axios from 'axios';
 import { ethers } from 'ethers';
 import { ChainId } from '@usedapp/core';
 import { Contract } from '@ethersproject/contracts';
-import { BURN_WINDOW, contractAbi } from './constants';
+import { OWNERSHIP_TOKEN_ID, BURN_WINDOW, contractAbi } from './constants';
 import staticDuckData from './duckData.json';
 import { MachineConfig, MachineState } from '../types/types';
 
@@ -104,7 +104,7 @@ const fetchDucks = async () => {
         && (hatched + BURN_WINDOW) > Date.now(),
     };
   });
-  const mintedDucks = formatedMintedDucks.filter((duck) => duck.id !== 420);
+  const mintedDucks = formatedMintedDucks.filter((duck) => duck.id !== OWNERSHIP_TOKEN_ID);
   const mintedTozziDucks = mintedDucks.filter((duck) => !duck.isCustom);
   const mintedCustomDucks = mintedDucks.filter((duck) => duck.isCustom);
   const nonMintedDucks = staticDuckData.filter((duck) => !mintedDucks.includes(duck.id));
@@ -127,10 +127,8 @@ const fetchMachineConfig = async (): Promise<MachineConfig> => {
 };
 
 const fetchMachineState = async (): Promise<MachineState> => {
-  const ownershipTokenId = await duckMachineContract.OWNERSHIP_TOKEN_ID();
-  const machineOwner = await duckMachineContract.ownerOf(ownershipTokenId);
-  const balance = await ethereumProvider.getBalance(contractAddress);
-  // const totalSales = await getTotalSales();
+  const machineOwner = await duckMachineContract.ownerOf(OWNERSHIP_TOKEN_ID);
+  const balance = await injectedProvider?.getBalance(contractAddress);
   const duckMintsCount = await getMintsCount();
   const machineConfig = await fetchMachineConfig();
 
@@ -138,9 +136,8 @@ const fetchMachineState = async (): Promise<MachineState> => {
     owner: machineOwner,
     tozziMints: duckMintsCount.tozzi,
     customMints: duckMintsCount.custom,
-    balance: ethers.utils.formatEther(balance),
+    balance: ethers.utils.formatEther(balance!),
     config: machineConfig,
-    // totalSales,
   };
 };
 

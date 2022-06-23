@@ -14,6 +14,8 @@ export enum MachineMode {
 export const numberRegex = /^\d*(?:\d*)?$/;
 export const decimalRegex = /^\d*(?:[.,]\d*)?$/;
 
+export const OWNERSHIP_TOKEN_ID = 420;
+
 export const defaultLayerIndex = 0;
 export const defaultColorIndex = 0;
 export const colors = [
@@ -62,12 +64,12 @@ export const contractAbi = [
           {
             "internalType": "uint256",
             "name": "tozziDuckPrice",
-            "type": "uint256",
+            "type": "uint256"
           },
           {
             "internalType": "uint256",
             "name": "customDuckPrice",
-            "type": "uint256",
+            "type": "uint256"
           },
           {
             "internalType": "uint256",
@@ -75,24 +77,24 @@ export const contractAbi = [
             "type": "uint256"
           },
           {
-            "internalType": "enum MintStatus",
+            "internalType": "enum ITheAmazingTozziDuckMachine.MintStatus",
             "name": "tozziDuckMintStatus",
             "type": "uint8"
           },
           {
-            "internalType": "enum MintStatus",
+            "internalType": "enum ITheAmazingTozziDuckMachine.MintStatus",
             "name": "customDuckMintStatus",
             "type": "uint8"
           }
         ],
-        "internalType": "struct MachineConfig",
-        "name": "config",
+        "internalType": "struct ITheAmazingTozziDuckMachine.MachineConfig",
+        "name": "_machineConfig",
         "type": "tuple"
       },
       {
         "internalType": "string",
         "name": "ownershipTokenURI",
-        "type": 'string'
+        "type": "string"
       }
     ],
     "stateMutability": "nonpayable",
@@ -105,7 +107,7 @@ export const contractAbi = [
   },
   {
     "inputs": [],
-    "name": "BurnWindowHasPassed",
+    "name": "BurnWindowPassed",
     "type": "error"
   },
   {
@@ -144,9 +146,14 @@ export const contractAbi = [
     "type": "error"
   },
   {
+    "inputs": [],
+    "name": "InvalidStatusId",
+    "type": "error"
+  },
+  {
     "inputs": [
       {
-        "internalType": "enum DuckType",
+        "internalType": "enum ITheAmazingTozziDuckMachine.DuckType",
         "name": "duckType",
         "type": "uint8"
       }
@@ -257,7 +264,7 @@ export const contractAbi = [
       },
       {
         "indexed": true,
-        "internalType": "enum DuckType",
+        "internalType": "enum ITheAmazingTozziDuckMachine.DuckType",
         "name": "duckType",
         "type": "uint8"
       },
@@ -275,59 +282,94 @@ export const contractAbi = [
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "internalType": "uint256",
         "name": "duckId",
         "type": "uint256"
       },
       {
         "indexed": false,
-        "internalType": "address",
-        "name": "updatedBy",
-        "type": "address"
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
       },
       {
-        "components": [
-          {
-            "internalType": "string",
-            "name": "name",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "description",
-            "type": "string"
-          },
-          {
-            "components": [
-              {
-                "internalType": "string",
-                "name": "stance",
-                "type": "string"
-              },
-              {
-                "internalType": "uint256",
-                "name": "timeout",
-                "type": "uint256"
-              }
-            ],
-            "internalType": "struct DuckStance",
-            "name": "stance",
-            "type": "tuple"
-          },
-          {
-            "internalType": "uint256",
-            "name": "updated",
-            "type": "uint256"
-          }
-        ],
         "indexed": false,
-        "internalType": "struct DuckProfile",
-        "name": "profile",
-        "type": "tuple"
+        "internalType": "string",
+        "name": "description",
+        "type": "string"
       }
     ],
     "name": "DuckProfileUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint8",
+        "name": "statusId",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "statusName",
+        "type": "string"
+      }
+    ],
+    "name": "DuckStatusDefined",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "duckId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint8",
+        "name": "statusId",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "statusName",
+        "type": "string"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "who",
+        "type": "address"
+      }
+    ],
+    "name": "DuckStatusUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "message",
+        "type": "string"
+      }
+    ],
+    "name": "MOTDSet",
     "type": "event"
   },
   {
@@ -359,18 +401,37 @@ export const contractAbi = [
       },
       {
         "indexed": false,
-        "internalType": "enum MintStatus",
+        "internalType": "enum ITheAmazingTozziDuckMachine.MintStatus",
         "name": "tozziDuckMintStatus",
         "type": "uint8"
       },
       {
         "indexed": false,
-        "internalType": "enum MintStatus",
+        "internalType": "enum ITheAmazingTozziDuckMachine.MintStatus",
         "name": "customDuckMintStatus",
         "type": "uint8"
       }
     ],
     "name": "MachineConfigUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
     "type": "event"
   },
   {
@@ -397,19 +458,6 @@ export const contractAbi = [
     ],
     "name": "Transfer",
     "type": "event"
-  },
-  {
-    "inputs": [],
-    "name": "BURN_WINDOW",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
   },
   {
     "inputs": [],
@@ -496,6 +544,24 @@ export const contractAbi = [
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint8",
+        "name": "statusId",
+        "type": "uint8"
+      },
+      {
+        "internalType": "string",
+        "name": "statusName",
+        "type": "string"
+      }
+    ],
+    "name": "defineDuckStatus",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -598,28 +664,44 @@ export const contractAbi = [
         "internalType": "string",
         "name": "description",
         "type": "string"
-      },
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
       {
-        "components": [
-          {
-            "internalType": "string",
-            "name": "stance",
-            "type": "string"
-          },
-          {
-            "internalType": "uint256",
-            "name": "timeout",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct DuckStance",
-        "name": "stance",
-        "type": "tuple"
-      },
+        "internalType": "uint8",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "name": "duckStatusOptions",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
       {
         "internalType": "uint256",
-        "name": "updated",
+        "name": "",
         "type": "uint256"
+      }
+    ],
+    "name": "duckStatuses",
+    "outputs": [
+      {
+        "internalType": "uint8",
+        "name": "",
+        "type": "uint8"
       }
     ],
     "stateMutability": "view",
@@ -639,6 +721,25 @@ export const contractAbi = [
         "internalType": "address",
         "name": "",
         "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getDuckStatus",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "statusName",
+        "type": "string"
       }
     ],
     "stateMutability": "view",
@@ -688,12 +789,12 @@ export const contractAbi = [
         "type": "uint256"
       },
       {
-        "internalType": "enum MintStatus",
+        "internalType": "enum ITheAmazingTozziDuckMachine.MintStatus",
         "name": "tozziDuckMintStatus",
         "type": "uint8"
       },
       {
-        "internalType": "enum MintStatus",
+        "internalType": "enum ITheAmazingTozziDuckMachine.MintStatus",
         "name": "customDuckMintStatus",
         "type": "uint8"
       }
@@ -751,6 +852,19 @@ export const contractAbi = [
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -767,6 +881,13 @@ export const contractAbi = [
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -877,19 +998,40 @@ export const contractAbi = [
         "internalType": "string",
         "name": "_description",
         "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "_stance",
-        "type": "string"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_stanceTimeout",
-        "type": "uint256"
       }
     ],
     "name": "setDuckProfile",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint8",
+        "name": "statusId",
+        "type": "uint8"
+      }
+    ],
+    "name": "setDuckStatus",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "motd",
+        "type": "string"
+      }
+    ],
+    "name": "setMOTD",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -914,18 +1056,18 @@ export const contractAbi = [
             "type": "uint256"
           },
           {
-            "internalType": "enum MintStatus",
+            "internalType": "enum ITheAmazingTozziDuckMachine.MintStatus",
             "name": "tozziDuckMintStatus",
             "type": "uint8"
           },
           {
-            "internalType": "enum MintStatus",
+            "internalType": "enum ITheAmazingTozziDuckMachine.MintStatus",
             "name": "customDuckMintStatus",
             "type": "uint8"
           }
         ],
-        "internalType": "struct MachineConfig",
-        "name": "config",
+        "internalType": "struct ITheAmazingTozziDuckMachine.MachineConfig",
+        "name": "_machineConfig",
         "type": "tuple"
       }
     ],
@@ -1060,6 +1202,19 @@ export const contractAbi = [
       }
     ],
     "name": "transferFrom",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
