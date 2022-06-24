@@ -1,17 +1,22 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useThree } from 'react-three-fiber';
 import Screen from '../../../common/Screen';
 import { minViewLength } from '../../../../../utils/constants';
 import useMachineStore from '../../../../../store';
-import { useMachineConfig } from '../../../../../state/hooks';
+import { useMachineConfig, useMachineState } from '../../../../../state/hooks';
 import ShimmerLayer from '../../../../common/ShimmerLayer';
 import StatusSlides from './StatusSlides';
 
 const StatusPanel = () => {
   const setIsOwnersManualOpen = useMachineStore((state) => state.setIsOwnersManualOpen);
   const isOwnersModalOpen = useMachineStore((state) => state.isOwnersManualOpen);
-  const { data: machineConfig } = useMachineConfig();
+  const { data: machineState } = useMachineState();
   const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log(machineState);
+  }, [machineState]);
 
   return (
     <div className="status-panel">
@@ -22,7 +27,7 @@ const StatusPanel = () => {
           border-t border-l border-black border-opacity-50 pointer-events-auto"
       >
         <ShimmerLayer targetHovered={isHovered} />
-        <StatusSlides config={machineConfig} />
+        <StatusSlides state={machineState} />
       </div>
     </div>
   );

@@ -1,53 +1,56 @@
 import { FC, useState } from 'react';
+import { shortenAddress } from '@usedapp/core';
 // eslint-disable-next-line import/no-relative-packages
 import { motion, AnimatePresence } from '../../../../../../node_modules/framer-motion/dist/framer-motion';
-import { MachineConfig } from '../../../../../types/types';
+import { MachineConfig, MachineState } from '../../../../../types/types';
 import useMachineStore from '../../../../../store';
 import NavButton from './NavButton';
 import { mintStatusName } from '../../../../../utils/helpers';
+import { useEnsOrShort } from '../../../../../hooks';
 
 interface SlideProps {
-  config?: MachineConfig | undefined;
+  state?: MachineState | undefined;
 }
 
-const TozziSlide: FC<SlideProps> = ({ config }) => {
+const TozziSlide: FC<SlideProps> = ({ state }) => {
   return (
     <div className="w-full flex justify-between px-4 items-center">
       <div className="px-3 text-[#656b4d] transparent bg-black opacity-75">
         tozzi ducks
       </div>
       <div>
-        { config ? `status: ${mintStatusName(config.tozziMintStatus)}` : '--' }
+        { state?.config ? `status: ${mintStatusName(state.config.tozziMintStatus)}` : '--' }
       </div>
       <div>
-        { config ? `price: ${config.tozziMintPrice || ''} eth` : '--' }
+        { state?.config ? `price: ${state.config.tozziMintPrice || ''} eth` : '--' }
       </div>
     </div>
   );
 };
 
-const CustomSlide: FC<SlideProps> = ({ config }) => {
+const CustomSlide: FC<SlideProps> = ({ state }) => {
   return (
     <div className="w-full flex justify-between px-4 items-center">
       <div className="px-3 text-[#656b4d] transparent bg-black opacity-75">
         custom ducks
       </div>
       <div>
-        { config ? `status: ${mintStatusName(config.customMintStatus)}` : '--' }
+        { state?.config ? `status: ${mintStatusName(state.config.customMintStatus)}` : '--' }
       </div>
       <div>
-        { config ? `price: ${config.customMintPrice || ''} eth` : '--' }
+        { state?.config ? `price: ${state.config.customMintPrice || ''} eth` : '--' }
       </div>
     </div>
   );
 };
 
-const ManualSlide: FC<SlideProps> = ({ config }) => {
+const ManualSlide: FC<SlideProps> = ({ state }) => {
+  const owner = shortenAddress(state?.owner!);
   const { setIsOwnersManualOpen, isOwnersManualOpen } = useMachineStore();
   return (
     <div className="w-full flex justify-between px-4 items-center">
       <div>
-        owner: --
+        owner: {owner}
       </div>
       <div>
         population: 0/200
@@ -66,14 +69,14 @@ const ManualSlide: FC<SlideProps> = ({ config }) => {
   );
 };
 
-const StatusSlides: FC<{config: MachineConfig | undefined}> = ({ config }) => {
+const StatusSlides: FC<{state: MachineState | undefined}> = ({ state }) => {
   const [slideIndex, setSlideIndex] = useState(0);
   const [showSlide, setShowSlide] = useState(true);
 
   const slideContent = [
-    <TozziSlide config={config} />,
-    <CustomSlide config={config} />,
-    <ManualSlide config={config} />,
+    <TozziSlide state={state} />,
+    <CustomSlide state={state} />,
+    <ManualSlide state={state} />,
   ];
 
   const handleNext = () => {

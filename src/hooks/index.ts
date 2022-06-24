@@ -35,6 +35,8 @@ export function useEnsOrShort(account: string | undefined) {
           }
         })
         .catch(() => setEns(shortenAddress(account)));
+    } else {
+      setEns(shortenAddress(account!));
     }
 
     return () => {
