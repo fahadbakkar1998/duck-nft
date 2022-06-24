@@ -12,6 +12,7 @@ import { DuckData } from '../../../../types/types';
 import CircleButton from '../../../common/CircleButton';
 import filterIcon from '../../../../assets/img/icons/filter.svg';
 import ScrollBar from './ScrollBar';
+import Motd from './Motd';
 
 const directionToDuckIndex = (direction: string, currentDuckIndex: number) => {
   let nextDuckIndex = currentDuckIndex;
@@ -78,6 +79,7 @@ const BrowsingMode = () => {
           onScroll={handleScroll}
           className="mainScreen overflow-scroll w-full border-gray-600 border-2"
         >
+          <Motd open onClose={() => {}} />
           <FiltersModal
             open={showFilters}
             onClose={() => { setShowFilters(false); }}
