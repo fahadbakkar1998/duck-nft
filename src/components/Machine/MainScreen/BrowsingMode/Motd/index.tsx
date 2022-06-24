@@ -2,25 +2,26 @@ import { FC } from 'react';
 import useMachineStore from '../../../../../store';
 import Modal from '../../OnScreenModal';
 import CheckBox from '../../CheckBox';
+import { Motd } from '../../../../../types/types';
 
-interface ModalProps {
+interface MotdProps {
   open: boolean;
+  motd: Motd;
   onClose: () => void;
 }
 
-const Motd: FC<ModalProps> = ({ open, children, onClose }) => {
+const MotdModal: FC<MotdProps> = ({ open, motd, onClose }) => {
   // const { } = useMachineStore();
   const timeStamp = new Date();
-  const motd = 'hey there';
 
   return (
     <Modal open={open} onClose={onClose}>
-      <div className="mb-2 pb-2 border-b-2 border-dashed text-base text-center">MotD - {timeStamp.toLocaleDateString()}</div>
+      <div className="mb-2 pb-2 border-b-2 border-dashed text-base text-center">MotD - {motd?.posted}</div>
       <div className="pixel-font-thin text-xl h-[250px] overflow-scroll">
-        {motd}
+        {motd?.message}
       </div>
     </Modal>
   );
 };
 
-export default Motd;
+export default MotdModal;

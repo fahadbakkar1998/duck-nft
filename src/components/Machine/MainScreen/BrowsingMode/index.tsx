@@ -6,7 +6,7 @@ import DuckCard from '../../../DuckCard/DuckCard';
 import useMachineStore from '../../../../store';
 import './index.scss';
 import FiltersModal from './FiltersModal';
-import { useDucks } from '../../../../state/hooks';
+import { useDucks, useMachineState } from '../../../../state/hooks';
 import { useAccountChange, useFilteredDucks } from '../../../../hooks';
 import { DuckData } from '../../../../types/types';
 import CircleButton from '../../../common/CircleButton';
@@ -47,6 +47,7 @@ const BrowsingMode = () => {
   const { data: ducks } = useDucks();
   const filteredDucks = useFilteredDucks(ducks);
   const [scrollPosition, setScrollPosition] = useState(0.0);
+  const { data: machineState } = useMachineState();
 
   const selectDuckByDirection = (direction: string) => {
     const currentDuckIndex = findIndex(filteredDucks, (d) => d.id === currentDuckId);
@@ -82,7 +83,8 @@ const BrowsingMode = () => {
           className="mainScreen overflow-scroll w-full border-gray-600 border-2"
         >
           <Motd
-            open={showMotd}
+            open={!!(showMotd && machineState?.motd?.message)}
+            motd={machineState?.motd || {}}
             onClose={() => setShowMotd(false)}
           />
           <FiltersModal

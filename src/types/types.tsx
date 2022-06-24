@@ -49,6 +49,12 @@ export interface MachineConfig {
   maxCustomDucks: number; // current cap for custom ducks
 }
 
+export interface Motd {
+  posted?: string;
+  owner?: string;
+  message?: string;
+}
+
 export interface MachineState {
   owner: string; // account # of current owner
   ownerEns: string | null;
@@ -57,6 +63,7 @@ export interface MachineState {
   balance: string; // current balance in ETH
   totalSales?: string; // total revenue from selling ducks
   config?: MachineConfig;
+  motd: Motd;
 }
 
 export interface DuckProfile {

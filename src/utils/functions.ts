@@ -6,7 +6,7 @@ import { ChainId } from '@usedapp/core';
 import { Contract } from '@ethersproject/contracts';
 import { OWNERSHIP_TOKEN_ID, BURN_WINDOW, contractAbi } from './constants';
 import staticDuckData from './duckData.json';
-import { MachineConfig, MachineState } from '../types/types';
+import { MachineConfig, MachineState, Motd } from '../types/types';
 
 const { REACT_APP_MACHINE_CONTRACT_ADDRESS: contractAddress = '', REACT_APP_INFURA_API_KEY, REACT_APP_CHAIN_ID } = process.env;
 const CHAIN_ID = process.env.REACT_PUBLIC_ENV === 'production' ? ChainId.Mainnet : ChainId.Rinkeby;
@@ -127,6 +127,27 @@ const fetchMachineConfig = async (): Promise<MachineConfig> => {
   };
 };
 
+const fetchMotd = async (): Promise<Motd> => {
+  const blocksPerMonth = 172800;
+  const currBlock = await infuraProvider.getBlockNumber();
+  const duckMachineContract = new ethers.Contract(contractAddress, contractAbi, infuraProvider);
+  const eventFilter = duckMachineContract.filters.MOTDSet();
+  // Get MotD set in the past 30 days:
+  const events = await duckMachineContract.queryFilter(eventFilter, currBlock - blocksPerMonth, currBlock);
+
+  if (events.length) {
+    // return most recent MotD
+    const latestMessage = events[events.length - 1];
+    const posted = (await infuraProvider.getBlock(latestMessage.blockNumber)).timestamp;
+    return {
+      posted: (new Date(posted * 1000)).toLocaleDateString(),
+      owner: latestMessage.args?.owner,
+      message: latestMessage.args?.message,
+    };
+  }
+  return {};
+};
+
 const fetchMachineState = async (): Promise<MachineState> => {
   const duckMachineContract = new ethers.Contract(contractAddress, contractAbi, infuraProvider);
   const machineOwner = await duckMachineContract.ownerOf(OWNERSHIP_TOKEN_ID);
@@ -134,6 +155,7 @@ const fetchMachineState = async (): Promise<MachineState> => {
   const balance = await injectedProvider?.getBalance(contractAddress);
   const duckMintsCount = await getMintsCount();
   const machineConfig = await fetchMachineConfig();
+  const motd = await fetchMotd();
 
   return {
     owner: machineOwner,
@@ -142,6 +164,7 @@ const fetchMachineState = async (): Promise<MachineState> => {
     customMints: duckMintsCount.custom,
     balance: ethers.utils.formatEther(balance!),
     config: machineConfig,
+    motd,
   };
 };
 
