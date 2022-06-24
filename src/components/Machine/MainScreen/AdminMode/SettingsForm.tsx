@@ -1,18 +1,20 @@
 import { useState, useEffect, ChangeEvent, useRef } from 'react';
 import { useContractFunction } from '@usedapp/core';
 import { utils } from 'ethers';
+import { useQueryClient } from 'react-query';
 import { MintStatus } from '../../../../types/types';
 import FormToggle from './common/FormToggle';
 import FormInput from './common/FormInput';
 import FormButton from './common/FormButton';
-import { useMachineConfig, useMachineContract } from '../../../../hooks/machine';
+import { useMachineContract } from '../../../../hooks/machine';
+import { useMachineState } from '../../../../state/hooks';
 import useMachineStore from '../../../../store';
 import AdminFormWrapper from './AdminFormWrapper';
 import { numberRegex, decimalRegex } from '../../../../utils/constants';
 
 const SettingsForm = () => {
-  const config = useMachineConfig();
-  const [configLoaded, setConfigLoaded] = useState(false);
+  const queryClient = useQueryClient();
+  const { data: machineState, isLoading } = useMachineState();
   const [tozziStatus, setTozziStatus] = useState<MintStatus|undefined>();
   const [customStatus, setCustomStatus] = useState<MintStatus|undefined>();
   const [tozziPrice, setTozziPrice] = useState<string>();
@@ -26,9 +28,7 @@ const SettingsForm = () => {
   );
 
   const {
-    altMessage,
     setAltMessage,
-    machineMood,
     setMachineMood,
     isLocked,
     setIsLocked,
@@ -43,6 +43,7 @@ const SettingsForm = () => {
       setAltMessage('Settings Updated!');
       setMachineMood(undefined);
       setIsLocked(false);
+      queryClient.invalidateQueries('machineState');
     } else if (state?.status === 'PendingSignature') {
       setAltMessage('Signature Pending...');
     } else if (state?.status === 'Exception') {
@@ -59,18 +60,14 @@ const SettingsForm = () => {
   }, [state.status]);
 
   useEffect(() => {
-    if (!configLoaded && config) {
+    if (machineState) {
       resetForm();
-      setConfigLoaded(true);
     }
-  }, [config]);
-
-  const filterEventInput = (e: ChangeEvent<HTMLInputElement>) => {
-    return e.currentTarget.value.replace(/\D/g, '');
-  };
+  }, [machineState]);
 
   const resetForm = () => {
-    if (config) {
+    if (machineState?.config) {
+      const { config } = machineState;
       setTozziStatus(config.tozziMintStatus);
       setCustomStatus(config.customMintStatus);
       setTozziPrice(config.tozziMintPrice);

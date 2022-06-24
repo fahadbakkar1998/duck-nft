@@ -12,27 +12,27 @@ export const useMachineContract = (): Contract => {
   return contract;
 };
 
-export const useMachineConfig = (): MachineConfig | undefined => {
-  const { value, error } = useCall({
-    contract: useMachineContract(),
-    method: 'machineConfig',
-    args: [],
-  }) ?? {};
+// export const useMachineConfig = (): MachineConfig | undefined => {
+//   const { value, error } = useCall({
+//     contract: useMachineContract(),
+//     method: 'machineConfig',
+//     args: [],
+//   }) ?? {};
 
-  if (error) {
-    console.error(error.message);
-  }
+//   if (error) {
+//     console.error(error.message);
+//   }
 
-  if (value) {
-    return {
-      tozziMintStatus: value?.[3] as MintStatus,
-      tozziMintPrice: utils.formatEther(value?.[0]),
-      customMintStatus: value?.[4] as MintStatus,
-      customMintPrice: utils.formatEther(value?.[1]),
-      maxCustomDucks: value?.[2].toNumber(),
-    };
-  }
-  return value;
-};
+//   if (value) {
+//     return {
+//       tozziMintStatus: value?.[3] as MintStatus,
+//       tozziMintPrice: utils.formatEther(value?.[0]),
+//       customMintStatus: value?.[4] as MintStatus,
+//       customMintPrice: utils.formatEther(value?.[1]),
+//       maxCustomDucks: value?.[2].toNumber(),
+//     };
+//   }
+//   return value;
+// };
 
-export default useMachineConfig;
+// export default useMachineConfig;

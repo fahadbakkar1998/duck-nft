@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { FC, useEffect } from 'react';
 // eslint-disable-next-line import/no-relative-packages
 import { motion, AnimatePresence } from '../../../../node_modules/framer-motion/dist/framer-motion';

@@ -26,8 +26,8 @@ const Keyboard: FC = () => {
     const duckExists = ducks.find((d) => d.id === Number(value));
     if (duckExists) {
       setCurrentDuckId(Number(value));
-      document.getElementById(`item${value}`)?.scrollIntoView({
-        block: 'end',
+      document.querySelector(`#item${value}`)?.scrollIntoView({
+        block: 'nearest',
       });
     } else {
       setAltMessage('Invalid duck ID!');

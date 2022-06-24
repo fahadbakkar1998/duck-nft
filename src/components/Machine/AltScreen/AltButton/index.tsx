@@ -101,7 +101,6 @@ const ButtonView = () => {
   };
 
   const handleMintCustomTozziDuck = async () => {
-    // const canMint = true; //TODO handle this case. check to see if custom minting is even enabled
     const { customMintPrice } = await fetchMachineConfig();
     const price = utils.parseEther(customMintPrice.toString());
     const base64data = await DToolInst.getWebp();

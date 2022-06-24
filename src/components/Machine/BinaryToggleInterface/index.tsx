@@ -17,7 +17,7 @@ const BTI = () => {
     const newDuckId = currentDuckId + (valence * (2 ** index));
     if (newDuckId <= 199) {
       setCurrentDuckId(newDuckId);
-      document.getElementById(`item${newDuckId}`)?.scrollIntoView({ block: 'end' });
+      document.getElementById(`item${newDuckId}`)?.scrollIntoView({ block: 'nearest' });
     }
   };
 
