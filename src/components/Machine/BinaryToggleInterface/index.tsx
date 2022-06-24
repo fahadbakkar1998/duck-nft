@@ -1,8 +1,9 @@
 import useMachineStore from '../../../store';
 import ToggleSwitch from './ToggleSwitch';
+import { MachineMode } from '../../../utils/constants';
 
 const BTI = () => {
-  const { currentDuckId, setCurrentDuckId } = useMachineStore();
+  const { currentDuckId, setCurrentDuckId, currentMode } = useMachineStore();
 
   function toBinary(integer) {
     const str = integer.toString(2);
@@ -13,6 +14,7 @@ const BTI = () => {
   };
 
   const toggleSwitch = (index: number) => {
+    if (currentMode !== MachineMode.Shopping) return;
     const valence = isOn(index) ? -1 : 1;
     const newDuckId = currentDuckId + (valence * (2 ** index));
     if (newDuckId <= 199) {
@@ -25,6 +27,7 @@ const BTI = () => {
     return [7, 6, 5, 4, 3, 2, 1, 0].map((num) => {
       return (
         <ToggleSwitch
+          disabled={currentMode !== MachineMode.Shopping}
           key={num}
           value={isOn(num)}
           onClick={() => toggleSwitch(num)}

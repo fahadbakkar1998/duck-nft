@@ -8,6 +8,7 @@ import { MachineMode, minViewLength } from '../../../utils/constants';
 import Display from '../Display';
 import { useMachineStore } from '../../../store';
 import { useDucks } from '../../../state/hooks';
+import { useFilteredDucks } from '../../../hooks';
 
 const Keyboard: FC = () => {
   const [vrm, setVrm] = useState<any>(null);
@@ -16,14 +17,14 @@ const Keyboard: FC = () => {
   const min = viewport.width;
   const [value, setValue] = useState<string>('');
   const { currentDuckId, currentMode } = useMachineStore();
-  const { data: ducksData = [], isLoading } = useDucks();
-  const ducks = !isLoading ? ducksData : [];
+  const { data: ducks } = useDucks();
+  const filteredDucks = useFilteredDucks(ducks);
   const [clearOnNext, setClearOnNext] = useState(true);
   const { setCurrentDuckId, setAltMessage } = useMachineStore();
 
   const enterClick = (value: string) => {
     // TODO - find better way to do this that doesn't require all ducks
-    const duckExists = ducks.find((d) => d.id === Number(value));
+    const duckExists = filteredDucks.find((d) => d.id === Number(value));
     if (duckExists) {
       setCurrentDuckId(Number(value));
       document.querySelector(`#item${value}`)?.scrollIntoView({
@@ -54,7 +55,7 @@ const Keyboard: FC = () => {
   }, [currentDuckId]);
 
   const buttonClick = (btnName) => {
-    if (currentMode === MachineMode.Off) return;
+    if (currentMode !== MachineMode.Shopping) return;
     if (btnName === 'enter') enterClick(value);
     else if (btnName === 'clear') clearClick();
     else if (clearOnNext) {
