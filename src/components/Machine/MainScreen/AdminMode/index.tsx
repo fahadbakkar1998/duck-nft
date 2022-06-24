@@ -6,6 +6,7 @@ import SettingsForm from './SettingsForm';
 import AllowancesForm from './AllowancesForm';
 import AccountingForm from './AccountingForm';
 import AdminTabButton from './AdminTabButton';
+import MotdForm from './MotdForm';
 import useMachineStore from '../../../../store';
 import BurnForm from './BurnForm';
 import { useAccountChange } from '../../../../hooks';
@@ -29,13 +30,13 @@ const AdminMain = () => {
 
   return (
     <div className="AdminMain p-7 inner-shadow pixel-font overflow-hidden relative text-sm border-2 border-gray-600 bg-screenBlack">
-      <div className=" h-full w-full border-2 p-4">
+      <div className=" h-full w-full ">
         <div className="h-full w-full flex flex-col">
-          <div className="pb-1 border-b-2 border-dashed text-base">DUCK ADMINISTRATION</div>
+          <div className="text-base">DUCK ADMINISTRATION</div>
           { activeTab !== AdminTabs.Burn && (
-            <div className="mt-2 flex gap-2 pixel-font-thin text-center text-base">
+            <div className="mt-2 grid grid-cols-3 gap-2 pixel-font-thin text-center text-base">
               <AdminTabButton
-                title="Settings"
+                title="Minting"
                 isActive={activeTab === AdminTabs.Settings}
                 onClick={() => setActiveTab(AdminTabs.Settings)}
               />
@@ -49,11 +50,22 @@ const AdminMain = () => {
                 isActive={activeTab === AdminTabs.Accounting}
                 onClick={() => setActiveTab(AdminTabs.Accounting)}
               />
+              <AdminTabButton
+                title="MotD"
+                isActive={activeTab === AdminTabs.Motd}
+                onClick={() => setActiveTab(AdminTabs.Motd)}
+              />
+              {/* <AdminTabButton
+                title="Duck Review"
+                isActive={activeTab === AdminTabs.Burn}
+                onClick={() => setActiveTab(AdminTabs.Burn)}
+              /> */}
             </div>
           )}
           { activeTab === AdminTabs.Settings && <SettingsForm /> }
           { activeTab === AdminTabs.Allowances && <AllowancesForm /> }
           { activeTab === AdminTabs.Accounting && <AccountingForm /> }
+          { activeTab === AdminTabs.Motd && <MotdForm /> }
           { activeTab === AdminTabs.Burn && <BurnForm /> }
         </div>
       </div>

@@ -40,7 +40,9 @@ export enum AdminTabs {
   Allowances,
   Accounting,
   Burn,
+  Motd,
 }
+
 export interface MachineConfig {
   tozziMintStatus: MintStatus;
   tozziMintPrice: string; // current price in ETH

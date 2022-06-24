@@ -154,7 +154,7 @@ const AllowancesForm = () => {
               />
             </div>
           </div>
-          <div className="absolute -bottom-4 -right-4 flex space-x-2 text-sm">
+          <div className="absolute -bottom-1 right-0 flex space-x-2 text-sm">
             <FormButton label="Reset" onClick={handleReset} />
             <FormButton label="Submit" onClick={handleSetAllowance} />
           </div>
