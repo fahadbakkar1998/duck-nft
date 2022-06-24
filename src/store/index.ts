@@ -70,6 +70,8 @@ type MachineStore = {
   setOpenBurnForm: (val: boolean) => void;
   isOwnersManualOpen: boolean;
   setIsOwnersManualOpen: (val: boolean) => void;
+  showMotd: boolean;
+  setShowMotd: (val: boolean) => void;
 
   // eyedropper
   eyeDropperColor: any;
@@ -258,6 +260,10 @@ export const useMachineStore = create<MachineStore>(
     isOwnersManualOpen: false,
     setIsOwnersManualOpen: (val: boolean): void => {
       set({ isOwnersManualOpen: val });
+    },
+    showMotd: true,
+    setShowMotd: (val: boolean): void => {
+      set({ showMotd: val });
     },
 
     // eyedropper

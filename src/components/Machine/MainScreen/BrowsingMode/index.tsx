@@ -40,6 +40,8 @@ const BrowsingMode = () => {
     isSwitchingModes,
     currentDuckId,
     setCurrentDuckId,
+    showMotd,
+    setShowMotd,
   } = useMachineStore();
   const [showFilters, setShowFilters] = useState(false);
   const { data: ducks } = useDucks();
@@ -79,7 +81,10 @@ const BrowsingMode = () => {
           onScroll={handleScroll}
           className="mainScreen overflow-scroll w-full border-gray-600 border-2"
         >
-          <Motd open onClose={() => {}} />
+          <Motd
+            open={showMotd}
+            onClose={() => setShowMotd(false)}
+          />
           <FiltersModal
             open={showFilters}
             onClose={() => { setShowFilters(false); }}
