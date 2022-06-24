@@ -51,6 +51,7 @@ export interface MachineConfig {
 
 export interface MachineState {
   owner: string; // account # of current owner
+  ownerEns: string | null;
   tozziMints: number; // # tozzi ducks minted
   customMints: number; // # custom ducks minted
   balance: string; // current balance in ETH

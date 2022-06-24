@@ -45,15 +45,15 @@ const CustomSlide: FC<SlideProps> = ({ state }) => {
 };
 
 const ManualSlide: FC<SlideProps> = ({ state }) => {
-  const owner = shortenAddress(state?.owner!);
+  const ownerDisplay = state?.ownerEns || shortenAddress(state?.owner || '');
   const { setIsOwnersManualOpen, isOwnersManualOpen } = useMachineStore();
   return (
     <div className="w-full flex justify-between px-4 items-center">
       <div>
-        owner: {owner}
-      </div>
-      <div>
-        population: 0/200
+        owner:
+        <a target="_blank" className="hover:font-bold" href={`https://opensea.io/${state?.owner}`} rel="noreferrer">
+          {ownerDisplay}
+        </a>
       </div>
       <button
         type="button"

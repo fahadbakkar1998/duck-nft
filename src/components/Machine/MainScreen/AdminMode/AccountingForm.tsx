@@ -1,12 +1,11 @@
 /* eslint-disable no-console */
 import { useState, useEffect } from 'react';
 import { utils } from 'ethers';
-import { useContractFunction } from '@usedapp/core';
+import { shortenAddress, useContractFunction } from '@usedapp/core';
 import FormInput from './common/FormInput';
 import FormButton from './common/FormButton';
 import { useMachineState, useMachineConfig } from '../../../../state/hooks';
 import AdminFormWrapper from './AdminFormWrapper';
-import { useEnsOrShort } from '../../../../hooks';
 import { useMachineContract } from '../../../../hooks/machine';
 import useMachineStore from '../../../../store';
 import { decimalRegex } from '../../../../utils/constants';
@@ -14,7 +13,7 @@ import { decimalRegex } from '../../../../utils/constants';
 const AccountingForm = () => {
   const [value, setValue] = useState('');
   const { data: machineState, isLoading } = useMachineState();
-  const owner = useEnsOrShort(machineState?.owner);
+  const ownerDisplay = machineState?.ownerEns || shortenAddress(machineState?.owner || '');
   const {
     setAltMessage,
     setIsLocked,
@@ -74,7 +73,9 @@ const AccountingForm = () => {
       <div className="flex flex-col space-y-2 h-full relative">
         <div>OWNER</div>
         <div className="pixel-font-thin text-xl">
-          { owner || '--' }
+          <a target="_blank" href={`https://opensea.io/${machineState?.owner}`} rel="noreferrer" className="hover:text-orange-500 transition">
+            { ownerDisplay}
+          </a>
         </div>
         <div>CURRENT BALANCE</div>
         <div className="pixel-font-thin text-xl">
