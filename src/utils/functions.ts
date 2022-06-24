@@ -16,15 +16,16 @@ declare const window: any;
 const injectedProvider = window.ethereum ? new ethers.providers.Web3Provider(window.ethereum) : undefined;
 const infuraProvider = new ethers.providers.InfuraProvider(CHAIN_NAME, REACT_APP_INFURA_API_KEY);
 const ethereumProvider = injectedProvider ? injectedProvider.getSigner() : infuraProvider;
-const duckMachineContract = new ethers.Contract(contractAddress, contractAbi, ethereumProvider);
 export const contract = new Contract(contractAddress, contractAbi, ethereumProvider) as any;
 
 const getMachineConfig = async () => {
+  const duckMachineContract = new ethers.Contract(contractAddress, contractAbi, infuraProvider);
   const config = await duckMachineContract.machineConfig();
   return config;
 };
 
 const getMintedDucks = async () => {
+  const duckMachineContract = new ethers.Contract(contractAddress, contractAbi, infuraProvider);
   const eventFilter = duckMachineContract.filters.DuckMinted();
   const events = await duckMachineContract.queryFilter(eventFilter);
 
@@ -127,6 +128,7 @@ const fetchMachineConfig = async (): Promise<MachineConfig> => {
 };
 
 const fetchMachineState = async (): Promise<MachineState> => {
+  const duckMachineContract = new ethers.Contract(contractAddress, contractAbi, infuraProvider);
   const machineOwner = await duckMachineContract.ownerOf(OWNERSHIP_TOKEN_ID);
   const balance = await injectedProvider?.getBalance(contractAddress);
   const duckMintsCount = await getMintsCount();
@@ -141,4 +143,4 @@ const fetchMachineState = async (): Promise<MachineState> => {
   };
 };
 
-export { fetchDucks, fetchMachineConfig, fetchMachineState, duckMachineContract };
+export { fetchDucks, fetchMachineConfig, fetchMachineState };
