@@ -1,17 +1,25 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 // eslint-disable-next-line import/no-relative-packages
 import { motion, AnimatePresence } from '../../../../node_modules/framer-motion/dist/framer-motion';
 import { useDucks } from '../../../state/hooks';
+import { useFilteredDucks } from '../../../hooks';
 import useMachineStore from '../../../store';
 import DuckProfile from './DuckProfile';
+import { DuckData } from '../../../types/types';
 
 const Shopping = () => {
   const { altIsStatic, showDuckProfile, currentDuckId, setAltMessage } = useMachineStore();
-  const { data: ducksData = [], isLoading } = useDucks();
-  const ducks = !isLoading ? ducksData : [];
-  const duck = ducks?.find((d) => d.id === currentDuckId);
+  const { data: ducks } = useDucks();
+  const filteredDucks = useFilteredDucks(ducks);
 
-  return (
+  const [duck, setDuck] = useState<DuckData|null>();
+
+  useEffect(() => {
+    const duck = filteredDucks.find((d) => d.id === currentDuckId);
+    setDuck(duck);
+  }, [currentDuckId]);
+
+  return duck ? (
     <div className="absolute z-10">
       <DuckProfile show={showDuckProfile} duck={duck} />
       { true && (
@@ -35,7 +43,7 @@ const Shopping = () => {
         </div>
       )}
     </div>
-  );
+  ) : null;
 };
 
 export default Shopping;

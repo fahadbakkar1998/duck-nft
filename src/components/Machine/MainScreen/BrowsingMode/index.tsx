@@ -1,5 +1,6 @@
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 import React, { useEffect, useState, useRef, UIEvent } from 'react';
+import { findIndex } from 'lodash';
 import { useEthers } from '@usedapp/core';
 import DuckCard from '../../../DuckCard/DuckCard';
 import useMachineStore from '../../../../store';
@@ -12,24 +13,24 @@ import CircleButton from '../../../common/CircleButton';
 import filterIcon from '../../../../assets/img/icons/filter.svg';
 import ScrollBar from './ScrollBar';
 
-const directionToDuckId = (direction: string, currentDuckId: number) => {
-  let nextDuckId = currentDuckId;
+const directionToDuckIndex = (direction: string, currentDuckIndex: number) => {
+  let nextDuckIndex = currentDuckIndex;
   switch (direction) {
     case 'up':
-      nextDuckId -= 3;
+      nextDuckIndex -= 3;
       break;
     case 'down':
-      nextDuckId += 3;
+      nextDuckIndex += 3;
       break;
     case 'left':
-      nextDuckId -= 1;
+      nextDuckIndex -= 1;
       break;
     case 'right':
-      nextDuckId += 1;
+      nextDuckIndex += 1;
       break;
     default: break;
   }
-  return nextDuckId;
+  return nextDuckIndex;
 };
 
 const BrowsingMode = () => {
@@ -38,7 +39,6 @@ const BrowsingMode = () => {
     isSwitchingModes,
     currentDuckId,
     setCurrentDuckId,
-    setCurrentMode,
   } = useMachineStore();
   const [showFilters, setShowFilters] = useState(false);
   const { data: ducks } = useDucks();
@@ -46,10 +46,12 @@ const BrowsingMode = () => {
   const [scrollPosition, setScrollPosition] = useState(0.0);
 
   const selectDuckByDirection = (direction: string) => {
-    const nextDuck = directionToDuckId(direction, currentDuckId);
-    if (ducks?.[nextDuck]) {
-      setCurrentDuckId(nextDuck);
-      document.getElementById(`item${nextDuck}`)?.scrollIntoView({ block: 'nearest' });
+    const currentDuckIndex = findIndex(filteredDucks, (d) => d.id === currentDuckId);
+    const nextDuckIndex = directionToDuckIndex(direction, currentDuckIndex);
+    if (filteredDucks?.[nextDuckIndex]) {
+      const nextDuckId = filteredDucks[nextDuckIndex].id;
+      setCurrentDuckId(nextDuckId);
+      document.getElementById(`item${nextDuckId}`)?.scrollIntoView({ block: 'nearest' });
     }
   };
 
