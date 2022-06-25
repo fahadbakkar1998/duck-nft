@@ -12,6 +12,8 @@ import { DuckData, DuckFilters } from '../types/types';
 import { useDucks } from '../state/hooks';
 
 type MachineStore = {
+  account: string | undefined;
+  setAccount: (account: string | undefined) => void;
   currentMode: MachineMode;
   switchModes: (direction: string) => void;
   queryClient: any;
@@ -82,6 +84,10 @@ type MachineStore = {
 
 export const useMachineStore = create<MachineStore>(
   (set: SetState<MachineStore>) => ({
+    account: '',
+    setAccount: (account: string | undefined): void => {
+      set({ account });
+    },
     // main
     currentMode: MachineMode.Off,
     setCurrentMode: (mode: MachineMode): void => {

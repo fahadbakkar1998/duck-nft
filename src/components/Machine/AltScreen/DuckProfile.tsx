@@ -22,7 +22,7 @@ interface DuckProfileProps {
 }
 const DuckProfileView: FC<DuckProfileProps> = ({ duck }) => {
   const { metadata } = duck;
-  const { showProfileForm, setShowProfileForm } = useMachineStore();
+  const { showProfileForm, setShowProfileForm, account } = useMachineStore();
   const { name, description } = metadata!;
   const status = getMetadataAttribute(metadata, 'Status');
   const title = getMetadataAttribute(metadata, 'Title');
@@ -48,7 +48,7 @@ const DuckProfileView: FC<DuckProfileProps> = ({ duck }) => {
                 alt={`Duck ${duck.id}`}
                 src={duck.isCustom ? duck.webp : `data:image/webp;base64,${duck.webp}`}
               />
-              { true && (
+              { account === duck.owner && (
                 <div
                   onClick={() => setShowProfileForm(!showProfileForm)}
                   className="absolute top-0 left-0 z-30 px-2 pt-1 text-sm text-white bg-orange-500 border-2 border-white rounded-lg pixel-font cursor-pointer"
