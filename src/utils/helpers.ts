@@ -1,5 +1,5 @@
 import { useEthers } from '@usedapp/core';
-import { DuckData, DuckFilters, MintStatus } from '../types/types';
+import { DuckData, DuckFilters, MintStatus, DuckMetadata } from '../types/types';
 
 export const filterDucks = ({ ducks = [], filters } : {ducks: DuckData[], filters: DuckFilters}): DuckData[] => {
   const { account } = useEthers();
@@ -45,4 +45,9 @@ export const getCustomErrorText = (errorMessage: string | undefined) => {
     return 'Error: Insufficient funds. Plz check the current duck price.';
   }
   return defaultMsg;
+};
+
+export const getMetadataAttribute = (metadata: DuckMetadata | undefined, traitType: string): string | undefined => {
+  const attribute = metadata?.attributes.find((a) => a.trait_type === traitType);
+  return attribute?.value;
 };

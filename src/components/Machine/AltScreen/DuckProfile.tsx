@@ -5,7 +5,8 @@ import { shortenAddress } from '@usedapp/core';
 // eslint-disable-next-line import/no-relative-packages
 import { motion, AnimatePresence } from '../../../../node_modules/framer-motion/dist/framer-motion';
 import { DuckData } from '../../../types/types';
-import { useDuckProfile } from '../../../hooks/ducks';
+import { getMetadataAttribute } from '../../../utils/helpers';
+import { useEnsOrShort } from '../../../hooks';
 
 const FieldLabel = ({ text }: {text:string}) => {
   return <div className="pixel-font text-sm">{text.toUpperCase()}</div>;
@@ -19,7 +20,14 @@ interface DuckProfileProps {
   duck: DuckData;
 }
 const DuckProfileView: FC<DuckProfileProps> = ({ duck }) => {
-  const profile = useDuckProfile(duck);
+  const { metadata } = duck;
+  const { name, description } = metadata!;
+  const status = getMetadataAttribute(metadata, 'Status');
+  const title = getMetadataAttribute(metadata, 'Title');
+  const creator = getMetadataAttribute(metadata, 'Creator');
+  const formattedCreator = creator === 'Jim Tozzi'
+    ? creator
+    : useEnsOrShort(creator);
   return (
     <motion.div
       initial={{ y: '100%' }}
@@ -31,9 +39,9 @@ const DuckProfileView: FC<DuckProfileProps> = ({ duck }) => {
       <div className="h-full overflow-scroll relative">
         <div className="p-2 flex flex-col gap-2">
           <div className="flex gap-2">
-            <div className="flex-1 relative">
+            <div className="flex-1 relative bg-white bg-opacity-10 rounded-lg">
               <img
-                className="border-2 border-white rounded-full"
+                className="border-2  rounded-full"
                 alt={`Duck ${duck.id}`}
                 src={duck.isCustom ? duck.webp : `data:image/webp;base64,${duck.webp}`}
               />
@@ -54,18 +62,28 @@ const DuckProfileView: FC<DuckProfileProps> = ({ duck }) => {
               </div>
             </div>
           </div>
-          <div className="col-span-2 bg-white flex  items-center space-x-4 bg-opacity-10 p-1">
+          <div className="col-span-2 bg-white bg-opacity-10 pt-2 px-2">
             <FieldLabel text="Name" />
-            <Field text={profile?.name ?? `Duck ${duck.id}`} />
+            <Field text={name || `Duck ${duck.id}`} />
           </div>
-          <div className="col-span-2 p-1 flex  items-center space-x-4">
-            <FieldLabel text="Status" />
-            <Field text={profile?.status ?? 'N/A'} />
+          <div className="flex col-span-2 bg-opacity-10 pt-2 px-2">
+            <div className="flex-1">
+              <FieldLabel text="Status" />
+              <Field text={status || 'N/A'} />
+            </div>
+            { title && (
+              <div className="flex-1">
+                <FieldLabel text="Title" />
+                <Field text={title} />
+              </div>
+            )}
           </div>
-          <div className="col-span-2 bg-white bg-opacity-10 p-1">
+
+          <div className="col-span-2 bg-white bg-opacity-10 pt-2 px-2">
             <FieldLabel text="Profile" />
-            <Field text={profile?.description ?? 'N/A - Please contact machine owner to configure your profile.'} />
+            <Field text={description || 'N/A - Please contact machine owner to configure your profile.'} />
           </div>
+
           <div className="flex gap-2">
             <div className="p-1 flex-1">
               <FieldLabel text="Owner" />
@@ -74,7 +92,7 @@ const DuckProfileView: FC<DuckProfileProps> = ({ duck }) => {
 
             <div className=" p-1 flex-1">
               <FieldLabel text="Creator" />
-              <Field text={profile?.creator ?? 'N/A'} />
+              <Field text={formattedCreator || shortenAddress(creator || '') || '--'} />
             </div>
           </div>
         </div>
