@@ -72,6 +72,8 @@ type MachineStore = {
   setIsOwnersManualOpen: (val: boolean) => void;
   showMotd: boolean;
   setShowMotd: (val: boolean) => void;
+  showProfileForm: boolean;
+  setShowProfileForm: (val: boolean) => void;
 
   // eyedropper
   eyeDropperColor: any;
@@ -264,6 +266,11 @@ export const useMachineStore = create<MachineStore>(
     showMotd: true,
     setShowMotd: (val: boolean): void => {
       set({ showMotd: val });
+    },
+
+    showProfileForm: false,
+    setShowProfileForm: (val: boolean): void => {
+      set({ showProfileForm: val });
     },
 
     // eyedropper

@@ -1,12 +1,13 @@
 /* eslint-disable no-console */
 import { FC, useEffect, useState } from 'react';
 import { padStart } from 'lodash';
-import { shortenAddress } from '@usedapp/core';
+import { shortenAddress, useEthers } from '@usedapp/core';
 // eslint-disable-next-line import/no-relative-packages
 import { motion, AnimatePresence } from '../../../../node_modules/framer-motion/dist/framer-motion';
 import { DuckData } from '../../../types/types';
 import { getMetadataAttribute } from '../../../utils/helpers';
 import { useEnsOrShort } from '../../../hooks';
+import useMachineStore from '../../../store';
 
 const FieldLabel = ({ text }: {text:string}) => {
   return <div className="pixel-font text-sm">{text.toUpperCase()}</div>;
@@ -21,6 +22,7 @@ interface DuckProfileProps {
 }
 const DuckProfileView: FC<DuckProfileProps> = ({ duck }) => {
   const { metadata } = duck;
+  const { showProfileForm, setShowProfileForm } = useMachineStore();
   const { name, description } = metadata!;
   const status = getMetadataAttribute(metadata, 'Status');
   const title = getMetadataAttribute(metadata, 'Title');
@@ -28,6 +30,7 @@ const DuckProfileView: FC<DuckProfileProps> = ({ duck }) => {
   const formattedCreator = creator === 'Jim Tozzi'
     ? creator
     : useEnsOrShort(creator);
+
   return (
     <motion.div
       initial={{ y: '100%' }}
@@ -45,6 +48,14 @@ const DuckProfileView: FC<DuckProfileProps> = ({ duck }) => {
                 alt={`Duck ${duck.id}`}
                 src={duck.isCustom ? duck.webp : `data:image/webp;base64,${duck.webp}`}
               />
+              { true && (
+                <div
+                  onClick={() => setShowProfileForm(!showProfileForm)}
+                  className="absolute top-0 left-0 z-30 px-2 pt-1 text-sm text-white bg-orange-500 border-2 border-white rounded-lg pixel-font cursor-pointer"
+                >
+                  { showProfileForm ? 'CANCEL' : 'EDIT' }
+                </div>
+              )}
             </div>
 
             <div className="flex items-start flex-col justify-end gap-2 ">
