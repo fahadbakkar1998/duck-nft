@@ -13,11 +13,6 @@ const StatusPanel = () => {
   const { data: machineState } = useMachineState();
   const [isHovered, setIsHovered] = useState(false);
 
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(machineState);
-  }, [machineState]);
-
   return (
     <div className="status-panel">
       <div
