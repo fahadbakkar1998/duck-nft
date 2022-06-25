@@ -115,7 +115,11 @@ export const useMachineStore = create<MachineStore>(
 
     showDuckProfile: false,
     setShowDuckProfile: (showProfile: boolean): void => {
-      set({ showDuckProfile: showProfile });
+      if (showProfile === false) {
+        set({ showDuckProfile: showProfile, showProfileForm: false });
+      } else {
+        set({ showDuckProfile: showProfile });
+      }
     },
 
     altMessage: '',
