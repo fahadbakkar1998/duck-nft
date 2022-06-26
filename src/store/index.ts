@@ -1,4 +1,5 @@
 import create, { SetState } from 'zustand';
+import { ReactNode } from 'react';
 import { QueryClient } from 'react-query';
 import {
   MachineMode,
@@ -8,7 +9,7 @@ import {
 } from '../utils/constants';
 import DTool from './DTool';
 import jsonDucks from '../utils/duckData.json';
-import { DuckData, DuckFilters } from '../types/types';
+import { AltMessage, DuckData, DuckFilters } from '../types/types';
 import { useDucks } from '../state/hooks';
 
 type MachineStore = {
@@ -39,8 +40,8 @@ type MachineStore = {
   altIsStatic: boolean;
   showDuckProfile: boolean;
   setShowDuckProfile: (showProfile: boolean) => void;
-  altMessage: string;
-  setAltMessage: (message: string) => void;
+  altMessage: AltMessage | undefined;
+  setAltMessage: (message: string | AltMessage | undefined) => void;
 
   // color picker
   DToolInst: DTool;
@@ -122,8 +123,12 @@ export const useMachineStore = create<MachineStore>(
       }
     },
 
-    altMessage: '',
-    setAltMessage: (message: string): void => {
+    altMessage: undefined,
+    setAltMessage: (message: string | AltMessage | undefined): void => {
+      if (typeof message === 'string') {
+        set({ altMessage: { message } });
+        return;
+      }
       set({ altMessage: message });
     },
 
@@ -155,10 +160,10 @@ export const useMachineStore = create<MachineStore>(
           set({ isSwitchingModes: false });
         }, 300);
         if (direction === 'off') {
-          return { currentMode: MachineMode.Off, isSwitchingModes: true, altMessage: '' };
+          return { currentMode: MachineMode.Off, isSwitchingModes: true, altMessage: undefined };
         }
         if (direction === 'shopping') {
-          return { currentMode: MachineMode.Shopping, isSwitchingModes: true, altMessage: '' };
+          return { currentMode: MachineMode.Shopping, isSwitchingModes: true, altMessage: undefined };
         }
         let nextMode: any;
         switch (state.currentMode) {
@@ -180,7 +185,7 @@ export const useMachineStore = create<MachineStore>(
           default:
             nextMode = MachineMode.Shopping;
         }
-        return { currentMode: nextMode, isSwitchingModes: true, altMessage: '' };
+        return { currentMode: nextMode, isSwitchingModes: true, altMessage: undefined };
       });
     },
     currentDuckId: 0,

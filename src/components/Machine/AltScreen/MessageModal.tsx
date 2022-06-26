@@ -1,9 +1,11 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 // eslint-disable-next-line import/no-relative-packages
 import { motion, AnimatePresence } from '../../../../node_modules/framer-motion/dist/framer-motion';
+import { AltMessage } from '../../../types/types';
+import TxNotification from './TxNotification';
 
 interface MessageModalProps {
-  message: string;
+  message?: AltMessage;
   open: boolean;
   onClose: () => void;
 }
@@ -26,9 +28,7 @@ const MessageModal: FC<MessageModalProps> = ({ message, open, onClose }) => {
           flex flex-col justify-between items-start                  
         `}
       >
-        <div>
-          {message.toUpperCase()}
-        </div>
+        <TxNotification message={message?.message} txHash={message?.txHash} />
         <div className="flex w-full justify-end">
           <div
             onClick={onClose}

@@ -48,9 +48,9 @@ const AltScreen: FC = () => {
           {currentMode === MachineMode.Customization && <CustomMode />}
           {currentMode === MachineMode.Admin && <AdminMode />}
           <MessageModal
-            open={!!altMessage.length}
+            open={!!altMessage}
             message={altMessage}
-            onClose={() => setAltMessage('')}
+            onClose={() => setAltMessage(undefined)}
           />
         </div>
         <AltButton />

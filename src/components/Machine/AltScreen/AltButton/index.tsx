@@ -13,7 +13,7 @@ import ShimmerLayer from '../../../common/ShimmerLayer';
 import { contract, fetchMachineConfig } from '../../../../utils/functions';
 import AltButtonLoader from './AltButtonLoader';
 import BurnButton from './BurnButton';
-import { useTxNotifier } from '../../../../hooks/transactionStatus';
+import { useTxNotifier } from '../../../../hooks/transaction';
 
 const ButtonView = () => {
   const queryClient = useQueryClient();

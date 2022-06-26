@@ -4,6 +4,8 @@ import { TransactionStatus } from '@usedapp/core';
 import useMachineStore from '../store';
 import { getCustomErrorText } from '../utils/helpers';
 
+import TxNotification from '../components/Machine/AltScreen/TxNotification';
+
 interface TxMessages {
   signing?: string;
   mining?: string;
@@ -16,25 +18,29 @@ export const useTxNotifier = (messages: TxMessages, txStatus: TransactionStatus)
   const queryClient = useQueryClient();
 
   const handleOnSigning = useCallback(() => {
-    setAltMessage(messages.signing || 'Signature Pending...');
+    const message = messages.signing || 'Signature Pending... ';
+    setAltMessage({ message });
   }, []);
 
-  const handleOnMining = useCallback(() => {
+  const handleOnMining = useCallback((tx: any) => {
+    const message = messages.mining || 'Processing Transaction.. ';
     setIsLocked(true);
-    setAltMessage(messages.mining || 'Processing Transaction...');
+    setAltMessage({ message, txHash: tx?.hash });
     setMachineMood('happy');
   }, [setAltMessage]);
 
-  const handleOnSuccess = useCallback(() => {
+  const handleOnSuccess = useCallback((tx: any) => {
+    const message = messages.success || 'Success! ';
     setIsLocked(false);
     queryClient.invalidateQueries();
-    setAltMessage(messages.success || 'Success!');
+    setAltMessage({ message, txHash: tx?.hash });
     setMachineMood(undefined);
   }, [queryClient]);
 
   const handleOnException = useCallback(() => {
     const { errorMessage } = txStatus;
-    setAltMessage(getCustomErrorText(errorMessage));
+    const message = getCustomErrorText(errorMessage);
+    setAltMessage({ message });
     setMachineMood('sad');
     setTimeout(() => { setMachineMood(undefined); }, 200);
     setIsLocked(false);
@@ -43,8 +49,10 @@ export const useTxNotifier = (messages: TxMessages, txStatus: TransactionStatus)
   useEffect(() => {
     const { status } = txStatus;
     if (status === 'PendingSignature') handleOnSigning();
-    if (status === 'Mining') handleOnMining();
-    if (status === 'Success') handleOnSuccess();
+    if (status === 'Mining') handleOnMining(txStatus.transaction);
+    if (status === 'Success') handleOnSuccess(txStatus.transaction);
     if (status === 'Exception') handleOnException();
+    // eslint-disable-next-line no-console
+    console.log(status, txStatus);
   }, [txStatus, handleOnMining, handleOnSuccess, handleOnException]);
 };

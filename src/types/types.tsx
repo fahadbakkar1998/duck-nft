@@ -4,6 +4,11 @@ export interface DuckMetadata {
   attributes: any[],
 }
 
+export interface AltMessage {
+  message?: string;
+  txHash?: string;
+}
+
 export interface DuckData {
   id: number; // token ID
   proof: string[]; // merkle proof
