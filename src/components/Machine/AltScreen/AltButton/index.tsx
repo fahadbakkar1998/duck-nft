@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQueryClient } from 'react-query';
 import { useContractFunction, useEthers } from '@usedapp/core';
 import { utils } from 'ethers';
@@ -13,58 +13,34 @@ import ShimmerLayer from '../../../common/ShimmerLayer';
 import { contract, fetchMachineConfig } from '../../../../utils/functions';
 import AltButtonLoader from './AltButtonLoader';
 import BurnButton from './BurnButton';
-import { getCustomErrorText } from '../../../../utils/helpers';
+import { useTxNotifier } from '../../../../hooks/transactionStatus';
 
 const ButtonView = () => {
   const queryClient = useQueryClient();
   const {
     currentDuckId,
-    setProcessing,
-    setAltMessage,
     currentMode,
     DToolInst,
     showDuckProfile,
     setShowDuckProfile,
-    setShowTxStatus,
     setCurrentMode,
     isLocked,
-    setIsLocked,
-    setMachineMood,
   } = useMachineStore();
   const { data = [], isLoading } = useDucks();
   const ducks = !isLoading ? data : [];
   const selectedDuck = ducks?.find((d) => d.id === currentDuckId);
-
   const { activateBrowserWallet, account } = useEthers();
-  const { send: sendFnTozziDuck, state: mintTozziDuckState } = useContractFunction(contract, 'mintTozziDuck');
-  const { send: sendFnCustomTozziDuck, state: mintCustomTozziDuckState } = useContractFunction(contract, 'mintCustomDuck');
+  const {
+    send: sendFnTozziDuck,
+    state: mintTozziDuckState,
+  } = useContractFunction(contract, 'mintTozziDuck');
+  const {
+    send: sendFnCustomTozziDuck,
+    state: mintCustomTozziDuckState,
+  } = useContractFunction(contract, 'mintCustomDuck');
 
-  const handleOnSigning = useCallback(() => {
-    setAltMessage('Signature Pending...');
-  }, [setAltMessage]);
-
-  const handleOnMining = useCallback((message?: string) => {
-    setAltMessage(message || 'mining...');
-    setIsLocked(true);
-    setMachineMood('happy');
-  }, [setAltMessage, setIsLocked]);
-
-  const handleOnSuccess = useCallback(() => {
-    queryClient.invalidateQueries();
-    setAltMessage('Success! Duck Purchased!');
-    setMachineMood(undefined);
-    setIsLocked(false);
-  }, [queryClient, setAltMessage]);
-
-  const handleOnException = useCallback(() => {
-    const { errorMessage } = mintTozziDuckState;
-    setAltMessage(getCustomErrorText(errorMessage));
-    setMachineMood('sad');
-    setTimeout(() => {
-      setMachineMood(undefined);
-    }, 200);
-    setIsLocked(false);
-  }, [mintTozziDuckState, setAltMessage]);
+  useTxNotifier({}, mintTozziDuckState);
+  useTxNotifier({}, mintCustomTozziDuckState);
 
   useEffect(() => {
     if (account) {
@@ -72,22 +48,6 @@ const ButtonView = () => {
       setCurrentMode(MachineMode.Off);
     }
   }, [account]);
-
-  useEffect(() => {
-    const { status } = mintTozziDuckState;
-    if (status === 'PendingSignature') handleOnSigning();
-    if (status === 'Mining') handleOnMining('Duck purchase processing...');
-    if (status === 'Success') handleOnSuccess();
-    if (status === 'Exception') handleOnException();
-  }, [mintTozziDuckState, handleOnMining, handleOnSuccess]);
-
-  useEffect(() => {
-    const { status } = mintCustomTozziDuckState;
-    if (status === 'PendingSignature') handleOnSigning();
-    if (status === 'Mining') handleOnMining('Custom duck minting in progress..');
-    if (status === 'Success') handleOnSuccess();
-    if (status === 'Exception') handleOnException();
-  }, [mintCustomTozziDuckState, handleOnMining, handleOnSuccess]);
 
   const handleMintTozziDuck = async () => {
     const selectedDuck = ducks?.find((d) => d.id === currentDuckId);
