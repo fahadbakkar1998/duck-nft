@@ -17,7 +17,7 @@ const AdminMain = () => {
   const { setAltMessage, openBurnForm } = useMachineStore();
 
   useEffect(() => {
-    setAltMessage('');
+    setAltMessage(undefined);
   }, [activeTab]);
 
   useEffect(() => {

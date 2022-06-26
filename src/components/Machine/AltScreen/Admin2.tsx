@@ -8,7 +8,7 @@ import useMachineStore from '../../../store';
 
 const NoDucks = () => {
   return (
-    <div className="w-full h-full bg-screenBlack pixel-font flex justify-center items-center">
+    <div className="w-full h-full z-20 absolute bg-screenBlack pixel-font flex justify-center items-center">
       NO DUCKS TO REVIEW ATM
     </div>
   );

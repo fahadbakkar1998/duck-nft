@@ -22,7 +22,9 @@ export const filterDucks = ({ ducks = [], filters } : {ducks: DuckData[], filter
   }
 
   if (filters.mine) {
-    filteredDucks = filteredDucks.filter((duck) => duck.owner === account);
+    if (account) {
+      filteredDucks = filteredDucks.filter((duck) => duck.owner === account);
+    }
   }
   return filteredDucks;
 };
