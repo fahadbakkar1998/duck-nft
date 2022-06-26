@@ -28,7 +28,7 @@ const AltButtonLoader = () => {
     <div className="w-full h-full opacity-75 overflow-hidden p-1 px-2">
       <div className="lcd-font tracking-wide text-xs top-2 text-black font-bold mb-1">processing tx...</div>
       <div className="w-full h-full flex">
-        { [...Array(numCells).keys()].map((_, i) => <DuckLoader direction="right" on={i === index} />) }
+        { [...Array(numCells).keys()].map((_, i) => <DuckLoader key={index} direction="right" on={i === index} />) }
       </div>
     </div>
   );

@@ -43,8 +43,11 @@ export const mintStatusName = (status: MintStatus) => {
 export const getCustomErrorText = (errorMessage: string | undefined) => {
   const defaultMsg = 'Oh quack! Something went wrong!';
   if (!errorMessage) return defaultMsg;
+  if (errorMessage.includes('User denied')) {
+    return 'Well nevermind then... ';
+  }
   if (errorMessage.includes('insufficient funds')) {
-    return 'Error: Insufficient funds. Plz check the current duck price.';
+    return 'You\'re broke! Plz check the current duck price.';
   }
   return defaultMsg;
 };

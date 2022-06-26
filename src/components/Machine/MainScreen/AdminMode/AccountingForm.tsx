@@ -71,15 +71,21 @@ const AccountingForm = () => {
   return (
     <AdminFormWrapper>
       <div className="flex flex-col space-y-2 h-full relative">
-        <div>OWNER</div>
-        <div className="pixel-font-thin text-xl">
-          <a target="_blank" href={`https://opensea.io/${machineState?.owner}`} rel="noreferrer" className="hover:text-orange-500 transition">
-            { ownerDisplay}
-          </a>
-        </div>
-        <div>CURRENT BALANCE</div>
-        <div className="pixel-font-thin text-xl">
-          { machineState?.balance ?? '--'} ETH
+        <div className="flex">
+          <div className="flex-1">
+            <div>OWNER</div>
+            <div className="pixel-font-thin text-xl">
+              <a target="_blank" href={`https://opensea.io/${machineState?.owner}`} rel="noreferrer" className="hover:text-orange-500 transition">
+                { ownerDisplay}
+              </a>
+            </div>
+          </div>
+          <div className="flex-1">
+            <div>BALANCE</div>
+            <div className="pixel-font-thin text-xl">
+              { machineState?.balance ?? '--'} ETH
+            </div>
+          </div>
         </div>
         <div>WITHDRAW ETH</div>
         <div className="pixel-font-thin">

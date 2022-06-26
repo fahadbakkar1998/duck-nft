@@ -16,7 +16,6 @@ import BurnButton from './BurnButton';
 import { useTxNotifier } from '../../../../hooks/transaction';
 
 const ButtonView = () => {
-  const queryClient = useQueryClient();
   const {
     currentDuckId,
     currentMode,
@@ -26,6 +25,7 @@ const ButtonView = () => {
     setCurrentMode,
     isLocked,
   } = useMachineStore();
+
   const { data = [], isLoading } = useDucks();
   const ducks = !isLoading ? data : [];
   const selectedDuck = ducks?.find((d) => d.id === currentDuckId);

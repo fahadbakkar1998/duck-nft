@@ -1,19 +1,18 @@
-import { useState, useEffect, ChangeEvent, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useContractFunction } from '@usedapp/core';
 import { utils } from 'ethers';
-import { useQueryClient } from 'react-query';
 import { MintStatus } from '../../../../types/types';
 import FormToggle from './common/FormToggle';
 import FormInput from './common/FormInput';
 import FormButton from './common/FormButton';
 import { useMachineContract } from '../../../../hooks/machine';
 import { useMachineState } from '../../../../state/hooks';
-import useMachineStore from '../../../../store';
 import AdminFormWrapper from './AdminFormWrapper';
 import { numberRegex, decimalRegex } from '../../../../utils/constants';
+import { useTxNotifier } from '../../../../hooks/transaction';
+import useMachineStore from '../../../../store';
 
 const SettingsForm = () => {
-  const queryClient = useQueryClient();
   const { data: machineState, isLoading } = useMachineState();
   const [tozziStatus, setTozziStatus] = useState<MintStatus|undefined>();
   const [customStatus, setCustomStatus] = useState<MintStatus|undefined>();
@@ -21,43 +20,16 @@ const SettingsForm = () => {
   const [customPrice, setCustomPrice] = useState<string>();
   const [maxDucks, setMaxDucks] = useState<string>();
   const contract = useMachineContract();
-  const { send, state } = useContractFunction(
-    contract,
-    'setMachineConfig',
-    { transactionName: 'Update Config' },
+  const { send, state } = useContractFunction(contract, 'setMachineConfig');
+  const { setAltMessage } = useMachineStore();
+
+  useTxNotifier(
+    {
+      mining: 'Update in progress... ',
+      success: 'Settings updated! ',
+    },
+    state,
   );
-
-  const {
-    setAltMessage,
-    setMachineMood,
-    isLocked,
-    setIsLocked,
-  } = useMachineStore();
-
-  useEffect(() => {
-    if (state?.status === 'Mining') {
-      setAltMessage('Update Processing...');
-      setIsLocked(true);
-      setMachineMood('happy');
-    } else if (state?.status === 'Success') {
-      setAltMessage('Settings Updated!');
-      setMachineMood(undefined);
-      setIsLocked(false);
-      queryClient.invalidateQueries('machineState');
-    } else if (state?.status === 'PendingSignature') {
-      setAltMessage('Signature Pending...');
-    } else if (state?.status === 'Exception') {
-      const denied = 'MetaMask Tx Signature: User denied transaction signature.';
-      if (state?.errorMessage === denied) {
-        setAltMessage('Well, nevermind then...');
-      } else {
-        setAltMessage('Oh Quack! something went wrong!');
-      }
-      setMachineMood('sad');
-      setIsLocked(false);
-      setTimeout(() => setMachineMood(undefined), 500);
-    }
-  }, [state.status]);
 
   useEffect(() => {
     if (machineState) {
@@ -77,13 +49,17 @@ const SettingsForm = () => {
   };
 
   const handleSubmission = () => {
-    send([
-      utils.parseEther(tozziPrice ?? ''),
-      utils.parseEther(customPrice ?? ''),
-      maxDucks,
-      tozziStatus,
-      customStatus,
-    ]);
+    try {
+      send([
+        utils.parseEther(tozziPrice ?? ''),
+        utils.parseEther(customPrice ?? ''),
+        maxDucks,
+        tozziStatus,
+        customStatus,
+      ]);
+    } catch (e) {
+      setAltMessage({ message: 'Oh Quack! Something went wrong!' });
+    }
   };
 
   return (

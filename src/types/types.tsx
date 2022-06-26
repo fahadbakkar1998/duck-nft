@@ -97,3 +97,16 @@ export interface Size {
   width: number | undefined;
   height: number | undefined;
 }
+
+export interface TxMessages {
+  signing?: string;
+  mining?: string;
+  success?: string;
+  exception?: string;
+}
+
+export interface Allowance {
+  account?: string;
+  tozziDucks?: string;
+  customDucks?: string;
+}

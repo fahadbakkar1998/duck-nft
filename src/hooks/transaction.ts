@@ -3,17 +3,12 @@ import { useQueryClient } from 'react-query';
 import { TransactionStatus } from '@usedapp/core';
 import useMachineStore from '../store';
 import { getCustomErrorText } from '../utils/helpers';
+import { TxMessages } from '../types/types';
 
-import TxNotification from '../components/Machine/AltScreen/TxNotification';
-
-interface TxMessages {
-  signing?: string;
-  mining?: string;
-  success?: string;
-  exception?: string;
-}
-
-export const useTxNotifier = (messages: TxMessages, txStatus: TransactionStatus) => {
+export const useTxNotifier = (
+  messages: TxMessages,
+  txStatus: TransactionStatus,
+) => {
   const { setAltMessage, setIsLocked, setMachineMood } = useMachineStore();
   const queryClient = useQueryClient();
 
@@ -52,7 +47,5 @@ export const useTxNotifier = (messages: TxMessages, txStatus: TransactionStatus)
     if (status === 'Mining') handleOnMining(txStatus.transaction);
     if (status === 'Success') handleOnSuccess(txStatus.transaction);
     if (status === 'Exception') handleOnException();
-    // eslint-disable-next-line no-console
-    console.log(status, txStatus);
   }, [txStatus, handleOnMining, handleOnSuccess, handleOnException]);
 };

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import { Contract } from 'ethers';
 import { useContractFunction, useEthers } from '@usedapp/core';
 import FormInput from './common/FormInput';
@@ -6,35 +6,19 @@ import FormButton from './common/FormButton';
 import { contractAbi, numberRegex } from '../../../../utils/constants';
 import useMachineStore from '../../../../store';
 import AdminFormWrapper from './AdminFormWrapper';
-
-interface Allowance {
-  tozziDucks: string;
-  customDucks: string;
-}
-
-interface AllowanceFormValues extends Allowance {
-  account: string;
-}
-
-const emptyAllowance = {
-  account: '',
-  tozziDucks: '',
-  customDucks: '',
-};
+import { useTxNotifier } from '../../../../hooks/transaction';
+import { getCustomErrorText } from '../../../../utils/helpers';
+import { Allowance } from '../../../../types/types';
 
 const AllowancesForm = () => {
-  const { altMessage, setAltMessage } = useMachineStore();
+  const { setAltMessage } = useMachineStore();
   const [allowanceAccount, setAllowanceAccount] = useState('');
   const [checkedAllowance, setCheckedAllowance] = useState<Allowance|null>(null);
   const { library } = useEthers();
   const machineContract = new Contract(process.env.REACT_APP_MACHINE_CONTRACT_ADDRESS!, contractAbi, library);
-  const { send, state } = useContractFunction(
-    machineContract,
-    'setDuckAllowance',
-    { transactionName: 'Set Duck Allowance' },
-  );
-
-  const [allowanceFormValues, setAllowanceFormValues] = useState<AllowanceFormValues>(emptyAllowance);
+  const [allowanceFormValues, setAllowanceFormValues] = useState<Allowance>({});
+  const { send, state } = useContractFunction(machineContract, 'setDuckAllowance');
+  useTxNotifier({ mining: 'Setting Duck Allowance ... ' }, state);
 
   useEffect(() => {
     setCheckedAllowance(null);
@@ -50,43 +34,39 @@ const AllowancesForm = () => {
         };
         setCheckedAllowance(allowance);
       } catch {
-        setAltMessage('Oh Quack! Something went wrong!');
+        setAltMessage({ message: getCustomErrorText(undefined) });
       }
     }
   };
 
-  useEffect(() => {
-    if (state?.status === 'Mining') {
-      setAltMessage('Setting Duck Allowance...');
-      // setIsLocked(true);
-      // setMachineMood('happy');
-    } else if (state?.status === 'Success') {
-      setAltMessage('Success!');
-      // setMachineMood(undefined);
-      // setIsLocked(false);
-    } else if (state?.status === 'PendingSignature') {
-      setAltMessage('Signature Pending...');
-    } else if (state?.status === 'Exception') {
-      const denied = 'MetaMask Tx Signature: User denied transaction signature.';
-      if (state?.errorMessage === denied) {
-        setAltMessage('Well, nevermind then...');
-      } else {
-        setAltMessage('Oh Quack! something went wrong!');
-      }
-      // setMachineMood('sad');
-      // setIsLocked(false);
-      // setTimeout(() => setMachineMood(undefined), 500);
+  const handleAccountChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setAllowanceFormValues({ ...allowanceFormValues, account: e.currentTarget.value });
+  };
+
+  const handleTozziChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (numberRegex.test(e.currentTarget.value)) {
+      setAllowanceFormValues({ ...allowanceFormValues, tozziDucks: e.currentTarget.value });
     }
-  }, [state.status]);
+  };
+
+  const handleCustomChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (numberRegex.test(e.currentTarget.value)) {
+      setAllowanceFormValues({ ...allowanceFormValues, customDucks: e.currentTarget.value });
+    }
+  };
 
   const handleSetAllowance = () => {
-    const { account, tozziDucks, customDucks } = allowanceFormValues;
-    send(account, tozziDucks, customDucks);
+    try {
+      const { account, tozziDucks, customDucks } = allowanceFormValues;
+      send(account, tozziDucks, customDucks);
+    } catch (e) {
+      setAltMessage({ message: getCustomErrorText(undefined) });
+    }
   };
 
   const handleReset = () => {
     setAllowanceAccount('');
-    setAllowanceFormValues(emptyAllowance);
+    setAllowanceFormValues({});
   };
 
   return (
@@ -120,8 +100,8 @@ const AllowancesForm = () => {
             <div className="items-center flex text-2xl">Account</div>
             <FormInput
               className="w-full"
-              value={allowanceFormValues.account}
-              onChange={(e) => { setAllowanceFormValues({ ...allowanceFormValues, account: e.currentTarget.value }); }}
+              value={allowanceFormValues?.account || ''}
+              onChange={handleAccountChange}
             />
           </div>
           <div className="pixel-font-thin space-x-2 text-2xl flex justify-between">
@@ -129,28 +109,16 @@ const AllowancesForm = () => {
               <div>Tozzi Ducks:</div>
               <FormInput
                 className="w-full"
-                value={allowanceFormValues.tozziDucks.toString()}
-                onChange={
-                  (e) => {
-                    if (numberRegex.test(e.currentTarget.value)) {
-                      setAllowanceFormValues({ ...allowanceFormValues, tozziDucks: e.currentTarget.value });
-                    }
-                  }
-                }
+                value={allowanceFormValues?.tozziDucks?.toString() || ''}
+                onChange={handleTozziChange}
               />
             </div>
             <div className="flex-1">
               <div>Custom Ducks:</div>
               <FormInput
                 className="w-full"
-                value={allowanceFormValues.customDucks.toString()}
-                onChange={
-                  (e) => {
-                    if (numberRegex.test(e.currentTarget.value)) {
-                      setAllowanceFormValues({ ...allowanceFormValues, customDucks: e.currentTarget.value });
-                    }
-                  }
-                }
+                value={allowanceFormValues?.customDucks?.toString() || ''}
+                onChange={handleCustomChange}
               />
             </div>
           </div>
