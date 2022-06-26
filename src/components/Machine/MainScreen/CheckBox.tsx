@@ -18,11 +18,11 @@ const CheckBox: FC<CheckBoxProps> = ({
       className={`
         ${disabled ? 'opacity-20' : ''}
         border border-white aspect-square 
-        w-4 cursor-pointer
+        w-6 cursor-pointer
         ${isChecked ? 'bg-white' : ''}
       `}
     >
-      {isChecked && (<CheckIcon className="absolute h-4 flex fill-black" />)}
+      {isChecked && (<CheckIcon className="absolute h-6 flex fill-screenBlack" />)}
     </div>
   );
 };

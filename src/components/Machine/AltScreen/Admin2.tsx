@@ -16,15 +16,15 @@ const NoDucks = () => {
 
 const DuckReviewLabel: FC<{duckNum: number, numDucks: number}> = ({ duckNum, numDucks }) => {
   return (
-    <motion.div
+    <div
       className="
         pointer-events-none
-        absolute bottom-2 right-0 px-4 py-2 rounded-l-md border-white border-2 shadow-md  pixel-font z-20 border-r-0 border-b-0
+        absolute px-4 py-2 bottom-5 right-2 rounded-md border-white border-2 shadow-md  pixel-font z-20
         bg-orange-500
       "
     >
       DUCK REVIEW {`(${duckNum}/${numDucks})`}
-    </motion.div>
+    </div>
   );
 };
 
@@ -50,16 +50,14 @@ const Admin: FC = () => {
     <div
       className="absolute z-10"
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      // onMouseLeave={() => setIsHovered(false)}
     >
       { !!duck && (
         <div className="h-full">
           <AnimatePresence>
             { !altIsStatic && (
               <div className="overflow-hidden bg-white bg-opacity-80">
-                <AnimatePresence>
-                  { !isHovered && <DuckReviewLabel duckNum={duckIndex + 1} numDucks={ducks.length} /> }
-                </AnimatePresence>
+                <DuckReviewLabel duckNum={duckIndex + 1} numDucks={ducks.length} />
                 <motion.img
                   initial={{ scale: 0, opacity: 0, borderRadius: '100%' }}
                   animate={{ scale: 1, opacity: 1, borderRadius: '0%' }}

@@ -16,9 +16,11 @@ const MotdModal: FC<MotdProps> = ({ open, motd, onClose }) => {
 
   return (
     <Modal open={open} onClose={onClose}>
-      <div className="mb-2 pb-2 border-b-2 border-dashed text-base text-center">MotD - {motd?.posted}</div>
-      <div className="pixel-font-thin text-xl h-[250px] overflow-scroll">
-        {motd?.message}
+      <div className="pixel-font-thin text-2xl flex items-center text-center h-[250px] overflow-scroll">
+        <div>
+          <div className="m-auto mb-2 pb-2 pixel-font text-lg text-center">MotD - {motd?.posted}</div>
+          {motd?.message}
+        </div>
       </div>
     </Modal>
   );

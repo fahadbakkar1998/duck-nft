@@ -22,7 +22,7 @@ const FiltersModal: FC<FiltersModalProps> = ({ open, children, onClose }) => {
 
   return (
     <Modal open={open} onClose={onClose}>
-      <div className="mb-2 pb-2 border-b-2 border-dashed text-base">DUCK FILTERS</div>
+      <div className="mb-1 text-lg">DUCK FILTERS</div>
       <div className="grid w-full grid-cols-2 text-base pixel-font">
         <div className="flex items-center pixel-font-thin text-2xl">Available</div>
         <div className="flex items-center justify-end">
@@ -53,7 +53,7 @@ const FiltersModal: FC<FiltersModalProps> = ({ open, children, onClose }) => {
           />
         </div>
       </div>
-      <div className="mb-2 mt-4 pb-2 border-b-2 border-dashed text-base">UI OPTIONS</div>
+      <div className="mb-1 mt-4 text-lg">UI OPTIONS</div>
       <div className="grid w-full grid-cols-2  text-base pixel-font">
 
         <div className="flex items-center pixel-font-thin text-2xl">Show Duck ID</div>

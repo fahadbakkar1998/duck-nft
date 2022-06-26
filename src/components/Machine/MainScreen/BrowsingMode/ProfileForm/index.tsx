@@ -79,17 +79,17 @@ const ProfileForm: FC<Props> = ({ open, onClose }) => {
       open={open}
       onClose={onClose}
       buttons={(
-        <div className="absolute bottom-0 right-0 flex space-x-2 text-sm">
+        <div className="absolute bottom-0 right-0 flex space-x-2">
           <FormButton label="Cancel" onClick={onClose} />
           <FormButton label="Submit" onClick={handleSubmit} />
         </div>
       )}
     >
-      <div className="flex flex-col space-y-2 h-full relative pb-7 pixel-font-thin text-2xl ">
-        <div className="pixel-font text-base">
+      <div className="flex flex-col mb-1 h-full relative pb-7 pixel-font-thin text-2xl ">
+        <div className="pixel-font text-lg">
           EDIT DUCK PROFILE
         </div>
-        <div className="space-x-2 flex justify-between">
+        <div className="space-x-2 flex justify-between mb-1">
           <div className="flex-1">
             <div>Name:</div>
             <FormInput

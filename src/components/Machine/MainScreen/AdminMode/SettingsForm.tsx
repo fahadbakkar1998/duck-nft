@@ -162,7 +162,7 @@ const SettingsForm = () => {
             />
           </div>
         </div>
-        <div className="absolute -bottom-1 right-0 flex space-x-2 text-sm">
+        <div className="absolute -bottom-1 right-0 flex space-x-2">
           <FormButton label="Reset" onClick={resetForm} />
           <FormButton label="Submit" onClick={handleSubmission} />
         </div>

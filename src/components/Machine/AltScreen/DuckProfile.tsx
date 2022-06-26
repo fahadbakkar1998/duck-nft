@@ -44,14 +44,14 @@ const DuckProfileView: FC<DuckProfileProps> = ({ duck }) => {
           <div className="flex gap-2">
             <div className="flex-1 relative bg-white bg-opacity-10 rounded-lg">
               <img
-                className="border-2  rounded-full"
+                className="border-2"
                 alt={`Duck ${duck.id}`}
                 src={duck.isCustom ? duck.webp : `data:image/webp;base64,${duck.webp}`}
               />
               { account === duck.owner && (
                 <div
                   onClick={() => setShowProfileForm(!showProfileForm)}
-                  className="absolute top-0 left-0 z-30 px-2 pt-1 text-sm text-white bg-orange-500 border-2 border-white rounded-lg pixel-font cursor-pointer"
+                  className="absolute bottom-2 right-2 z-30 px-2 pt-1 text-sm text-white bg-orange-500 border-2 border-white rounded-lg pixel-font cursor-pointer"
                 >
                   { showProfileForm ? 'CANCEL' : 'EDIT' }
                 </div>
