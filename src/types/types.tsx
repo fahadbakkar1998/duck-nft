@@ -87,3 +87,8 @@ export interface LcdNavButtonProps {
   disabled: boolean;
   flipped?: boolean;
 }
+
+export interface Size {
+  width: number | undefined;
+  height: number | undefined;
+}

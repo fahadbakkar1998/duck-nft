@@ -3,7 +3,7 @@ import { shortenAddress, useEthers } from '@usedapp/core';
 import { Contract } from 'ethers';
 import useMachineStore from '../store';
 import { filterDucks } from '../utils/helpers';
-import { DuckData } from '../types/types';
+import { DuckData, Size } from '../types/types';
 import { contractAbi, MachineMode } from '../utils/constants';
 import { useDucks } from '../state/hooks';
 
@@ -56,4 +56,35 @@ export const useAccountChange = () => {
     }
     setAccount(account || undefined);
   }, [account]);
+};
+
+export function useWindowSize(): Size {
+  const [windowSize, setWindowSize] = useState<Size>({
+    width: undefined,
+    height: undefined,
+  });
+  useEffect(() => {
+    function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  return windowSize;
+}
+
+export const useIsMobile = () => {
+  const { width } = useWindowSize();
+  let isMobile =
+  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent,
+  );
+
+  if (width && width < 750) isMobile = true;
+
+  return isMobile;
 };

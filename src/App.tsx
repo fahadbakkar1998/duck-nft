@@ -9,12 +9,9 @@ import OwnersManualModal from './components/OwnersManual/OwnersManualModal';
 import useMachineStore from './store';
 import BTI from './components/Machine/BinaryToggleInterface';
 import SideButtons from './components/Machine/AltScreen/SideButtons';
+import { useIsMobile } from './hooks';
 
-const App = () => {
-  const isMobile =
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent,
-    );
+const Desktop = () => {
   const {
     openBurnForm,
     isOwnersManualOpen,
@@ -22,9 +19,7 @@ const App = () => {
     isLocked,
   } = useMachineStore();
 
-  return isMobile ? (
-    <Mobile />
-  ) : (
+  return (
     <div className="App flex flex-col">
       <div className="machine-container relative w-full">
         <div className={`
@@ -71,6 +66,11 @@ const App = () => {
       <OwnersManualModal modalIsOpen={isOwnersManualOpen} setModalIsOpen={setIsOwnersManualOpen} />
     </div>
   );
+};
+
+const App = () => {
+  const isMobile = useIsMobile();
+  return isMobile ? <Mobile /> : <Desktop />;
 };
 
 export default App;
