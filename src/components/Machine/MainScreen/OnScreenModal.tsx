@@ -8,9 +8,10 @@ interface ModalProps {
   open: boolean;
   onClose: () => void;
   className?: string;
+  buttons?: ReactNode;
 }
 
-const Modal: FC<ModalProps> = ({ children, open, onClose, className }) => {
+const Modal: FC<ModalProps> = ({ children, open, onClose, className, buttons }) => {
   const handleClose = () => {
     onClose();
   };
@@ -35,9 +36,11 @@ const Modal: FC<ModalProps> = ({ children, open, onClose, className }) => {
         >
           <div className="w-full h-full">
             <div>{children}</div>
-            <div className="absolute bottom-0 right-0">
-              <FormButton label="Done" onClick={handleClose} />
-            </div>
+            { buttons || (
+              <div className="absolute bottom-0 right-0">
+                <FormButton label="Done" onClick={handleClose} />
+              </div>
+            )}
           </div>
         </motion.div>
       )}

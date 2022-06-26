@@ -91,7 +91,7 @@ const DuckProfileView: FC<DuckProfileProps> = ({ duck }) => {
           </div>
 
           <div className="col-span-2 bg-white bg-opacity-10 pt-2 px-2">
-            <FieldLabel text="Profile" />
+            <FieldLabel text="Description" />
             <Field text={description || 'N/A - Please contact machine owner to configure your profile.'} />
           </div>
 

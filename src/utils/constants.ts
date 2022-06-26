@@ -288,10 +288,16 @@ export const contractAbi = [
         "type": "uint256"
       },
       {
-        "indexed": false,
-        "internalType": "string",
+        "indexed": true,
+        "internalType": "bytes32",
         "name": "name",
-        "type": "string"
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "status",
+        "type": "bytes32"
       },
       {
         "indexed": false,
@@ -351,6 +357,31 @@ export const contractAbi = [
       }
     ],
     "name": "DuckStatusUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "title",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      }
+    ],
+    "name": "DuckTitleGranted",
     "type": "event"
   },
   {
@@ -513,7 +544,7 @@ export const contractAbi = [
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "duckId",
+        "name": "tokenId",
         "type": "uint256"
       },
       {
@@ -656,9 +687,14 @@ export const contractAbi = [
     "name": "duckProfiles",
     "outputs": [
       {
-        "internalType": "string",
+        "internalType": "bytes32",
         "name": "name",
-        "type": "string"
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "status",
+        "type": "bytes32"
       },
       {
         "internalType": "string",
@@ -711,16 +747,16 @@ export const contractAbi = [
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "tokenId",
+        "name": "",
         "type": "uint256"
       }
     ],
-    "name": "getApproved",
+    "name": "duckTitles",
     "outputs": [
       {
-        "internalType": "address",
+        "internalType": "bytes32",
         "name": "",
-        "type": "address"
+        "type": "bytes32"
       }
     ],
     "stateMutability": "view",
@@ -734,12 +770,12 @@ export const contractAbi = [
         "type": "uint256"
       }
     ],
-    "name": "getDuckStatus",
+    "name": "getApproved",
     "outputs": [
       {
-        "internalType": "string",
-        "name": "statusName",
-        "type": "string"
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -885,6 +921,19 @@ export const contractAbi = [
   },
   {
     "inputs": [],
+    "name": "probationPeriod",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "renounceOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
@@ -990,13 +1039,18 @@ export const contractAbi = [
         "type": "uint256"
       },
       {
-        "internalType": "string",
-        "name": "_name",
-        "type": "string"
+        "internalType": "bytes32",
+        "name": "name",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "status",
+        "type": "bytes32"
       },
       {
         "internalType": "string",
-        "name": "_description",
+        "name": "description",
         "type": "string"
       }
     ],
@@ -1013,12 +1067,12 @@ export const contractAbi = [
         "type": "uint256"
       },
       {
-        "internalType": "uint8",
-        "name": "statusId",
-        "type": "uint8"
+        "internalType": "bytes32",
+        "name": "title",
+        "type": "bytes32"
       }
     ],
-    "name": "setDuckStatus",
+    "name": "setDuckTitle",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1072,6 +1126,32 @@ export const contractAbi = [
       }
     ],
     "name": "setMachineConfig",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "ownershipTokenUri",
+        "type": "string"
+      }
+    ],
+    "name": "setOwnershipTokenURI",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_probationPeriod",
+        "type": "uint256"
+      }
+    ],
+    "name": "setProbationPeriod",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
