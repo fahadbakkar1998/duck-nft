@@ -190,7 +190,7 @@ export const useMachineStore = create<MachineStore>(
         setTimeout(() => {
           set({ machineMood: undefined, altIsStatic: false });
         }, 350);
-        return { showDuckProfile: false, currentDuckId: id };
+        return { showDuckProfile: false, showProfileForm: false, currentDuckId: id };
       });
     },
 
