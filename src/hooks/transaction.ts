@@ -13,19 +13,19 @@ export const useTxNotifier = (
   const queryClient = useQueryClient();
 
   const handleOnSigning = useCallback(() => {
-    const message = messages.signing || 'Signature Pending... ';
+    const message = messages.signing || 'Signature Pending...';
     setAltMessage({ message });
   }, []);
 
   const handleOnMining = useCallback((tx: any) => {
-    const message = messages.mining || 'Processing Transaction.. ';
+    const message = messages.mining || 'Processing Transaction';
     setIsLocked(true);
     setAltMessage({ message, txHash: tx?.hash });
     setMachineMood('happy');
   }, [setAltMessage]);
 
   const handleOnSuccess = useCallback((tx: any) => {
-    const message = messages.success || 'Success! ';
+    const message = messages.success || 'Success!';
     setIsLocked(false);
     queryClient.invalidateQueries();
     setAltMessage({ message, txHash: tx?.hash });
