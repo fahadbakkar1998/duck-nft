@@ -1,5 +1,5 @@
-/* eslint-disable react/no-unescaped-entities */
 import { FC } from 'react';
+import { mintStatusName } from '../../../utils/helpers';
 import { useMachineConfig } from '../../../state/hooks';
 import useMachineStore from '../../../store';
 
@@ -8,7 +8,7 @@ const Tag = ({ text }:{text: string}) => {
 };
 
 const TagLink = ({ text, onClick }:{text: string, onClick: () => void;}) => {
-  return <span onClick={onClick} className="bg-white cursor-pointer hover:bg-orange-400 bg-opacity-50 text-screenBlack px-2 rounded-sm uppercase">{text}</span>;
+  return <span onClick={onClick} className="bg-orange-300 cursor-pointer hover:bg-orange-400 bg-opacity-50 text-screenBlack px-2 rounded-sm uppercase">{text}</span>;
 };
 
 const Custom: FC = () => {
@@ -22,25 +22,25 @@ const Custom: FC = () => {
   return (
     <div className="absolute h-full w-full z-10">
       <div className="pixel-font w-full h-full p-2 scanline">
-        <div className="h-full overflow-scroll border-2">
+        <div className="h-full overflow-scroll">
           <div className="p-3">
-            <div className="mb-2 pb-1 border-b-2 border-dashed tracking-widest ">
+            <div className="mb-1 text-xl text-orange-300">
               DUCK CUSTOMIZER
             </div>
-            <div className="pixel-font-thin Custom-content mb-2 text-xl tracking-wide leading-[22px] ">
+            <div className="pixel-font-thin Custom-content mb-3 text-xl tracking-wide leading-[22px] ">
               Create your very own Custom Duck™️ with our embedded Duck Customizer™️
             </div>
             {/* MINT STATUS */}
-            <div className="flex text-center mb-2 border-t border border-opacity-40 ">
-              <div className="border-r w-full flex items-center justify-center p-1">
+            <div className="flex text-center mb-3  border border-orange-300 rounded-lg">
+              <div className="border-r border-orange-300 w-full flex items-center justify-center p-1">
                 <div className="mt-2">
                   <div className="pixel-font text-xs">MINT STATUS</div>
-                  <div className="pixel-font-thin text-xl ">
-                    ENABLED
+                  <div className="pixel-font-thin text-xl uppercase">
+                    {mintStatusName(machineConfig?.customMintStatus!)}
                   </div>
                 </div>
               </div>
-              <div className="border-r w-full flex items-center justify-center p-1">
+              <div className="w-full flex items-center justify-center p-1">
                 <div className="mt-2">
                   <div className="pixel-font text-xs">MINT PRICE</div>
                   <div className="pixel-font-thin text-xl ">
@@ -51,22 +51,22 @@ const Custom: FC = () => {
             </div>
 
             <div className="pixel-font-thin flex flex-col">
-              <div className="text-red-500 justify-center mt-1 gap-2 flex pixel-font text-sm">
-                <div className="animate-pokeRight">{'-->'}</div>
-                READ BEFORE YOU MINT!
-                <div className="animate-pokeLeft">{'<--'}</div>
+              <div className="text-orange-300 mb-2 mt-1 gap-2 flex pixel-font text-xl">
+                {/* <div className="animate-pokeRight">{'-->'}</div> */}
+                READ BEFORE YOU MINT
+                {/* <div className="animate-pokeLeft">{'<--'}</div> */}
               </div>
-              <div className="text-xl leading-[22px] tracking-wide flex flex-col gap-2">
+              <div className="text-xl leading-[22px] tracking-wide flex flex-col gap-2 border border-orange-300 rounded-lg p-4">
                 <div>
-                  <b>1.</b> The Owner of this machine is the boss.
+                  <b>1.</b> The Machine&apos;s Owner is the <b>BOSS</b>
                 </div>
 
                 <div>
-                  <b>2.</b> If the Owner doesn't like your duck, they can <b>BURN</b> it within a period of <b>1 WEEK</b>. After that, you're safe.
+                  <b>2.</b> If the Owner doesn&apos;t like your duck, they have <b>1 WEEK</b> to <b>BURN IT</b>. After that, you&apos;re safe.
                 </div>
 
                 <div>
-                  <b>3.</b> Custom Ducks™️ are stored on-chain using .webp image compression. Storage costs are paid by the minter (that&apos;s you, ser).
+                  <b>3.</b> Custom Ducks™️ are stored on-chain. Gas is paid by the minter (you).
                 </div>
 
                 <div>

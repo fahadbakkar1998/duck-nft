@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, ChangeEvent } from 'react';
 import { useQueryClient } from 'react-query';
 import { useContractFunction, useEthers } from '@usedapp/core';
 import FormButton from './common/FormButton';
@@ -7,6 +7,8 @@ import { useDucks, useMachineState } from '../../../../state/hooks';
 import AdminFormWrapper from './AdminFormWrapper';
 import { useMachineContract } from '../../../../hooks/machine';
 import useMachineStore from '../../../../store';
+import { useTxNotifier } from '../../../../hooks/transaction';
+import { getCustomErrorText } from '../../../../utils/helpers';
 
 const BurnForm = () => {
   const queryClient = useQueryClient();
@@ -18,28 +20,20 @@ const BurnForm = () => {
   const { account } = useEthers();
   const {
     setAltMessage,
-    setIsLocked,
-    setMachineMood,
     setOpenBurnForm,
     currentAdminDuckId,
-    setCurrentAdminDuckId,
   } = useMachineStore();
   const textRef = useRef<HTMLTextAreaElement>(null);
-
   const contract = useMachineContract();
-  const { send, state } = useContractFunction(
-    contract,
-    'burnRenegadeDuck',
-    { transactionName: 'Burn Renegade Duck' },
-  );
 
-  const handleBurn = () => {
-    if (account !== machineState?.owner) {
-      setAltMessage('Woa there, only the owner of this device can do that!');
-      return;
-    }
-    send(currentAdminDuckId, burnReason);
-  };
+  const { send, state } = useContractFunction(contract, 'burnRenegadeDuck');
+  useTxNotifier(
+    {
+      mining: 'Burning that goddamn duck',
+      success: 'Success! That duck won\t be bothering you anymore',
+    },
+    state,
+  );
 
   useEffect(() => {
     if (textRef.current) {
@@ -47,36 +41,24 @@ const BurnForm = () => {
     }
   }, []);
 
-  useEffect(() => {
-    if (state?.status === 'Mining') {
-      setAltMessage('Duck Burn Processing...');
-      setIsLocked(true);
-      setMachineMood('happy');
-    } else if (state?.status === 'Success') {
-      (async () => {
-        const nextDuck = ducks[0].id === currentAdminDuckId
-          ? ducks[1] : ducks[0];
-        await queryClient.invalidateQueries();
-        setOpenBurnForm(false);
-        setMachineMood(undefined);
-        setIsLocked(false);
-        setCurrentAdminDuckId(nextDuck?.id ?? -1);
-        setAltMessage('Success! That duck won\t be bothering you anymore.');
-      })();
-    } else if (state?.status === 'PendingSignature') {
-      setAltMessage('Signature Pending...');
-    } else if (state?.status === 'Exception') {
-      const denied = 'MetaMask Tx Signature: User denied transaction signature.';
-      if (state?.errorMessage === denied) {
-        setAltMessage('Well, nevermind then...');
-      } else {
-        setAltMessage('Oh Quack! something went wrong!');
-      }
-      setMachineMood('sad');
-      setIsLocked(false);
-      setTimeout(() => setMachineMood(undefined), 500);
+  const handleBurn = () => {
+    if (account !== machineState?.owner) {
+      setAltMessage({ message: 'Woa there, only the owner of this device can do that!' });
+      return;
     }
-  }, [state.status]);
+    if (!burnReason) {
+      setAltMessage({ message: 'But why!? Please provide a reason' });
+    }
+    try {
+      send(currentAdminDuckId, burnReason);
+    } catch (e) {
+      setAltMessage(getCustomErrorText(undefined));
+    }
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setBurnReason(e.currentTarget.value.replace(/\r?\n|\r/g, ''));
+  };
 
   return (
     <AdminFormWrapper>
@@ -87,7 +69,7 @@ const BurnForm = () => {
         </div>
         <textarea
           ref={textRef}
-          onChange={(e) => setBurnReason(e.currentTarget.value)}
+          onChange={handleChange}
           value={burnReason}
           className="resize-none p-4 focus:outline-none focus:border-2 focus:ring-0 focus:rounded-none w-full h-[245px] bg-screenBlack border text-base text-red-300"
         />

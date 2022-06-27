@@ -1,104 +1,85 @@
-/* eslint-disable no-console */
-import { useState, useEffect } from 'react';
+import { useState, ChangeEvent } from 'react';
 import { utils } from 'ethers';
 import { shortenAddress, useContractFunction } from '@usedapp/core';
 import FormInput from './common/FormInput';
 import FormButton from './common/FormButton';
-import { useMachineState, useMachineConfig } from '../../../../state/hooks';
+import { useMachineState } from '../../../../state/hooks';
 import AdminFormWrapper from './AdminFormWrapper';
 import { useMachineContract } from '../../../../hooks/machine';
 import useMachineStore from '../../../../store';
 import { decimalRegex } from '../../../../utils/constants';
+import { useTxNotifier } from '../../../../hooks/transaction';
+import { getCustomErrorText } from '../../../../utils/helpers';
 
 const AccountingForm = () => {
   const [value, setValue] = useState('');
-  const { data: machineState, isLoading } = useMachineState();
+  const { data: machineState } = useMachineState();
   const ownerDisplay = machineState?.ownerEns || shortenAddress(machineState?.owner || '');
-  const {
-    setAltMessage,
-    setIsLocked,
-    setMachineMood,
-  } = useMachineStore();
+  const { setAltMessage } = useMachineStore();
 
   const contract = useMachineContract();
-  const { send, state } = useContractFunction(
-    contract,
-    'withdraw',
-    { transactionName: 'Withdraw Funds' },
+  const { send, state } = useContractFunction(contract, 'withdraw');
+  useTxNotifier(
+    {
+      mining: 'Processing withdrawal',
+      success: 'Withdrawal successful',
+    },
+    state,
   );
+
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (decimalRegex.test(e.currentTarget.value)) setValue(e.currentTarget.value);
+  };
 
   const handleWithdraw = () => {
     if (!value) {
-      setAltMessage('Enter amount to withdraw, plz');
+      setAltMessage({ message: 'Enter amount to withdraw, plz' });
       return;
     }
-    if (contract && machineState?.owner) {
-      try {
-        send(
-          machineState.owner,
-          utils.parseEther(value ?? ''),
-        );
-      } catch (e) {
-        setAltMessage('Oh quack! Something went wrong!');
-      }
+    try {
+      send(
+        machineState?.owner,
+        utils.parseEther(value ?? ''),
+      );
+    } catch (e) {
+      setAltMessage(getCustomErrorText(undefined));
     }
   };
-
-  useEffect(() => {
-    if (state?.status === 'Mining') {
-      setAltMessage('Withdrawal Processing...');
-      setIsLocked(true);
-      setMachineMood('happy');
-    } else if (state?.status === 'Success') {
-      setAltMessage('Withdrawal Successful!');
-      setMachineMood(undefined);
-      setIsLocked(false);
-    } else if (state?.status === 'PendingSignature') {
-      setAltMessage('Signature Pending...');
-    } else if (state?.status === 'Exception') {
-      const denied = 'MetaMask Tx Signature: User denied transaction signature.';
-      if (state?.errorMessage === denied) {
-        setAltMessage('Well, nevermind then...');
-      } else {
-        setAltMessage('Oh Quack! something went wrong!');
-      }
-      setMachineMood('sad');
-      setIsLocked(false);
-      setTimeout(() => setMachineMood(undefined), 500);
-    }
-  }, [state.status]);
 
   return (
     <AdminFormWrapper>
       <div className="flex flex-col space-y-2 h-full relative">
         <div className="flex">
           <div className="flex-1">
-            <div>OWNER</div>
-            <div className="pixel-font-thin text-xl">
-              <a target="_blank" href={`https://opensea.io/${machineState?.owner}`} rel="noreferrer" className="hover:text-orange-500 transition">
+            <div className="text-lg">OWNER</div>
+            <div className="pixel-font-thin text-2xl">
+              <a
+                target="_blank"
+                href={`https://opensea.io/${machineState?.owner}`}
+                rel="noreferrer"
+                className="text-orange-300 hover:text-orange-500 transition"
+              >
                 { ownerDisplay}
               </a>
             </div>
           </div>
           <div className="flex-1">
-            <div>BALANCE</div>
-            <div className="pixel-font-thin text-xl">
+            <div className="text-lg">BALANCE</div>
+            <div className="pixel-font-thin text-2xl">
               { machineState?.balance ?? '--'} ETH
             </div>
           </div>
         </div>
-        <div>WITHDRAW ETH</div>
+        <div className="text-lg">WITHDRAW</div>
         <div className="pixel-font-thin">
           <FormInput
             className="w-full"
             value={value}
             overlay="ETH"
-            onChange={(e) => {
-              if (decimalRegex.test(e.currentTarget.value)) setValue(e.currentTarget.value);
-            }}
+            onChange={handleOnChange}
           />
         </div>
-        <div className="absolute -bottom-1 right-0 flex space-x-2 text-sm">
+        <div className="absolute bottom-0 right-0 flex space-x-2 text-sm">
           <FormButton label="Reset" onClick={() => setValue('')} />
           <FormButton label="Submit" onClick={handleWithdraw} />
         </div>

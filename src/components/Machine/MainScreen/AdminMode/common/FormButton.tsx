@@ -19,7 +19,7 @@ const FormButton: FC<FormButtonProps> = ({ label, onClick }) => {
       onClick={handleClick}
       className={`            
         px-2  py-1 text-base   
-        text-screenBlack  bg-white bg-opacity-20 cursor-pointer
+        text-screenBlack  bg-white bg-opacity-40 cursor-pointer
         hover:bg-opacity-100
       `}
     >

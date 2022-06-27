@@ -17,8 +17,9 @@ const AllowancesForm = () => {
   const { library } = useEthers();
   const machineContract = new Contract(process.env.REACT_APP_MACHINE_CONTRACT_ADDRESS!, contractAbi, library);
   const [allowanceFormValues, setAllowanceFormValues] = useState<Allowance>({});
+
   const { send, state } = useContractFunction(machineContract, 'setDuckAllowance');
-  useTxNotifier({ mining: 'Setting Duck Allowance ... ' }, state);
+  useTxNotifier({ mining: 'Setting Duck Allowance' }, state);
 
   useEffect(() => {
     setCheckedAllowance(null);
@@ -76,7 +77,7 @@ const AllowancesForm = () => {
           <div className="pixel-font-thin mt-1">
             <FormInput
               className="w-full"
-              placeholder="Account #"
+              placeholder="ACCOUNT #"
               value={allowanceAccount}
               onChange={(e) => { setAllowanceAccount(e.currentTarget.value); }}
             />
@@ -95,9 +96,9 @@ const AllowancesForm = () => {
         </div>
 
         <div className="">
-          <div>SET DUCK ALLOWANCE</div>
+          <div className="text-base">SET DUCK ALLOWANCE</div>
           <div className="pixel-font-thin">
-            <div className="items-center flex text-2xl">Account</div>
+            <div className="items-center flex text-2xl">ACCOUNT</div>
             <FormInput
               className="w-full"
               value={allowanceFormValues?.account || ''}
@@ -106,7 +107,7 @@ const AllowancesForm = () => {
           </div>
           <div className="pixel-font-thin space-x-2 text-2xl flex justify-between">
             <div className="flex-1">
-              <div>Tozzi Ducks:</div>
+              <div># TOZZI DUCKS</div>
               <FormInput
                 className="w-full"
                 value={allowanceFormValues?.tozziDucks?.toString() || ''}
@@ -114,7 +115,7 @@ const AllowancesForm = () => {
               />
             </div>
             <div className="flex-1">
-              <div>Custom Ducks:</div>
+              <div># CUSTOM DUCKS</div>
               <FormInput
                 className="w-full"
                 value={allowanceFormValues?.customDucks?.toString() || ''}
@@ -122,7 +123,7 @@ const AllowancesForm = () => {
               />
             </div>
           </div>
-          <div className="absolute -bottom-1 right-0 flex space-x-2 text-sm">
+          <div className="absolute bottom-0 right-0 flex space-x-2 text-sm">
             <FormButton label="Reset" onClick={handleReset} />
             <FormButton label="Submit" onClick={handleSetAllowance} />
           </div>

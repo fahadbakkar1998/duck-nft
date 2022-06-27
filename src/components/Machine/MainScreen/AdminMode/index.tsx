@@ -1,6 +1,5 @@
 import './index.scss';
 import { useEffect, useState } from 'react';
-import { useEthers } from '@usedapp/core';
 import { AdminTabs } from '../../../../types/types';
 import SettingsForm from './SettingsForm';
 import AllowancesForm from './AllowancesForm';
@@ -11,9 +10,24 @@ import useMachineStore from '../../../../store';
 import BurnForm from './BurnForm';
 import { useAccountChange } from '../../../../hooks';
 
+const getTabTitle = (tab: AdminTabs) => {
+  switch (tab) {
+    case 'minting':
+      return 'Mint Settings';
+    case 'allowances':
+      return 'Duck Allowances';
+    case 'accounting':
+      return 'Accounting';
+    case 'motd':
+      return 'Message of the Day';
+    default:
+      return 'Duck Administration';
+  }
+};
+
 const AdminMain = () => {
   useAccountChange();
-  const [activeTab, setActiveTab] = useState<AdminTabs>(AdminTabs.Settings);
+  const [activeTab, setActiveTab] = useState<AdminTabs>('minting');
   const { setAltMessage, openBurnForm } = useMachineStore();
 
   useEffect(() => {
@@ -22,51 +36,50 @@ const AdminMain = () => {
 
   useEffect(() => {
     if (openBurnForm) {
-      setActiveTab(AdminTabs.Burn);
+      setActiveTab('burn');
     } else {
-      setActiveTab(AdminTabs.Settings);
+      setActiveTab('minting');
     }
   }, [openBurnForm]);
 
   return (
-    <div className="AdminMain p-7 inner-shadow pixel-font overflow-hidden relative text-sm border-2 border-gray-600 bg-screenBlack">
-      <div className=" h-full w-full ">
+    <div
+      className="AdminMain p-7 inner-shadow pixel-font overflow-hidden relative text-sm border-2 border-gray-600 bg-screenBlack"
+    >
+      <div className=" h-full w-full border rounded-lg border-orange-300 p-4">
         <div className="h-full w-full flex flex-col">
-          <div className="text-base">DUCK ADMINISTRATION</div>
-          { activeTab !== AdminTabs.Burn && (
-            <div className="mt-2 grid grid-cols-3 gap-2 pixel-font-thin text-center text-base">
-              <AdminTabButton
-                title="Minting"
-                isActive={activeTab === AdminTabs.Settings}
-                onClick={() => setActiveTab(AdminTabs.Settings)}
-              />
-              <AdminTabButton
-                title="Duck Allowances"
-                isActive={activeTab === AdminTabs.Allowances}
-                onClick={() => setActiveTab(AdminTabs.Allowances)}
-              />
-              <AdminTabButton
-                title="Accounting"
-                isActive={activeTab === AdminTabs.Accounting}
-                onClick={() => setActiveTab(AdminTabs.Accounting)}
-              />
-              <AdminTabButton
-                title="MotD"
-                isActive={activeTab === AdminTabs.Motd}
-                onClick={() => setActiveTab(AdminTabs.Motd)}
-              />
-              {/* <AdminTabButton
-                title="Duck Review"
-                isActive={activeTab === AdminTabs.Burn}
-                onClick={() => setActiveTab(AdminTabs.Burn)}
-              /> */}
-            </div>
-          )}
-          { activeTab === AdminTabs.Settings && <SettingsForm /> }
-          { activeTab === AdminTabs.Allowances && <AllowancesForm /> }
-          { activeTab === AdminTabs.Accounting && <AccountingForm /> }
-          { activeTab === AdminTabs.Motd && <MotdForm /> }
-          { activeTab === AdminTabs.Burn && <BurnForm /> }
+          <div className="absolute top-4 bg-screenBlack px-2 text-xl uppercase text-orange-300">
+            {getTabTitle(activeTab)}
+          </div>
+          <div
+            className="mt-2 grid grid-cols-4 gap-2 pixel-font-thin text-center text-lg"
+          >
+            <AdminTabButton
+              title="Minting"
+              isActive={activeTab === 'minting'}
+              onClick={() => setActiveTab('minting')}
+            />
+            <AdminTabButton
+              title="Allow"
+              isActive={activeTab === 'allowances'}
+              onClick={() => setActiveTab('allowances')}
+            />
+            <AdminTabButton
+              title="Accounting"
+              isActive={activeTab === 'accounting'}
+              onClick={() => setActiveTab('accounting')}
+            />
+            <AdminTabButton
+              title="MotD"
+              isActive={activeTab === 'motd'}
+              onClick={() => setActiveTab('motd')}
+            />
+          </div>
+          { activeTab === 'minting' && <SettingsForm /> }
+          { activeTab === 'allowances' && <AllowancesForm /> }
+          { activeTab === 'accounting' && <AccountingForm /> }
+          { activeTab === 'motd' && <MotdForm /> }
+          { activeTab === 'burn' && <BurnForm /> }
         </div>
       </div>
     </div>

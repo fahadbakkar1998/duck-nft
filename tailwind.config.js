@@ -25,7 +25,7 @@ module.exports = {
           },
           '50%, 99%': {
             backgroundColor: 'rgba(255, 255, 255, 1)',
-            color: 'black',
+            color: '#070707',
           },
         },
         pokeRight: {

@@ -86,7 +86,7 @@ const ProfileForm: FC<Props> = ({ open, onClose }) => {
       )}
     >
       <div className="flex flex-col mb-1 h-full relative pb-7 pixel-font-thin text-2xl ">
-        <div className="pixel-font text-lg">
+        <div className="pixel-font text-xl text-orange-300">
           EDIT DUCK PROFILE
         </div>
         <div className="space-x-2 flex justify-between mb-1">

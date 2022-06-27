@@ -11,7 +11,7 @@ const TxNotification: FC<AltMessage> = ({ message, txHash }) => {
     <div className="uppercase">
       {message}
       {!!txHash && (
-        <a className="text-orange-300" href={url} target="_blank" rel="noreferrer">
+        <a className="hover:underline text-orange-300 hover:text-orange-500 transition" href={url} target="_blank" rel="noreferrer">
           Check TX
         </a>
       )}

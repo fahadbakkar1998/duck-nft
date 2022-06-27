@@ -40,13 +40,7 @@ export enum MintStatus {
   Allowance,
 }
 
-export enum AdminTabs {
-  Settings,
-  Allowances,
-  Accounting,
-  Burn,
-  Motd,
-}
+export type AdminTabs = 'minting' | 'allowances' | 'accounting' | 'burn' | 'motd';
 
 export interface MachineConfig {
   tozziMintStatus: MintStatus;
