@@ -17,7 +17,7 @@ const WalletConnect = () => {
     }
     ref.current?.classList.add('animate-blink');
     setTimeout(() => { ref.current?.classList.remove('animate-blink'); }, 300);
-    setAltMessage('');
+    setAltMessage(undefined);
     activateBrowserWallet();
   };
 

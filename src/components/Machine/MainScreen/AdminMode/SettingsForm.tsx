@@ -102,17 +102,17 @@ const SettingsForm = () => {
             <div className="text-base pixel-font flex-1 mb-1">CUSTOM DUCKS</div>
             <div className="flex flex-1 space-x-2 items-center">
               <FormToggle
-                label="Enabled"
+                label="ON"
                 isSelected={customStatus === MintStatus.Enabled}
                 onToggle={() => setCustomStatus(MintStatus.Enabled)}
               />
               <FormToggle
-                label="Disabled"
+                label="OFF"
                 isSelected={customStatus === MintStatus.Disabled}
                 onToggle={() => setCustomStatus(MintStatus.Disabled)}
               />
               <FormToggle
-                label="Allowance"
+                label="ALLOW"
                 isSelected={customStatus === MintStatus.Allowance}
                 onToggle={() => setCustomStatus(MintStatus.Allowance)}
               />

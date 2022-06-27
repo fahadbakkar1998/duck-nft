@@ -7,6 +7,7 @@ import useMachineStore from '../../../../../store';
 import FormButton from '../../AdminMode/common/FormButton';
 import FormInput from '../../AdminMode/common/FormInput';
 import Modal from '../../OnScreenModal';
+import { useTxNotifier } from '../../../../../hooks/transaction';
 
 interface Props {
   open: boolean;
@@ -18,52 +19,18 @@ const ProfileForm: FC<Props> = ({ open, onClose }) => {
   const [name, setName] = useState('');
   const [status, setStatus] = useState('');
   const [profile, setProfile] = useState('');
-  const queryClient = useQueryClient();
-  const {
-    setAltMessage,
-    setIsLocked,
-    setMachineMood,
-    setOpenBurnForm,
-    currentAdminDuckId,
-    setCurrentAdminDuckId,
-    currentDuckId,
-    setShowDuckProfile,
-  } = useMachineStore();
+  const { currentDuckId } = useMachineStore();
 
   const contract = useMachineContract();
-  const { send, state } = useContractFunction(
-    contract,
-    'setDuckProfile',
-    { transactionName: 'Set Duck Profile' },
-  );
+  const { send, state } = useContractFunction(contract, 'setDuckProfile');
 
-  useEffect(() => {
-    if (state?.status === 'Mining') {
-      setAltMessage('Updating Duck Profile...');
-      setIsLocked(true);
-      setMachineMood('happy');
-    } else if (state?.status === 'Success') {
-      (async () => {
-        await queryClient.invalidateQueries();
-        setMachineMood(undefined);
-        setIsLocked(false);
-        setAltMessage('Success! Duck profile updated.');
-        setShowDuckProfile(false);
-      })();
-    } else if (state?.status === 'PendingSignature') {
-      setAltMessage('Signature Pending...');
-    } else if (state?.status === 'Exception') {
-      const denied = 'MetaMask Tx Signature: User denied transaction signature.';
-      if (state?.errorMessage === denied) {
-        setAltMessage('Well, nevermind then...');
-      } else {
-        setAltMessage('Oh Quack! something went wrong!');
-      }
-      setMachineMood('sad');
-      setIsLocked(false);
-      setTimeout(() => setMachineMood(undefined), 500);
-    }
-  }, [state.status]);
+  useTxNotifier(
+    {
+      mining: 'Updating duck profile',
+      success: 'Settings! Profile updated',
+    },
+    state,
+  );
 
   const handleSubmit = () => {
     send(

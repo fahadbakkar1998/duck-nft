@@ -101,6 +101,10 @@ export const useMachineStore = create<MachineStore>(
 
     isLocked: false,
     setIsLocked: (locked: boolean): void => {
+      if (!locked) {
+        set({ isLocked: locked, showProfileForm: false });
+        return;
+      }
       set({ isLocked: locked });
     },
     // alt screen
