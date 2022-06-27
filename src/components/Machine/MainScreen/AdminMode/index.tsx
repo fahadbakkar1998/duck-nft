@@ -20,6 +20,8 @@ const getTabTitle = (tab: AdminTabs) => {
       return 'Accounting';
     case 'motd':
       return 'Message of the Day';
+    case 'burn':
+      return 'Burn Custom Duck';
     default:
       return 'Duck Administration';
   }
@@ -51,30 +53,30 @@ const AdminMain = () => {
           <div className="absolute top-4 bg-screenBlack px-2 text-xl uppercase text-orange-300">
             {getTabTitle(activeTab)}
           </div>
-          <div
-            className="mt-2 grid grid-cols-4 gap-2 pixel-font-thin text-center text-lg"
-          >
-            <AdminTabButton
-              title="Minting"
-              isActive={activeTab === 'minting'}
-              onClick={() => setActiveTab('minting')}
-            />
-            <AdminTabButton
-              title="Allow"
-              isActive={activeTab === 'allowances'}
-              onClick={() => setActiveTab('allowances')}
-            />
-            <AdminTabButton
-              title="Accounting"
-              isActive={activeTab === 'accounting'}
-              onClick={() => setActiveTab('accounting')}
-            />
-            <AdminTabButton
-              title="MotD"
-              isActive={activeTab === 'motd'}
-              onClick={() => setActiveTab('motd')}
-            />
-          </div>
+          { activeTab !== 'burn' && (
+            <div className="mt-2 grid grid-cols-4 gap-2 pixel-font-thin text-center text-lg">
+              <AdminTabButton
+                title="Minting"
+                isActive={activeTab === 'minting'}
+                onClick={() => setActiveTab('minting')}
+              />
+              <AdminTabButton
+                title="Allow"
+                isActive={activeTab === 'allowances'}
+                onClick={() => setActiveTab('allowances')}
+              />
+              <AdminTabButton
+                title="Accounting"
+                isActive={activeTab === 'accounting'}
+                onClick={() => setActiveTab('accounting')}
+              />
+              <AdminTabButton
+                title="MotD"
+                isActive={activeTab === 'motd'}
+                onClick={() => setActiveTab('motd')}
+              />
+            </div>
+          )}
           { activeTab === 'minting' && <SettingsForm /> }
           { activeTab === 'allowances' && <AllowancesForm /> }
           { activeTab === 'accounting' && <AccountingForm /> }
