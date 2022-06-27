@@ -39,8 +39,6 @@ export const SmallCircleButton = (props) => {
         <div className="flex justify-center items-center">
           <img className="mt-[1px] opacity-90 w-4 h-4" alt="" src={props.image} />
         </div>
-        {/* {props.name} */}
-        {/* {props.children} */}
       </div>
     </div>
   );

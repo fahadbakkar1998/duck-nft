@@ -26,6 +26,7 @@ export const MainScreen = () => {
     processing,
     showTxStatus,
     setIsSwitchingModes,
+    isLocked,
   } = useMachineStore();
 
   const [spring, setSpring] = useSpring(() => ({
@@ -38,6 +39,7 @@ export const MainScreen = () => {
   }));
 
   const handleModeSwitch = (direction: string) => {
+    if (isLocked) return;
     if (currentMode === MachineMode.Off) return;
     if (screenIsRotating || processing || showTxStatus) return;
     setScreenIsRotating(true);
