@@ -66,7 +66,7 @@ const DrawingTool: FC = (props: any) => {
     setSelectedColor,
   } = useMachineStore();
 
-  useAccountChange();
+  // useAccountChange();
 
   const toggleEyeDrop = (flag: boolean) => {
     drawingCanvas!.current!.style.cursor = flag

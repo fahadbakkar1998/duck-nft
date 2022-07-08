@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import ModeSwitcher from '../../common/ModeSwitcher';
 import useMachineStore from '../../../store';
 import AdminMain from './AdminMode';
@@ -15,6 +15,11 @@ interface MainScreenProps {
 
 const MainScreen: FC<MainScreenProps> = ({ screenInverted, switchModes }) => {
   const { currentMode } = useMachineStore();
+
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log('Current Mode: ', currentMode);
+  }, [currentMode]);
 
   return (
     <Screen

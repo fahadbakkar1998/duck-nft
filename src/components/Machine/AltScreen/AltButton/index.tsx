@@ -42,12 +42,12 @@ const ButtonView = () => {
   useTxNotifier({}, mintTozziDuckState);
   useTxNotifier({}, mintCustomTozziDuckState);
 
-  useEffect(() => {
-    if (account) {
-      setCurrentMode(MachineMode.Shopping);
-      setCurrentMode(MachineMode.Off);
-    }
-  }, [account]);
+  // useEffect(() => {
+  //   if (account) {
+  //     setCurrentMode(MachineMode.Shopping);
+  //     setCurrentMode(MachineMode.Off);
+  //   }
+  // }, [account]);
 
   const handleMintTozziDuck = async () => {
     const selectedDuck = ducks?.find((d) => d.id === currentDuckId);
@@ -67,7 +67,7 @@ const ButtonView = () => {
     sendFnCustomTozziDuck(base64data, { value: price });
   };
 
-  if (currentMode === MachineMode.Off) {
+  if (!account) {
     return (
       <Button onClick={() => activateBrowserWallet()}>
         <div className="flex space-x-2 justify-center items-center lcd-font opacity-75 hover:font-bold text-base mt-1">
@@ -76,6 +76,7 @@ const ButtonView = () => {
       </Button>
     );
   }
+
   if (isLocked) return <AltButtonLoader />;
 
   if (currentMode === MachineMode.Shopping) {
@@ -110,6 +111,12 @@ const ButtonView = () => {
           mint duck
         </div>
       </Button>
+    );
+  }
+
+  if (currentMode === MachineMode.Off) {
+    return (
+      <div className="lcd-font h-full w-full flex justify-center text-xl items-center opacity-50">WELCOME</div>
     );
   }
 

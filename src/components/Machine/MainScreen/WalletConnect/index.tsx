@@ -4,28 +4,32 @@ import './index.scss';
 import useMachineStore from '../../../../store';
 import { MachineMode } from '../../../../utils/constants';
 import { DuckLogo, ChainsawLogo } from '../../../common/SvgIcon';
+import { useMachineState } from '../../../../state/hooks';
 
 const WalletConnect = () => {
   const { currentMode, setCurrentMode, setAltMessage, setIsSwitchingModes, isSwitchingModes, switchModes } = useMachineStore();
   const ref = useRef<HTMLDivElement>(null);
   const { activateBrowserWallet, account, chainId } = useEthers();
+  const { isLoading } = useMachineState();
 
   const handleConnectWallet = async () => {
-    if (chainId !== parseInt(process.env.REACT_APP_CHAIN_ID!)) {
-      setAltMessage('Please connect to Mainnet Ethereum!');
-      return;
-    }
-    ref.current?.classList.add('animate-blink');
-    setTimeout(() => { ref.current?.classList.remove('animate-blink'); }, 300);
-    setAltMessage(undefined);
-    activateBrowserWallet();
+    // if (chainId !== parseInt(process.env.REACT_APP_CHAIN_ID!)) {
+    //   setAltMessage('Please connect to Mainnet Ethereum!');
+    //   return;
+    // }
+    // ref.current?.classList.add('animate-blink');
+    // setTimeout(() => { ref.current?.classList.remove('animate-blink'); }, 300);
+    // setAltMessage(undefined);
+    // activateBrowserWallet();
+    if (isLoading) return;
+    switchModes('shopping');
   };
 
-  useEffect(() => {
-    if (account) {
-      switchModes('next');
-    }
-  }, [account]);
+  // useEffect(() => {
+  //   if (account) {
+  //     switchModes('next');
+  //   }
+  // }, [account]);
 
   return (
     <div className="inner-shadow WalletConnect scanline">
@@ -52,7 +56,7 @@ const WalletConnect = () => {
                 onClick={handleConnectWallet}
               >
                 <div className="animate-pokeRight">{'>'}</div>
-                <div>Connect Wallet</div>
+                <div>{ isLoading ? 'LOADING DUCKS' : 'CLICK TO START'}</div>
                 <div className="animate-pokeLeft">{'<'}</div>
               </div>
             )}

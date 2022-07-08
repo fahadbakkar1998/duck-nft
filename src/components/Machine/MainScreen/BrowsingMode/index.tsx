@@ -36,7 +36,7 @@ const directionToDuckIndex = (direction: string, currentDuckIndex: number) => {
 };
 
 const BrowsingMode = () => {
-  useAccountChange();
+  // useAccountChange();
   const {
     isSwitchingModes,
     currentDuckId,
