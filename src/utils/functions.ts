@@ -5,8 +5,19 @@ import { ethers } from 'ethers';
 import { ChainId } from '@usedapp/core';
 import { Contract } from '@ethersproject/contracts';
 import { OWNERSHIP_TOKEN_ID, BURN_WINDOW, contractAbi } from './constants';
-import staticDuckData from './duckData.json';
+import proofs from '../data/proofs.json';
 import { MachineConfig, MachineState, Motd } from '../types/types';
+
+const emptyData = {
+  owner: '',
+  salePrice: 0,
+  isCustom: false,
+  hatched: 0,
+};
+
+const staticDuckData = Object.values(proofs).map((proof, index) => {
+  return { id: index, ...proof, ...emptyData };
+});
 
 const { REACT_APP_MACHINE_CONTRACT_ADDRESS: contractAddress = '', REACT_APP_INFURA_API_KEY, REACT_APP_CHAIN_ID } = process.env;
 const CHAIN_ID = process.env.REACT_PUBLIC_ENV === 'production' ? ChainId.Mainnet : ChainId.Rinkeby;

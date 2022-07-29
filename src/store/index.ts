@@ -8,7 +8,6 @@ import {
   colors,
 } from '../utils/constants';
 import DTool from './DTool';
-import jsonDucks from '../utils/duckData.json';
 import { AltMessage, DuckData, DuckFilters } from '../types/types';
 import { useDucks } from '../state/hooks';
 

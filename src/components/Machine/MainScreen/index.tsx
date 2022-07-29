@@ -16,11 +16,6 @@ interface MainScreenProps {
 const MainScreen: FC<MainScreenProps> = ({ screenInverted, switchModes }) => {
   const { currentMode } = useMachineStore();
 
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log('Current Mode: ', currentMode);
-  }, [currentMode]);
-
   return (
     <Screen
       style={{ pointerEvents: 'auto' }}
