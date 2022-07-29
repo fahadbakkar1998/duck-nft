@@ -56,7 +56,7 @@ const ButtonView = () => {
       const { tozziMintPrice } = await fetchMachineConfig();
       const price = utils.parseEther(tozziMintPrice.toString());
       const { webp, proof } = selectedDuck;
-      sendFnTozziDuck(currentDuckId, webp, proof, { value: price });
+      sendFnTozziDuck(account, currentDuckId, webp, proof, { value: price });
     }
   };
 
@@ -64,7 +64,7 @@ const ButtonView = () => {
     const { customMintPrice } = await fetchMachineConfig();
     const price = utils.parseEther(customMintPrice.toString());
     const base64data = await DToolInst.getWebp();
-    sendFnCustomTozziDuck(base64data, { value: price });
+    sendFnCustomTozziDuck(account, base64data, { value: price });
   };
 
   if (!account) {

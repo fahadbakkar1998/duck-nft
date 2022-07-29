@@ -151,13 +151,7 @@ export const contractAbi = [
     "type": "error"
   },
   {
-    "inputs": [
-      {
-        "internalType": "enum ITheAmazingTozziDuckMachine.DuckType",
-        "name": "duckType",
-        "type": "uint8"
-      }
-    ],
+    "inputs": [],
     "name": "MintingDisabled",
     "type": "error"
   },
@@ -258,12 +252,24 @@ export const contractAbi = [
       },
       {
         "indexed": true,
-        "internalType": "address",
-        "name": "who",
-        "type": "address"
+        "internalType": "bytes32",
+        "name": "webpHash",
+        "type": "bytes32"
       },
       {
         "indexed": true,
+        "internalType": "address",
+        "name": "creator",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "recipient",
+        "type": "address"
+      },
+      {
+        "indexed": false,
         "internalType": "enum ITheAmazingTozziDuckMachine.DuckType",
         "name": "duckType",
         "type": "uint8"
@@ -307,56 +313,6 @@ export const contractAbi = [
       }
     ],
     "name": "DuckProfileUpdated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "uint8",
-        "name": "statusId",
-        "type": "uint8"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "statusName",
-        "type": "string"
-      }
-    ],
-    "name": "DuckStatusDefined",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "duckId",
-        "type": "uint256"
-      },
-      {
-        "indexed": true,
-        "internalType": "uint8",
-        "name": "statusId",
-        "type": "uint8"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "statusName",
-        "type": "string"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "who",
-        "type": "address"
-      }
-    ],
-    "name": "DuckStatusUpdated",
     "type": "event"
   },
   {
@@ -524,6 +480,25 @@ export const contractAbi = [
   {
     "inputs": [
       {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "artists",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "owner",
         "type": "address"
@@ -575,24 +550,6 @@ export const contractAbi = [
       }
     ],
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint8",
-        "name": "statusId",
-        "type": "uint8"
-      },
-      {
-        "internalType": "string",
-        "name": "statusName",
-        "type": "string"
-      }
-    ],
-    "name": "defineDuckStatus",
-    "outputs": [],
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -665,7 +622,7 @@ export const contractAbi = [
         "type": "uint256"
       }
     ],
-    "name": "duckIdToWEBP",
+    "name": "duckImageData",
     "outputs": [
       {
         "internalType": "address",
@@ -700,44 +657,6 @@ export const contractAbi = [
         "internalType": "string",
         "name": "description",
         "type": "string"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint8",
-        "name": "",
-        "type": "uint8"
-      }
-    ],
-    "name": "duckStatusOptions",
-    "outputs": [
-      {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "duckStatuses",
-    "outputs": [
-      {
-        "internalType": "uint8",
-        "name": "",
-        "type": "uint8"
       }
     ],
     "stateMutability": "view",
@@ -841,6 +760,11 @@ export const contractAbi = [
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      },
+      {
         "internalType": "string",
         "name": "webp",
         "type": "string"
@@ -853,6 +777,11 @@ export const contractAbi = [
   },
   {
     "inputs": [
+      {
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      },
       {
         "internalType": "uint256",
         "name": "duckId",
@@ -898,6 +827,24 @@ export const contractAbi = [
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "webp",
+        "type": "string"
+      }
+    ],
+    "name": "ownerMint",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -1011,22 +958,77 @@ export const contractAbi = [
   {
     "inputs": [
       {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "name",
+        "type": "bytes32"
+      }
+    ],
+    "name": "setArtistName",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "who",
         "type": "address"
       },
       {
-        "internalType": "uint128",
-        "name": "tozziDuckAllowance",
-        "type": "uint128"
-      },
-      {
-        "internalType": "uint128",
-        "name": "customDuckAllowance",
-        "type": "uint128"
+        "components": [
+          {
+            "internalType": "uint128",
+            "name": "tozziDuckAllowance",
+            "type": "uint128"
+          },
+          {
+            "internalType": "uint128",
+            "name": "customDuckAllowance",
+            "type": "uint128"
+          }
+        ],
+        "internalType": "struct ITheAmazingTozziDuckMachine.DuckAllowance",
+        "name": "allowance",
+        "type": "tuple"
       }
     ],
     "name": "setDuckAllowance",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address[]",
+        "name": "who",
+        "type": "address[]"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint128",
+            "name": "tozziDuckAllowance",
+            "type": "uint128"
+          },
+          {
+            "internalType": "uint128",
+            "name": "customDuckAllowance",
+            "type": "uint128"
+          }
+        ],
+        "internalType": "struct ITheAmazingTozziDuckMachine.DuckAllowance",
+        "name": "allowance",
+        "type": "tuple"
+      }
+    ],
+    "name": "setDuckAllowances",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1139,19 +1141,6 @@ export const contractAbi = [
       }
     ],
     "name": "setOwnershipTokenURI",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_probationPeriod",
-        "type": "uint256"
-      }
-    ],
-    "name": "setProbationPeriod",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
