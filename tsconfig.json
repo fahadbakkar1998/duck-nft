@@ -19,7 +19,8 @@
     "baseUrl": "src",
     "paths": {
       "@/*": ["*"],
-      "stream": ["./node_modules/readable-stream"]
+      "components/*": ["src/components/*"],
+      "stream": ["./node_modules/readable-stream"],
     },
     "noImplicitAny": false,
   },
