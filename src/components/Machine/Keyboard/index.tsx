@@ -7,7 +7,6 @@ import modelObject from '../../../assets/glb/key_pad.glb';
 import { MachineMode, minViewLength } from '../../../utils/constants';
 import Display from '../Display';
 import { useMachineStore } from '../../../store';
-import { useDucks } from '../../../state/hooks';
 import { useFilteredDucks } from '../../../hooks';
 
 const Keyboard: FC = () => {
@@ -17,10 +16,9 @@ const Keyboard: FC = () => {
   const min = viewport.width;
   const [value, setValue] = useState<string>('');
   const { currentDuckId, currentMode } = useMachineStore();
-  const { data: ducks } = useDucks();
-  const filteredDucks = useFilteredDucks(ducks);
   const [clearOnNext, setClearOnNext] = useState(true);
-  const { setCurrentDuckId, setAltMessage } = useMachineStore();
+  const { setCurrentDuckId, setAltMessage, ducks } = useMachineStore();
+  const filteredDucks = useFilteredDucks(ducks);
 
   const enterClick = (value: string) => {
     // TODO - find better way to do this that doesn't require all ducks

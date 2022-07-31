@@ -1,15 +1,19 @@
 import { FC, useEffect, useState } from 'react';
 // eslint-disable-next-line import/no-relative-packages
 import { motion, AnimatePresence } from '../../../../node_modules/framer-motion/dist/framer-motion';
-import { useDucks } from '../../../state/hooks';
 import { useFilteredDucks } from '../../../hooks';
 import useMachineStore from '../../../store';
 import DuckProfile from './DuckProfile';
 import { DuckData } from '../../../types/types';
 
 const Shopping = () => {
-  const { altIsStatic, showDuckProfile, currentDuckId, setAltMessage } = useMachineStore();
-  const { data: ducks } = useDucks();
+  const {
+    altIsStatic,
+    showDuckProfile,
+    currentDuckId,
+    setAltMessage,
+    ducks,
+  } = useMachineStore();
   const filteredDucks = useFilteredDucks(ducks);
 
   const [duck, setDuck] = useState<DuckData|null>();

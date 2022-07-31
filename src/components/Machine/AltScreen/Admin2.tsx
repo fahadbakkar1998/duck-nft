@@ -3,7 +3,6 @@ import { FC, useEffect, useState } from 'react';
 import { indexOf } from 'lodash';
 // eslint-disable-next-line import/no-relative-packages
 import { motion, AnimatePresence } from '../../../../node_modules/framer-motion/dist/framer-motion';
-import { useDucks } from '../../../state/hooks';
 import useMachineStore from '../../../store';
 
 const NoDucks = () => {
@@ -33,9 +32,9 @@ const Admin: FC = () => {
     altIsStatic,
     setCurrentAdminDuckId,
     currentAdminDuckId,
+    ducks,
   } = useMachineStore();
-  const { data: ducksData = [], isLoading } = useDucks();
-  const ducks = !isLoading ? ducksData.filter((d) => d.burnable) : [];
+
   const duck = ducks?.find((d) => d.id === currentAdminDuckId);
   const duckIndex = indexOf(ducks, duck);
   const [isHovered, setIsHovered] = useState(false);

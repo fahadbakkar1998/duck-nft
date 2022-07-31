@@ -1,10 +1,18 @@
 import create, { SetState } from 'zustand';
 import { QueryClient } from 'react-query';
-import { MachineMode } from '../utils/constants';
+import { emptyDuckData, MachineMode } from '../utils/constants';
 import { AltMessage, DuckData, DuckFilters } from '../types/types';
-import { useDucks } from '../state/hooks';
+import proofs from '../data/proofs.json';
+import { fetchDucks, contract } from '../utils/functions';
+
+const staticDuckData: DuckData[] = Object.values(proofs).map((proof, index) => {
+  return { id: index, ...proof, ...emptyDuckData };
+});
 
 type MachineStore = {
+  ducks: DuckData[];
+  setDucks: (ducks: DuckData[]) => void;
+
   account: string | undefined;
   setAccount: (account: string | undefined) => void;
 
@@ -50,10 +58,25 @@ type MachineStore = {
   setShowMotd: (val: boolean) => void;
   showProfileForm: boolean;
   setShowProfileForm: (val: boolean) => void;
+
+  processing: boolean;
+  setProcessing: (val: boolean) => void;
+  address: string;
+  setAddress: (val: string) => void;
+  transactionStatus: any;
+  setTransactionStatus: (val: any) => void;
+  showTxStatus: boolean;
+  setShowTxStatus: (val: boolean) => void;
 };
 
 export const useMachineStore = create<MachineStore>(
   (set: SetState<MachineStore>) => ({
+
+    ducks: staticDuckData,
+    setDucks: (ducks: DuckData[]): void => {
+      set({ ducks });
+    },
+
     account: '',
     setAccount: (account: string | undefined): void => {
       set({ account });
@@ -215,7 +238,53 @@ export const useMachineStore = create<MachineStore>(
     setShowProfileForm: (val: boolean): void => {
       set({ showProfileForm: val });
     },
+
+    // contract status
+    processing: false,
+    setProcessing: (val: boolean): void => {
+      set({ processing: val });
+    },
+
+    address: '',
+    setAddress: (val: string): void => {
+      set({ address: val });
+    },
+
+    transactionStatus: '',
+    setTransactionStatus: (val: any): void => {
+      set({ transactionStatus: val });
+    },
+
+    showTxStatus: false,
+    setShowTxStatus: (val: boolean): void => {
+      set({ showTxStatus: val });
+    },
   }),
 );
+
+const refreshDucks = () => {
+  fetchDucks()
+    .then((ducks) => {
+      useMachineStore.setState((state) => ({
+        ...state,
+        ducks,
+      }));
+    });
+};
+
+refreshDucks();
+
+const events = [
+  'CustomDuckBurned',
+  'DuckMinted',
+  'DuckProfileUpdated',
+  'DuckTitleGranted',
+];
+
+events.forEach((event) => {
+  contract.on(event, () => {
+    refreshDucks();
+  });
+});
 
 export default useMachineStore;

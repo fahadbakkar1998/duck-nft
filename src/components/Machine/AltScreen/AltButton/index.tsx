@@ -7,7 +7,6 @@ import useMachineStore from '../../../../store';
 import { MachineMode } from '../../../../utils/constants';
 import '../index.scss';
 import Button from '../Button';
-import { useDucks } from '../../../../state/hooks';
 import { BuyIcon, ProfileIcon, ProfileOpenIcon } from '../../../common/SvgIcon';
 import ShimmerLayer from '../../../common/ShimmerLayer';
 import { contract, fetchMachineConfig } from '../../../../utils/functions';
@@ -24,12 +23,11 @@ const ButtonView = () => {
     setShowDuckProfile,
     setCurrentMode,
     isLocked,
+    ducks,
   } = useMachineStore();
 
   const { DToolInst } = useDToolStore();
 
-  const { data = [], isLoading } = useDucks();
-  const ducks = !isLoading ? data : [];
   const selectedDuck = ducks?.find((d) => d.id === currentDuckId);
   const { activateBrowserWallet, account } = useEthers();
   const {

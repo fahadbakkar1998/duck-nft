@@ -3,7 +3,6 @@ import { indexOf } from 'lodash';
 import { PixelArrow } from '../../../../icons';
 import Button from '../Button';
 import useMachineStore from '../../../../store';
-import { useDucks } from '../../../../state/hooks';
 
 interface DuckNavButtonProps {
   onClick: () => void;
@@ -32,10 +31,9 @@ const BurnButton = () => {
     openBurnForm,
     setCurrentAdminDuckId,
     currentAdminDuckId,
+    ducks,
   } = useMachineStore();
 
-  const { data: ducksData = [], isLoading } = useDucks();
-  const ducks = !isLoading ? ducksData.filter((d) => d.burnable) : [];
   const duck = ducks?.find((d) => d.id === currentAdminDuckId);
   const duckIndex = indexOf(ducks, duck);
 

@@ -1,11 +1,9 @@
 import { useEffect } from 'react';
 import useMachineStore from '../../../store';
 import StatusLight from '../StatusLight';
-import { useDucks } from '../../../state/hooks';
 
 const StatusLights = () => {
-  const { machineMood, setMachineMood, currentDuckId } = useMachineStore();
-  const { data: ducks } = useDucks();
+  const { machineMood, setMachineMood, currentDuckId, ducks } = useMachineStore();
 
   useEffect(() => {
     const getActiveDuck = () => ducks?.length && ducks.find((duck) => duck.id === currentDuckId);

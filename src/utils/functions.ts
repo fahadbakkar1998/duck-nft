@@ -4,19 +4,12 @@ import axios from 'axios';
 import { ethers } from 'ethers';
 import { ChainId } from '@usedapp/core';
 import { Contract } from '@ethersproject/contracts';
-import { OWNERSHIP_TOKEN_ID, BURN_WINDOW, contractAbi } from './constants';
+import { emptyDuckData, OWNERSHIP_TOKEN_ID, BURN_WINDOW, contractAbi } from './constants';
 import proofs from '../data/proofs.json';
 import { MachineConfig, MachineState, Motd } from '../types/types';
 
-const emptyData = {
-  owner: '',
-  salePrice: 0,
-  isCustom: false,
-  hatched: 0,
-};
-
 const staticDuckData = Object.values(proofs).map((proof, index) => {
-  return { id: index, ...proof, ...emptyData };
+  return { id: index, ...proof, ...emptyDuckData };
 });
 
 const { REACT_APP_MACHINE_CONTRACT_ADDRESS: contractAddress = '', REACT_APP_INFURA_API_KEY, REACT_APP_CHAIN_ID } = process.env;
@@ -55,7 +48,7 @@ const getMintedDucks = async () => {
       const tokenId = parseInt(event?.args?.tokenId._hex);
       const salePrice = parseInt(event?.args?.price._hex);
       const duckType = event?.args?.duckType;
-      const owner = event?.args?.who;
+      const owner = event?.args?.recipient;
       const tokenURI = await duckMachineContract.tokenURI(tokenId);
       const tokenURIRes = await axios.get(tokenURI);
       const timestamp = await (await (event.getBlock())).timestamp;
@@ -123,6 +116,8 @@ const fetchDucks = async () => {
   const ducks = nonMintedDucks.map((obj) => mintedTozziDucks.find((o) => o.id === obj.id) || obj);
 
   const finalDucks = [...ducks, ...mintedCustomDucks];
+  // eslint-disable-next-line no-console
+  console.log('ducks loaded', ducks);
   return finalDucks;
 };
 

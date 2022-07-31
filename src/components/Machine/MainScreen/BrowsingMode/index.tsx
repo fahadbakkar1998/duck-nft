@@ -6,7 +6,7 @@ import DuckCard from '../../../DuckCard/DuckCard';
 import useMachineStore from '../../../../store';
 import './index.scss';
 import FiltersModal from './FiltersModal';
-import { useDucks, useMachineState } from '../../../../state/hooks';
+import { useMachineState } from '../../../../state/hooks';
 import { useAccountChange, useFilteredDucks } from '../../../../hooks';
 import { DuckData } from '../../../../types/types';
 import CircleButton from '../../../common/CircleButton';
@@ -45,9 +45,9 @@ const BrowsingMode = () => {
     setShowMotd,
     showProfileForm,
     setShowProfileForm,
+    ducks,
   } = useMachineStore();
   const [showFilters, setShowFilters] = useState(false);
-  const { data: ducks } = useDucks();
   const filteredDucks = useFilteredDucks(ducks);
   const [scrollPosition, setScrollPosition] = useState(0.0);
   const { data: machineState } = useMachineState();

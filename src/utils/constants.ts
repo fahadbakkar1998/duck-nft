@@ -16,6 +16,13 @@ export const decimalRegex = /^\d*(?:[.,]\d*)?$/;
 
 export const OWNERSHIP_TOKEN_ID = 420;
 
+export const emptyDuckData = {
+  owner: '',
+  salePrice: 0,
+  isCustom: false,
+  hatched: 0,
+};
+
 export const defaultLayerIndex = 0;
 export const defaultColorIndex = 0;
 export const colors = [
