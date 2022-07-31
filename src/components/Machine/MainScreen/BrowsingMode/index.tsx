@@ -1,5 +1,5 @@
 import KeyboardEventHandler from 'react-keyboard-event-handler';
-import React, { useEffect, useState, useRef, UIEvent } from 'react';
+import React, { useMemo, useState, useRef, UIEvent } from 'react';
 import { findIndex } from 'lodash';
 import { useEthers } from '@usedapp/core';
 import DuckCard from '../../../DuckCard/DuckCard';
@@ -7,13 +7,13 @@ import useMachineStore from '../../../../store';
 import './index.scss';
 import FiltersModal from './FiltersModal';
 import { useMachineState } from '../../../../state/hooks';
-import { useAccountChange, useFilteredDucks } from '../../../../hooks';
 import { DuckData } from '../../../../types/types';
 import CircleButton from '../../../common/CircleButton';
 import filterIcon from '../../../../assets/img/icons/filter.svg';
 import ScrollBar from './ScrollBar';
 import Motd from './Motd';
 import ProfileForm from './ProfileForm';
+import { filterDucks } from '../../../../utils/helpers';
 
 const directionToDuckIndex = (direction: string, currentDuckIndex: number) => {
   let nextDuckIndex = currentDuckIndex;
@@ -46,12 +46,13 @@ const BrowsingMode = () => {
     showProfileForm,
     setShowProfileForm,
     ducks,
+    duckFilters,
+    account,
   } = useMachineStore();
   const [showFilters, setShowFilters] = useState(false);
-  const filteredDucks = useFilteredDucks(ducks);
   const [scrollPosition, setScrollPosition] = useState(0.0);
   const { data: machineState } = useMachineState();
-
+  const filteredDucks = useMemo(() => filterDucks({ ducks, filters: duckFilters, account }), [duckFilters, account]);
   const selectDuckByDirection = (direction: string) => {
     const currentDuckIndex = findIndex(filteredDucks, (d) => d.id === currentDuckId);
     const nextDuckIndex = directionToDuckIndex(direction, currentDuckIndex);

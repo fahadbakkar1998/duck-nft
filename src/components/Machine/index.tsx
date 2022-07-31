@@ -17,9 +17,7 @@ const Machine = () => {
     <group>
       <AltScreen />
       <MainScreen />
-      <Providers>
-        <Keyboard />
-      </Providers>
+      <Keyboard />
       {
         currentMode === MachineMode.Customization
           ? (

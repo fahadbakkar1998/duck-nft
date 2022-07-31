@@ -11,6 +11,7 @@ import AdminFormWrapper from './AdminFormWrapper';
 import { numberRegex, decimalRegex } from '../../../../utils/constants';
 import { useTxNotifier } from '../../../../hooks/transaction';
 import useMachineStore from '../../../../store';
+import { contract } from '../../../../utils/functions';
 
 const SettingsForm = () => {
   const { data: machineState, isLoading } = useMachineState();
@@ -19,7 +20,6 @@ const SettingsForm = () => {
   const [tozziPrice, setTozziPrice] = useState<string>();
   const [customPrice, setCustomPrice] = useState<string>();
   const [maxDucks, setMaxDucks] = useState<string>();
-  const contract = useMachineContract();
   const { send, state } = useContractFunction(contract, 'setMachineConfig');
   const { setAltMessage } = useMachineStore();
 

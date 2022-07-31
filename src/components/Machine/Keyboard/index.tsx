@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState, useMemo } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { useThree } from 'react-three-fiber';
 import { padStart } from 'lodash';
@@ -7,7 +7,7 @@ import modelObject from '../../../assets/glb/key_pad.glb';
 import { MachineMode, minViewLength } from '../../../utils/constants';
 import Display from '../Display';
 import { useMachineStore } from '../../../store';
-import { useFilteredDucks } from '../../../hooks';
+import { filterDucks } from '../../../utils/helpers';
 
 const Keyboard: FC = () => {
   const [vrm, setVrm] = useState<any>(null);
@@ -17,12 +17,12 @@ const Keyboard: FC = () => {
   const [value, setValue] = useState<string>('');
   const { currentDuckId, currentMode } = useMachineStore();
   const [clearOnNext, setClearOnNext] = useState(true);
-  const { setCurrentDuckId, setAltMessage, ducks } = useMachineStore();
-  const filteredDucks = useFilteredDucks(ducks);
+  const { setCurrentDuckId, setAltMessage, ducks, duckFilters, account } = useMachineStore();
+
+  const filteredDucks = useMemo(() => filterDucks({ ducks, filters: duckFilters, account }), [duckFilters, account]);
 
   const enterClick = (value: string) => {
-    // TODO - find better way to do this that doesn't require all ducks
-    const duckExists = filteredDucks.find((d) => d.id === Number(value));
+    const duckExists = filteredDucks?.find((d) => d.id === Number(value));
     if (duckExists) {
       setCurrentDuckId(Number(value));
       document.querySelector(`#item${value}`)?.scrollIntoView({

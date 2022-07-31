@@ -4,6 +4,7 @@ import { emptyDuckData, MachineMode } from '../utils/constants';
 import { AltMessage, DuckData, DuckFilters } from '../types/types';
 import proofs from '../data/proofs.json';
 import { fetchDucks, contract } from '../utils/functions';
+import { filterDucks } from '../utils/helpers';
 
 const staticDuckData: DuckData[] = Object.values(proofs).map((proof, index) => {
   return { id: index, ...proof, ...emptyDuckData };
@@ -13,8 +14,8 @@ type MachineStore = {
   ducks: DuckData[];
   setDucks: (ducks: DuckData[]) => void;
 
-  account: string | undefined;
-  setAccount: (account: string | undefined) => void;
+  account: string | undefined | null;
+  setAccount: (account: string | undefined | null) => void;
 
   currentMode: MachineMode;
   switchModes: (direction: string) => void;
@@ -72,13 +73,13 @@ type MachineStore = {
 export const useMachineStore = create<MachineStore>(
   (set: SetState<MachineStore>) => ({
 
-    ducks: staticDuckData,
+    ducks: [],
     setDucks: (ducks: DuckData[]): void => {
       set({ ducks });
     },
 
-    account: '',
-    setAccount: (account: string | undefined): void => {
+    account: undefined,
+    setAccount: (account: string | undefined | null): void => {
       set({ account });
     },
     // main

@@ -35,17 +35,18 @@ const Admin: FC = () => {
     ducks,
   } = useMachineStore();
 
-  const duck = ducks?.find((d) => d.id === currentAdminDuckId);
-  const duckIndex = indexOf(ducks, duck);
+  const burnableDucks = ducks.filter((duck) => duck.burnable);
+  const duck = burnableDucks?.find((d) => d.id === currentAdminDuckId);
+  const duckIndex = indexOf(ducks, duck) - 200;
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    if (ducks.length) {
-      setCurrentAdminDuckId(ducks[0].id);
+    if (burnableDucks.length) {
+      setCurrentAdminDuckId(burnableDucks[0].id);
     }
   }, []);
 
-  return ducks.length ? (
+  return burnableDucks.length ? (
     <div
       className="absolute z-10"
       onMouseEnter={() => setIsHovered(true)}
@@ -56,7 +57,7 @@ const Admin: FC = () => {
           <AnimatePresence>
             { !altIsStatic && (
               <div className="overflow-hidden bg-white bg-opacity-80">
-                <DuckReviewLabel duckNum={duckIndex + 1} numDucks={ducks.length} />
+                <DuckReviewLabel duckNum={duckIndex + 1} numDucks={burnableDucks.length} />
                 <motion.img
                   initial={{ scale: 0, opacity: 0, borderRadius: '100%' }}
                   animate={{ scale: 1, opacity: 1, borderRadius: '0%' }}

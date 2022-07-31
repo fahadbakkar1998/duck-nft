@@ -1,10 +1,10 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 // eslint-disable-next-line import/no-relative-packages
 import { motion, AnimatePresence } from '../../../../node_modules/framer-motion/dist/framer-motion';
-import { useFilteredDucks } from '../../../hooks';
 import useMachineStore from '../../../store';
 import DuckProfile from './DuckProfile';
 import { DuckData } from '../../../types/types';
+import { filterDucks } from '../../../utils/helpers';
 
 const Shopping = () => {
   const {
@@ -12,11 +12,13 @@ const Shopping = () => {
     showDuckProfile,
     currentDuckId,
     setAltMessage,
+    duckFilters,
+    account,
     ducks,
   } = useMachineStore();
-  const filteredDucks = useFilteredDucks(ducks);
 
   const [duck, setDuck] = useState<DuckData|null>();
+  const filteredDucks = useMemo(() => filterDucks({ ducks, filters: duckFilters, account }), [duckFilters, account]);
 
   useEffect(() => {
     const duck = filteredDucks.find((d) => d.id === currentDuckId);

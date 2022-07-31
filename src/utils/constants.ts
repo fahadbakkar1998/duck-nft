@@ -58,8 +58,8 @@ export const colors = [
 
 export const tozziDuckNum = 200;
 
-// export const BURN_WINDOW = 604800 * 1000; // one week in ms
-export const BURN_WINDOW = 600 * 1000; // 10 mins
+export const BURN_WINDOW = 604800 * 1000; // one week in ms
+// export const BURN_WINDOW = 600 * 1000; // 10 mins
 
 export const reactQueryStaleTime = 5 * 60 * 1000; // 5 minutes
 

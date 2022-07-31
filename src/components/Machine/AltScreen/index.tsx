@@ -5,7 +5,6 @@ import useMachineStore from '../../../store';
 import { MachineMode, minViewLength } from '../../../utils/constants';
 import BrowsingMode from './BrowsingMode';
 import CustomMode from './Custom';
-// import AdminMode from './Admin';
 import AdminMode from './Admin2';
 import './index.scss';
 import NotConnected from './NotConnected';

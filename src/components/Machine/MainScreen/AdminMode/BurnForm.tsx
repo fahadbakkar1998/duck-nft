@@ -3,7 +3,7 @@ import { useContractFunction, useEthers } from '@usedapp/core';
 import FormButton from './common/FormButton';
 import { useMachineState } from '../../../../state/hooks';
 import AdminFormWrapper from './AdminFormWrapper';
-import { useMachineContract } from '../../../../hooks/machine';
+import { contract } from '../../../../utils/functions';
 import useMachineStore from '../../../../store';
 import { useTxNotifier } from '../../../../hooks/transaction';
 import { getCustomErrorText } from '../../../../utils/helpers';
@@ -12,15 +12,13 @@ const BurnForm = () => {
   const [burnReason, setBurnReason] = useState('');
   const { data: machineState } = useMachineState();
 
-  const { account } = useEthers();
   const {
     setAltMessage,
     setOpenBurnForm,
     currentAdminDuckId,
+    account,
   } = useMachineStore();
   const textRef = useRef<HTMLTextAreaElement>(null);
-  const contract = useMachineContract();
-
   const { send, state } = useContractFunction(contract, 'burnRenegadeDuck');
   useTxNotifier(
     {

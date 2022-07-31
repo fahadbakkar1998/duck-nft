@@ -8,10 +8,10 @@ import { contractAbi, MachineMode } from '../utils/constants';
 
 const { REACT_APP_MACHINE_CONTRACT_ADDRESS: contractAddress = '' } = process.env;
 
-export const useFilteredDucks = (ducks): DuckData[] => {
-  const { duckFilters: filters } = useMachineStore();
-  return filterDucks({ ducks, filters });
-};
+// export const useFilteredDucks = (ducks): DuckData[] => {
+//   const { duckFilters: filters } = useMachineStore();
+//   return filterDucks({ ducks, filters });
+// };
 
 export function useEnsOrShort(account: string | undefined) {
   const [ens, setEns] = useState<string | null>();

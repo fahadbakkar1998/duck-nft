@@ -24,6 +24,7 @@ const ButtonView = () => {
     setCurrentMode,
     isLocked,
     ducks,
+    setAccount,
   } = useMachineStore();
 
   const { DToolInst } = useDToolStore();
@@ -42,12 +43,9 @@ const ButtonView = () => {
   useTxNotifier({}, mintTozziDuckState);
   useTxNotifier({}, mintCustomTozziDuckState);
 
-  // useEffect(() => {
-  //   if (account) {
-  //     setCurrentMode(MachineMode.Shopping);
-  //     setCurrentMode(MachineMode.Off);
-  //   }
-  // }, [account]);
+  useEffect(() => {
+    setAccount(account);
+  }, [account]);
 
   const handleMintTozziDuck = async () => {
     const selectedDuck = ducks?.find((d) => d.id === currentDuckId);

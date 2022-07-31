@@ -1,8 +1,7 @@
 import { useEthers } from '@usedapp/core';
 import { DuckData, DuckFilters, MintStatus, DuckMetadata } from '../types/types';
 
-export const filterDucks = ({ ducks = [], filters } : {ducks: DuckData[], filters: DuckFilters}): DuckData[] => {
-  const { account } = useEthers();
+export const filterDucks = ({ ducks = [], filters, account } : {ducks: DuckData[], filters: DuckFilters, account: string | undefined | null}): DuckData[] => {
   let filteredDucks = ducks;
 
   if (!filters.available && filters.sold) {
@@ -21,10 +20,8 @@ export const filterDucks = ({ ducks = [], filters } : {ducks: DuckData[], filter
     filteredDucks = filteredDucks.filter((duck) => !duck.isCustom);
   }
 
-  if (filters.mine) {
-    if (account) {
-      filteredDucks = filteredDucks.filter((duck) => duck.owner === account);
-    }
+  if (account && filters.mine) {
+    filteredDucks = filteredDucks.filter((duck) => duck.owner === account);
   }
   return filteredDucks;
 };
