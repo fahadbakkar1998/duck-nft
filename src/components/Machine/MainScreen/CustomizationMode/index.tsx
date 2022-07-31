@@ -14,7 +14,6 @@ import undoIcon from '../../../../assets/img/icons/undo.svg';
 import redoIcon from '../../../../assets/img/icons/redo.svg';
 import randomIcon from '../../../../assets/img/icons/random.svg';
 import './index.scss';
-import { useAccountChange } from '../../../../hooks';
 
 const layers: Object[] = [
   { label: 'Head' },

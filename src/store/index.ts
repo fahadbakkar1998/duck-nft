@@ -7,6 +7,7 @@ import { useDucks } from '../state/hooks';
 type MachineStore = {
   account: string | undefined;
   setAccount: (account: string | undefined) => void;
+
   currentMode: MachineMode;
   switchModes: (direction: string) => void;
   queryClient: any;
@@ -28,6 +29,7 @@ type MachineStore = {
   setShowDuckIdOnDuckCards: (val: boolean) => void
   showAvailabilityOnDuckCards: boolean;
   setShowAvailabilityOnDuckCards: (val: boolean) => void
+
   // alt screen
   altIsStatic: boolean;
   showDuckProfile: boolean;
@@ -38,16 +40,6 @@ type MachineStore = {
   // contract data
   machineConfig: any;
   setMachineConfig: (val: any) => void;
-
-  // contract status
-  processing: boolean;
-  setProcessing: (val: boolean) => void;
-  address: string;
-  setAddress: (val: string) => void;
-  transactionStatus: any;
-  setTransactionStatus: (val: any) => void;
-  showTxStatus: boolean;
-  setShowTxStatus: (val: boolean) => void;
 
   // modal
   openBurnForm: boolean;
@@ -112,7 +104,6 @@ export const useMachineStore = create<MachineStore>(
       }
       set({ altMessage: message });
     },
-
     duckFilters: {
       available: true,
       sold: true,
@@ -204,27 +195,6 @@ export const useMachineStore = create<MachineStore>(
     },
     setMachineConfig: (val: any): void => {
       set({ machineConfig: val });
-    },
-
-    // contract status
-    processing: false,
-    setProcessing: (val: boolean): void => {
-      set({ processing: val });
-    },
-
-    address: '',
-    setAddress: (val: string): void => {
-      set({ address: val });
-    },
-
-    transactionStatus: '',
-    setTransactionStatus: (val: any): void => {
-      set({ transactionStatus: val });
-    },
-
-    showTxStatus: false,
-    setShowTxStatus: (val: boolean): void => {
-      set({ showTxStatus: val });
     },
 
     // modal
