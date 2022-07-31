@@ -1,6 +1,7 @@
 import { FC, Suspense, useEffect, useRef } from 'react';
 import cn from 'classnames';
-import { useMachineStore } from '../../../../store';
+import { useDToolStore } from '../../../../store/dtoolStore';
+import useMachineStore from '../../../../store';
 import { colors, MachineMode } from '../../../../utils/constants';
 import duckbill from '../../../../assets/duck-bill.png';
 import CircleButton from '../../../common/CircleButton';
@@ -56,7 +57,6 @@ const layers: Object[] = [
 const DrawingTool: FC = (props: any) => {
   const drawingCanvas = useRef<HTMLCanvasElement>(null);
   const {
-    currentMode,
     DToolInst,
     selectedColorIndex,
     selectedLayerIndex,
@@ -64,7 +64,8 @@ const DrawingTool: FC = (props: any) => {
     setHistoryButtonsState,
     selectedColor,
     setSelectedColor,
-  } = useMachineStore();
+  } = useDToolStore();
+  const { currentMode } = useMachineStore();
 
   // useAccountChange();
 

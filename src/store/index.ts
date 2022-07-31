@@ -1,12 +1,6 @@
 import create, { SetState } from 'zustand';
 import { QueryClient } from 'react-query';
-import {
-  MachineMode,
-  defaultLayerIndex,
-  defaultColorIndex,
-  colors,
-} from '../utils/constants';
-import DTool from './DTool';
+import { MachineMode } from '../utils/constants';
 import { AltMessage, DuckData, DuckFilters } from '../types/types';
 import { useDucks } from '../state/hooks';
 
@@ -41,17 +35,6 @@ type MachineStore = {
   altMessage: AltMessage | undefined;
   setAltMessage: (message: string | AltMessage | undefined) => void;
 
-  // color picker
-  DToolInst: DTool;
-  selectedLayerIndex: number;
-  setSelectedLayerIndex: (val: number) => void;
-  selectedColorIndex: number;
-  setSelectedColorIndex: (val: number) => void;
-  selectedColor: string;
-  setSelectedColor: (val: string) => void;
-  historyButtonsState: any;
-  setHistoryButtonsState: (val: any) => void;
-
   // contract data
   machineConfig: any;
   setMachineConfig: (val: any) => void;
@@ -75,10 +58,6 @@ type MachineStore = {
   setShowMotd: (val: boolean) => void;
   showProfileForm: boolean;
   setShowProfileForm: (val: boolean) => void;
-
-  // eyedropper
-  eyeDropperColor: any;
-  setEyeDropperColor: (val: boolean) => void;
 };
 
 export const useMachineStore = create<MachineStore>(
@@ -212,29 +191,6 @@ export const useMachineStore = create<MachineStore>(
       });
     },
 
-    // color picker
-    DToolInst: new DTool(2, 40),
-
-    selectedLayerIndex: defaultLayerIndex,
-    setSelectedLayerIndex: (val: number): void => {
-      set({ selectedLayerIndex: val });
-    },
-
-    selectedColorIndex: defaultColorIndex,
-    setSelectedColorIndex: (val: number): void => {
-      set({ selectedColorIndex: val });
-    },
-
-    selectedColor: colors[defaultLayerIndex],
-    setSelectedColor: (val: string): void => {
-      set({ selectedColor: val });
-    },
-
-    historyButtonsState: [false, false],
-    setHistoryButtonsState: (val: any): void => {
-      set({ historyButtonsState: val });
-    },
-
     // contract data
     machineConfig: {
       tozziDuckPrice: 0,
@@ -288,12 +244,6 @@ export const useMachineStore = create<MachineStore>(
     showProfileForm: false,
     setShowProfileForm: (val: boolean): void => {
       set({ showProfileForm: val });
-    },
-
-    // eyedropper
-    eyeDropperColor: { r: 0, g: 0, b: 0 },
-    setEyeDropperColor: (eyeDropperColor: boolean): void => {
-      set({ eyeDropperColor });
     },
   }),
 );

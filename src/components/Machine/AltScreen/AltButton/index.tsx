@@ -14,17 +14,19 @@ import { contract, fetchMachineConfig } from '../../../../utils/functions';
 import AltButtonLoader from './AltButtonLoader';
 import BurnButton from './BurnButton';
 import { useTxNotifier } from '../../../../hooks/transaction';
+import { useDToolStore } from '../../../../store/dtoolStore';
 
 const ButtonView = () => {
   const {
     currentDuckId,
     currentMode,
-    DToolInst,
     showDuckProfile,
     setShowDuckProfile,
     setCurrentMode,
     isLocked,
   } = useMachineStore();
+
+  const { DToolInst } = useDToolStore();
 
   const { data = [], isLoading } = useDucks();
   const ducks = !isLoading ? data : [];

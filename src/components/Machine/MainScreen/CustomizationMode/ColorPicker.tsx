@@ -3,14 +3,13 @@ import { HexColorPicker } from 'react-colorful';
 import { Html } from '@react-three/drei';
 import { useThree } from 'react-three-fiber';
 import { MachineMode, minViewLength } from '../../../../utils/constants';
+import { useDToolStore } from '../../../../store/dtoolStore';
 import useMachineStore from '../../../../store';
 // eslint-disable-next-line import/no-relative-packages
 import { motion, AnimatePresence } from '../../../../../node_modules/framer-motion/dist/framer-motion';
 
 const ColorPicker: FC = () => {
-  const DToolInst = useMachineStore((state) => state.DToolInst);
-  const selectedColor = useMachineStore((state) => state.selectedColor);
-  const { setSelectedColor, currentMode } = useMachineStore();
+  const { DToolInst, selectedColor, setSelectedColor } = useDToolStore();
   const { viewport } = useThree();
   const min = viewport.width;
   const bgColor = selectedColor || '#FFFFFF';
