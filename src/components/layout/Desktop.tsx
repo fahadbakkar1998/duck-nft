@@ -23,18 +23,20 @@ const Desktop = () => {
         {/* <SideButtons /> */}
         <TitleImage />
         <img className="background pointer-events-none" src={bgImg} alt="" />
-        {/* <Canvas
-          className="select-none"
-          orthographic
-          camera={{ zoom: 100, position: [0, 0, 100] }}
-          onCreated={(state) => state.gl.clearColor()}
-        >
-          <Suspense fallback={null}>
-            <pointLight intensity={4} position={[-10, 10, 5]} />
-            <ambientLight intensity={0.6} />
-            <Machine />
-          </Suspense>
-        </Canvas> */}
+        <div className="absolute w-full h-full -top-[11.35%] left-0">
+          <Canvas
+            className="select-none"
+            orthographic
+            camera={{ zoom: 100, position: [0, 0, 100] }}
+            onCreated={(state) => state.gl.clearColor()}
+          >
+            <Suspense fallback={null}>
+              <pointLight intensity={4} position={[-10, 10, 5]} />
+              <ambientLight intensity={0.6} />
+              <Machine />
+            </Suspense>
+          </Canvas>
+        </div>
       </div>
       <OwnersManualModal modalIsOpen={isOwnersManualOpen} setModalIsOpen={setIsOwnersManualOpen} />
     </div>
