@@ -1,7 +1,8 @@
 import { Suspense } from 'react';
 import { Canvas } from 'react-three-fiber';
+import { Cloud } from '@react-three/drei';
 import Machine from '../Machine/index';
-import bgImg from '../../assets/img/machine-bg.png';
+import bgImg from '../../assets/img/machine-bg.jpg';
 import OwnersManualModal from '../OwnersManual/OwnersManualModal';
 import useMachineStore from '../../store';
 import BTI from '../Machine/BinaryToggleInterface';
@@ -17,13 +18,12 @@ const Desktop = () => {
 
   return (
     <div className="App flex flex-col">
-      <div className="machine-container relative w-full">
-        <Background />
+      <div className="machine-container relative">
+        {/* <BTI />
+        <SideButtons /> */}
         <TitleImage />
-        <BTI />
-        <SideButtons />
         <img className="background pointer-events-none" src={bgImg} alt="" />
-        <Canvas
+        {/* <Canvas
           className="select-none"
           orthographic
           camera={{ zoom: 100, position: [0, 0, 100] }}
@@ -34,7 +34,7 @@ const Desktop = () => {
             <ambientLight intensity={0.6} />
             <Machine />
           </Suspense>
-        </Canvas>
+        </Canvas> */}
       </div>
       <OwnersManualModal modalIsOpen={isOwnersManualOpen} setModalIsOpen={setIsOwnersManualOpen} />
     </div>

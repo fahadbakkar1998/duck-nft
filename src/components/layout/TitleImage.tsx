@@ -6,7 +6,7 @@ const TitleImage = () => {
   return (
     <img
       className={`
-        ${!openBurnForm ? 'animate-wow' : ''} top-[25.3%] left-[10%] w-[60%] 
+        top-[25.3%] left-[10%] w-[60%] 
         absolute z-50
       `}
       src={logo}
