@@ -18,9 +18,9 @@ const Desktop = () => {
 
   return (
     <div className="App flex flex-col">
-      <div className="machine-container relative w-full xl:w-[85%] pt-[3%]">
-        {/* <BTI />
-        <SideButtons /> */}
+      <div className="machine-container relative w-full 2xl:w-[85%] pt-[3%]">
+        <BTI />
+        {/* <SideButtons /> */}
         <TitleImage />
         <img className="background pointer-events-none" src={bgImg} alt="" />
         {/* <Canvas

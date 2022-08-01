@@ -40,7 +40,7 @@ const BTI = () => {
     <div
       className={`
         flex gap-[1%] z-50 absolute 
-        top-[77.6%] left-[64%] 
+        top-[84.25%] left-[64%] 
         -translate-x-1/2 -translate-y-1/2
       `}
     >
