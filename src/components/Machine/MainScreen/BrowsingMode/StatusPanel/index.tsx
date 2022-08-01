@@ -39,7 +39,7 @@ const StatusPanelWrap: FC = () => {
         (0.18 * min) / minViewLength,
         (0.18 * min) / minViewLength,
       ]}
-      position={[-0.185 * min, -0.1805 * min, 0]}
+      position={[-0.1855 * min, -0.1795 * min, 0]}
       rotation={[0.0, 0.0, 0.0]}
       transform
     >

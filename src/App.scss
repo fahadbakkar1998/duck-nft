@@ -1,29 +1,3 @@
-.inner-shadow {
-  -webkit-box-shadow: inset 8px 5px 8px -1px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: inset 8px 5px 8px -1px rgba(0, 0, 0, 0.5);
-  box-shadow: inset 8px 5px 8px -1px rgba(0, 0, 0, 0.5);
-}
-
-.scene-gradient {
-  // background-color: rgb(6, 158, 218);
-  // -moz-box-shadow:    inset 0 0 50px #00000047;
-  // -webkit-box-shadow: inset 0 0 50px #00000047;
-  // box-shadow:         inset 0 0 50px #00000047;
-}
-
-.shimmer {          
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
-  width: 50%;
-  height: 100%;
-  top: 0;
-  left: 0;
-}
-
 body, html {
   height: 100%;
   width: 100%;
@@ -36,25 +10,9 @@ body {
 }
 
 .App {
-  position: relative;
   height: 100vh;
   width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.machine-container {
   position: relative;
-  // width: 100vw;
-  // height: 100vw;
-  // .background {
-  //   position: absolute;
-  //   left: 50%;
-  //   top: 50%;
-  //   transform: translate3d(-50%, -50%, 0);
-  //   width: 100vw;
-  // }
 }
 
 canvas {
@@ -228,12 +186,9 @@ $scan-opacity: 0.75;
 .circle-button.small:active {
   position: relative;
   box-shadow: 1px 1px 1px 0px #b53c24;
-  // border: 3px solid #ffffff1c;
   background: linear-gradient(to bottom, #f06824 5%, #ec5523 100%);
-  // left: 1px;
   top: 1px;
   left: 1px;
-  
 }
 
 .pill-button {
@@ -242,8 +197,6 @@ $scan-opacity: 0.75;
   background-color: #ff8040;
   margin-right: 1px;
   border-width: 2px;
-
-
   border: 3px solid #ffffff37;
   border-top: 0;
   cursor: pointer;
@@ -256,7 +209,6 @@ $scan-opacity: 0.75;
   justify-content: center;
 }
 
-
 .pill-button:active {
   position: relative;
   // box-shadow: 1px 1px 0px 2px #454545;
@@ -264,7 +216,6 @@ $scan-opacity: 0.75;
   // background: linear-gradient(to bottom, #b5b5b5 5%, #b5b5b5 100%);
   // top: 1px;
 }
-
 
 .status-panel {  
   position: fixed;
@@ -319,8 +270,6 @@ $scan-opacity: 0.75;
   gap: 22px;
 }
 
-
-
 .bottom {
   position: absolute;
   bottom: -4%;
@@ -329,6 +278,21 @@ $scan-opacity: 0.75;
   justify-content: space-between;  
 }
 
-.altScreen {
-  
+.inner-shadow {
+  -webkit-box-shadow: inset 8px 5px 8px -1px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: inset 8px 5px 8px -1px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 8px 5px 8px -1px rgba(0, 0, 0, 0.5);
+}
+
+.shimmer {          
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  width: 50%;
+  height: 100%;
+  top: 0;
+  left: 0;
 }

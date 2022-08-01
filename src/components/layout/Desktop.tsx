@@ -17,15 +17,14 @@ const Desktop = () => {
   } = useMachineStore();
 
   return (
-    <div className="App flex flex-col">
-      <div className="machine-container relative w-full 2xl:w-[85%] pt-[3%]">
-        <BTI />
+    <div className="App flex items-center justify-center">
+      <div className="flex flex-col items-start machine-container relative w-full 2xl:w-[85%]">
+        {/* <BTI /> */}
         {/* <SideButtons /> */}
         <TitleImage />
-        <img className="background pointer-events-none" src={bgImg} alt="" />
-        <div className="absolute w-full h-full -top-[11.35%] left-0">
+        <img className="background pt-20 pointer-events-none" src={bgImg} alt="" />
+        <div className=" absolute w-full h-full  -top-[8.8%]  left-0 ">
           <Canvas
-            className="select-none"
             orthographic
             camera={{ zoom: 100, position: [0, 0, 100] }}
             onCreated={(state) => state.gl.clearColor()}

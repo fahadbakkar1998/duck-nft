@@ -5,10 +5,11 @@ const TitleImage = () => {
   const { openBurnForm } = useMachineStore();
   return (
     <img
-      className={`
-        top-0 xl:top-[3%] xl:left-[12%] left-[10%] w-[50%] xl:w-[48%]
-        absolute z-50
-      `}
+      className="
+        z-50 absolute
+        w-[55%] lg:w-[50%] 2xl:w-[45%]
+        left-[12%] top-[5%] 2xl:top-[4%]
+      "
       src={logo}
       alt="Tozzi Ducks"
     />
