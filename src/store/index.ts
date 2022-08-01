@@ -284,6 +284,8 @@ const events = [
 
 events.forEach((event) => {
   contract.on(event, () => {
+    // eslint-disable-next-line no-console
+    console.log(event);
     refreshDucks();
   });
 });

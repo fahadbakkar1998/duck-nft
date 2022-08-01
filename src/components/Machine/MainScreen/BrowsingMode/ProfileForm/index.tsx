@@ -2,7 +2,7 @@ import { useContractFunction } from '@usedapp/core';
 import { utils } from 'ethers';
 import { FC, useRef, useState, useEffect } from 'react';
 import { useQueryClient } from 'react-query';
-import { useMachineContract } from '../../../../../hooks/machine';
+import { contract } from '../../../../../utils/functions';
 import useMachineStore from '../../../../../store';
 import FormButton from '../../AdminMode/common/FormButton';
 import FormInput from '../../AdminMode/common/FormInput';
@@ -20,8 +20,6 @@ const ProfileForm: FC<Props> = ({ open, onClose }) => {
   const [status, setStatus] = useState('');
   const [profile, setProfile] = useState('');
   const { currentDuckId } = useMachineStore();
-
-  const contract = useMachineContract();
   const { send, state } = useContractFunction(contract, 'setDuckProfile');
 
   useTxNotifier(

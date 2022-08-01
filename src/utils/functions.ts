@@ -116,8 +116,6 @@ const fetchDucks = async () => {
   const ducks = nonMintedDucks.map((obj) => mintedTozziDucks.find((o) => o.id === obj.id) || obj);
 
   const finalDucks = [...ducks, ...mintedCustomDucks];
-  // eslint-disable-next-line no-console
-  console.log('ducks loaded', ducks);
   return finalDucks;
 };
 

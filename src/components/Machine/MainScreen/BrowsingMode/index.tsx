@@ -52,7 +52,9 @@ const BrowsingMode = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0.0);
   const { data: machineState } = useMachineState();
-  const filteredDucks = useMemo(() => filterDucks({ ducks, filters: duckFilters, account }), [duckFilters, account]);
+
+  const filteredDucks = filterDucks({ ducks, filters: duckFilters, account });
+
   const selectDuckByDirection = (direction: string) => {
     const currentDuckIndex = findIndex(filteredDucks, (d) => d.id === currentDuckId);
     const nextDuckIndex = directionToDuckIndex(direction, currentDuckIndex);

@@ -5,7 +5,6 @@ import { MintStatus } from '../../../../types/types';
 import FormToggle from './common/FormToggle';
 import FormInput from './common/FormInput';
 import FormButton from './common/FormButton';
-import { useMachineContract } from '../../../../hooks/machine';
 import { useMachineState } from '../../../../state/hooks';
 import AdminFormWrapper from './AdminFormWrapper';
 import { numberRegex, decimalRegex } from '../../../../utils/constants';

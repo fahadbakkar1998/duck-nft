@@ -5,7 +5,7 @@ import FormInput from './common/FormInput';
 import FormButton from './common/FormButton';
 import { useMachineState } from '../../../../state/hooks';
 import AdminFormWrapper from './AdminFormWrapper';
-import { useMachineContract } from '../../../../hooks/machine';
+import { contract } from '../../../../utils/functions';
 import useMachineStore from '../../../../store';
 import { decimalRegex } from '../../../../utils/constants';
 import { useTxNotifier } from '../../../../hooks/transaction';
@@ -17,7 +17,6 @@ const AccountingForm = () => {
   const ownerDisplay = machineState?.ownerEns || shortenAddress(machineState?.owner || '');
   const { setAltMessage } = useMachineStore();
 
-  const contract = useMachineContract();
   const { send, state } = useContractFunction(contract, 'withdraw');
   useTxNotifier(
     {

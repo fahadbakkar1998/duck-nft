@@ -18,7 +18,7 @@ const Shopping = () => {
   } = useMachineStore();
 
   const [duck, setDuck] = useState<DuckData|null>();
-  const filteredDucks = useMemo(() => filterDucks({ ducks, filters: duckFilters, account }), [duckFilters, account]);
+  const filteredDucks = filterDucks({ ducks, filters: duckFilters, account });
 
   useEffect(() => {
     const duck = filteredDucks.find((d) => d.id === currentDuckId);
