@@ -6,7 +6,7 @@ const TitleImage = () => {
   return (
     <img
       className={`
-        top-[25.3%] left-[10%] w-[60%] 
+        top-0 xl:top-[3%] xl:left-[12%] left-[10%] w-[50%] xl:w-[48%]
         absolute z-50
       `}
       src={logo}

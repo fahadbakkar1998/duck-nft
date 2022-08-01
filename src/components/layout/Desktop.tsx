@@ -18,7 +18,7 @@ const Desktop = () => {
 
   return (
     <div className="App flex flex-col">
-      <div className="machine-container relative">
+      <div className="machine-container relative w-full xl:w-[85%] pt-[3%]">
         {/* <BTI />
         <SideButtons /> */}
         <TitleImage />
