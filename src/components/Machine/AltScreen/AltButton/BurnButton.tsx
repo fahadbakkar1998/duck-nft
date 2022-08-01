@@ -34,22 +34,23 @@ const BurnButton = () => {
     ducks,
   } = useMachineStore();
 
-  const duck = ducks?.find((d) => d.id === currentAdminDuckId);
-  const duckIndex = indexOf(ducks, duck);
+  const burnableDucks = ducks.filter((d) => d.burnable);
+  const duck = burnableDucks?.filter((d) => d.burnable).find((d) => d.id === currentAdminDuckId);  
+  const duckIndex = indexOf(burnableDucks, duck);
 
   const handleClickNext = () => {
-    const duckIndex = indexOf(ducks, duck);
+    const duckIndex = indexOf(burnableDucks, duck);
     const nextDuckIndex = duckIndex + 1;
-    if (nextDuckIndex < ducks.length) {
-      setCurrentAdminDuckId(ducks[nextDuckIndex].id);
+    if (nextDuckIndex < burnableDucks.length) {
+      setCurrentAdminDuckId(burnableDucks[nextDuckIndex].id);
     }
   };
 
   const handleClickPrev = () => {
-    const duckIndex = indexOf(ducks, duck);
+    const duckIndex = indexOf(burnableDucks, duck);
     const prevDuckIndex = duckIndex - 1;
     if (prevDuckIndex >= 0) {
-      setCurrentAdminDuckId(ducks[prevDuckIndex].id);
+      setCurrentAdminDuckId(burnableDucks[prevDuckIndex].id);
     }
   };
 
@@ -61,7 +62,7 @@ const BurnButton = () => {
 
   return !openBurnForm ? (
     <div className="flex justify-between items-center h-full w-full px-3">
-      <DuckNavButton disabled={duckIndex <= 200} onClick={handleClickPrev} />
+      <DuckNavButton disabled={duckIndex <= 0} onClick={handleClickPrev} />
       <Button onClick={handleClickBurn}>
         <div
           className={`
@@ -74,7 +75,7 @@ const BurnButton = () => {
       </Button>
       <DuckNavButton
         flipped
-        disabled={duckIndex === ducks.length - 1}
+        disabled={duckIndex === burnableDucks.length - 1}
         onClick={handleClickNext}
       />
     </div>

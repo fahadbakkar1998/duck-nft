@@ -37,7 +37,7 @@ const Admin: FC = () => {
 
   const burnableDucks = ducks.filter((duck) => duck.burnable);
   const duck = burnableDucks?.find((d) => d.id === currentAdminDuckId);
-  const duckIndex = indexOf(ducks, duck) - 200;
+  const duckIndex = indexOf(burnableDucks, duck);
 
   useEffect(() => {
     if (burnableDucks.length) {
