@@ -35,11 +35,11 @@ const StatusPanelWrap: FC = () => {
   return (
     <Screen
       scale={[
-        (0.18 * min) / minViewLength,
-        (0.18 * min) / minViewLength,
-        (0.18 * min) / minViewLength,
+        (0.179 * min) / minViewLength,
+        (0.179 * min) / minViewLength,
+        (0.179 * min) / minViewLength,
       ]}
-      position={[-0.1855 * min, -0.1795 * min, 0]}
+      position={[-0.1842 * min, -0.1808 * min, 0]}
       rotation={[0.0, 0.0, 0.0]}
       transform
     >

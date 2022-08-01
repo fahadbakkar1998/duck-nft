@@ -1,7 +1,9 @@
 import { FC, Suspense, useEffect, useRef } from 'react';
+import useSound from 'use-sound';
 import cn from 'classnames';
 import { useDToolStore } from '../../../../store/dtoolStore';
 import useMachineStore from '../../../../store';
+
 import { colors, MachineMode } from '../../../../utils/constants';
 import duckbill from '../../../../assets/duck-bill.png';
 import CircleButton from '../../../common/CircleButton';
@@ -13,6 +15,8 @@ import trashIcon from '../../../../assets/img/icons/trash.svg';
 import undoIcon from '../../../../assets/img/icons/undo.svg';
 import redoIcon from '../../../../assets/img/icons/redo.svg';
 import randomIcon from '../../../../assets/img/icons/random.svg';
+// @ts-ignore
+import keyPress from '../../../../assets/audio/fart.wav';
 import './index.scss';
 
 const layers: Object[] = [
@@ -65,6 +69,7 @@ const DrawingTool: FC = (props: any) => {
     setSelectedColor,
   } = useDToolStore();
   const { currentMode } = useMachineStore();
+  const [playKeyPress] = useSound(keyPress);
 
   // useAccountChange();
 
@@ -113,12 +118,14 @@ const DrawingTool: FC = (props: any) => {
         <div className="right">
           <CircleButton
             onClick={() => {
+              playKeyPress();
               DToolInst.fillWithRandomColor(1);
             }}
             image={randomIcon}
           />
           <CircleButton
             onClick={() => {
+              playKeyPress();
               setSelectedLayerIndex(0);
               DToolInst.selectLayer(0);
               DToolInst.selectTool(0);
@@ -130,6 +137,7 @@ const DrawingTool: FC = (props: any) => {
           />
           <CircleButton
             onClick={() => {
+              playKeyPress();
               setSelectedLayerIndex(0);
               DToolInst.selectLayer(0);
               DToolInst.selectTool(1);
@@ -140,6 +148,7 @@ const DrawingTool: FC = (props: any) => {
           />
           <CircleButton
             onClick={() => {
+              playKeyPress();
               setSelectedLayerIndex(0);
               DToolInst.selectLayer(0);
               DToolInst.selectTool(0);
@@ -153,11 +162,15 @@ const DrawingTool: FC = (props: any) => {
 
         <div className="left">
           <CircleButton
-            onClick={() => toggleEyeDrop(true)}
+            onClick={() => {
+              toggleEyeDrop(true);
+              playKeyPress();
+            }}
             image={dropperIcon}
           />
           <CircleButton
             onClick={() => {
+              playKeyPress();
               DToolInst.undoredo(-1);
             }}
             image={undoIcon}
@@ -165,12 +178,14 @@ const DrawingTool: FC = (props: any) => {
 
           <CircleButton
             onClick={() => {
+              playKeyPress();
               DToolInst.undoredo(1);
             }}
             image={redoIcon}
           />
           <CircleButton
             onClick={() => {
+              playKeyPress();
               DToolInst.eraseCurrentLayer();
             }}
             image={trashIcon}

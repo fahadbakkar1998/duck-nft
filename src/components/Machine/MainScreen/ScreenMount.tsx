@@ -1,12 +1,15 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-plusplus */
 import { useState, useRef } from 'react';
+import useSound from 'use-sound';
 import { a, useSpring, easings } from '@react-spring/three';
 import { useLoader, useThree } from 'react-three-fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import useMachineStore from '../../../store';
 import { MachineMode, minViewLength } from '../../../utils/constants';
 import Screen from './index';
+// @ts-ignore
+import keyPress from '../../../assets/audio/fart.wav';
 
 let globalRoundCount = 0;
 // let screenIsRotating = false;
@@ -18,6 +21,7 @@ export const MainScreen = () => {
   const [screenIsRotating, setScreenIsRotating] = useState(false);
   const gltfDisk = useLoader(GLTFLoader, 'assets/models/DuckDisk.glb');
   const modelRef = useRef();
+  const [playKeyPress] = useSound(keyPress);
 
   const {
     switchModes,
@@ -41,6 +45,7 @@ export const MainScreen = () => {
   const handleModeSwitch = (direction: string) => {
     if (isLocked) return;
     if (currentMode === MachineMode.Off) return;
+    playKeyPress();
     if (screenIsRotating || processing || showTxStatus) return;
     setScreenIsRotating(true);
     setTimeout(() => {

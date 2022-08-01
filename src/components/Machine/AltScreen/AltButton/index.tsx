@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { useEffect, useState } from 'react';
 import { useQueryClient } from 'react-query';
+import useSound from 'use-sound';
 import { useContractFunction, useEthers } from '@usedapp/core';
 import { utils } from 'ethers';
 import useMachineStore from '../../../../store';
@@ -14,6 +15,8 @@ import AltButtonLoader from './AltButtonLoader';
 import BurnButton from './BurnButton';
 import { useTxNotifier } from '../../../../hooks/transaction';
 import { useDToolStore } from '../../../../store/dtoolStore';
+// @ts-ignore
+import lcdPress from '../../../../assets/audio/lcd.ogg';
 
 const ButtonView = () => {
   const {
@@ -27,6 +30,7 @@ const ButtonView = () => {
     setAccount,
   } = useMachineStore();
 
+  const [play] = useSound(lcdPress);
   const { DToolInst } = useDToolStore();
 
   const selectedDuck = ducks?.find((d) => d.id === currentDuckId);
@@ -65,9 +69,14 @@ const ButtonView = () => {
     sendFnCustomTozziDuck(account, base64data, { value: price });
   };
 
+  const handleConnectWallet = () => {
+    play();
+    activateBrowserWallet();
+  };
+
   if (!account) {
     return (
-      <Button onClick={() => activateBrowserWallet()}>
+      <Button onClick={handleConnectWallet}>
         <div className="flex space-x-2 justify-center items-center lcd-font opacity-75 hover:font-bold text-base mt-1">
           connect wallet
         </div>

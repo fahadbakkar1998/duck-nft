@@ -4,15 +4,21 @@ body, html {
   margin: 0;
 }
 
-body {  
-  // background: rgb(127, 255, 41);
+body {
   background-color: #02c6fd;
 }
 
-.App {
-  height: 100vh;
-  width: 100vw;
+.app-container {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  .machine-container {
+    margin-top: 7%;
+    aspect-ratio: 14.25 / 9;
+    position: relative;
+  }
 }
 
 canvas {

@@ -8,7 +8,7 @@ const TitleImage = () => {
       className="
         z-50 absolute
         w-[55%] lg:w-[50%] 2xl:w-[45%]
-        left-[12%] top-[5%] 2xl:top-[4%]
+        left-[12%] -top-[4%] 2xl:top-[1%]
       "
       src={logo}
       alt="Tozzi Ducks"

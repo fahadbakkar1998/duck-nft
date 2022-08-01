@@ -1,11 +1,15 @@
 import { FC } from 'react';
+import useSound from 'use-sound';
 import { useMachineStore } from '../../store';
 import { DuckData } from '../../types/types';
+// @ts-ignore
+import bloop from '../../assets/audio/select_duck_bloop.wav';
 
 const DuckCard: FC<DuckData> = (data) => {
   const { currentDuckId, setCurrentDuckId, showAvailabilityOnDuckCards, showDuckIdOnDuckCards } = useMachineStore();
-
+  const [playBloop] = useSound(bloop, { volume: 0.5 });
   const handleClick = () => {
+    playBloop();
     setCurrentDuckId(data.id);
   };
 
