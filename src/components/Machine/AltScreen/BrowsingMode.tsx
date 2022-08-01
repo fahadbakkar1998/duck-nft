@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from '../../../../node_modules/framer-motion/
 import useMachineStore from '../../../store';
 import DuckProfile from './DuckProfile';
 import { DuckData } from '../../../types/types';
-import { filterDucks } from '../../../utils/helpers';
 
 const Shopping = () => {
   const {
@@ -12,13 +11,10 @@ const Shopping = () => {
     showDuckProfile,
     currentDuckId,
     setAltMessage,
-    duckFilters,
-    account,
-    ducks,
+    filteredDucks,
   } = useMachineStore();
 
   const [duck, setDuck] = useState<DuckData|null>();
-  const filteredDucks = filterDucks({ ducks, filters: duckFilters, account });
 
   useEffect(() => {
     const duck = filteredDucks.find((d) => d.id === currentDuckId);

@@ -7,7 +7,6 @@ import modelObject from '../../../assets/glb/key_pad.glb';
 import { MachineMode, minViewLength } from '../../../utils/constants';
 import Display from '../Display';
 import { useMachineStore } from '../../../store';
-import { filterDucks } from '../../../utils/helpers';
 
 const Keyboard: FC = () => {
   const [vrm, setVrm] = useState<any>(null);
@@ -17,9 +16,7 @@ const Keyboard: FC = () => {
   const [value, setValue] = useState<string>('');
   const { currentDuckId, currentMode } = useMachineStore();
   const [clearOnNext, setClearOnNext] = useState(true);
-  const { setCurrentDuckId, setAltMessage, ducks, duckFilters, account } = useMachineStore();
-
-  const filteredDucks = filterDucks({ ducks, filters: duckFilters, account });
+  const { setCurrentDuckId, setAltMessage, filteredDucks } = useMachineStore();
 
   const enterClick = (value: string) => {
     const duckExists = filteredDucks?.find((d) => d.id === Number(value));

@@ -32,10 +32,9 @@ const Admin: FC = () => {
     altIsStatic,
     setCurrentAdminDuckId,
     currentAdminDuckId,
-    ducks,
+    burnableDucks,
   } = useMachineStore();
 
-  const burnableDucks = ducks.filter((duck) => duck.burnable);
   const duck = burnableDucks?.find((d) => d.id === currentAdminDuckId);
   const duckIndex = indexOf(burnableDucks, duck);
 

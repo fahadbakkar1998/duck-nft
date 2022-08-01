@@ -13,6 +13,8 @@ const staticDuckData: DuckData[] = Object.values(proofs).map((proof, index) => {
 type MachineStore = {
   ducks: DuckData[];
   setDucks: (ducks: DuckData[]) => void;
+  burnableDucks: DuckData[];
+  filteredDucks: DuckData[];
 
   account: string | undefined | null;
   setAccount: (account: string | undefined | null) => void;
@@ -74,8 +76,13 @@ export const useMachineStore = create<MachineStore>(
   (set: SetState<MachineStore>) => ({
 
     ducks: [],
+    burnableDucks: [],
+    filteredDucks: [],
     setDucks: (ducks: DuckData[]): void => {
-      set({ ducks });
+      set((state) => ({
+        ducks,
+        burnableDucks: ducks.filter((d) => d.burnable),
+      }));
     },
 
     account: undefined,
@@ -136,7 +143,10 @@ export const useMachineStore = create<MachineStore>(
       hideUI: false,
     },
     setDuckFilters: (filters: DuckFilters): void => {
-      set({ duckFilters: filters });
+      set((state) => ({
+        duckFilters: filters,
+        filteredDucks: filterDucks({ ducks: state.ducks, filters, account: state.account }),
+      }));
     },
     showAvailabilityOnDuckCards: true,
     setShowAvailabilityOnDuckCards: (show: boolean): void => {
@@ -269,6 +279,8 @@ const refreshDucks = () => {
       useMachineStore.setState((state) => ({
         ...state,
         ducks,
+        burnableDucks: ducks.filter((d) => d.burnable),
+        filteredDucks: filterDucks({ ducks, filters: state.duckFilters, account: state.account }),
       }));
     });
 };
@@ -285,7 +297,6 @@ const events = [
 events.forEach((event) => {
   contract.on(event, () => {
     // eslint-disable-next-line no-console
-    console.log(event);
     refreshDucks();
   });
 });

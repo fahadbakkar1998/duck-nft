@@ -13,7 +13,6 @@ import filterIcon from '../../../../assets/img/icons/filter.svg';
 import ScrollBar from './ScrollBar';
 import Motd from './Motd';
 import ProfileForm from './ProfileForm';
-import { filterDucks } from '../../../../utils/helpers';
 
 const directionToDuckIndex = (direction: string, currentDuckIndex: number) => {
   let nextDuckIndex = currentDuckIndex;
@@ -44,15 +43,11 @@ const BrowsingMode = () => {
     setShowMotd,
     showProfileForm,
     setShowProfileForm,
-    ducks,
-    duckFilters,
-    account,
+    filteredDucks,
   } = useMachineStore();
   const [showFilters, setShowFilters] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0.0);
   const { data: machineState } = useMachineState();
-
-  const filteredDucks = filterDucks({ ducks, filters: duckFilters, account });
 
   const selectDuckByDirection = (direction: string) => {
     const currentDuckIndex = findIndex(filteredDucks, (d) => d.id === currentDuckId);

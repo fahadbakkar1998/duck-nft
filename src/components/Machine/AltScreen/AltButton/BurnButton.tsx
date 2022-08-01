@@ -31,11 +31,10 @@ const BurnButton = () => {
     openBurnForm,
     setCurrentAdminDuckId,
     currentAdminDuckId,
-    ducks,
+    burnableDucks,
   } = useMachineStore();
 
-  const burnableDucks = ducks.filter((d) => d.burnable);
-  const duck = burnableDucks?.filter((d) => d.burnable).find((d) => d.id === currentAdminDuckId);  
+  const duck = burnableDucks?.filter((d) => d.burnable).find((d) => d.id === currentAdminDuckId);
   const duckIndex = indexOf(burnableDucks, duck);
 
   const handleClickNext = () => {
@@ -70,7 +69,7 @@ const BurnButton = () => {
             ${duckIndex >= 0 ? 'opacity-75 hover:font-bold' : 'opacity-30'}
           `}
         >
-          burn
+          burn {currentAdminDuckId}
         </div>
       </Button>
       <DuckNavButton
