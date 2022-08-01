@@ -9,16 +9,16 @@ import AdminFormWrapper from './AdminFormWrapper';
 import { useTxNotifier } from '../../../../hooks/transaction';
 import { getCustomErrorText } from '../../../../utils/helpers';
 import { Allowance } from '../../../../types/types';
+import { contract } from '../../../../utils/functions';
 
 const AllowancesForm = () => {
   const { setAltMessage } = useMachineStore();
   const [allowanceAccount, setAllowanceAccount] = useState('');
   const [checkedAllowance, setCheckedAllowance] = useState<Allowance|null>(null);
   const { library } = useEthers();
-  const machineContract = new Contract(process.env.REACT_APP_MACHINE_CONTRACT_ADDRESS!, contractAbi, library);
   const [allowanceFormValues, setAllowanceFormValues] = useState<Allowance>({});
 
-  const { send, state } = useContractFunction(machineContract, 'setDuckAllowance');
+  const { send, state } = useContractFunction(contract, 'setDuckAllowance');
   useTxNotifier({ mining: 'Setting Duck Allowance' }, state);
 
   useEffect(() => {
@@ -26,9 +26,9 @@ const AllowancesForm = () => {
   }, [allowanceAccount]);
 
   const handleCheckAllowance = async () => {
-    if (machineContract) {
+    if (contract) {
       try {
-        const result = await machineContract.duckAllowances(allowanceAccount);
+        const result = await contract.duckAllowances(allowanceAccount);
         const allowance = {
           tozziDucks: result.tozziDuckAllowance.toNumber(),
           customDucks: result.customDuckAllowance.toNumber(),
@@ -59,9 +59,14 @@ const AllowancesForm = () => {
   const handleSetAllowance = () => {
     try {
       const { account, tozziDucks, customDucks } = allowanceFormValues;
-      send(account, tozziDucks, customDucks);
+      send(account, [tozziDucks, customDucks]);
+      // eslint-disable-next-line no-console
+      console.log('wtf');
     } catch (e) {
-      setAltMessage({ message: getCustomErrorText(undefined) });
+      // eslint-disable-next-line no-console
+      console.log('wtf');
+      // @ts-ignore
+      setAltMessage({ message: getCustomErrorText(e.message) });
     }
   };
 

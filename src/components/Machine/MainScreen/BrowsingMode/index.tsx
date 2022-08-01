@@ -1,5 +1,5 @@
 import KeyboardEventHandler from 'react-keyboard-event-handler';
-import React, { useMemo, useState, useRef, UIEvent } from 'react';
+import React, { useState, UIEvent } from 'react';
 import { findIndex } from 'lodash';
 import { useEthers } from '@usedapp/core';
 import DuckCard from '../../../DuckCard/DuckCard';
@@ -36,7 +36,6 @@ const directionToDuckIndex = (direction: string, currentDuckIndex: number) => {
 };
 
 const BrowsingMode = () => {
-  // useAccountChange();
   const {
     isSwitchingModes,
     currentDuckId,

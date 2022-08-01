@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import React, { FC, useEffect, useRef, useState, useMemo } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { useThree } from 'react-three-fiber';
 import { padStart } from 'lodash';
@@ -19,7 +19,7 @@ const Keyboard: FC = () => {
   const [clearOnNext, setClearOnNext] = useState(true);
   const { setCurrentDuckId, setAltMessage, ducks, duckFilters, account } = useMachineStore();
 
-  const filteredDucks = useMemo(() => filterDucks({ ducks, filters: duckFilters, account }), [duckFilters, account]);
+  const filteredDucks = filterDucks({ ducks, filters: duckFilters, account });
 
   const enterClick = (value: string) => {
     const duckExists = filteredDucks?.find((d) => d.id === Number(value));
