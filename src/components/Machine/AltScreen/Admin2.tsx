@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { indexOf } from 'lodash';
 // eslint-disable-next-line import/no-relative-packages
 import { motion, AnimatePresence } from '../../../../node_modules/framer-motion/dist/framer-motion';
@@ -38,7 +38,6 @@ const Admin: FC = () => {
   const burnableDucks = ducks.filter((duck) => duck.burnable);
   const duck = burnableDucks?.find((d) => d.id === currentAdminDuckId);
   const duckIndex = indexOf(ducks, duck) - 200;
-  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     if (burnableDucks.length) {
@@ -47,11 +46,7 @@ const Admin: FC = () => {
   }, []);
 
   return burnableDucks.length ? (
-    <div
-      className="absolute z-10"
-      onMouseEnter={() => setIsHovered(true)}
-      // onMouseLeave={() => setIsHovered(false)}
-    >
+    <div className="absolute z-10">
       { !!duck && (
         <div className="h-full">
           <AnimatePresence>

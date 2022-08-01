@@ -27,7 +27,6 @@ const Desktop = () => {
           className="select-none"
           orthographic
           camera={{ zoom: 100, position: [0, 0, 100] }}
-          shadows
           onCreated={(state) => state.gl.clearColor()}
         >
           <Suspense fallback={null}>

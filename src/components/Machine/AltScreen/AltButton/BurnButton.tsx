@@ -61,7 +61,7 @@ const BurnButton = () => {
 
   return !openBurnForm ? (
     <div className="flex justify-between items-center h-full w-full px-3">
-      <DuckNavButton disabled={duckIndex <= 0} onClick={handleClickPrev} />
+      <DuckNavButton disabled={duckIndex <= 200} onClick={handleClickPrev} />
       <Button onClick={handleClickBurn}>
         <div
           className={`
