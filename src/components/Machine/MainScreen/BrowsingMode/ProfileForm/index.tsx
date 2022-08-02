@@ -2,6 +2,7 @@ import { useContractFunction } from '@usedapp/core';
 import { utils } from 'ethers';
 import { FC, useRef, useState, useEffect } from 'react';
 import { useQueryClient } from 'react-query';
+import { DuckData } from '../../../../../types/types';
 import { contract } from '../../../../../utils/functions';
 import useMachineStore from '../../../../../store';
 import FormButton from '../../AdminMode/common/FormButton';
@@ -16,14 +17,20 @@ interface Props {
 }
 
 const ProfileForm: FC<Props> = ({ open, onClose }) => {
-  const { currentDuckId, ducks } = useMachineStore();
-  const duck = ducks.find((d) => d.id === currentDuckId);
-  const currStatus = duck?.metadata ? getMetadataAttribute(duck.metadata, 'Status') : '';
+  const { currentDuckId, filteredDucks } = useMachineStore();
   const textRef = useRef<HTMLTextAreaElement>(null);
-  const [name, setName] = useState(duck?.metadata?.name || '');
-  const [status, setStatus] = useState(currStatus || '');
-  const [profile, setProfile] = useState(duck?.metadata?.description || '');
+  const [name, setName] = useState('');
+  const [status, setStatus] = useState('');
+  const [profile, setProfile] = useState('');
   const { send, state } = useContractFunction(contract, 'setDuckProfile');
+
+  useEffect(() => {
+    const duck = filteredDucks.find((d) => d.id === currentDuckId);
+    const status = duck?.metadata ? getMetadataAttribute(duck.metadata, 'Status') : '';
+    setName(duck?.metadata?.name || '');
+    setProfile(duck?.metadata?.description || '');
+    setStatus(status || '');
+  }, [currentDuckId, filteredDucks]);
 
   useTxNotifier(
     {
