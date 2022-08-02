@@ -8,6 +8,7 @@ import FormButton from '../../AdminMode/common/FormButton';
 import FormInput from '../../AdminMode/common/FormInput';
 import Modal from '../../OnScreenModal';
 import { useTxNotifier } from '../../../../../hooks/transaction';
+import { getMetadataAttribute } from '../../../../../utils/helpers';
 
 interface Props {
   open: boolean;
@@ -15,11 +16,13 @@ interface Props {
 }
 
 const ProfileForm: FC<Props> = ({ open, onClose }) => {
+  const { currentDuckId, ducks } = useMachineStore();
+  const duck = ducks.find((d) => d.id === currentDuckId);
+  const currStatus = duck?.metadata ? getMetadataAttribute(duck.metadata, 'Status') : '';
   const textRef = useRef<HTMLTextAreaElement>(null);
-  const [name, setName] = useState('');
-  const [status, setStatus] = useState('');
-  const [profile, setProfile] = useState('');
-  const { currentDuckId } = useMachineStore();
+  const [name, setName] = useState(duck?.metadata?.name || '');
+  const [status, setStatus] = useState(currStatus || '');
+  const [profile, setProfile] = useState(duck?.metadata?.description || '');
   const { send, state } = useContractFunction(contract, 'setDuckProfile');
 
   useTxNotifier(
@@ -37,6 +40,7 @@ const ProfileForm: FC<Props> = ({ open, onClose }) => {
       utils.formatBytes32String(status),
       profile,
     );
+    onClose();
   };
 
   return (

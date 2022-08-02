@@ -19,7 +19,7 @@ const Shopping = () => {
   useEffect(() => {
     const duck = filteredDucks.find((d) => d.id === currentDuckId);
     setDuck(duck);
-  }, [currentDuckId]);
+  }, [currentDuckId, filteredDucks]);
 
   return duck ? (
     <div className="absolute z-10">
