@@ -9,9 +9,12 @@ interface ModalProps {
   onClose: () => void;
   className?: string;
   buttons?: ReactNode;
+  position?: Object;
 }
 
-const Modal: FC<ModalProps> = ({ children, open, onClose, className, buttons }) => {
+const defaultPosition = { x: '10%', y: '10%' };
+
+const Modal: FC<ModalProps> = ({ children, open, onClose, className, buttons, position = defaultPosition }) => {
   const handleClose = () => {
     onClose();
   };
@@ -20,9 +23,9 @@ const Modal: FC<ModalProps> = ({ children, open, onClose, className, buttons }) 
     <AnimatePresence>
       { open && (
         <motion.div
-          initial={{ scale: 0, x: '10%', y: '10%' }}
-          animate={{ scale: 1, x: '10%', y: '10%' }}
-          exit={{ scale: 0, x: '10%', y: '10%' }}
+          initial={{ scale: 0, ...position }}
+          animate={{ scale: 1, ...position }}
+          exit={{ scale: 0, ...position }}
           transition={{ duration: 0.2 }}
           className={`   
             ${className}       

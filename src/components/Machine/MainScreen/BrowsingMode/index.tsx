@@ -1,5 +1,5 @@
 import KeyboardEventHandler from 'react-keyboard-event-handler';
-import React, { useState, UIEvent } from 'react';
+import React, { useState, UIEvent, useEffect } from 'react';
 import { findIndex } from 'lodash';
 import { useEthers } from '@usedapp/core';
 import DuckCard from '../../../DuckCard/DuckCard';
@@ -58,6 +58,17 @@ const BrowsingMode = () => {
       document.getElementById(`item${nextDuckId}`)?.scrollIntoView({ block: 'nearest' });
     }
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log(currentDuckId);
+    setTimeout(() => {
+      const duck = document.getElementById(`item${currentDuckId}`);
+      if (duck) {
+        duck.scrollIntoView({ block: 'nearest' });
+      }
+    }, 300);
+  }, []);
 
   const handleScroll = (e: UIEvent<HTMLDivElement>) => {
     const currScrollTop = e.currentTarget.scrollTop;

@@ -3,6 +3,7 @@ import useSound from 'use-sound';
 import cn from 'classnames';
 import { useDToolStore } from '../../../../store/dtoolStore';
 import useMachineStore from '../../../../store';
+import MintedModal from './MintedModal';
 
 import { colors, MachineMode } from '../../../../utils/constants';
 import duckbill from '../../../../assets/duck-bill.png';
@@ -57,7 +58,11 @@ const layers: Object[] = [
   },
 ];
 
-const DrawingTool: FC = (props: any) => {
+interface DrawingToolProps {
+  switchModes: (direction: string) => void;
+}
+
+const DrawingTool: FC<DrawingToolProps> = ({ switchModes }) => {
   const drawingCanvas = useRef<HTMLCanvasElement>(null);
   const {
     DToolInst,
@@ -191,6 +196,11 @@ const DrawingTool: FC = (props: any) => {
             image={trashIcon}
           />
         </div>
+        <MintedModal
+          switchModes={switchModes}
+          open
+          onClose={() => { }}
+        />
       </div>
     </Suspense>
   );
