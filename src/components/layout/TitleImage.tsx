@@ -7,8 +7,8 @@ const TitleImage = () => {
     <img
       className="
         z-50 absolute
-        w-[55%] lg:w-[50%] 2xl:w-[45%]
-        left-[12%] -top-[4%] 2xl:top-[1%]
+        w-[55%] lg:w-[50%] 2xl:w-[50%]
+        left-[12%] -top-[4%] 2xl:-top-[3%]
       "
       src={logo}
       alt="Tozzi Ducks"

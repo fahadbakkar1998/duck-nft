@@ -1,0 +1,14 @@
+.social-icon {
+  stroke: #cf2323cc;
+  stroke-width: 10;
+  stroke-opacity: 0.75;
+  @apply w-6 h-6 lg:w-10 lg:h-10;
+  @apply fill-[#f68e45] hover:fill-[#ffac59] transition;
+}
+
+.orange {
+  stroke: #cf2323;
+  stroke-width: 10;
+  stroke-opacity: 0.75;
+  @apply fill-[#f68e45] hover:fill-[#ffac59] transition;
+}

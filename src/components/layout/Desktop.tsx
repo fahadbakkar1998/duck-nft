@@ -9,6 +9,7 @@ import BTI from '../Machine/BinaryToggleInterface';
 import SideButtons from '../Machine/AltScreen/SideButtons';
 import Background from './Background';
 import TitleImage from './TitleImage';
+import Footer from './Footer';
 
 const Desktop = () => {
   const {
@@ -19,7 +20,7 @@ const Desktop = () => {
   return (
     <div className="app-container overflow-hidden">
       <div
-        className="mx-auto machine-container w-full 2xl:w-[85%]"
+        className="mx-auto machine-container w-full 2xl:w-[80%]"
       >
         <BTI />
         {/* <SideButtons /> */}
@@ -37,6 +38,7 @@ const Desktop = () => {
             <Machine />
           </Suspense>
         </Canvas>
+        <Footer />
       </div>
       <OwnersManualModal modalIsOpen={isOwnersManualOpen} setModalIsOpen={setIsOwnersManualOpen} />
     </div>
