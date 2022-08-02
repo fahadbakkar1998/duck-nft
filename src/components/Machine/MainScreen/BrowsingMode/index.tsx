@@ -75,7 +75,7 @@ const BrowsingMode = () => {
         onKeyEvent={(key) => selectDuckByDirection(key)}
       />
       <div
-        className="main scanline"
+        className="main"
       >
         <div
           id="mainscreen"
