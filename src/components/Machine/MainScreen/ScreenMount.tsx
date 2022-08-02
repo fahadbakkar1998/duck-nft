@@ -9,7 +9,7 @@ import useMachineStore from '../../../store';
 import { MachineMode, minViewLength } from '../../../utils/constants';
 import Screen from './index';
 // @ts-ignore
-import keyPress from '../../../assets/audio/fart.wav';
+import keyPress from '../../../assets/audio/keypress.mp3';
 
 let globalRoundCount = 0;
 // let screenIsRotating = false;

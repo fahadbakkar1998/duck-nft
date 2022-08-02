@@ -16,7 +16,7 @@ import undoIcon from '../../../../assets/img/icons/undo.svg';
 import redoIcon from '../../../../assets/img/icons/redo.svg';
 import randomIcon from '../../../../assets/img/icons/random.svg';
 // @ts-ignore
-import keyPress from '../../../../assets/audio/fart.wav';
+import keyPress from '../../../../assets/audio/keypress.mp3';
 import './index.scss';
 
 const layers: Object[] = [
