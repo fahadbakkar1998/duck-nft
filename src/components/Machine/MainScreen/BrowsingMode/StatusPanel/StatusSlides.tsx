@@ -2,11 +2,10 @@ import { FC, useState } from 'react';
 import { shortenAddress } from '@usedapp/core';
 // eslint-disable-next-line import/no-relative-packages
 import { motion, AnimatePresence } from '../../../../../../node_modules/framer-motion/dist/framer-motion';
-import { MachineConfig, MachineState } from '../../../../../types/types';
+import { MachineState } from '../../../../../types/types';
 import useMachineStore from '../../../../../store';
 import NavButton from './NavButton';
 import { mintStatusName } from '../../../../../utils/helpers';
-import { useEnsOrShort } from '../../../../../hooks';
 
 interface SlideProps {
   state?: MachineState | undefined;
@@ -15,7 +14,7 @@ interface SlideProps {
 const TozziSlide: FC<SlideProps> = ({ state }) => {
   return (
     <div className="w-full flex justify-between px-4 items-center">
-      <div className="px-3 text-[#656b4d] transparent bg-black opacity-75">
+      <div className="px-3 text-[#ffdf74] transparent bg-black bg-opacity-75">
         tozzi ducks
       </div>
       <div>
@@ -31,7 +30,7 @@ const TozziSlide: FC<SlideProps> = ({ state }) => {
 const CustomSlide: FC<SlideProps> = ({ state }) => {
   return (
     <div className="w-full flex justify-between px-4 items-center">
-      <div className="px-3 text-[#656b4d] transparent bg-black opacity-75">
+      <div className="px-3 text-[#ffdf74] transparent bg-black opacity-75">
         custom ducks
       </div>
       <div>

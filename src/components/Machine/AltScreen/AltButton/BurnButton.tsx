@@ -78,7 +78,12 @@ const BurnButton = () => {
         onClick={handleClickNext}
       />
     </div>
-  ) : <div className="lcd-font h-full w-full flex justify-center items-center opacity-50">USE FORM --&gt;</div>;
+  ) : (
+    <div className="lcd-font h-full w-full space-x-5 flex justify-center items-center text-xl opacity-50">
+      <p>USE FORM</p>
+      <div className="animate-pokeRight">--&gt;</div>
+    </div>
+  );
 };
 
 export default BurnButton;
