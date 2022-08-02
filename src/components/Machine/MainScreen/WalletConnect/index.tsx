@@ -3,7 +3,7 @@ import { useEthers } from '@usedapp/core';
 import './index.scss';
 import useMachineStore from '../../../../store';
 import { MachineMode } from '../../../../utils/constants';
-import { DuckLogo, ChainsawLogo } from '../../../common/SvgIcon';
+import { DuckLogo } from '../../../common/SvgIcon';
 import { useMachineState } from '../../../../state/hooks';
 
 const WalletConnect = () => {

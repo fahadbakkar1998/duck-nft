@@ -2,7 +2,7 @@
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable react/no-array-index-key */
 import { FC } from 'react';
-import { ChainsawLogo, DuckLogo, DiscordIcon, InstagramIcon, TwitterIcon } from '../common/SvgIcon';
+import { DuckLogo, DiscordIcon, InstagramIcon, TwitterIcon } from '../common/SvgIcon';
 
 const DuckImage: FC<{src: string}> = ({ src }) => {
   return (

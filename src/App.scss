@@ -78,6 +78,10 @@ canvas {
   );
 }
 
+.title-image {
+  filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.2));
+}
+
 .circle-button {
   box-shadow: 1px 2px 2px 2px #b53c24;
   background: linear-gradient(to bottom, #ff912a 5%, #ff6e25 100%);

@@ -6,6 +6,7 @@ const TitleImage = () => {
   return (
     <img
       className="
+        title-image
         z-50 absolute
         w-[55%] lg:w-[50%] 2xl:w-[50%]
         left-[12%] -top-[4%] 2xl:-top-[3%]
