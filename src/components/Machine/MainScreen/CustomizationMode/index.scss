@@ -85,9 +85,10 @@
     height: 24px;
     top: 163px;
     left: 178px;
-    border: 2px solid rgba(0, 0, 0, 0.404);
+    border: 1px solid rgba(0, 0, 0, 0.404);
     border-right: 0;
-    border-radius: 0;
+    border-radius: 10%;
+    clip-path: polygon(-10% 0, 100% 0, 95.5% 100%, -1% 100%);
     
   }
   & .react-colorful__saturation-pointer {
