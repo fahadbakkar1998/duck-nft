@@ -54,6 +54,7 @@ const ButtonView = () => {
   const handleMintTozziDuck = async () => {
     const selectedDuck = ducks?.find((d) => d.id === currentDuckId);
     const canMint = selectedDuck && !selectedDuck.owner;
+    play();
     if (canMint) {
       const { tozziMintPrice } = await fetchMachineConfig();
       const price = utils.parseEther(tozziMintPrice.toString());
@@ -63,6 +64,7 @@ const ButtonView = () => {
   };
 
   const handleMintCustomTozziDuck = async () => {
+    play();
     const { customMintPrice } = await fetchMachineConfig();
     const price = utils.parseEther(customMintPrice.toString());
     const base64data = await DToolInst.getWebp();

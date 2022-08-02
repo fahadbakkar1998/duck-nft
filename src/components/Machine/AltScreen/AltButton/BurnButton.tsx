@@ -1,8 +1,11 @@
 import { FC } from 'react';
 import { indexOf } from 'lodash';
+import useSound from 'use-sound';
 import { PixelArrow } from '../../../../icons';
 import Button from '../Button';
 import useMachineStore from '../../../../store';
+// @ts-ignore
+import lcdPress from '../../../../assets/audio/lcd.ogg';
 
 interface DuckNavButtonProps {
   onClick: () => void;
@@ -34,6 +37,8 @@ const BurnButton = () => {
     burnableDucks,
   } = useMachineStore();
 
+  const [play] = useSound(lcdPress);
+
   const duck = burnableDucks?.filter((d) => d.burnable).find((d) => d.id === currentAdminDuckId);
   const duckIndex = indexOf(burnableDucks, duck);
 
@@ -41,6 +46,7 @@ const BurnButton = () => {
     const duckIndex = indexOf(burnableDucks, duck);
     const nextDuckIndex = duckIndex + 1;
     if (nextDuckIndex < burnableDucks.length) {
+      play();
       setCurrentAdminDuckId(burnableDucks[nextDuckIndex].id);
     }
   };
@@ -49,12 +55,14 @@ const BurnButton = () => {
     const duckIndex = indexOf(burnableDucks, duck);
     const prevDuckIndex = duckIndex - 1;
     if (prevDuckIndex >= 0) {
+      play();
       setCurrentAdminDuckId(burnableDucks[prevDuckIndex].id);
     }
   };
 
   const handleClickBurn = () => {
     if (duckIndex >= 0) {
+      play();
       setOpenBurnForm(true);
     }
   };
@@ -69,7 +77,7 @@ const BurnButton = () => {
             ${duckIndex >= 0 ? 'opacity-75 hover:font-bold' : 'opacity-30'}
           `}
         >
-          burn {currentAdminDuckId}
+          burn
         </div>
       </Button>
       <DuckNavButton

@@ -33,6 +33,7 @@ const Admin: FC = () => {
     setCurrentAdminDuckId,
     currentAdminDuckId,
     burnableDucks,
+    openBurnForm,
   } = useMachineStore();
 
   const duck = burnableDucks?.find((d) => d.id === currentAdminDuckId);
@@ -51,7 +52,17 @@ const Admin: FC = () => {
           <AnimatePresence>
             { !altIsStatic && (
               <div className="overflow-hidden bg-white bg-opacity-80">
-                <DuckReviewLabel duckNum={duckIndex + 1} numDucks={burnableDucks.length} />
+                { openBurnForm && (
+                  <video
+                    className="bottom-0 left-0 absolute z-20 mix-blend-screen"
+                    playsInline
+                    autoPlay
+                    muted
+                    loop
+                    src="/assets/video/fire.mp4"
+                  />
+                )}
+                { !openBurnForm && <DuckReviewLabel duckNum={duckIndex + 1} numDucks={burnableDucks.length} /> }
                 <motion.img
                   initial={{ scale: 0, opacity: 0, borderRadius: '100%' }}
                   animate={{ scale: 1, opacity: 1, borderRadius: '0%' }}
