@@ -1,10 +1,18 @@
-import { DuckLogo, DiscordIcon, InstagramIcon, TwitterIcon, OpenseaIcon } from '../../common/SvgIcon';
+import { ChainSawLogo, DiscordIcon, InstagramIcon, TwitterIcon, OpenseaIcon } from '../../common/SvgIcon';
 import './index.scss';
 
 const Footer = () => {
   return (
-    <div className="absolute bottom-[8%] right-[14%] lg:right-[14%] 2xl:bottom-[10%] ">
+    <div className="absolute bottom-[6%] right-[14%] lg:right-[14%] 2xl:bottom-[10%] ">
       <div className="flex space-x-4 lg:space-x-6 items-center">
+        <a
+          className="item-start"
+          target="_blank"
+          rel="noreferrer"
+          href="https://www.chainsaw.fun/"
+        >
+          <ChainSawLogo className="orange w-36 lg:w-full " />
+        </a>
         <a
           className="flex"
           target="_blank"

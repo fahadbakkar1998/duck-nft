@@ -6,3 +6,9 @@
   // @apply fill-[#ffac59] hover:fill-[#ff5206] transition;
   filter: drop-shadow(3px 5px 3px rgb(0 0 0 / 0.2));
 }
+
+.orange {
+  stroke-width: 1px;
+  @apply fill-[#fe7a42] hover:fill-[#ffac59] transition;
+  filter: drop-shadow(3px 5px 3px rgb(0 0 0 / 0.2));
+}
