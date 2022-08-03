@@ -1336,7 +1336,7 @@
     "@ethersproject/properties" "^5.6.0"
     "@ethersproject/strings" "^5.6.0"
 
-"@ethersproject/abi@5.6.1", "@ethersproject/abi@^5.6.0", "@ethersproject/abi@^5.6.1":
+"@ethersproject/abi@5.6.1", "@ethersproject/abi@^5.6.0":
   version "5.6.1"
   resolved "https://registry.yarnpkg.com/@ethersproject/abi/-/abi-5.6.1.tgz#f7de888edeb56b0a657b672bdd1b3a1135cd14f7"
   integrity sha512-0cqssYh6FXjlwKWBmLm3+zH2BNARoS5u/hxbz+LpQmcDB3w0W553h2btWui1/uZp2GBM/SI3KniTuMcYyHpA5w==
@@ -1431,7 +1431,7 @@
   dependencies:
     "@ethersproject/bignumber" "^5.6.0"
 
-"@ethersproject/contracts@5.6.0", "@ethersproject/contracts@^5.6.0":
+"@ethersproject/contracts@5.6.0":
   version "5.6.0"
   resolved "https://registry.yarnpkg.com/@ethersproject/contracts/-/contracts-5.6.0.tgz#60f2cfc7addd99a865c6c8cfbbcec76297386067"
   integrity sha512-74Ge7iqTDom0NX+mux8KbRUeJgu1eHZ3iv6utv++sLJG80FVuU9HnHeKVPfjd9s3woFhaFoQGf3B3iH/FrQmgw==
@@ -1565,7 +1565,7 @@
     bech32 "1.1.4"
     ws "7.4.6"
 
-"@ethersproject/providers@5.6.5", "@ethersproject/providers@^5.6.2":
+"@ethersproject/providers@5.6.5":
   version "5.6.5"
   resolved "https://registry.yarnpkg.com/@ethersproject/providers/-/providers-5.6.5.tgz#aefecf78459817a323452e05a16d56afcf807e27"
   integrity sha512-TRS+c2Ud+cMpWodmGAc9xbnYRPWzRNYt2zkCSnj58nJoamBQ6x4cUbBeo0lTC3y+6RDVIBeJv18OqsDbSktLVg==
@@ -1684,7 +1684,7 @@
     "@ethersproject/constants" "^5.6.0"
     "@ethersproject/logger" "^5.6.0"
 
-"@ethersproject/wallet@5.6.0", "@ethersproject/wallet@^5.6.0":
+"@ethersproject/wallet@5.6.0":
   version "5.6.0"
   resolved "https://registry.yarnpkg.com/@ethersproject/wallet/-/wallet-5.6.0.tgz#33d11a806d783864208f348709a5a3badac8e22a"
   integrity sha512-qMlSdOSTyp0MBeE+r7SUhr1jjDlC1zAXB8VD84hCnpijPQiSNbxr6GdiLXxpUs8UKzkDiNYYC5DRI3MZr+n+tg==
@@ -2867,25 +2867,17 @@
   dependencies:
     "@use-gesture/core" "10.2.7"
 
-"@usedapp/core@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@usedapp/core/-/core-1.0.2.tgz#89705fadd999c8933e1ef4a09a62b5ef90384cc2"
-  integrity sha512-pvZnBtDtZvt1AiUbPZALkyiQVXi/qIcb7miQWFhvQKeqeCSDkzGJogzZDyBxgpkgpZW2uVgxOkQqIF/4PltJ0g==
+"@usedapp/core@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@usedapp/core/-/core-1.1.4.tgz#f133e228e0f3b7bcb28637d9e6293f30a9f4afaf"
+  integrity sha512-PN+h+7ZcYIkInPktCENulNnLO/wWs1eFKOF/5TvKwhyrz29bnoR9WqS1VFzU4iRrLE+3uwkKOr7XfCuELDIa2A==
   dependencies:
-    "@ethersproject/abi" "^5.6.1"
-    "@ethersproject/abstract-provider" "^5.6.0"
-    "@ethersproject/bignumber" "^5.6.0"
-    "@ethersproject/constants" "^5.6.0"
-    "@ethersproject/contracts" "^5.6.0"
-    "@ethersproject/providers" "^5.6.2"
-    "@ethersproject/wallet" "^5.6.0"
     "@metamask/detect-provider" "^1.2.0"
     "@uniswap/token-lists" "^1.0.0-beta.27"
-    ethers "^5.6.2"
     fetch-mock "^9.11.0"
     lodash.merge "^4.6.2"
     lodash.pickby "^4.6.0"
-    nanoid "3.1.22"
+    nanoid "3.3.4"
 
 "@webassemblyjs/ast@1.11.1":
   version "1.11.1"
@@ -5624,7 +5616,7 @@ ethers@5.6.0:
     "@ethersproject/web" "5.6.0"
     "@ethersproject/wordlists" "5.6.0"
 
-ethers@^5.5.4, ethers@^5.6.2:
+ethers@^5.5.4:
   version "5.6.5"
   resolved "https://registry.yarnpkg.com/ethers/-/ethers-5.6.5.tgz#3185ac7815dc640993408adf6f133ffabfbcbb63"
   integrity sha512-9CTmplO9bv0s/aPw3HB3txGzKz3tUSI2EfO4dJo0W2WvaEq1ArgsEX6obV+bj5X3yY+Zgb1kAux8TDtJKe1FaA==
@@ -8265,10 +8257,10 @@ nano-time@1.0.0:
   dependencies:
     big-integer "^1.6.16"
 
-nanoid@3.1.22:
-  version "3.1.22"
-  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.22.tgz#b35f8fb7d151990a8aebd5aa5015c03cf726f844"
-  integrity sha512-/2ZUaJX2ANuLtTvqTlgqBQNJoQO398KyJgZloL0PZkC0dpysjncRUPsFe3DUPzz/y3h+u7C46np8RMuvF3jsSQ==
+nanoid@3.3.4:
+  version "3.3.4"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.4.tgz#730b67e3cd09e2deacf03c027c81c9d9dbc5e8ab"
+  integrity sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==
 
 nanoid@^3.3.1:
   version "3.3.1"

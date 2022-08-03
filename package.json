@@ -18,7 +18,7 @@
     "@types/react-slick": "^0.23.8",
     "@types/tailwindcss": "^3.0.3",
     "@typescript-eslint/parser": "^5.27.1",
-    "@usedapp/core": "^1.0.2",
+    "@usedapp/core": "^1.1.4",
     "assert": "^2.0.0",
     "axios": "^0.26.0",
     "buffer": "^6.0.3",
