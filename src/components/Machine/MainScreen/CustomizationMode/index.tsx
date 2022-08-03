@@ -196,11 +196,11 @@ const DrawingTool: FC<DrawingToolProps> = ({ switchModes }) => {
             image={trashIcon}
           />
         </div>
-        <MintedModal
+        {/* <MintedModal
           switchModes={switchModes}
           open
           onClose={() => { }}
-        />
+        /> */}
       </div>
     </Suspense>
   );
