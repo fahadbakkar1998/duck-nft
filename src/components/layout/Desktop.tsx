@@ -25,7 +25,7 @@ const Desktop = () => {
         <BTI />
         {/* <SideButtons /> */}
         <TitleImage />
-        <img className="absolute top-0 left-0 pointer-events-none" src={bgImg} alt="" />
+        <img className="z-0 absolute top-0 left-0 pointer-events-none" src={bgImg} alt="" />
         <Canvas
           className="absolute -top-[18.85%]"
           orthographic
