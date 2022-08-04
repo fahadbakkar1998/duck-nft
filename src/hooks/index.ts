@@ -73,12 +73,12 @@ export function useWindowSize(): Size {
 
 export const useIsMobile = () => {
   const { width } = useWindowSize();
-  let isMobile =
+  const isMobile =
   /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
     navigator.userAgent,
   );
 
-  if (width && width < 750) isMobile = true;
+  // if (width && width < 750) isMobile = true;
 
   return isMobile;
 };
