@@ -6,8 +6,6 @@ import bgImg from '../../assets/img/machine-bg.jpg';
 import OwnersManualModal from '../OwnersManual/OwnersManualModal';
 import useMachineStore from '../../store';
 import BTI from '../Machine/BinaryToggleInterface';
-import SideButtons from '../Machine/AltScreen/SideButtons';
-import Background from './Background';
 import TitleImage from './TitleImage';
 import Footer from './Footer';
 
@@ -23,7 +21,6 @@ const Desktop = () => {
         className="mx-auto machine-container w-full 2xl:w-[80%]"
       >
         <BTI />
-        {/* <SideButtons /> */}
         <TitleImage />
         <img className="z-0 absolute top-0 left-0 pointer-events-none" src={bgImg} alt="" />
         <Canvas
