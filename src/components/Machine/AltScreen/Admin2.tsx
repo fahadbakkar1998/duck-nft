@@ -1,8 +1,5 @@
-/* eslint-disable no-console */
 import { FC, useEffect } from 'react';
 import { indexOf } from 'lodash';
-// eslint-disable-next-line import/no-relative-packages
-import { motion, AnimatePresence } from '../../../../node_modules/framer-motion/dist/framer-motion';
 import useMachineStore from '../../../store';
 
 const NoDucks = () => {
@@ -60,13 +57,7 @@ const Admin: FC = () => {
               />
             )}
             { !openBurnForm && <DuckReviewLabel duckNum={duckIndex + 1} numDucks={burnableDucks.length} /> }
-            <motion.img
-              initial={{ scale: 0, opacity: 0, borderRadius: '100%' }}
-              animate={{ scale: 1, opacity: 1, borderRadius: '0%' }}
-              transition={{ duration: 0.10 }}
-              alt={`Duck ${duck.id}`}
-              src={duck.webp}
-            />
+            <img alt={`Duck ${duck.id}`} src={duck.webp} />
           </div>
           <div className="w-full h-full" />
         </div>

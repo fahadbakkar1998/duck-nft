@@ -1,17 +1,12 @@
 import { FC, useEffect, useState } from 'react';
-// eslint-disable-next-line import/no-relative-packages
-import { motion, AnimatePresence } from '../../../../node_modules/framer-motion/dist/framer-motion';
 import useMachineStore from '../../../store';
 import DuckProfile from './DuckProfile';
 import { DuckData } from '../../../types/types';
-import Static from './Static';
 
-const Shopping = () => {
+const Shopping: FC = () => {
   const {
-    altIsStatic,
     showDuckProfile,
     currentDuckId,
-    setAltMessage,
     filteredDucks,
   } = useMachineStore();
 
@@ -29,10 +24,7 @@ const Shopping = () => {
         <div
           className="overflow-hidden bg-white bg-opacity-80"
         >
-          <motion.img
-            initial={{ scale: 0, opacity: 0, borderRadius: '100%' }}
-            animate={{ scale: 1, opacity: 1, borderRadius: '0%' }}
-            transition={{ duration: 0.10 }}
+          <img
             alt={`Duck ${duck.id}`}
             src={duck.isCustom ? duck.webp : `data:image/webp;base64,${duck.webp}`}
           />
