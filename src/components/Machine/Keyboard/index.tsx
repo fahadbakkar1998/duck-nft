@@ -10,6 +10,8 @@ import Display from '../Display';
 import { useMachineStore } from '../../../store';
 // @ts-ignore
 import tv from '../../../assets/audio/tv.mp3';
+// @ts-ignore
+import keyPress from '../../../assets/audio/keypress.mp3';
 
 const Keyboard: FC = () => {
   const [vrm, setVrm] = useState<any>(null);
@@ -20,12 +22,13 @@ const Keyboard: FC = () => {
   const { currentDuckId, currentMode } = useMachineStore();
   const [clearOnNext, setClearOnNext] = useState(true);
   const { setCurrentDuckId, setAltMessage, filteredDucks } = useMachineStore();
-  const [play] = useSound(tv);
+  const [playTv] = useSound(tv);
+  const [playPress] = useSound(keyPress);
 
   const enterClick = (value: string) => {
     const duckExists = filteredDucks?.find((d) => d.id === Number(value));
     if (duckExists) {
-      play();
+      playTv();
       setCurrentDuckId(Number(value));
       document.querySelector(`#item${value}`)?.scrollIntoView({
         block: 'nearest',
@@ -56,6 +59,7 @@ const Keyboard: FC = () => {
 
   const buttonClick = (btnName) => {
     if (currentMode !== MachineMode.Shopping) return;
+    playPress();
     if (btnName === 'enter') enterClick(value);
     else if (btnName === 'clear') clearClick();
     else if (clearOnNext) {
