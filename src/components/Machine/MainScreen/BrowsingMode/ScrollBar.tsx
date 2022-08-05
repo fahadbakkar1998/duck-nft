@@ -34,7 +34,7 @@ const ScrollBar: FC<{position: number}> = ({ position }) => {
         dragMomentum={false}
         dragSnapToOrigin={false}
         dragConstraints={{ top: -120, bottom: 0 }}
-        className="top-[90%] absolute bg-orange-400 w-5 h-5 rounded-full"
+        className="scroll-button top-[90%] absolute bg-orange-400 w-5 h-5 rounded-full"
       />
     </div>
   );

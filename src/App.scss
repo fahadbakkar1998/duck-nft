@@ -117,6 +117,20 @@ canvas {
   box-shadow: 2px 1px 1px 0px #b53c24;
 }
 
+.scroll-button {  
+  border: 3px solid #ffffff1c;
+  height: 25px;
+  border-width: 1px;
+  width: 25px;
+  box-shadow: 1px 3px 3px 0px #b53c24;
+  cursor: grab;
+}
+
+.scroll-button:active {
+  cursor: grabbing;
+}
+
+
 
 .circle-button.small:active {
   position: relative;
