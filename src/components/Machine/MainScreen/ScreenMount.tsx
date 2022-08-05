@@ -24,7 +24,7 @@ export const MainScreen = () => {
   const gltfDisk = useLoader(GLTFLoader, 'assets/models/DuckDisk.glb');
   const modelRef = useRef();
   const [playKeyPress] = useSound(keyPress);
-  const [playWoosh] = useSound(woosh);
+  const [playWoosh] = useSound(woosh, { volume: 0.3, playbackRate: 1.5 });
 
   const {
     switchModes,
@@ -40,7 +40,7 @@ export const MainScreen = () => {
     rotation: [0, 0, 0],
     position: [0, 0, 0],
     config: {
-      duration: 2500,
+      duration: 2300,
       easing: easings.easeInOutElastic,
     },
   }));
@@ -56,16 +56,16 @@ export const MainScreen = () => {
     }, 300);
     setTimeout(() => {
       playWoosh();
-    }, 600);
+    }, 825);
     setTimeout(() => {
       setScreenIsRotating(false);
-    }, 1800);
+    }, 1500);
     setSpring({ rotation: [Math.PI * ++globalRoundCount, 0, 0] });
     setIsSwitchingModes(true);
     setTimeout(() => {
       switchModes(direction);
       setScreenInverted(!screenInverted);
-    }, 1200);
+    }, 1100);
   };
 
   return (
