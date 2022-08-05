@@ -31,7 +31,7 @@ export const useTxNotifier = (
   }, [setAltMessage]);
 
   const handleOnSuccess = useCallback((tx: any) => {
-    playSuccess();
+    // playSuccess();
     const message = messages.success || 'Success!';
     setIsLocked(false);
     queryClient.invalidateQueries();

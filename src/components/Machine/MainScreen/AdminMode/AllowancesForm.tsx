@@ -60,11 +60,7 @@ const AllowancesForm = () => {
     try {
       const { account, tozziDucks, customDucks } = allowanceFormValues;
       send(account, [tozziDucks, customDucks]);
-      // eslint-disable-next-line no-console
-      console.log('wtf');
     } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('wtf');
       // @ts-ignore
       setAltMessage({ message: getCustomErrorText(e.message) });
     }

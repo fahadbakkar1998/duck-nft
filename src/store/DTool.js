@@ -251,7 +251,6 @@ export default class DTool {
     } else {
       hex = this.getRandomColor();
     }
-    // console.log("DTool_randomColor: ", hex);
     return hex;
   }
 
@@ -261,13 +260,11 @@ export default class DTool {
     if (!layerSetting || !layer) return;
     const { fillPoints } = layerSetting;
     if (!fillPoints || !fillPoints.length) {
-      // console.log("DTool: ", "No fillPoints");
       return;
     }
     fillPoints.forEach((ptObj) => {
       const randomColor = hexToRgb(this.getAllowedRandomColor(layerIndex));
       ptObj.points.forEach((pt) => {
-        // console.log("DTool_pt: ", pt);
         this._floodFill(layer.ctx, pt[0], pt[1], randomColor);
       });
     });

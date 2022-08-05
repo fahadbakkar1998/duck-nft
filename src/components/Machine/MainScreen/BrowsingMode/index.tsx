@@ -65,8 +65,6 @@ const BrowsingMode = () => {
   };
 
   useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(currentDuckId);
     setTimeout(() => {
       const duck = document.getElementById(`item${currentDuckId}`);
       if (duck) {
