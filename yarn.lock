@@ -2867,10 +2867,10 @@
   dependencies:
     "@use-gesture/core" "10.2.7"
 
-"@usedapp/core@^1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@usedapp/core/-/core-1.1.4.tgz#f133e228e0f3b7bcb28637d9e6293f30a9f4afaf"
-  integrity sha512-PN+h+7ZcYIkInPktCENulNnLO/wWs1eFKOF/5TvKwhyrz29bnoR9WqS1VFzU4iRrLE+3uwkKOr7XfCuELDIa2A==
+"@usedapp/core@1.1.5":
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/@usedapp/core/-/core-1.1.5.tgz#1e7793d9633f19b38a65450c8815ed8020bf0692"
+  integrity sha512-goX1/uqlUGhio5fO3Uhjxe4gLde9ZkwGSdSaSfUGfrsDO5tyKgLK9Tlw0BF/Dj9Dh+NrKrhus/i2dNkpbbbktA==
   dependencies:
     "@metamask/detect-provider" "^1.2.0"
     "@uniswap/token-lists" "^1.0.0-beta.27"

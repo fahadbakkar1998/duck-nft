@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import { useEffect, useState } from 'react';
-import { useQueryClient } from 'react-query';
 import useSound from 'use-sound';
 import { useContractFunction, useEthers } from '@usedapp/core';
 import { utils } from 'ethers';
@@ -18,6 +17,8 @@ import { useDToolStore } from '../../../../store/dtoolStore';
 // @ts-ignore
 import lcdPress from '../../../../assets/audio/lcd.ogg';
 
+const CHAIN_ID = parseInt(process.env.REACT_APP_CHAIN_ID!);
+
 const ButtonView = () => {
   const {
     currentDuckId,
@@ -34,7 +35,7 @@ const ButtonView = () => {
   const { DToolInst } = useDToolStore();
 
   const selectedDuck = ducks?.find((d) => d.id === currentDuckId);
-  const { activateBrowserWallet, account } = useEthers();
+  const { activateBrowserWallet, account, switchNetwork, chainId } = useEthers();
   const {
     send: sendFnTozziDuck,
     state: mintTozziDuckState,
@@ -52,6 +53,9 @@ const ButtonView = () => {
   }, [account]);
 
   const handleMintTozziDuck = async () => {
+    if (chainId !== CHAIN_ID) {
+      await switchNetwork(CHAIN_ID);
+    }
     const selectedDuck = ducks?.find((d) => d.id === currentDuckId);
     const canMint = selectedDuck && !selectedDuck.owner;
     play();
@@ -65,14 +69,20 @@ const ButtonView = () => {
 
   const handleMintCustomTozziDuck = async () => {
     play();
+    if (chainId !== CHAIN_ID) {
+      await switchNetwork(CHAIN_ID);
+    }
     const { customMintPrice } = await fetchMachineConfig();
     const price = utils.parseEther(customMintPrice.toString());
     const base64data = await DToolInst.getWebp();
     sendFnCustomTozziDuck(account, base64data, { value: price });
   };
 
-  const handleConnectWallet = () => {
+  const handleConnectWallet = async () => {
     play();
+    if (chainId !== CHAIN_ID) {
+      await switchNetwork(CHAIN_ID);
+    }
     activateBrowserWallet();
   };
 

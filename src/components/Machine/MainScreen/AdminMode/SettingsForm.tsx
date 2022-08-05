@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useContractFunction } from '@usedapp/core';
+import { useContractFunction, useEthers } from '@usedapp/core';
 import { utils } from 'ethers';
 import { MintStatus } from '../../../../types/types';
 import FormToggle from './common/FormToggle';
@@ -12,6 +12,8 @@ import { useTxNotifier } from '../../../../hooks/transaction';
 import useMachineStore from '../../../../store';
 import { contract } from '../../../../utils/functions';
 
+const CHAIN_ID = parseInt(process.env.REACT_APP_CHAIN_ID!);
+
 const SettingsForm = () => {
   const { data: machineState, isLoading } = useMachineState();
   const [tozziStatus, setTozziStatus] = useState<MintStatus|undefined>();
@@ -21,7 +23,7 @@ const SettingsForm = () => {
   const [maxDucks, setMaxDucks] = useState<string>();
   const { send, state } = useContractFunction(contract, 'setMachineConfig');
   const { setAltMessage } = useMachineStore();
-
+  const { chainId, switchNetwork } = useEthers();
   useTxNotifier(
     {
       mining: 'Update in progress',
@@ -47,7 +49,12 @@ const SettingsForm = () => {
     }
   };
 
-  const handleSubmission = () => {
+  const handleSubmission = async () => {
+    // eslint-disable-next-line no-console
+    console.log(chainId, CHAIN_ID);
+    if (chainId !== CHAIN_ID) {
+      await switchNetwork(CHAIN_ID);
+    }
     try {
       send([
         utils.parseEther(tozziPrice ?? ''),
