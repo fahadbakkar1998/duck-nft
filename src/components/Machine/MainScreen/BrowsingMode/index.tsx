@@ -1,8 +1,8 @@
+/* eslint-disable no-plusplus */
 import KeyboardEventHandler from 'react-keyboard-event-handler';
-import React, { useState, UIEvent, useEffect } from 'react';
+import React, { useState, UIEvent, useEffect, ReactNode } from 'react';
 import useSound from 'use-sound';
 import { findIndex } from 'lodash';
-import { useEthers } from '@usedapp/core';
 import DuckCard from '../../../DuckCard/DuckCard';
 import useMachineStore from '../../../../store';
 import './index.scss';
@@ -16,6 +16,7 @@ import Motd from './Motd';
 import ProfileForm from './ProfileForm';
 // @ts-ignore
 import tv from '../../../../assets/audio/tv.mp3';
+import DummyDuckCard from '../../../DuckCard/DummyDuckCard';
 
 const directionToDuckIndex = (direction: string, currentDuckIndex: number) => {
   let nextDuckIndex = currentDuckIndex;
@@ -37,6 +38,14 @@ const directionToDuckIndex = (direction: string, currentDuckIndex: number) => {
   return nextDuckIndex;
 };
 
+const renderDummies = (n: number) => {
+  const dummies: Array<ReactNode> = [];
+  for (let i = 0; i < n; i++) {
+    dummies.push(<DummyDuckCard />);
+  }
+  return dummies;
+};
+
 const BrowsingMode = () => {
   const {
     isSwitchingModes,
@@ -48,10 +57,12 @@ const BrowsingMode = () => {
     setShowProfileForm,
     filteredDucks,
   } = useMachineStore();
+
   const [showFilters, setShowFilters] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0.0);
   const { data: machineState } = useMachineState();
   const [play] = useSound(tv, { volume: 0.5 });
+  const dummyCount = filteredDucks.length % 3 === 0 ? 0 : 3 - (filteredDucks.length % 3);
 
   const selectDuckByDirection = (direction: string) => {
     const currentDuckIndex = findIndex(filteredDucks, (d) => d.id === currentDuckId);
@@ -131,6 +142,7 @@ const BrowsingMode = () => {
                     return <DuckCard {...item} />;
                   }),
                 )}
+                {renderDummies(dummyCount)}
               </div>
             </div>
           )}

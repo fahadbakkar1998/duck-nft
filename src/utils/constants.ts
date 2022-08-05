@@ -1314,3 +1314,5 @@ export const contractAbi = [
     "type": "function"
   }
 ];
+
+export const placeholderDuck = "UklGRrIAAABXRUJQVlA4TKYAAAAvj8FjAA9AkG0bYtj2E2TbhiC2/QTZtiGIbf/8x/8AQGoYyJFkqQAUpKJekBpASd69sOlXFyP6PwH8+///qqcWbrK9o1VrvcCg1QTGAmiNxfJGJkETNGGxWm70w+D9KZhcqlMwqsGdk+1qGQCjGp8ZwF7RwlHjeHvQGmwVaIJm3wSneOIGfXqKmyZZMVrmo8Jg27LlRTcIDN6fYtMY3ye79u//n7MB";
