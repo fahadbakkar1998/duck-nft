@@ -51,7 +51,7 @@ const BrowsingMode = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0.0);
   const { data: machineState } = useMachineState();
-  const [play] = useSound(tv);
+  const [play] = useSound(tv, { volume: 0.5 });
 
   const selectDuckByDirection = (direction: string) => {
     const currentDuckIndex = findIndex(filteredDucks, (d) => d.id === currentDuckId);

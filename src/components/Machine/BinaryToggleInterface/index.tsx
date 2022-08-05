@@ -7,7 +7,7 @@ import tv from '../../../assets/audio/tv.mp3';
 
 const BTI = () => {
   const { currentDuckId, setCurrentDuckId, currentMode } = useMachineStore();
-  const [play] = useSound(tv);
+  const [play] = useSound(tv, { volume: 0.5 });
   function toBinary(integer) {
     const str = integer.toString(2);
     return str.padStart(8, '0').split('').reverse().join('');
