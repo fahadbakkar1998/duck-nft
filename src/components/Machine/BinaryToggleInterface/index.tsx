@@ -1,10 +1,13 @@
+import useSound from 'use-sound';
 import useMachineStore from '../../../store';
 import ToggleSwitch from './ToggleSwitch';
 import { MachineMode } from '../../../utils/constants';
+// @ts-ignore
+import tv from '../../../assets/audio/tv.mp3';
 
 const BTI = () => {
   const { currentDuckId, setCurrentDuckId, currentMode } = useMachineStore();
-
+  const [play] = useSound(tv);
   function toBinary(integer) {
     const str = integer.toString(2);
     return str.padStart(8, '0').split('').reverse().join('');
@@ -18,6 +21,7 @@ const BTI = () => {
     const valence = isOn(index) ? -1 : 1;
     const newDuckId = currentDuckId + (valence * (2 ** index));
     if (newDuckId <= 199) {
+      play();
       setCurrentDuckId(newDuckId);
       document.getElementById(`item${newDuckId}`)?.scrollIntoView({ block: 'nearest' });
     }

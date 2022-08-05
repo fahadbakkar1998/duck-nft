@@ -6,6 +6,8 @@ import Button from '../Button';
 import useMachineStore from '../../../../store';
 // @ts-ignore
 import lcdPress from '../../../../assets/audio/lcd.ogg';
+// @ts-ignore
+import tv from '../../../../assets/audio/tv.mp3';
 
 interface DuckNavButtonProps {
   onClick: () => void;
@@ -38,6 +40,7 @@ const BurnButton = () => {
   } = useMachineStore();
 
   const [play] = useSound(lcdPress);
+  const [playTv] = useSound(tv);
 
   const duck = burnableDucks?.filter((d) => d.burnable).find((d) => d.id === currentAdminDuckId);
   const duckIndex = indexOf(burnableDucks, duck);
@@ -46,7 +49,7 @@ const BurnButton = () => {
     const duckIndex = indexOf(burnableDucks, duck);
     const nextDuckIndex = duckIndex + 1;
     if (nextDuckIndex < burnableDucks.length) {
-      play();
+      playTv();
       setCurrentAdminDuckId(burnableDucks[nextDuckIndex].id);
     }
   };
@@ -55,7 +58,7 @@ const BurnButton = () => {
     const duckIndex = indexOf(burnableDucks, duck);
     const prevDuckIndex = duckIndex - 1;
     if (prevDuckIndex >= 0) {
-      play();
+      playTv();
       setCurrentAdminDuckId(burnableDucks[prevDuckIndex].id);
     }
   };

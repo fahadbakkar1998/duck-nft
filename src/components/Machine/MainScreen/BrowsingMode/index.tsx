@@ -1,5 +1,6 @@
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 import React, { useState, UIEvent, useEffect } from 'react';
+import useSound from 'use-sound';
 import { findIndex } from 'lodash';
 import { useEthers } from '@usedapp/core';
 import DuckCard from '../../../DuckCard/DuckCard';
@@ -13,6 +14,8 @@ import filterIcon from '../../../../assets/img/icons/filter.svg';
 import ScrollBar from './ScrollBar';
 import Motd from './Motd';
 import ProfileForm from './ProfileForm';
+// @ts-ignore
+import tv from '../../../../assets/audio/tv.mp3';
 
 const directionToDuckIndex = (direction: string, currentDuckIndex: number) => {
   let nextDuckIndex = currentDuckIndex;
@@ -48,11 +51,13 @@ const BrowsingMode = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0.0);
   const { data: machineState } = useMachineState();
+  const [play] = useSound(tv);
 
   const selectDuckByDirection = (direction: string) => {
     const currentDuckIndex = findIndex(filteredDucks, (d) => d.id === currentDuckId);
     const nextDuckIndex = directionToDuckIndex(direction, currentDuckIndex);
     if (filteredDucks?.[nextDuckIndex]) {
+      play();
       const nextDuckId = filteredDucks[nextDuckIndex].id;
       setCurrentDuckId(nextDuckId);
       document.getElementById(`item${nextDuckId}`)?.scrollIntoView({ block: 'nearest' });

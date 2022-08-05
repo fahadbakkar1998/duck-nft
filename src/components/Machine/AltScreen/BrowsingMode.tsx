@@ -26,16 +26,6 @@ const Shopping = () => {
     <div className="absolute z-10">
       <DuckProfile show={showDuckProfile} duck={duck} />
       <div className="h-full">
-        <div className={`top-[21%] absolute scale-[1.75]  z-40 ${altIsStatic ? 'visible' : 'invisible'}`}>
-          <video
-            id="alt-static"
-            playsInline
-            autoPlay
-            muted
-            loop
-            src="/assets/video/static.mp4"
-          />
-        </div>
         <div
           className="overflow-hidden bg-white bg-opacity-80"
         >

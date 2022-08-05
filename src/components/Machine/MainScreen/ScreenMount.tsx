@@ -57,11 +57,9 @@ export const MainScreen = () => {
     setTimeout(() => {
       playWoosh();
     }, 600);
-
     setTimeout(() => {
       setScreenIsRotating(false);
     }, 1800);
-
     setSpring({ rotation: [Math.PI * ++globalRoundCount, 0, 0] });
     setIsSwitchingModes(true);
     setTimeout(() => {

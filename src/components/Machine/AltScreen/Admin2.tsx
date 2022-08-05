@@ -29,7 +29,6 @@ const DuckReviewLabel: FC<{duckNum: number, numDucks: number}> = ({ duckNum, num
 
 const Admin: FC = () => {
   const {
-    altIsStatic,
     setCurrentAdminDuckId,
     currentAdminDuckId,
     burnableDucks,
@@ -49,30 +48,26 @@ const Admin: FC = () => {
     <div className="absolute z-10">
       { !!duck && (
         <div className="h-full">
-          <AnimatePresence>
-            { !altIsStatic && (
-              <div className="overflow-hidden bg-white bg-opacity-80">
-                { openBurnForm && (
-                  <video
-                    className="bottom-0 left-0 absolute z-20 mix-blend-screen"
-                    playsInline
-                    autoPlay
-                    muted
-                    loop
-                    src="/assets/video/fire.mp4"
-                  />
-                )}
-                { !openBurnForm && <DuckReviewLabel duckNum={duckIndex + 1} numDucks={burnableDucks.length} /> }
-                <motion.img
-                  initial={{ scale: 0, opacity: 0, borderRadius: '100%' }}
-                  animate={{ scale: 1, opacity: 1, borderRadius: '0%' }}
-                  transition={{ duration: 0.10 }}
-                  alt={`Duck ${duck.id}`}
-                  src={duck.webp}
-                />
-              </div>
+          <div className="overflow-hidden bg-white bg-opacity-80">
+            { openBurnForm && (
+              <video
+                className="bottom-0 left-0 absolute z-20 mix-blend-screen"
+                playsInline
+                autoPlay
+                muted
+                loop
+                src="/assets/video/fire.mp4"
+              />
             )}
-          </AnimatePresence>
+            { !openBurnForm && <DuckReviewLabel duckNum={duckIndex + 1} numDucks={burnableDucks.length} /> }
+            <motion.img
+              initial={{ scale: 0, opacity: 0, borderRadius: '100%' }}
+              animate={{ scale: 1, opacity: 1, borderRadius: '0%' }}
+              transition={{ duration: 0.10 }}
+              alt={`Duck ${duck.id}`}
+              src={duck.webp}
+            />
+          </div>
           <div className="w-full h-full" />
         </div>
       )}

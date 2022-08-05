@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { FC, useEffect, useRef, useState } from 'react';
+import useSound from 'use-sound';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { useThree } from 'react-three-fiber';
 import { padStart } from 'lodash';
@@ -7,6 +8,8 @@ import modelObject from '../../../assets/glb/key_pad.glb';
 import { MachineMode, minViewLength } from '../../../utils/constants';
 import Display from '../Display';
 import { useMachineStore } from '../../../store';
+// @ts-ignore
+import tv from '../../../assets/audio/tv.mp3';
 
 const Keyboard: FC = () => {
   const [vrm, setVrm] = useState<any>(null);
@@ -17,10 +20,12 @@ const Keyboard: FC = () => {
   const { currentDuckId, currentMode } = useMachineStore();
   const [clearOnNext, setClearOnNext] = useState(true);
   const { setCurrentDuckId, setAltMessage, filteredDucks } = useMachineStore();
+  const [play] = useSound(tv);
 
   const enterClick = (value: string) => {
     const duckExists = filteredDucks?.find((d) => d.id === Number(value));
     if (duckExists) {
+      play();
       setCurrentDuckId(Number(value));
       document.querySelector(`#item${value}`)?.scrollIntoView({
         block: 'nearest',
