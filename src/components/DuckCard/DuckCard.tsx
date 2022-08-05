@@ -3,13 +3,13 @@ import useSound from 'use-sound';
 import { useMachineStore } from '../../store';
 import { DuckData } from '../../types/types';
 // @ts-ignore
-import bloop from '../../assets/audio/select_duck_bloop.wav';
+import tvNoise from '../../assets/audio/tv.mp3';
 
 const DuckCard: FC<DuckData> = (data) => {
   const { currentDuckId, setCurrentDuckId, showAvailabilityOnDuckCards, showDuckIdOnDuckCards } = useMachineStore();
-  const [playBloop] = useSound(bloop, { volume: 0.5 });
+  const [playTvNoise] = useSound(tvNoise, { volume: 0.5 });
   const handleClick = () => {
-    playBloop();
+    playTvNoise();
     setCurrentDuckId(data.id);
   };
 

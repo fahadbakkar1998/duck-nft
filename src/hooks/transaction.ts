@@ -1,9 +1,14 @@
 import { useCallback, useEffect } from 'react';
 import { useQueryClient } from 'react-query';
+import useSound from 'use-sound';
 import { TransactionStatus } from '@usedapp/core';
 import useMachineStore from '../store';
 import { getCustomErrorText } from '../utils/helpers';
 import { TxMessages } from '../types/types';
+// @ts-ignore
+import success from '../assets/audio/success.mp3';
+// @ts-ignore
+import mining from '../assets/audio/mining.mp3';
 
 export const useTxNotifier = (
   messages: TxMessages,
@@ -11,6 +16,7 @@ export const useTxNotifier = (
 ) => {
   const { setAltMessage, setIsLocked, setMachineMood } = useMachineStore();
   const queryClient = useQueryClient();
+  const [playSuccess] = useSound(success);
 
   const handleOnSigning = useCallback(() => {
     const message = messages.signing || 'Signature Pending...';
@@ -25,6 +31,7 @@ export const useTxNotifier = (
   }, [setAltMessage]);
 
   const handleOnSuccess = useCallback((tx: any) => {
+    playSuccess();
     const message = messages.success || 'Success!';
     setIsLocked(false);
     queryClient.invalidateQueries();

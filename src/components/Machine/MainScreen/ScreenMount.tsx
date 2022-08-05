@@ -10,6 +10,8 @@ import { MachineMode, minViewLength } from '../../../utils/constants';
 import Screen from './index';
 // @ts-ignore
 import keyPress from '../../../assets/audio/keypress.mp3';
+// @ts-ignore
+import woosh from '../../../assets/audio/woosh.mp3';
 
 let globalRoundCount = 0;
 // let screenIsRotating = false;
@@ -22,6 +24,7 @@ export const MainScreen = () => {
   const gltfDisk = useLoader(GLTFLoader, 'assets/models/DuckDisk.glb');
   const modelRef = useRef();
   const [playKeyPress] = useSound(keyPress);
+  const [playWoosh] = useSound(woosh);
 
   const {
     switchModes,
@@ -51,6 +54,10 @@ export const MainScreen = () => {
     setTimeout(() => {
       changeChannel(1000);
     }, 300);
+    setTimeout(() => {
+      playWoosh();
+    }, 600);
+
     setTimeout(() => {
       setScreenIsRotating(false);
     }, 1800);

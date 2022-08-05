@@ -13,23 +13,9 @@ const WalletConnect = () => {
   const { isLoading } = useMachineState();
 
   const handleConnectWallet = async () => {
-    // if (chainId !== parseInt(process.env.REACT_APP_CHAIN_ID!)) {
-    //   setAltMessage('Please connect to Mainnet Ethereum!');
-    //   return;
-    // }
-    // ref.current?.classList.add('animate-blink');
-    // setTimeout(() => { ref.current?.classList.remove('animate-blink'); }, 300);
-    // setAltMessage(undefined);
-    // activateBrowserWallet();
     if (isLoading) return;
     switchModes('shopping');
   };
-
-  // useEffect(() => {
-  //   if (account) {
-  //     switchModes('next');
-  //   }
-  // }, [account]);
 
   return (
     <div className="inner-shadow WalletConnect scanline">
