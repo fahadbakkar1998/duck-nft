@@ -5,6 +5,7 @@ import { useDToolStore } from '../../../../store/dtoolStore';
 import useMachineStore from '../../../../store';
 import MintedModal from './MintedModal';
 
+import { useAccountChange } from '../../../../hooks';
 import { colors, MachineMode } from '../../../../utils/constants';
 import duckbill from '../../../../assets/duck-bill.png';
 import CircleButton from '../../../common/CircleButton';
@@ -75,8 +76,7 @@ const DrawingTool: FC<DrawingToolProps> = ({ switchModes }) => {
   } = useDToolStore();
   const { currentMode } = useMachineStore();
   const [playKeyPress] = useSound(keyPress);
-
-  // useAccountChange();
+  useAccountChange();
 
   const toggleEyeDrop = (flag: boolean) => {
     drawingCanvas!.current!.style.cursor = flag

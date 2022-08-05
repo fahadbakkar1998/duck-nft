@@ -42,7 +42,7 @@ export function useEnsOrShort(account: string | undefined) {
 }
 
 export const useAccountChange = () => {
-  const { account } = useEthers();
+  const { account, chainId } = useEthers();
   const { switchModes, setAccount } = useMachineStore();
   useEffect(() => {
     if (!account) {
