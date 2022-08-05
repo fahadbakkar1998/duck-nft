@@ -41,7 +41,7 @@ const AltScreen: FC = () => {
           `}
         >
           <ShadowLayer />
-          {altIsStatic && <Static /> }
+          {/* {altIsStatic && <Static /> } */}
           {currentMode === MachineMode.Off && <NotConnected />}
           {currentMode === MachineMode.Shopping && <BrowsingMode />}
           {currentMode === MachineMode.Customization && <CustomMode />}
