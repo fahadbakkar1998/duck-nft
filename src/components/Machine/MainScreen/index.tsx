@@ -31,7 +31,7 @@ const MainScreen: FC<MainScreenProps> = ({ screenInverted, switchModes }) => {
     >
       { currentMode === MachineMode.Off && <WalletConnect /> }
       { currentMode === MachineMode.Shopping && <BrowsingMode /> }
-      { currentMode === MachineMode.Customization && <DrawingTool switchModes={switchModes} /> }
+      <DrawingTool switchModes={switchModes} />
       { currentMode === MachineMode.Admin && <AdminMain /> }
       <ModeSwitcher
         nextMode={() => switchModes('next')}
