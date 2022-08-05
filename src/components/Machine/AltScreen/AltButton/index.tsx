@@ -139,7 +139,7 @@ const AltButton = () => {
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="inner-shadow absolute rounded-sm -bottom-[25.5%] left-[5.75%] graph-bg h-[14.75%] w-[48.75%] pointer-events-auto"
+      className="inner-shadow absolute rounded-sm -bottom-[25.5%] left-[5.75%] graph-bg h-[14.75%] w-[48.75%] pointer-events-auto select-none"
     >
       <ShimmerLayer targetHovered={isHovered} />
       <ButtonView />

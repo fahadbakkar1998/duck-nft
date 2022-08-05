@@ -18,7 +18,7 @@ const DuckCard: FC<DuckData> = (data) => {
   return (
     <div
       onClick={handleClick}
-      className={`cursor-pointer relative group ${currentDuckId === data?.id ? 'shadow-xl  border-4 border-[#ff5328]' : ''}`}
+      className={`select-none cursor-pointer relative group ${currentDuckId === data?.id ? 'shadow-xl  border-4 border-[#ff5328]' : ''}`}
       id={`item${data.id}`}
     >
       <div className="absolute w-full h-full bg-orange-500 opacity-0 group-hover:opacity-50" />

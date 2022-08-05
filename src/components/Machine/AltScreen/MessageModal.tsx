@@ -20,7 +20,8 @@ const MessageModal: FC<MessageModalProps> = ({ message, open, onClose }) => {
         exit={{ scale: 0, x: '50%', y: '10%' }}
         transition={{ duration: 0.10 }}
         style={{ zIndex: 100 }}
-        className={`          
+        className={`
+          select-none    
           absolute
           black-screen        
           pixel-font text-white p-5 border-2 border-white

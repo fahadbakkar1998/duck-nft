@@ -37,7 +37,7 @@ const DuckProfileView: FC<DuckProfileProps> = ({ duck }) => {
       animate={{ y: '0' }}
       exit={{ y: '100%' }}
       transition={{ duration: 0.20 }}
-      className="h-full p-2 absolute bg-black w-full"
+      className="h-full p-2 absolute bg-black w-full select-none"
     >
       <div className="h-full overflow-scroll relative">
         <div className="p-2 flex flex-col gap-2">
