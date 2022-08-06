@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-plusplus */
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import useSound from 'use-sound';
 import { a, useSpring, easings } from '@react-spring/three';
 import { useLoader, useThree } from 'react-three-fiber';
@@ -34,6 +34,8 @@ export const MainScreen = () => {
     showTxStatus,
     setIsSwitchingModes,
     isLocked,
+    newDuck,
+    setNewDuck,
   } = useMachineStore();
 
   const [spring, setSpring] = useSpring(() => ({
@@ -67,6 +69,13 @@ export const MainScreen = () => {
       setScreenInverted(!screenInverted);
     }, 1100);
   };
+
+  useEffect(() => {
+    if (newDuck !== undefined) {
+      handleModeSwitch('prev');
+      setNewDuck(undefined);
+    }
+  }, [newDuck]);
 
   return (
     <a.group

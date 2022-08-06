@@ -70,6 +70,9 @@ type MachineStore = {
   setTransactionStatus: (val: any) => void;
   showTxStatus: boolean;
   setShowTxStatus: (val: boolean) => void;
+
+  newDuck: number | undefined;
+  setNewDuck: (newDuck: number | undefined) => void;
 };
 
 export const useMachineStore = create<MachineStore>(
@@ -269,6 +272,11 @@ export const useMachineStore = create<MachineStore>(
     showTxStatus: false,
     setShowTxStatus: (val: boolean): void => {
       set({ showTxStatus: val });
+    },
+
+    newDuck: undefined,
+    setNewDuck: (newDuck: number | undefined) => {
+      set({ newDuck });
     },
   }),
 );

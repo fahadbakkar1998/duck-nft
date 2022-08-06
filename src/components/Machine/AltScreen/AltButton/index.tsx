@@ -29,6 +29,7 @@ const ButtonView = () => {
     isLocked,
     ducks,
     setAccount,
+    setNewDuck,
   } = useMachineStore();
 
   const [play] = useSound(lcdPress);
@@ -45,8 +46,13 @@ const ButtonView = () => {
     state: mintCustomTozziDuckState,
   } = useContractFunction(contract, 'mintCustomDuck');
 
+  const customDuckMintedCallback = () => {
+    console.log('new duck minted');
+    setNewDuck(0);
+  };
+
   useTxNotifier({}, mintTozziDuckState);
-  useTxNotifier({}, mintCustomTozziDuckState);
+  useTxNotifier({}, mintCustomTozziDuckState, customDuckMintedCallback);
 
   useEffect(() => {
     setAccount(account);

@@ -13,6 +13,7 @@ import mining from '../assets/audio/mining.mp3';
 export const useTxNotifier = (
   messages: TxMessages,
   txStatus: TransactionStatus,
+  successCallback?: Function,
 ) => {
   const { setAltMessage, setIsLocked, setMachineMood } = useMachineStore();
   const queryClient = useQueryClient();
@@ -37,6 +38,7 @@ export const useTxNotifier = (
     queryClient.invalidateQueries();
     setAltMessage({ message, txHash: tx?.hash });
     setMachineMood(undefined);
+    if (successCallback) successCallback();
   }, [queryClient]);
 
   const handleOnException = useCallback(() => {
