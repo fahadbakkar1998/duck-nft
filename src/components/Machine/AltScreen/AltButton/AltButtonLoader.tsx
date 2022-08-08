@@ -22,7 +22,10 @@ const AltButtonLoader = () => {
 
   useEffect(() => {
     const newIndex = (index + 1) % numCells;
-    setTimeout(() => setIndex(newIndex), 750);
+    const timeout = setTimeout(() => setIndex(newIndex), 750);
+    return () => {
+      clearTimeout(timeout);
+    };
   }, [index]);
 
   return (

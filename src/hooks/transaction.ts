@@ -37,8 +37,6 @@ export const useTxNotifier = (
   const handleOnSuccess = useCallback((tx: any) => {
     miningAudio.pause();
     successAudio.play();
-    // eslint-disable-next-line no-console
-    console.log(document.querySelectorAll('audio'));
     const message = messages.success || 'Success!';
     setIsLocked(false);
     queryClient.invalidateQueries();
@@ -62,5 +60,10 @@ export const useTxNotifier = (
     if (status === 'Mining') handleOnMining(txStatus.transaction);
     if (status === 'Success') handleOnSuccess(txStatus.transaction);
     if (status === 'Exception') handleOnException();
+
+    return () => {
+      successAudio.remove();
+      miningAudio.remove();
+    };
   }, [txStatus, handleOnMining, handleOnSuccess, handleOnException]);
 };

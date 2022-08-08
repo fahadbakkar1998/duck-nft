@@ -27,6 +27,7 @@ const TitleImage = () => {
       {letters.map((img, index) => {
         return (
           <motion.div
+            key={`title-image-${img}`}
             animate={animate}
             transition={{ duration: 3, repeat: Infinity, delay: 0.2 * index }}
             className={`${index === 1 ? '-ml-[2%]' : (index === 5 ? 'ml-[5%]' : '')}`}
