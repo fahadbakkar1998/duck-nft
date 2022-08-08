@@ -41,7 +41,7 @@ const directionToDuckIndex = (direction: string, currentDuckIndex: number) => {
 const renderDummies = (n: number) => {
   const dummies: Array<ReactNode> = [];
   for (let i = 0; i < n; i++) {
-    dummies.push(<DummyDuckCard />);
+    dummies.push(<DummyDuckCard key={`dummy-${i}`} />);
   }
   return dummies;
 };

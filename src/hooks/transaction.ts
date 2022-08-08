@@ -10,6 +10,9 @@ import success from '../assets/audio/success.mp3';
 // @ts-ignore
 import mining from '../assets/audio/mining.mp3';
 
+const miningAudio = new Audio(mining);
+const successAudio = new Audio(success);
+
 export const useTxNotifier = (
   messages: TxMessages,
   txStatus: TransactionStatus,
@@ -18,13 +21,13 @@ export const useTxNotifier = (
   const { setAltMessage, setIsLocked, setMachineMood } = useMachineStore();
   const queryClient = useQueryClient();
   const [playSuccess] = useSound(success);
-
   const handleOnSigning = useCallback(() => {
     const message = messages.signing || 'Signature Pending...';
     setAltMessage({ message });
   }, []);
 
   const handleOnMining = useCallback((tx: any) => {
+    miningAudio.play();
     const message = messages.mining || 'Processing Transaction';
     setIsLocked(true);
     setAltMessage({ message, txHash: tx?.hash });
@@ -32,7 +35,10 @@ export const useTxNotifier = (
   }, [setAltMessage]);
 
   const handleOnSuccess = useCallback((tx: any) => {
-    // playSuccess();
+    miningAudio.pause();
+    successAudio.play();
+    // eslint-disable-next-line no-console
+    console.log(document.querySelectorAll('audio'));
     const message = messages.success || 'Success!';
     setIsLocked(false);
     queryClient.invalidateQueries();
