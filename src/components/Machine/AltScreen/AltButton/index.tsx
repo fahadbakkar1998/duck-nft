@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { useEffect, useState } from 'react';
 import useSound from 'use-sound';
-import { useContractFunction, useEthers } from '@usedapp/core';
+import { TypedFilter, useContractFunction, useEthers, TransactionStatus } from '@usedapp/core';
 import { utils } from 'ethers';
 import useMachineStore from '../../../../store';
 import { MachineMode } from '../../../../utils/constants';
@@ -30,6 +30,9 @@ const ButtonView = () => {
     ducks,
     setAccount,
     setNewDuck,
+    duckFilters,
+    setDuckFilters,
+    filteredDucks,
   } = useMachineStore();
 
   const [play] = useSound(lcdPress);
@@ -46,9 +49,12 @@ const ButtonView = () => {
     state: mintCustomTozziDuckState,
   } = useContractFunction(contract, 'mintCustomDuck');
 
-  const customDuckMintedCallback = () => {
-    console.log('new duck minted');
-    setNewDuck(0);
+  const customDuckMintedCallback = async () => {
+    setDuckFilters({ ...duckFilters, custom: true });
+    const mintFilter = await contract.filters.DuckMinted(null, null, account);
+    const events = await contract.queryFilter(mintFilter);
+    const tokenId = events.pop().args.tokenId.toNumber();
+    setNewDuck(tokenId);
   };
 
   useTxNotifier({}, mintTozziDuckState);

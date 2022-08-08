@@ -36,6 +36,7 @@ export const MainScreen = () => {
     isLocked,
     newDuck,
     setNewDuck,
+    setCurrentDuckId,
   } = useMachineStore();
 
   const [spring, setSpring] = useSpring(() => ({
@@ -73,6 +74,7 @@ export const MainScreen = () => {
   useEffect(() => {
     if (newDuck !== undefined) {
       handleModeSwitch('prev');
+      setCurrentDuckId(newDuck);
       setNewDuck(undefined);
     }
   }, [newDuck]);

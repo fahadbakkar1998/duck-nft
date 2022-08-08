@@ -23,7 +23,7 @@ const Keyboard: FC = () => {
   const [clearOnNext, setClearOnNext] = useState(true);
   const { setCurrentDuckId, setAltMessage, filteredDucks } = useMachineStore();
   const [playTv] = useSound(tv);
-  const [playPress] = useSound(keyPress);
+  const [playPress] = useSound(keyPress, { volume: 0.5 });
 
   const enterClick = (value: string) => {
     const duckExists = filteredDucks?.find((d) => d.id === Number(value));

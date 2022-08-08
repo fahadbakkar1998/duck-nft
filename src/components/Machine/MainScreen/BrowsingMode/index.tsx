@@ -81,8 +81,8 @@ const BrowsingMode = () => {
       if (duck) {
         duck.scrollIntoView({ block: 'nearest' });
       }
-    }, 300);
-  }, []);
+    }, 320);
+  }, [filteredDucks]);
 
   const handleScroll = (e: UIEvent<HTMLDivElement>) => {
     const currScrollTop = e.currentTarget.scrollTop;

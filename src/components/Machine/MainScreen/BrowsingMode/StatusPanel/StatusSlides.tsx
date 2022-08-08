@@ -75,7 +75,7 @@ const StatusSlides: FC<{state: MachineState | undefined}> = ({ state }) => {
   const slideContent = [
     <TozziSlide state={state} />,
     <CustomSlide state={state} />,
-    <ManualSlide state={state} />,
+    // <ManualSlide state={state} />,
   ];
 
   const handleNext = () => {
