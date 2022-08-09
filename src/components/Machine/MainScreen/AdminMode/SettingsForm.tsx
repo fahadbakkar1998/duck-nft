@@ -50,8 +50,6 @@ const SettingsForm = () => {
   };
 
   const handleSubmission = async () => {
-    // eslint-disable-next-line no-console
-    console.log(chainId, CHAIN_ID);
     if (chainId !== CHAIN_ID) {
       await switchNetwork(CHAIN_ID);
     }

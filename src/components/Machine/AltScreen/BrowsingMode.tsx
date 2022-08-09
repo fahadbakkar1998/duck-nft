@@ -2,6 +2,8 @@ import { FC, useEffect, useState } from 'react';
 import useMachineStore from '../../../store';
 import DuckProfile from './DuckProfile';
 import { DuckData } from '../../../types/types';
+import { openseaDuckUrl } from '../../../utils/constants';
+import { OpenseaIcon } from '../../common/SvgIcon';
 
 const Shopping: FC = () => {
   const {

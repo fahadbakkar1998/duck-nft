@@ -9,9 +9,12 @@ import { TxMessages } from '../types/types';
 import success from '../assets/audio/success.mp3';
 // @ts-ignore
 import mining from '../assets/audio/mining.mp3';
+// @ts-ignore
+import error from '../assets/audio/error.wav';
 
 const miningAudio = new Audio(mining);
 const successAudio = new Audio(success);
+const errorAudio = new Audio(error);
 
 export const useTxNotifier = (
   messages: TxMessages,
@@ -36,6 +39,7 @@ export const useTxNotifier = (
 
   const handleOnSuccess = useCallback((tx: any) => {
     miningAudio.pause();
+    miningAudio.currentTime = 0;
     successAudio.play();
     const message = messages.success || 'Success!';
     setIsLocked(false);
@@ -46,6 +50,7 @@ export const useTxNotifier = (
   }, [queryClient]);
 
   const handleOnException = useCallback(() => {
+    errorAudio.play();
     const { errorMessage } = txStatus;
     const message = getCustomErrorText(errorMessage);
     setAltMessage({ message });

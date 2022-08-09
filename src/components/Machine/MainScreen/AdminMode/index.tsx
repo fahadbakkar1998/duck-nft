@@ -28,7 +28,6 @@ const getTabTitle = (tab: AdminTabs) => {
 };
 
 const AdminMain = () => {
-  // useAccountChange();
   const [activeTab, setActiveTab] = useState<AdminTabs>('minting');
   const { setAltMessage, openBurnForm } = useMachineStore();
 

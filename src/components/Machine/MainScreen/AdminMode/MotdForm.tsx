@@ -10,8 +10,7 @@ import { getCustomErrorText } from '../../../../utils/helpers';
 
 const MotdForm = () => {
   const { data: machineState } = useMachineState();
-  const { account } = useEthers();
-  const { setAltMessage } = useMachineStore();
+  const { setAltMessage, account } = useMachineStore();
   const textRef = useRef<HTMLTextAreaElement>(null);
   const [motd, setMotd] = useState(machineState?.motd?.message?.replace(/\r?\n|\r/g, '') || '');
   const { send, state } = useContractFunction(contract, 'setMOTD');

@@ -1,4 +1,7 @@
 import { FC, useRef } from 'react';
+import useSound from 'use-sound';
+// @ts-ignore
+import selectSound from '../../../../../assets/audio/select.wav';
 
 interface FormButtonProps {
   label: string;
@@ -7,7 +10,9 @@ interface FormButtonProps {
 
 const FormButton: FC<FormButtonProps> = ({ label, onClick }) => {
   const ref = useRef<any>();
+  const [playSelect] = useSound(selectSound);
   const handleClick = () => {
+    playSelect();
     ref.current?.classList.add('animate-blink');
     setTimeout(() => { ref.current?.classList.remove('animate-blink'); }, 300);
     onClick();
