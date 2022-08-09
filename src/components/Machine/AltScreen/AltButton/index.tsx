@@ -98,16 +98,6 @@ const ButtonView = () => {
     activateBrowserWallet();
   };
 
-  if (!account) {
-    return (
-      <Button onClick={handleConnectWallet}>
-        <div className="flex space-x-2 justify-center items-center lcd-font opacity-75 hover:font-bold text-base mt-1">
-          connect wallet
-        </div>
-      </Button>
-    );
-  }
-
   if (isLocked) return <AltButtonLoader />;
 
   if (currentMode === MachineMode.Shopping) {
@@ -125,11 +115,30 @@ const ButtonView = () => {
         </Button>
       );
     }
+    if (!account) {
+      return (
+        <Button onClick={handleConnectWallet}>
+          <div className="flex space-x-2 justify-center items-center lcd-font opacity-75 hover:font-bold text-base mt-1">
+            connect wallet
+          </div>
+        </Button>
+      );
+    }
     return (
       <Button onClick={handleMintTozziDuck}>
         <div className="flex space-x-2 justify-center items-center lcd-font text-black opacity-75 hover:font-bold">
           <div>buy duck</div>
           <BuyIcon wrapperClassName="w-5 mb-[3px]" className="stroke-black" />
+        </div>
+      </Button>
+    );
+  }
+
+  if (!account) {
+    return (
+      <Button onClick={handleConnectWallet}>
+        <div className="flex space-x-2 justify-center items-center lcd-font opacity-75 hover:font-bold text-base mt-1">
+          connect wallet
         </div>
       </Button>
     );
