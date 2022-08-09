@@ -1316,3 +1316,6 @@ export const contractAbi = [
 ];
 
 export const placeholderDuck = "UklGRrIAAABXRUJQVlA4TKYAAAAvj8FjAA9AkG0bYtj2E2TbhiC2/QTZtiGIbf/8x/8AQGoYyJFkqQAUpKJekBpASd69sOlXFyP6PwH8+///qqcWbrK9o1VrvcCg1QTGAmiNxfJGJkETNGGxWm70w+D9KZhcqlMwqsGdk+1qGQCjGp8ZwF7RwlHjeHvQGmwVaIJm3wSneOIGfXqKmyZZMVrmo8Jg27LlRTcIDN6fYtMY3ye79u//n7MB";
+
+export const openseaUrl = 'https://testnets.opensea.io/collection/tozzi-ducks-eduoyj5wsl';
+export const openseaDuckUrl = 'https://testnets.opensea.io/assets/rinkeby/0x6278eabb6de07168add818ed6965eadb35f654be/';

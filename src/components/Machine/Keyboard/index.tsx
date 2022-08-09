@@ -98,6 +98,8 @@ const Keyboard: FC = () => {
     >
       <Display value={value} />
       <mesh
+        onPointerOver={() => { document.body.style.cursor = currentMode === MachineMode.Shopping ? 'pointer' : 'not-allowed'; }}
+        onPointerOut={() => { document.body.style.cursor = 'default'; }}
         onPointerDown={(e) => {
           if (e.object.name !== 'pad_1' && e.object.name !== 'pad_2') buttonClick(e.object.name);
         }}

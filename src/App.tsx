@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import './App.scss';
 import { isMobile, isSafari } from 'react-device-detect';
 import Desktop from './components/layout/Desktop';

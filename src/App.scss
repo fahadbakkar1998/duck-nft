@@ -102,6 +102,15 @@ canvas {
   align-items: center;
   justify-content: center;
 }
+
+.pressed {
+  position: relative;
+  box-shadow: 1px 1px 0px 2px #b53c24;
+  border: 3px solid #ffffff1c;
+  background: linear-gradient(to bottom, #f06824 5%, #ec5523 100%);
+  top: 1px;
+}
+
 .circle-button:active {
   position: relative;
   box-shadow: 1px 1px 0px 2px #b53c24;

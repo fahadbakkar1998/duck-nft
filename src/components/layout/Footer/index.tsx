@@ -1,3 +1,4 @@
+import { openseaUrl } from '../../../utils/constants';
 import { ChainSawLogo, DiscordIcon, InstagramIcon, TwitterIcon, OpenseaIcon } from '../../common/SvgIcon';
 import './index.scss';
 
@@ -17,7 +18,7 @@ const Footer = () => {
           className="flex"
           target="_blank"
           rel="noreferrer"
-          href="https://testnets.opensea.io/collection/tozzi-ducks-eduoyj5wsl"
+          href={openseaUrl}
         >
           <OpenseaIcon className="social-icon" />
         </a>

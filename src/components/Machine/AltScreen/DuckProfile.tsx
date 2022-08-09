@@ -8,6 +8,8 @@ import { DuckData } from '../../../types/types';
 import { getMetadataAttribute } from '../../../utils/helpers';
 import { useEnsOrShort } from '../../../hooks';
 import useMachineStore from '../../../store';
+import { OpenseaIcon } from '../../common/SvgIcon';
+import { openseaDuckUrl } from '../../../utils/constants';
 
 const FieldLabel = ({ text }: {text:string}) => {
   return <div className="pixel-font text-sm">{text.toUpperCase()}</div>;
@@ -43,6 +45,9 @@ const DuckProfileView: FC<DuckProfileProps> = ({ duck }) => {
         <div className="p-2 flex flex-col gap-2">
           <div className="flex gap-2">
             <div className="flex-1 relative bg-white bg-opacity-10 rounded-lg">
+              <a target="_blank" href={`${openseaDuckUrl}${duck.id}`} rel="noreferrer">
+                <OpenseaIcon className="fill-white absolute w-8 h-8 bottom-2 left-2" />
+              </a>
               <img
                 className="border-2"
                 alt={`Duck ${duck.id}`}

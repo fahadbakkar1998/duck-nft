@@ -30,7 +30,7 @@ const AltScreen: FC = () => {
       rotation={[0.0, 0.0, 0.0]}
       transform
     >
-      <div className="relative">
+      <div className="relative select-none">
         <StatusLights />
         <div
           className={`

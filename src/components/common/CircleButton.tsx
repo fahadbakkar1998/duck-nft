@@ -1,5 +1,9 @@
+import useMachineStore from '../../store';
+
 /* eslint-disable react/prop-types */
 const CircleButton = (props) => {
+  const { isLocked } = useMachineStore();
+
   return (
     <div className="relative flex justify-center w-full select-none">
       <div
@@ -9,7 +13,7 @@ const CircleButton = (props) => {
           -top-[3px]  border-gray-600 h-[52px]  w-[52px] rounded-full bg-gray-900`}
       />
       <div
-        className="relative z-20 circle-button w-11 rounded-full"
+        className={`relative z-20 circle-button w-11 rounded-full ${isLocked ? 'pressed' : ''}`}
         onClick={props.onClick}
       >
         <div className="flex justify-center items-center">
