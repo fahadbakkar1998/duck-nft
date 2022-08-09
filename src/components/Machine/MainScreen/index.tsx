@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import ModeSwitcher from '../../common/ModeSwitcher';
 import useMachineStore from '../../../store';
 import AdminMain from './AdminMode';
@@ -29,14 +29,11 @@ const MainScreen: FC<MainScreenProps> = ({ screenInverted, switchModes }) => {
       transform
       occlude
     >
-      { currentMode === MachineMode.Off && <WalletConnect /> }
+      { currentMode === MachineMode.Off && <WalletConnect switchModes={switchModes} /> }
       { currentMode === MachineMode.Shopping && <BrowsingMode /> }
       <DrawingTool switchModes={switchModes} />
       { currentMode === MachineMode.Admin && <AdminMain /> }
-      <ModeSwitcher
-        nextMode={() => switchModes('next')}
-        prevMode={() => switchModes('prev')}
-      />
+      <ModeSwitcher switchModes={switchModes} />
     </Screen>
   );
 };

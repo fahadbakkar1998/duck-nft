@@ -1,24 +1,26 @@
-import { useEffect, useRef } from 'react';
-import { useEthers } from '@usedapp/core';
+import { FC, useRef } from 'react';
 import './index.scss';
 import useMachineStore from '../../../../store';
 import { MachineMode } from '../../../../utils/constants';
 import { DuckLogo } from '../../../common/SvgIcon';
 import { useMachineState } from '../../../../state/hooks';
 
-const WalletConnect = () => {
-  const { currentMode, setCurrentMode, setAltMessage, setIsSwitchingModes, isSwitchingModes, switchModes } = useMachineStore();
+interface WalletConnectProps {
+  switchModes: (direction: string) => void;
+}
+
+const WalletConnect: FC<WalletConnectProps> = ({ switchModes }) => {
+  const { currentMode } = useMachineStore();
   const ref = useRef<HTMLDivElement>(null);
-  const { activateBrowserWallet, account, chainId } = useEthers();
   const { isLoading } = useMachineState();
 
   const handleConnectWallet = async () => {
     if (isLoading) return;
-    switchModes('shopping');
+    switchModes('next');
   };
 
   return (
-    <div className="inner-shadow WalletConnect scanline">
+    <div className="inner-shadow WalletConnect">
       <DuckLogo className="w-full" wrapperClassName="w-full" />
       <div className="text-white flex flex-col space-y-1 text-sm mb-2">
         {currentMode === MachineMode.Off && (

@@ -6,15 +6,12 @@ import { a, useSpring, easings } from '@react-spring/three';
 import { useLoader, useThree } from 'react-three-fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import useMachineStore from '../../../store';
-import { MachineMode, minViewLength } from '../../../utils/constants';
+import { minViewLength } from '../../../utils/constants';
 import Screen from './index';
-// @ts-ignore
-import keyPress from '../../../assets/audio/keypress.mp3';
 // @ts-ignore
 import woosh from '../../../assets/audio/woosh.mp3';
 
 let globalRoundCount = 0;
-// let screenIsRotating = false;
 
 export const MainScreen = () => {
   const { viewport } = useThree();
@@ -23,12 +20,10 @@ export const MainScreen = () => {
   const [screenIsRotating, setScreenIsRotating] = useState(false);
   const gltfDisk = useLoader(GLTFLoader, 'assets/models/DuckDisk.glb');
   const modelRef = useRef();
-  const [playKeyPress] = useSound(keyPress);
   const [playWoosh] = useSound(woosh, { volume: 0.3, playbackRate: 1.5 });
 
   const {
     switchModes,
-    currentMode,
     changeChannel,
     processing,
     showTxStatus,
@@ -50,8 +45,8 @@ export const MainScreen = () => {
 
   const handleModeSwitch = (direction: string) => {
     if (isLocked) return;
-    if (currentMode === MachineMode.Off) return;
-    playKeyPress();
+    // if (currentMode === MachineMode.Off) return;
+    // playKeyPress();
     if (screenIsRotating || processing || showTxStatus) return;
     setScreenIsRotating(true);
     setTimeout(() => {

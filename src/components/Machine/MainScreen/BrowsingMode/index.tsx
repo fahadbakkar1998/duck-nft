@@ -99,9 +99,7 @@ const BrowsingMode = () => {
         handleKeys={['up', 'down', 'left', 'right']}
         onKeyEvent={(key) => selectDuckByDirection(key)}
       />
-      <div
-        className="main"
-      >
+      <div className="main">
         <div
           id="mainscreen"
           onScroll={handleScroll}

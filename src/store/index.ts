@@ -192,6 +192,8 @@ export const useMachineStore = create<MachineStore>(
               : MachineMode.Customization;
             break;
           default:
+            // eslint-disable-next-line no-console
+            console.log('hi');
             nextMode = MachineMode.Shopping;
         }
         return { currentMode: nextMode, isSwitchingModes: true, altMessage: undefined };

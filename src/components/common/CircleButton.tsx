@@ -27,6 +27,8 @@ const CircleButton = (props) => {
 };
 
 export const SmallCircleButton = (props) => {
+  const { isLocked } = useMachineStore();
+
   return (
     <div className="relative select-none mb-[1px]">
       <div
@@ -37,7 +39,7 @@ export const SmallCircleButton = (props) => {
           -left-[1px]  border-gray-600 h-[29px]  w-[30px] rounded-md bg-gray-900`}
       />
       <div
-        className="relative z-20 circle-button small w-11 rounded"
+        className={`relative z-20 circle-button small w-11 rounded ${isLocked ? 'pressed' : ''}`}
         onClick={props.onClick}
       >
         <div className="flex justify-center items-center">
