@@ -3,7 +3,7 @@ import ModeSwitcher from '../../common/ModeSwitcher';
 import useMachineStore from '../../../store';
 import AdminMain from './AdminMode';
 import DrawingTool from './CustomizationMode';
-import WalletConnect from './WalletConnect/index';
+import LoadingScreen from './LoadingScreen.tsx/index';
 import BrowsingMode from './BrowsingMode';
 import { MachineMode } from '../../../utils/constants';
 import Screen from '../common/Screen';
@@ -29,7 +29,7 @@ const MainScreen: FC<MainScreenProps> = ({ screenInverted, switchModes }) => {
       transform
       occlude
     >
-      { currentMode === MachineMode.Off && <WalletConnect switchModes={switchModes} /> }
+      { currentMode === MachineMode.Off && <LoadingScreen switchModes={switchModes} /> }
       { currentMode === MachineMode.Shopping && <BrowsingMode /> }
       <DrawingTool switchModes={switchModes} />
       { currentMode === MachineMode.Admin && <AdminMain /> }

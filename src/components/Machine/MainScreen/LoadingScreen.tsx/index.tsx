@@ -1,26 +1,42 @@
-import { FC, useRef } from 'react';
+import { FC, useEffect, useRef } from 'react';
+import useSound from 'use-sound';
 import './index.scss';
 import useMachineStore from '../../../../store';
 import { MachineMode } from '../../../../utils/constants';
 import { DuckLogo } from '../../../common/SvgIcon';
 import { useMachineState } from '../../../../state/hooks';
+// @ts-ignore
+import selectSound from '../../../../assets/audio/select.wav';
+// @ts-ignore
+import successSound from '../../../../assets/audio/success.mp3';
 
-interface WalletConnectProps {
+interface LoadingScreenProps {
   switchModes: (direction: string) => void;
 }
 
-const WalletConnect: FC<WalletConnectProps> = ({ switchModes }) => {
+const LoadingScreen: FC<LoadingScreenProps> = ({ switchModes }) => {
   const { currentMode } = useMachineStore();
   const ref = useRef<HTMLDivElement>(null);
   const { isLoading } = useMachineState();
+  const [playSelect] = useSound(selectSound);
+  const [playSuccess] = useSound(successSound);
 
   const handleConnectWallet = async () => {
     if (isLoading) return;
+    playSelect();
+    ref.current?.classList.add('animate-blink');
+    setTimeout(() => { ref.current?.classList.remove('animate-blink'); }, 300);
     switchModes('next');
   };
 
+  useEffect(() => {
+    if (!isLoading) {
+      (new Audio(successSound)).play();
+    }
+  }, [isLoading]);
+
   return (
-    <div className="inner-shadow WalletConnect">
+    <div className="inner-shadow LoadingScreen">
       <DuckLogo className="w-full" wrapperClassName="w-full" />
       <div className="text-white flex flex-col space-y-1 text-sm mb-2">
         {currentMode === MachineMode.Off && (
@@ -45,4 +61,4 @@ const WalletConnect: FC<WalletConnectProps> = ({ switchModes }) => {
   );
 };
 
-export default WalletConnect;
+export default LoadingScreen;
