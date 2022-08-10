@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { FC, useEffect, useState } from 'react';
 import { padStart } from 'lodash';
+import { utils } from 'ethers';
 import { shortenAddress, useEthers } from '@usedapp/core';
 // eslint-disable-next-line import/no-relative-packages
 import { motion, AnimatePresence } from '../../../../node_modules/framer-motion/dist/framer-motion';
@@ -29,9 +30,9 @@ const DuckProfileView: FC<DuckProfileProps> = ({ duck }) => {
   const status = getMetadataAttribute(metadata, 'Status');
   const title = getMetadataAttribute(metadata, 'Title');
   const creator = getMetadataAttribute(metadata, 'Creator');
-  const formattedCreator = creator === 'Jim Tozzi'
-    ? creator
-    : useEnsOrShort(creator);
+  const formattedCreator = utils.isAddress(creator!)
+    ? useEnsOrShort(creator)
+    : (creator || 'N/A');
 
   return (
     <motion.div
