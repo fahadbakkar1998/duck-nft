@@ -11,8 +11,9 @@ import TitleImage from './TitleImage';
 import Footer from './Footer';
 import browsingOverlay from '../../assets/img/browsing-overlay.png';
 import customizerOverlay from '../../assets/img/customizer-overlay.png';
+import adminOverlay from '../../assets/img/admin-overlay.png';
 
-const overlays = [undefined, browsingOverlay, customizerOverlay];
+const overlays = [undefined, browsingOverlay, customizerOverlay, adminOverlay];
 
 const Desktop = () => {
   const {
