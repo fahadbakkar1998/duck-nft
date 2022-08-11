@@ -49,7 +49,7 @@ const Desktop = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 style={{ zIndex: 100 }}
-                className="drop-shadow absolute w-full pointer-events-none "
+                className="drop-glow absolute w-full pointer-events-none "
               >
                 <img src={overlay1} alt="overvlay" />
               </motion.div>
