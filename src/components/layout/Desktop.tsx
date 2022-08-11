@@ -9,10 +9,14 @@ import useMachineStore from '../../store';
 import BTI from '../Machine/BinaryToggleInterface';
 import TitleImage from './TitleImage';
 import Footer from './Footer';
-import overlay1 from '../../assets/img/browsing-overlay.png';
+import browsingOverlay from '../../assets/img/browsing-overlay.png';
+import customizerOverlay from '../../assets/img/customizer-overlay.png';
+
+const overlays = [undefined, browsingOverlay, customizerOverlay];
 
 const Desktop = () => {
   const {
+    currentMode,
     isOwnersManualOpen,
     setIsOwnersManualOpen,
     showOverlay,
@@ -27,7 +31,7 @@ const Desktop = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="w-full h-full absolute bg-black bg-opacity-70 color"
+            className="w-full h-full absolute bg-black bg-opacity-80 color"
             style={{ zIndex: 100 }}
           >
             <div
@@ -51,7 +55,7 @@ const Desktop = () => {
                 style={{ zIndex: 100 }}
                 className="drop-glow absolute w-full pointer-events-none "
               >
-                <img src={overlay1} alt="overvlay" />
+                <img src={overlays[currentMode]} alt="Duck Browser Guide" />
               </motion.div>
             )}
           </AnimatePresence>
