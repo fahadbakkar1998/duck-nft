@@ -18,19 +18,22 @@ import Floater from '../common/Floater';
 const letters = [t, o, z1, z2, i, d, u, c, k, s];
 
 const TitleImage = () => {
-  const { openBurnForm } = useMachineStore();
+  const { showOverlay } = useMachineStore();
   const animate = {
     y: [-15, -35, -15],
   };
   return (
-    <div className="flex absolute z-50 w-1/2 -top-[1%] 2xl:top-0 left-[12%] title-image">
+    <div
+      style={{ zIndex: 110 }}
+      className="flex absolute w-1/2 -top-[1%] 2xl:top-0 left-[12%] title-image"
+    >
       {letters.map((img, index) => {
         return (
           <motion.div
             key={`title-image-${img}`}
             animate={animate}
             transition={{ duration: 3, repeat: Infinity, delay: 0.2 * index }}
-            className={`${index === 1 ? '-ml-[2%]' : (index === 5 ? 'ml-[5%]' : '')}`}
+            className={`${index === 1 ? '-ml-[2%]' : (index === 5 ? 'ml-[5%]' : '')} ${showOverlay ? 'hue-rotate-[-140deg] duration-500 transition-all' : '0'}`}
           >
             <img src={img} alt="foo" className="" />
           </motion.div>
