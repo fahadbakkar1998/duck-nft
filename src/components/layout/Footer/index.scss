@@ -12,3 +12,8 @@
   @apply fill-[#fe7a42] hover:fill-[#ffac59] transition;
   filter: drop-shadow(3px 5px 3px rgb(0 0 0 / 0.2));
 }
+
+.footer-link {
+  @apply text-[#fe7a42] hover:text-[#ffac59] transition;
+  filter: drop-shadow(3px 5px 3px rgb(0 0 0 / 0.2));
+}

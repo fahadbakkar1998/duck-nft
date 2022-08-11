@@ -73,6 +73,9 @@ type MachineStore = {
 
   newDuck: number | undefined;
   setNewDuck: (newDuck: number | undefined) => void;
+
+  showOverlay: boolean;
+  setShowOverlay: (showOverlay: boolean) => void;
 };
 
 export const useMachineStore = create<MachineStore>(
@@ -277,6 +280,11 @@ export const useMachineStore = create<MachineStore>(
     newDuck: undefined,
     setNewDuck: (newDuck: number | undefined) => {
       set({ newDuck });
+    },
+
+    showOverlay: false,
+    setShowOverlay: (showOverlay: boolean) => {
+      set({ showOverlay });
     },
   }),
 );

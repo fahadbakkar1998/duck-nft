@@ -1,6 +1,5 @@
 import { Suspense } from 'react';
 import { Canvas } from 'react-three-fiber';
-import { Cloud } from '@react-three/drei';
 import Machine from '../Machine/index';
 // eslint-disable-next-line import/no-relative-packages
 import { motion, AnimatePresence } from '../../../node_modules/framer-motion/dist/framer-motion';
@@ -10,29 +9,51 @@ import useMachineStore from '../../store';
 import BTI from '../Machine/BinaryToggleInterface';
 import TitleImage from './TitleImage';
 import Footer from './Footer';
-import overlay1 from '../../assets/img/overlay_1.png';
+import overlay1 from '../../assets/img/browsing-overlay.png';
 
 const Desktop = () => {
   const {
     isOwnersManualOpen,
     setIsOwnersManualOpen,
+    showOverlay,
+    setShowOverlay,
   } = useMachineStore();
 
   return (
     <div className="bg-opacity">
-      {/* <div className="w-full h-full absolute bg-black bg-opacity-70 pointer-events-none" style={{ zIndex: 100 }} /> */}
+      <AnimatePresence>
+        { showOverlay && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="w-full h-full absolute bg-black bg-opacity-70 color"
+            style={{ zIndex: 100 }}
+          >
+            <div
+              onClick={() => setShowOverlay(false)}
+              style={{ zIndex: 110 }}
+              className="cursor-pointer absolute footer-link white pixel-font text-5xl right-[5%] top-[5%]"
+            >
+              X
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <div className="app-container overflow-hidden">
         <div className="mx-auto machine-container w-full 2xl:w-[80%]">
           <AnimatePresence>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              style={{ zIndex: 100 }}
-              className="absolute w-full drop-shadow pointer-events-none "
-            >
-              <img src={overlay1} alt="overvlay" />
-            </motion.div>
+            {showOverlay && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                style={{ zIndex: 100 }}
+                className="drop-shadow absolute w-full pointer-events-none "
+              >
+                <img src={overlay1} alt="overvlay" />
+              </motion.div>
+            )}
           </AnimatePresence>
           <BTI />
           <TitleImage />
