@@ -36,11 +36,12 @@ const Mobile = () => {
           bg-black pixel-font 
           text-white  p-4 border-orange-600 border-8 shadow-lg
           border-inset rounded-lg mx-40 z-50
-          w-[50%]
+          w-[65%]
           `}
         >
-          <div className="animate-pulse text-center">
-            Come Back on Desktop
+          <div className="animate-pulse text-left space-y-4">
+            <p>Hey, thanks for checking out Tozzi Ducks!</p>
+            <p>To view & interact with the Tozzi Duck Machine in all it&apos;s glory, please visit us on a supported desktop browser. (Chrome, Firefox work best).</p>
           </div>
         </div>
         <div className="flex flex-col mt-8 max-w-md justify-center items-center relative">
