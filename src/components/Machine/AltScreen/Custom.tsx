@@ -68,10 +68,9 @@ const Custom: FC = () => {
                 <div>
                   <b>3.</b> Custom Ducks™️ are stored on-chain. Gas is paid by the minter (you).
                 </div>
-
-                <div>
+                {/* <div>
                   <b>4.</b> For more info, check the <TagLink onClick={openManual} text="Manual" />
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
