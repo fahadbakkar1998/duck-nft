@@ -1,20 +1,22 @@
-import { openseaUrl } from '../../../utils/constants';
+import { MachineMode, openseaUrl } from '../../../utils/constants';
 import { ChainSawLogo, DiscordIcon, InstagramIcon, TwitterIcon, OpenseaIcon } from '../../common/SvgIcon';
 import useMachineStore from '../../../store';
 import './index.scss';
 
 const Footer = () => {
-  const { showOverlay, setShowOverlay } = useMachineStore();
+  const { showOverlay, setShowOverlay, currentMode } = useMachineStore();
   return (
     <div className="flex items-center justify-between absolute w-full bottom-[6%] 2xl:bottom-[10%] pl-[19%] pr-[14%]">
       <div className="space-x-8 flex items-center">
-        <div
-          onClick={() => setShowOverlay(!showOverlay)}
-          className="pixel-font footer-link cursor-pointer text-4xl"
-        >
-          HOW?
-        </div>
-        <div className="pixel-font footer-link cursor-pointer text-4xl">DOCS</div>
+        { currentMode !== MachineMode.Off && (
+          <div
+            onClick={() => setShowOverlay(!showOverlay)}
+            className="pixel-font footer-link cursor-pointer text-4xl"
+          >
+            HOW?
+          </div>
+        )}
+        {/* <div className="pixel-font footer-link cursor-pointer text-4xl">DOCS</div> */}
       </div>
       <div className=" right-[14%] lg:right-[14%]">
         <div className="flex space-x-4 lg:space-x-6 items-center">
