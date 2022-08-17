@@ -1,4 +1,4 @@
-import { MachineMode, openseaUrl } from '../../../utils/constants';
+import { MachineMode } from '../../../utils/constants';
 import { ChainSawLogo, DiscordIcon, InstagramIcon, TwitterIcon, OpenseaIcon } from '../../common/SvgIcon';
 import useMachineStore from '../../../store';
 import './index.scss';
