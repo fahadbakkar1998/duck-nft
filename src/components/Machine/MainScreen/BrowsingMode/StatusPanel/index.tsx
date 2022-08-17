@@ -18,7 +18,7 @@ const StatusPanel = () => {
       <div
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="graph-bg lcd-font text-black text-opacity-75 text-md inner-shadow rounded-sm font-thin flex items-center  justify-center space-x-10 h-8
+        className="graph-bg lcd-font text-black text-opacity-75 text-md inner-shadow rounded-sm font-thin flex items-center  justify-center space-x-10 h-[2.05rem]
           border-t border-l border-black border-opacity-50 pointer-events-auto"
       >
         <ShimmerLayer targetHovered={isHovered} />

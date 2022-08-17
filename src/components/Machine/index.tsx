@@ -7,8 +7,6 @@ import WaveForm from './WaveForm';
 import StatusPanel from './MainScreen/BrowsingMode/StatusPanel';
 import Keyboard from './Keyboard';
 // eslint-disable-next-line import/no-relative-packages
-import { motion, AnimatePresence } from '../../../node_modules/framer-motion/dist/framer-motion';
-import Providers from '../../Providers';
 
 const Machine = () => {
   const { currentMode } = useMachineStore();
