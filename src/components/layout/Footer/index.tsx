@@ -11,7 +11,7 @@ const Footer = () => {
         { currentMode !== MachineMode.Off && (
           <div
             onClick={() => setShowOverlay(!showOverlay)}
-            className="pixel-font footer-link cursor-pointer text-4xl"
+            className="pixel-font footer-link cursor-pointer text-2xl lg:text-4xl"
           >
             HOW?
           </div>

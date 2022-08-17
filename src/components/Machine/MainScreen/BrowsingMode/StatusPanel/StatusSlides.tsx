@@ -11,10 +11,24 @@ interface SlideProps {
   state?: MachineState | undefined;
 }
 
+const AccountSlide: FC<SlideProps> = () => {
+  const { account } = useMachineStore();
+  return (
+    <div className="w-full flex justify-between px-4 items-center">
+      <div className="px-3 py-[2px] text-[#ffdf74] transparent bg-black bg-opacity-75">
+        welcome
+      </div>
+      <div>
+        Connected Account: <span className="ml-2">{ account ? shortenAddress(account) : 'Not Connected'}</span>
+      </div>
+    </div>
+  );
+};
+
 const TozziSlide: FC<SlideProps> = ({ state }) => {
   return (
     <div className="w-full flex justify-between px-4 items-center">
-      <div className="px-3 text-[#ffdf74] transparent bg-black bg-opacity-75">
+      <div className="px-3 py-[2px] text-[#ffdf74] transparent bg-black bg-opacity-75">
         tozzi ducks
       </div>
       <div>
@@ -30,7 +44,7 @@ const TozziSlide: FC<SlideProps> = ({ state }) => {
 const CustomSlide: FC<SlideProps> = ({ state }) => {
   return (
     <div className="w-full flex justify-between px-4 items-center">
-      <div className="px-3 text-[#ffdf74] transparent bg-black opacity-75">
+      <div className="px-3 py-[2px] text-[#ffdf74] transparent bg-black opacity-75">
         custom ducks
       </div>
       <div>
@@ -73,6 +87,7 @@ const StatusSlides: FC<{state: MachineState | undefined}> = ({ state }) => {
   const [showSlide, setShowSlide] = useState(true);
 
   const slideContent = [
+    <AccountSlide state={state} />,
     <TozziSlide state={state} />,
     <CustomSlide state={state} />,
     // <ManualSlide state={state} />,
