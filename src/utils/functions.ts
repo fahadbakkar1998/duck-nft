@@ -48,7 +48,7 @@ const getMintedDucks = async () => {
       const tokenId = parseInt(event?.args?.tokenId._hex);
       const salePrice = parseInt(event?.args?.price._hex);
       const duckType = event?.args?.duckType;
-      const owner = event?.args?.recipient;
+      const owner = await duckMachineContract.ownerOf(tokenId);
       const tokenURI = await duckMachineContract.tokenURI(tokenId);
       const tokenURIRes = await axios.get(tokenURI);
       const timestamp = await (await (event.getBlock())).timestamp;
