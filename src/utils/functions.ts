@@ -35,9 +35,6 @@ const getMintedDucks = async () => {
 
   const burnedFilter = duckMachineContract.filters.CustomDuckBurned();
   const burnEvents = await duckMachineContract.queryFilter(burnedFilter);
-  // eslint-disable-next-line no-console
-  console.log(burnEvents);
-
   let parsedEvents;
 
   parsedEvents = events.filter((event) => {
@@ -98,6 +95,7 @@ const fetchDucks = async () => {
     const { id, salePrice, isCustom, owner, webp, hatched, metadata } = duck;
     const { proof } = staticDuckData[index];
     mintedDuckIds = [...mintedDuckIds, id];
+    const status = metadata.attributes.find((a) => a.trait_type === 'Status');
     return {
       id,
       proof,
@@ -107,8 +105,7 @@ const fetchDucks = async () => {
       salePrice,
       isCustom,
       hatched: hatched as number,
-      burnable: (isCustom && hatched > 0)
-        && (hatched + BURN_WINDOW) > Date.now(),
+      burnable: (isCustom && hatched > 0) && (hatched + BURN_WINDOW) > Date.now() && status?.value === 'Probation',
     };
   });
   const mintedDucks = formatedMintedDucks.filter((duck) => duck.id !== OWNERSHIP_TOKEN_ID);
