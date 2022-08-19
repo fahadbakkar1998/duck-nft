@@ -6,7 +6,7 @@
   width: 435px;
   height: 435px;
   border-radius: 15%;
-  overflow: hidden;  
+  // overflow: auto;  
   &.active {
     display: flex;
   }
@@ -26,10 +26,16 @@
       cursor: default;
     }
   }
+  .drawing-canvas-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 15%;
+    display: relative;
+  }
   .drawing-canvas {
     width: 100%;
     height: 100%;
-    border-radius: 8%;
+    border-radius: 2%;
     cursor: url("../../../../../public/assets/images/pencil.png"), default;
   }
   .bottom {

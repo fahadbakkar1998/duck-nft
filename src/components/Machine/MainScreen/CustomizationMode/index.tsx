@@ -17,9 +17,12 @@ import trashIcon from '../../../../assets/img/icons/trash.svg';
 import undoIcon from '../../../../assets/img/icons/undo.svg';
 import redoIcon from '../../../../assets/img/icons/redo.svg';
 import randomIcon from '../../../../assets/img/icons/random.svg';
+import downloadIcon from '../../../../assets/img/icons/download.svg';
+import uploadIcon from '../../../../assets/img/icons/upload.svg';
 // @ts-ignore
 import keyPress from '../../../../assets/audio/keypress.mp3';
 import './index.scss';
+import RectButton from '../../../common/RectButton';
 
 const layers: Object[] = [
   { label: 'Head' },
@@ -114,12 +117,24 @@ const DrawingTool: FC<DrawingToolProps> = ({ switchModes }) => {
         })}
       >
         <div className="absolute w-full h-full inner-shadow rounded-[15%] pointer-events-none" />
-        {/* border-[#aba961] */}
-        <canvas
-          className="drawing-canvas bg-black border-[#656b4d]  border-[30px]"
-          ref={drawingCanvas}
-          id="drawingtool_canvas"
-        />
+        <div className="drawing-canvas-container  bg-black border-[#656b4d] border-[35px]">
+          <canvas
+            className="drawing-canvas"
+            ref={drawingCanvas}
+            id="drawingtool_canvas"
+          />
+          <div className="absolute opacity-75 hover:opacity-100 transition bottom-[2.2%] right-[10%] w-5 h-5">
+            <img
+              className="cursor-pointer"
+              onClick={() => {
+                playKeyPress();
+                DToolInst.downloadPng();
+              }}
+              src={downloadIcon}
+              alt="Download"
+            />
+          </div>
+        </div>
         <div className="right">
           <CircleButton
             onClick={() => {
@@ -196,11 +211,6 @@ const DrawingTool: FC<DrawingToolProps> = ({ switchModes }) => {
             image={trashIcon}
           />
         </div>
-        {/* <MintedModal
-          switchModes={switchModes}
-          open
-          onClose={() => { }}
-        /> */}
       </div>
     </Suspense>
   );

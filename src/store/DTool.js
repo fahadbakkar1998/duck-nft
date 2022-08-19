@@ -350,6 +350,25 @@ export default class DTool {
     return base64data;
   }
 
+  async downloadPng() {
+    const inMemoryCanvas = document.createElement('canvas');
+    inMemoryCanvas.setAttribute('width', 400);
+    inMemoryCanvas.setAttribute('height', 400);
+    const inMemoryContext = inMemoryCanvas.getContext('2d');
+    inMemoryContext.imageSmoothingEnabled = false;
+    inMemoryContext.drawImage(this.c, 0, 0, 400, 400);
+    inMemoryCanvas.style =
+      'image-rendering: -moz-crisp-edges;image-rendering: -webkit-crisp-edges;image-rendering: pixelated;image-rendering: crisp-edges;';
+    const blob = await fetch(inMemoryCanvas.toDataURL('image/png', 1))
+      .then((response) => response.blob())
+      .catch(console.error);
+    const href = (await this.readAsDataURLAsync(blob));
+    const link = document.createElement('a');
+    link.download = 'custom-duck.png';
+    link.href = href;
+    link.click();
+  }
+
   fillHandler(e) {
     const layer = this.layers[this.selectedLayerIndex];
     const correctPos = this.getCorrectPos(e);
