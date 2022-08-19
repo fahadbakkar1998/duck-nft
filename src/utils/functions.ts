@@ -35,6 +35,8 @@ const getMintedDucks = async () => {
 
   const burnedFilter = duckMachineContract.filters.CustomDuckBurned();
   const burnEvents = await duckMachineContract.queryFilter(burnedFilter);
+  // eslint-disable-next-line no-console
+  console.log(burnEvents);
 
   let parsedEvents;
 
