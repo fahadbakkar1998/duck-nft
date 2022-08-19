@@ -22,7 +22,6 @@ import uploadIcon from '../../../../assets/img/icons/upload.svg';
 // @ts-ignore
 import keyPress from '../../../../assets/audio/keypress.mp3';
 import './index.scss';
-import RectButton from '../../../common/RectButton';
 
 const layers: Object[] = [
   { label: 'Head' },
