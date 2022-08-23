@@ -2,7 +2,7 @@ import { ChainId } from '@usedapp/core';
 import { FC } from 'react';
 import { AltMessage } from '../../../types/types';
 
-const CHAIN_ID = process.env.REACT_PUBLIC_ENV === 'production' ? ChainId.Mainnet : ChainId.Rinkeby;
+const CHAIN_ID = process.env.REACT_APP_ENV === 'production' ? ChainId.Mainnet : ChainId.Rinkeby;
 const etherscanUrl = CHAIN_ID === 1 ? 'etherscan.io' : 'rinkeby.etherscan.io';
 
 const TxNotification: FC<AltMessage> = ({ message, txHash }) => {

@@ -12,8 +12,8 @@ const staticDuckData = Object.values(proofs).map((proof, index) => {
   return { id: index, ...proof, ...emptyDuckData };
 });
 
-const { REACT_APP_MACHINE_CONTRACT_ADDRESS: contractAddress = '', REACT_APP_INFURA_API_KEY, REACT_APP_CHAIN_ID } = process.env;
-const CHAIN_ID = process.env.REACT_PUBLIC_ENV === 'production' ? ChainId.Mainnet : ChainId.Rinkeby;
+const { REACT_APP_MACHINE_CONTRACT_ADDRESS: contractAddress = '', REACT_APP_INFURA_API_KEY, REACT_APP_CHAIN_ID, REACT_APP_ENV } = process.env;
+const CHAIN_ID = REACT_APP_ENV === 'production' ? ChainId.Mainnet : ChainId.Rinkeby;
 const CHAIN_NAME = CHAIN_ID === 1 ? 'mainnet' : 'rinkeby';
 
 declare const window: any;

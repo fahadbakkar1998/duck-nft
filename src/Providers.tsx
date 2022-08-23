@@ -3,7 +3,7 @@ import React from 'react';
 import { QueryClientProvider } from 'react-query';
 import useMachineStore from './store';
 
-const CHAIN_ID = process.env.REACT_PUBLIC_ENV === 'production' ? ChainId.Mainnet : ChainId.Rinkeby;
+const CHAIN_ID = process.env.REACT_APP_ENV === 'production' ? ChainId.Mainnet : ChainId.Rinkeby;
 const CHAIN_NAME = CHAIN_ID === 1 ? 'mainnet' : 'rinkeby';
 const { REACT_APP_INFURA_API_KEY } = process.env;
 
