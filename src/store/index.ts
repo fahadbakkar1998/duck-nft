@@ -145,7 +145,7 @@ export const useMachineStore = create<MachineStore>(
       available: true,
       sold: true,
       mine: false,
-      custom: false,
+      custom: true,
       hideUI: false,
     },
     setDuckFilters: (filters: DuckFilters): void => {

@@ -31,7 +31,7 @@ export const mintStatusName = (status: MintStatus) => {
     case MintStatus.Enabled:
       return 'on';
     case MintStatus.Allowance:
-      return 'allow';
+      return 'allow list';
     default:
       return 'off';
   }

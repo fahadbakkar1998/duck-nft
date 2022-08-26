@@ -44,7 +44,7 @@ const Custom: FC = () => {
                 <div className="mt-2">
                   <div className="pixel-font text-xs">MINT PRICE</div>
                   <div className="pixel-font-thin text-xl ">
-                    {`${machineConfig?.tozziMintPrice} ETH`}
+                    {`${machineConfig?.customMintPrice} ETH`}
                   </div>
                 </div>
               </div>
