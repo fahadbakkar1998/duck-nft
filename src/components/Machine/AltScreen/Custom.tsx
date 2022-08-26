@@ -22,7 +22,7 @@ const Custom: FC = () => {
   return (
     <div className="absolute h-full w-full z-10">
       <div className="pixel-font w-full h-full p-2 scanline">
-        <div className="h-full overflow-scroll">
+        <div className="h-full overflow-scroll" style={{ scrollbarWidth: 'none' }}>
           <div className="p-3">
             <div className="mb-1 text-xl text-orange-300">
               DUCK CUSTOMIZER
