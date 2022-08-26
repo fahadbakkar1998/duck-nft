@@ -30,7 +30,11 @@ const DuckNavButton: FC<DuckNavButtonProps> = ({ onClick, disabled = false, flip
   );
 };
 
-const BurnButton = () => {
+interface BurnButtonProps {
+  disabled?: boolean;
+}
+
+const BurnButton: FC<BurnButtonProps> = ({ disabled = false }) => {
   const {
     setOpenBurnForm,
     openBurnForm,
@@ -73,11 +77,11 @@ const BurnButton = () => {
   return !openBurnForm ? (
     <div className="flex justify-between items-center h-full w-full px-3">
       <DuckNavButton disabled={duckIndex <= 0} onClick={handleClickPrev} />
-      <Button onClick={handleClickBurn}>
+      <Button onClick={handleClickBurn} disabled={disabled}>
         <div
           className={`
             lcd-font text-black relative
-            ${duckIndex >= 0 ? 'opacity-75 hover:font-bold' : 'opacity-30'}
+            ${duckIndex >= 0 && !disabled ? 'opacity-75 hover:font-bold' : ''}
           `}
         >
           burn

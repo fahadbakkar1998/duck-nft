@@ -3,17 +3,18 @@ import { FC, ReactNode } from 'react';
 interface ButtonProps {
   children: ReactNode;
   onClick: () => any;
+  disabled?: boolean;
 }
 
-const Button: FC<ButtonProps> = ({ children, onClick }) => {
+const Button: FC<ButtonProps> = ({ children, onClick, disabled = false }) => {
   return (
     <div
-      onClick={onClick}
+      onClick={!disabled ? onClick : () => {}}
       className={`
         relative
         w-full h-full flex justify-center items-center
-        transition
-        cursor-pointer
+        transition        
+        ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer opacity-100'}
       `}
     >
       <div

@@ -14,6 +14,9 @@ import AltButtonLoader from './AltButtonLoader';
 import BurnButton from './BurnButton';
 import { useTxNotifier } from '../../../../hooks/transaction';
 import { useDToolStore } from '../../../../store/dtoolStore';
+import { useMachineConfig } from '../../../../state/hooks';
+import { MintStatus } from '../../../../types/types';
+
 // @ts-ignore
 import lcdPress from '../../../../assets/audio/lcd.ogg';
 
@@ -25,19 +28,18 @@ const ButtonView = () => {
     currentMode,
     showDuckProfile,
     setShowDuckProfile,
-    setCurrentMode,
     isLocked,
     ducks,
     setAccount,
     setNewDuck,
     duckFilters,
     setDuckFilters,
-    filteredDucks,
   } = useMachineStore();
 
   const [play] = useSound(lcdPress);
   const { DToolInst } = useDToolStore();
-
+  const { data: config } = useMachineConfig();
+  const disabled = config?.customMintStatus !== MintStatus.Enabled;
   const selectedDuck = ducks?.find((d) => d.id === currentDuckId);
   const { activateBrowserWallet, account, switchNetwork, chainId } = useEthers();
   const {
@@ -125,8 +127,13 @@ const ButtonView = () => {
       );
     }
     return (
-      <Button onClick={handleMintTozziDuck}>
-        <div className="flex space-x-2 justify-center items-center lcd-font text-black opacity-75 hover:font-bold">
+      <Button onClick={handleMintTozziDuck} disabled={disabled}>
+        <div
+          className={`
+            flex space-x-2 justify-center items-center lcd-font text-black hover:font-bold opacity-75
+            ${!disabled ? ' hover:font-bold' : ''}
+          `}
+        >
           <div>buy duck</div>
           <BuyIcon wrapperClassName="w-5 mb-[3px]" className="stroke-black" />
         </div>
@@ -146,8 +153,13 @@ const ButtonView = () => {
 
   if (currentMode === MachineMode.Customization) {
     return (
-      <Button onClick={handleMintCustomTozziDuck}>
-        <div className="flex space-x-2 justify-center items-center lcd-font text-black opacity-75 hover:font-bold">
+      <Button onClick={handleMintCustomTozziDuck} disabled={disabled}>
+        <div
+          className={`
+            flex space-x-2 justify-center items-center lcd-font text-black
+            opacity-75 ${!disabled ? 'hover:font-bold' : ''}
+          `}
+        >
           mint duck
         </div>
       </Button>
@@ -160,7 +172,7 @@ const ButtonView = () => {
     );
   }
 
-  return <BurnButton />;
+  return <BurnButton disabled={disabled} />;
 };
 
 const AltButton = () => {
