@@ -24,6 +24,7 @@ const DuckCard: FC<DuckData> = (data) => {
       <div className="absolute w-full h-full bg-orange-500 opacity-0 group-hover:opacity-50" />
       <img
         alt="Tozzi Duck"
+        className="pixel-art"
         src={data.isCustom ? data.webp : `data:image/webp;base64,${data.webp}`}
       />
       {showDuckIdOnDuckCards && (

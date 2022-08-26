@@ -59,7 +59,7 @@ const Admin: FC = () => {
               />
             )}
             { !openBurnForm && <DuckReviewLabel duckNum={duckIndex + 1} numDucks={burnableDucks.length} /> }
-            <img alt={`Duck ${duck.id}`} src={duck.webp} />
+            <img className="pixel-art" alt={`Duck ${duck.id}`} src={duck.webp} />
           </div>
           <div className="w-full h-full" />
         </div>

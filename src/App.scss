@@ -21,6 +21,19 @@ body {
   }
 }
 
+.fixed-center {
+  @apply fixed;
+  @apply top-1/2;
+  @apply left-1/2;
+  @apply transform;
+  @apply -translate-x-1/2;
+  @apply -translate-y-1/2;  
+}
+
+.text-shadow {
+  text-shadow: 2px 2px #0000005b;
+}
+
 canvas {
   image-rendering: -moz-crisp-edges;
   image-rendering: -webkit-crisp-edges;
@@ -145,6 +158,13 @@ canvas {
 
 .scroll-button:active {
   cursor: grabbing;
+}
+
+.pixel-art {
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
 
 

@@ -2,8 +2,6 @@ import { FC, useEffect, useState } from 'react';
 import useMachineStore from '../../../store';
 import DuckProfile from './DuckProfile';
 import { DuckData } from '../../../types/types';
-import { openseaDuckUrl } from '../../../utils/constants';
-import { OpenseaIcon } from '../../common/SvgIcon';
 
 const Shopping: FC = () => {
   const {
@@ -28,6 +26,7 @@ const Shopping: FC = () => {
         >
           <img
             alt={`Duck ${duck.id}`}
+            className="pixel-art"
             src={duck.isCustom ? duck.webp : `data:image/webp;base64,${duck.webp}`}
           />
         </div>

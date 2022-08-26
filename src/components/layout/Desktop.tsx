@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
 import { Canvas } from 'react-three-fiber';
 import Machine from '../Machine/index';
 // eslint-disable-next-line import/no-relative-packages
@@ -12,6 +12,7 @@ import Footer from './Footer';
 import browsingOverlay from '../../assets/img/browsing-overlay.png';
 import customizerOverlay from '../../assets/img/customizer-overlay.png';
 import adminOverlay from '../../assets/img/admin-overlay.png';
+import LandingPage from '../LandingPage';
 
 const overlays = [undefined, browsingOverlay, customizerOverlay, adminOverlay];
 
@@ -24,8 +25,11 @@ const Desktop = () => {
     setShowOverlay,
   } = useMachineStore();
 
+  const [showLandingPage, setShowLandingPage] = useState(true);
+
   return (
     <div className="bg-opacity">
+      { showLandingPage && <LandingPage onClick={() => setShowLandingPage(false)} /> }
       <AnimatePresence>
         { showOverlay && (
           <motion.div

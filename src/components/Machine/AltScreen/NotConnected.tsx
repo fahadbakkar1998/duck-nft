@@ -34,8 +34,9 @@ const NotConnected: FC = () => {
     <div className="absolute w-full h-full z-10">
       <img
         style={{ width: '100%' }}
-        alt=""
-        src={require(`../../../assets/img/ducks/crypto_duck_${duckIndex}.svg`)}
+        className="pixel-art"
+        alt="Tozzi Duck"
+        src={require(`../../../assets/img/ducks/png/crypto_duck_${duckIndex}.png`)}
       />
     </div>
   );

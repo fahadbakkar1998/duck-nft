@@ -1336,5 +1336,5 @@ export const contractAbi = [
 
 export const placeholderDuck = "UklGRrIAAABXRUJQVlA4TKYAAAAvj8FjAA9AkG0bYtj2E2TbhiC2/QTZtiGIbf/8x/8AQGoYyJFkqQAUpKJekBpASd69sOlXFyP6PwH8+///qqcWbrK9o1VrvcCg1QTGAmiNxfJGJkETNGGxWm70w+D9KZhcqlMwqsGdk+1qGQCjGp8ZwF7RwlHjeHvQGmwVaIJm3wSneOIGfXqKmyZZMVrmo8Jg27LlRTcIDN6fYtMY3ye79u//n7MB";
 
-export const openseaUrl = 'https://testnets.opensea.io/collection/tozzi-ducks-su8vqtb1zv';
-export const openseaDuckUrl = 'https://testnets.opensea.io/assets/rinkeby/0xa0c90e6bb263dfdb328e666b66ddb9ba8f6d0a1a/';
+export const openseaUrl = 'https://opensea.io/collection/tozzi-ducks';
+export const openseaDuckUrl = 'https://opensea.io/assets/ethereum/0x0cd9c257f7565476f5d374ef27854abdd5916bad/';

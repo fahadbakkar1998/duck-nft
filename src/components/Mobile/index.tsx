@@ -2,12 +2,13 @@
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable react/no-array-index-key */
 import { FC } from 'react';
-import { DuckLogo, DiscordIcon, InstagramIcon, TwitterIcon } from '../common/SvgIcon';
+import { OpenseaIcon, DiscordIcon, InstagramIcon, TwitterIcon } from '../common/SvgIcon';
+import { openseaUrl } from '../../utils/constants';
 
 const DuckImage: FC<{src: string}> = ({ src }) => {
   return (
-    <div className="col-span-1">
-      <img src={src} alt="Tozzi Duck" />
+    <div className="col-span-1 w-full h-full">
+      <img className="pixel-art w-full h-full" src={src} alt="Tozzi Duck" />
     </div>
   );
 };
@@ -15,69 +16,84 @@ const DuckImage: FC<{src: string}> = ({ src }) => {
 const renderDucks = () => {
   return (
     <>
-      { Array(200).fill(null).map((_, index) => <DuckImage key={index} src={require(`../../assets/img/ducks/crypto_duck_${index + 1}.svg`)} />) }
+      { Array(200).fill(null).map((_, index) => <DuckImage key={index} src={require(`../../assets/img/ducks/png/crypto_duck_${index + 1}.png`)} />) }
     </>
+  );
+};
+
+const DuckGrid = () => {
+  return (
+    <div className="absolute w-full grid grid-cols-4 sm:grid-cols-8 lg:grid-cols-10">
+      <div className="absolute bg-black h-full w-full opacity-50" />
+      {renderDucks()}
+    </div>
+  );
+};
+
+const ChainSaw = () => {
+  return (
+    <div className="">
+      <a href="https://www.chainsaw.fun/" rel="noreferrer" target="_blank">
+        <img src="assets/images/chainsaw.svg" alt="Chain/Saw Logo" />
+      </a>
+    </div>
+  );
+};
+
+const Socials = () => {
+  return (
+    <div className="flex flex-col justify-center items-center w-full">
+      <div className="w-full flex justify-center">
+        <a className="flex mx-3" target="_blank" rel="noreferrer" href={openseaUrl}>
+          <OpenseaIcon className="w-8 h-8 fill-white opacity-90 hover:opacity-100" />
+        </a>
+        <a className="flex mx-3" target="_blank" rel="noreferrer" href="https://discord.com/invite/aXQqKxKggh">
+          <DiscordIcon className="w-8 h-8 fill-white opacity-90 hover:opacity-100" />
+        </a>
+        <a className="flex mx-3" target="_blank" rel="noreferrer" href="https://twitter.com/specialsquid">
+          <TwitterIcon className="w-8 h-8 fill-white opacity-90 hover:opacity-100" />
+        </a>
+        <a className="flex mx-3" target="_blank" rel="noreferrer" href="https://www.instagram.com/jimtozzi/?hl=en">
+          <InstagramIcon className="w-8 h-8 fill-white opacity-90 hover:opacity-100" />
+        </a>
+      </div>
+    </div>
   );
 };
 
 const Mobile = () => {
   return (
-    <div className="relative h-full">
-      <div className="absolute w-full h-full bg-black bg-opacity-50" />
-      <div className={`
-        z-10 fixed w-full
-        top-1/2 left-1/2 transform -translate-x-1/2 sm:p-20 -translate-y-1/2 md:p-0  2xl:p-96 xl:-mt-20
-        flex flex-col justify-center items-center
-      `}
-      >
-        <DuckLogo className="w-full" wrapperClassName="w-full" />
-        <div className={`
-          lg:text-3xl xl:text-4xl text-base md:text-2xl
-          bg-black pixel-font 
-          text-white  p-4 border-orange-600 border-8 shadow-lg
-          border-inset rounded-lg mx-40 z-50
-          w-[65%]
-          `}
+    <div className="flex justify-center">
+      <DuckGrid />
+      <div className="fixed p-10 sm:p-0 h-full md:top-[2%] max-w-screen-md mx-auto flex flex-col items-center">
+        <div className="w-full">
+          <img
+            className="w-full pixel-art"
+            src="assets/images/pixel-duck.png"
+            alt="logo"
+          />
+        </div>
+        <div
+          className="
+            p-10 text-lg md:text-xl
+            bg-[#00c7ff] bg-opacity-75 sm:w-3/4 text-white pixel-font text-shadow
+            border-4 rounded shadow-xl border-orange-500
+            text-center
+          "
         >
-          <div className="animate-pulse text-left space-y-4">
-            <p>Hey, thanks for checking out Tozzi Ducks!</p>
-            <p>To view & interact with the Tozzi Duck Machine in all it&apos;s glory, please visit us on a supported desktop browser. (Chrome, Firefox work best).</p>
+          <p className="mb-4">Thanks for checking out TOZZI DUCKS!</p>
+
+          <p className="mb-4">
+            To view and interact with The Tozzi Duck Machine, please come back on a supported MetaMask-equipped
+            desktop browser (Chrome, Firefox, Edge).
+          </p>
+
+          <p className="mb-4">For more info, check out the links below and come chat w/ fellow duck-enthusiasts on our Discord.</p>
+          <div className="flex justify-between items-center">
+            <ChainSaw />
+            <Socials />
           </div>
         </div>
-        <div className="flex flex-col mt-8 max-w-md justify-center items-center relative">
-          <div className="w-full flex justify-center">
-            <a className="flex mx-4" target="_blank" rel="noreferrer" href="https://www.instagram.com/jimtozzi/?hl=en">
-              <InstagramIcon className="w-10 h-10 fill-white opacity-90 hover:opacity-100" />
-            </a>
-            <a className="flex mx-4" target="_blank" rel="noreferrer" href="https://discord.com/invite/aXQqKxKggh">
-              <DiscordIcon className="w-10 h-10 fill-white opacity-90 hover:opacity-100" />
-            </a>
-            <a className="flex mx-4" target="_blank" rel="noreferrer" href="https://twitter.com/specialsquid">
-              <TwitterIcon className="w-10 h-10 fill-white opacity-90 hover:opacity-100" />
-            </a>
-          </div>
-          <div
-            className={`
-              mt-6
-              lg:text-3xl xl:text-4xl text-base md:text-2xl
-              bg-black pixel-font 
-              text-white  px-4 md:px-8 border-orange-600 border-8 shadow-lg
-              border-inset rounded-lg mx-40 z-50
-              w-[200px] md:w-[80%] 
-            `}
-          >
-            <div className="animate-pulse text-center">
-              <a href="https://www.chainsaw.fun/" rel="noreferrer" target="_blank">
-                <img src="assets/images/chainsaw.svg" alt="Chain/Saw Logo" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="grid grid-cols-4 sm:grid-cols-8 lg:grid-cols-10"
-      >
-        {renderDucks()}
       </div>
     </div>
   );
