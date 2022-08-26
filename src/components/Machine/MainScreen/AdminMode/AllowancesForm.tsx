@@ -1,23 +1,26 @@
 import { useState, useEffect, ChangeEvent } from 'react';
-import { Contract } from 'ethers';
+import { useSound } from 'use-sound';
 import { useContractFunction, useEthers } from '@usedapp/core';
 import FormInput from './common/FormInput';
 import FormButton from './common/FormButton';
-import { contractAbi, numberRegex } from '../../../../utils/constants';
+import { numberRegex } from '../../../../utils/constants';
 import useMachineStore from '../../../../store';
 import AdminFormWrapper from './AdminFormWrapper';
 import { useTxNotifier } from '../../../../hooks/transaction';
 import { getCustomErrorText } from '../../../../utils/helpers';
 import { Allowance } from '../../../../types/types';
 import { contract } from '../../../../utils/functions';
+import { useMachineState } from '../../../../state/hooks';
+// @ts-ignore
+import error from '../../../../assets/audio/error.wav';
 
 const AllowancesForm = () => {
-  const { setAltMessage } = useMachineStore();
+  const { setAltMessage, account } = useMachineStore();
   const [allowanceAccount, setAllowanceAccount] = useState('');
   const [checkedAllowance, setCheckedAllowance] = useState<Allowance|null>(null);
-  const { library } = useEthers();
+  const { data: machineState } = useMachineState();
   const [allowanceFormValues, setAllowanceFormValues] = useState<Allowance>({});
-
+  const [playError] = useSound(error);
   const { send, state } = useContractFunction(contract, 'setDuckAllowance');
   useTxNotifier({ mining: 'Setting Duck Allowance' }, state);
 
@@ -57,6 +60,11 @@ const AllowancesForm = () => {
   };
 
   const handleSetAllowance = () => {
+    if (account !== machineState?.owner) {
+      playError();
+      setAltMessage({ message: 'Woa there, only the owner of this device can do that!' });
+      return;
+    }
     try {
       const { account, tozziDucks, customDucks } = allowanceFormValues;
       send(account, [tozziDucks, customDucks]);

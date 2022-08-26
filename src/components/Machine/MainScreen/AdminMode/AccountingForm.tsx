@@ -1,5 +1,6 @@
 import { useState, ChangeEvent } from 'react';
 import { utils } from 'ethers';
+import { useSound } from 'use-sound';
 import { shortenAddress, useContractFunction } from '@usedapp/core';
 import FormInput from './common/FormInput';
 import FormButton from './common/FormButton';
@@ -10,12 +11,15 @@ import useMachineStore from '../../../../store';
 import { decimalRegex } from '../../../../utils/constants';
 import { useTxNotifier } from '../../../../hooks/transaction';
 import { getCustomErrorText } from '../../../../utils/helpers';
+// @ts-ignore
+import error from '../../../../assets/audio/error.wav';
 
 const AccountingForm = () => {
   const [value, setValue] = useState('');
   const { data: machineState } = useMachineState();
   const ownerDisplay = machineState?.ownerEns || shortenAddress(machineState?.owner || '');
-  const { setAltMessage } = useMachineStore();
+  const [playError] = useSound(error);
+  const { setAltMessage, account } = useMachineStore();
 
   const { send, state } = useContractFunction(contract, 'withdraw');
   useTxNotifier(
@@ -31,6 +35,11 @@ const AccountingForm = () => {
   };
 
   const handleWithdraw = () => {
+    if (account !== machineState?.owner) {
+      playError();
+      setAltMessage({ message: 'Woa there, only the owner of this device can do that!' });
+      return;
+    }
     if (!value) {
       setAltMessage({ message: 'Enter amount to withdraw, plz' });
       return;

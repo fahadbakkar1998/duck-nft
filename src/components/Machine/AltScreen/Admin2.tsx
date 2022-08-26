@@ -1,11 +1,13 @@
 import { FC, useEffect } from 'react';
 import { indexOf } from 'lodash';
 import useMachineStore from '../../../store';
+import { placeholderDuck } from '../../../utils/constants';
 
 const NoDucks = () => {
   return (
     <div className="w-full h-full z-20 absolute bg-screenBlack pixel-font flex justify-center items-center">
-      NO DUCKS TO REVIEW ATM
+      <img alt="Tozzi Duck" src={`data:image/webp;base64,${placeholderDuck}`} />
+      {/* <div className="absolute opacity-50 top-[2%]">NO DUCKS TO REVIEW ATM, LOL</div> */}
     </div>
   );
 };

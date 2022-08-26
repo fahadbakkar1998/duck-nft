@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, ChangeEvent } from 'react';
 import { useContractFunction, useEthers } from '@usedapp/core';
+import { useSound } from 'use-sound';
 import FormButton from './common/FormButton';
 import { useMachineState } from '../../../../state/hooks';
 import AdminFormWrapper from './AdminFormWrapper';
@@ -7,6 +8,8 @@ import { contract } from '../../../../utils/functions';
 import useMachineStore from '../../../../store';
 import { useTxNotifier } from '../../../../hooks/transaction';
 import { getCustomErrorText } from '../../../../utils/helpers';
+// @ts-ignore
+import error from '../../../../assets/audio/error.wav';
 
 const MotdForm = () => {
   const { data: machineState } = useMachineState();
@@ -14,6 +17,7 @@ const MotdForm = () => {
   const textRef = useRef<HTMLTextAreaElement>(null);
   const [motd, setMotd] = useState(machineState?.motd?.message?.replace(/\r?\n|\r/g, '') || '');
   const { send, state } = useContractFunction(contract, 'setMOTD');
+  const [playError] = useSound(error);
 
   useTxNotifier(
     { mining: 'Updating MotD', success: 'Success! MotD updated!' },
@@ -32,10 +36,12 @@ const MotdForm = () => {
 
   const handleSubmit = () => {
     if (account !== machineState?.owner) {
+      playError();
       setAltMessage({ message: 'Woa there, only the owner of this device can do that!' });
       return;
     }
     if (!motd) {
+      playError();
       setAltMessage({ message: 'Bruh, it\'s empty! Try entering a message.' });
       return;
     }

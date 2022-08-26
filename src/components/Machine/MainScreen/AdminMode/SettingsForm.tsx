@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useContractFunction, useEthers } from '@usedapp/core';
 import { utils } from 'ethers';
+import { useSound } from 'use-sound';
 import { MintStatus } from '../../../../types/types';
 import FormToggle from './common/FormToggle';
 import FormInput from './common/FormInput';
@@ -11,6 +12,8 @@ import { numberRegex, decimalRegex } from '../../../../utils/constants';
 import { useTxNotifier } from '../../../../hooks/transaction';
 import useMachineStore from '../../../../store';
 import { contract } from '../../../../utils/functions';
+// @ts-ignore
+import error from '../../../../assets/audio/error.wav';
 
 const CHAIN_ID = parseInt(process.env.REACT_APP_CHAIN_ID!);
 
@@ -22,8 +25,9 @@ const SettingsForm = () => {
   const [customPrice, setCustomPrice] = useState<string>();
   const [maxDucks, setMaxDucks] = useState<string>();
   const { send, state } = useContractFunction(contract, 'setMachineConfig');
-  const { setAltMessage } = useMachineStore();
+  const { setAltMessage, account } = useMachineStore();
   const { chainId, switchNetwork } = useEthers();
+  const [playError] = useSound(error);
   useTxNotifier(
     {
       mining: 'Update in progress',
@@ -52,6 +56,11 @@ const SettingsForm = () => {
   const handleSubmission = async () => {
     if (chainId !== CHAIN_ID) {
       await switchNetwork(CHAIN_ID);
+    }
+    if (account !== machineState?.owner) {
+      playError();
+      setAltMessage({ message: 'Woa there, only the owner of this device can do that!' });
+      return;
     }
     try {
       send([

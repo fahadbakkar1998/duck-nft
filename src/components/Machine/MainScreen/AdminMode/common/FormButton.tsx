@@ -10,7 +10,7 @@ interface FormButtonProps {
 
 const FormButton: FC<FormButtonProps> = ({ label, onClick }) => {
   const ref = useRef<any>();
-  const [playSelect] = useSound(selectSound);
+  const [playSelect] = useSound(selectSound, { volume: 0.5 });
   const handleClick = () => {
     playSelect();
     ref.current?.classList.add('animate-blink');
