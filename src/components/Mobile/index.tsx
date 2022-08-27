@@ -45,16 +45,16 @@ const Socials = () => {
     <div className="flex flex-col justify-center items-center w-full">
       <div className="w-full flex justify-center">
         <a className="flex mx-3" target="_blank" rel="noreferrer" href={openseaUrl}>
-          <OpenseaIcon className="w-8 h-8 fill-white opacity-90 hover:opacity-100" />
+          <OpenseaIcon className="w-8 fill-white opacity-90 hover:opacity-100" />
         </a>
         <a className="flex mx-3" target="_blank" rel="noreferrer" href="https://discord.com/invite/aXQqKxKggh">
-          <DiscordIcon className="w-8 h-8 fill-white opacity-90 hover:opacity-100" />
+          <DiscordIcon className="w-8 fill-white opacity-90 hover:opacity-100" />
         </a>
         <a className="flex mx-3" target="_blank" rel="noreferrer" href="https://twitter.com/specialsquid">
-          <TwitterIcon className="w-8 h-8 fill-white opacity-90 hover:opacity-100" />
+          <TwitterIcon className="w-8 fill-white opacity-90 hover:opacity-100" />
         </a>
         <a className="flex mx-3" target="_blank" rel="noreferrer" href="https://www.instagram.com/jimtozzi/?hl=en">
-          <InstagramIcon className="w-8 h-8 fill-white opacity-90 hover:opacity-100" />
+          <InstagramIcon className="w-8 fill-white opacity-90 hover:opacity-100" />
         </a>
       </div>
     </div>
@@ -75,7 +75,8 @@ const Mobile = () => {
         </div>
         <div
           className="
-            p-10 text-base sm:text-lg md:text-xl
+            -mt-4
+            p-8 text-base sm:text-lg md:text-xl
             bg-[#00c7ff] bg-opacity-75 sm:w-3/4 text-white pixel-font text-shadow
             border-4 rounded shadow-xl border-orange-500
             text-center
@@ -90,8 +91,8 @@ const Mobile = () => {
 
           <p className="mb-4">For more info, check out the links below and come chat w/ fellow duck-enthusiasts on our Discord.</p>
           <div className="flex justify-between items-center">
-            <ChainSaw />
-            <Socials />
+            <div className="flex-1 mr-2"><ChainSaw /></div>
+            <div className="flex-1"><Socials /></div>
           </div>
         </div>
       </div>
