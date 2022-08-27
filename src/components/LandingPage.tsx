@@ -12,9 +12,11 @@ interface LandingPageProps {
 const LandingPage: FC<LandingPageProps> = ({ onClick }) => {
   const { keyPadLoaded } = useMachineStore();
   return (
-    <motion.div className="flex justify-center">
+    <div className="flex justify-center">
       <DuckGrid />
-      <div className="fixed z-[1000] w-screen h-screen max-w-screen-xl flex flex-col items-center justify-center">
+      <div
+        className="fixed z-[1010] w-screen h-screen max-w-screen-lg flex flex-col items-center justify-center"
+      >
         <div className="w-full">
           <img
             className="w-full pixel-art"
@@ -27,7 +29,7 @@ const LandingPage: FC<LandingPageProps> = ({ onClick }) => {
             onClick={keyPadLoaded ? onClick : () => {}}
             className="
               p-4
-              text-2xl -mt-10
+              text-2xl -mt-8
               bg-[#00c7ff] bg-opacity-75 text-white pixel-font text-shadow
               space-y-4 cursor-pointer hover:scale-105 transition
               border-8 rounded-full shadow-xl border-orange-500
@@ -37,7 +39,7 @@ const LandingPage: FC<LandingPageProps> = ({ onClick }) => {
           </div>
         </AnimatePresence>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

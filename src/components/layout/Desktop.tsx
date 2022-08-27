@@ -26,14 +26,12 @@ const Desktop = () => {
   const [showLandingPage, setShowLandingPage] = useState(true);
 
   return (
-    <div className="bg-opacity">
-      <AnimatePresence>
-        { showLandingPage && <LandingPage onClick={() => setShowLandingPage(false)} /> }
-      </AnimatePresence>
+    <div className="">
+      { showLandingPage && (<LandingPage onClick={() => setShowLandingPage(false)} />)}
       <AnimatePresence>
         { showOverlay && (
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="w-full h-full absolute bg-black bg-opacity-80 color"
@@ -49,7 +47,7 @@ const Desktop = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      <div className="app-container overflow-hidden">
+      <motion.div className="app-container overflow-hidden">
         <div className="mx-auto machine-container w-full 2xl:w-[80%]">
           <AnimatePresence>
             {showOverlay && (
@@ -67,7 +65,7 @@ const Desktop = () => {
           <BTI />
           <TitleImage />
           <img className="z-0 absolute top-0 left-0 pointer-events-none" src={bgImg} alt="" />
-          <Suspense fallback={<div className="bg-red-500 w-full h-full absolute" />}>
+          <Suspense fallback={null}>
             <Canvas
               className="absolute z-10 -top-[18.85%]"
               orthographic
@@ -81,7 +79,7 @@ const Desktop = () => {
           </Suspense>
           <Footer />
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
