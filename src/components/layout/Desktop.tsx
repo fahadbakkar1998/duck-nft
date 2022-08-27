@@ -19,8 +19,6 @@ const overlays = [undefined, browsingOverlay, customizerOverlay, adminOverlay];
 const Desktop = () => {
   const {
     currentMode,
-    isOwnersManualOpen,
-    setIsOwnersManualOpen,
     showOverlay,
     setShowOverlay,
   } = useMachineStore();
@@ -29,7 +27,9 @@ const Desktop = () => {
 
   return (
     <div className="bg-opacity">
-      { showLandingPage && <LandingPage onClick={() => setShowLandingPage(false)} /> }
+      <AnimatePresence>
+        { showLandingPage && <LandingPage onClick={() => setShowLandingPage(false)} /> }
+      </AnimatePresence>
       <AnimatePresence>
         { showOverlay && (
           <motion.div
@@ -67,21 +67,20 @@ const Desktop = () => {
           <BTI />
           <TitleImage />
           <img className="z-0 absolute top-0 left-0 pointer-events-none" src={bgImg} alt="" />
-          <Canvas
-            className="absolute z-10 -top-[18.85%]"
-            orthographic
-            camera={{ zoom: 100, position: [0, 0, 100] }}
-            onCreated={(state) => state.gl.clearColor()}
-          >
-            <Suspense fallback={null}>
+          <Suspense fallback={<div className="bg-red-500 w-full h-full absolute" />}>
+            <Canvas
+              className="absolute z-10 -top-[18.85%]"
+              orthographic
+              camera={{ zoom: 100, position: [0, 0, 100] }}
+              onCreated={(state) => state.gl.clearColor()}
+            >
               <pointLight intensity={4} position={[-10, 10, 5]} />
               <ambientLight intensity={0.6} />
               <Machine />
-            </Suspense>
-          </Canvas>
+            </Canvas>
+          </Suspense>
           <Footer />
         </div>
-        <OwnersManualModal modalIsOpen={isOwnersManualOpen} setModalIsOpen={setIsOwnersManualOpen} />
       </div>
     </div>
   );

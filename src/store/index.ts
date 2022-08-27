@@ -11,6 +11,8 @@ const staticDuckData: DuckData[] = Object.values(proofs).map((proof, index) => {
 });
 
 type MachineStore = {
+  keyPadLoaded: boolean;
+  setKeyPadLoaded: (loaded: boolean) => void;
   ducks: DuckData[];
   setDucks: (ducks: DuckData[]) => void;
   burnableDucks: DuckData[];
@@ -80,7 +82,10 @@ type MachineStore = {
 
 export const useMachineStore = create<MachineStore>(
   (set: SetState<MachineStore>) => ({
-
+    keyPadLoaded: false,
+    setKeyPadLoaded: (loaded: boolean): void => {
+      set({ keyPadLoaded: loaded });
+    },
     ducks: [],
     burnableDucks: [],
     filteredDucks: [],

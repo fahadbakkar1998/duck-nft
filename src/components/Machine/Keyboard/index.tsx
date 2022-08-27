@@ -19,7 +19,7 @@ const Keyboard: FC = () => {
   const { viewport } = useThree();
   const min = viewport.width;
   const [value, setValue] = useState<string>('');
-  const { currentDuckId, currentMode } = useMachineStore();
+  const { currentDuckId, currentMode, setKeyPadLoaded } = useMachineStore();
   const [clearOnNext, setClearOnNext] = useState(true);
   const { setCurrentDuckId, setAltMessage, filteredDucks } = useMachineStore();
   const [playTv] = useSound(tv);
@@ -46,6 +46,7 @@ const Keyboard: FC = () => {
   const loadObject = () => {
     loader.load(modelObject, (gltf: any) => {
       setVrm(gltf.scene);
+      setKeyPadLoaded(true);
     });
   };
 

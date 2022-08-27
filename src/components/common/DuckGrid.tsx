@@ -21,7 +21,7 @@ const renderDucks = () => {
 
 const DuckGrid = () => {
   return (
-    <div className="absolute w-full grid grid-cols-4 sm:grid-cols-8 lg:grid-cols-10">
+    <div className="absolute w-full grid grid-cols-4 sm:grid-cols-8 lg:grid-cols-10 z-[1000]">
       <div className="absolute bg-black h-full w-full opacity-50" />
       {renderDucks()}
     </div>

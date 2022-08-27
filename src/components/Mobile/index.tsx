@@ -5,7 +5,7 @@ const Mobile = () => {
   return (
     <div className="flex justify-center">
       <DuckGrid />
-      <div className="fixed p-5 sm:p-0 h-full max-w-screen-md mx-auto flex flex-col items-center">
+      <div className="fixed p-5 sm:p-0 h-full max-w-screen-md mx-auto flex flex-col items-center z-[1000]">
         <div className="w-full">
           <img
             className="w-full pixel-art"
