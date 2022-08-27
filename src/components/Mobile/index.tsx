@@ -75,7 +75,7 @@ const Mobile = () => {
         </div>
         <div
           className="
-            p-10 text-lg md:text-xl
+            p-10 text-base sm:text-lg md:text-xl
             bg-[#00c7ff] bg-opacity-75 sm:w-3/4 text-white pixel-font text-shadow
             border-4 rounded shadow-xl border-orange-500
             text-center
