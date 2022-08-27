@@ -10,7 +10,7 @@ interface ToggleSwitchProps {
 
 const ToggleSwitch = ({ value = 0, onClick, disabled }: ToggleSwitchProps) => {
   return (
-    <div className={`${disabled ? '' : 'cursor-pointer'} w-[7.5%]`} onClick={onClick}>
+    <div className={`${disabled ? 'cursor-not-allowed' : 'cursor-pointer'} w-[7.5%]`} onClick={onClick}>
       <img src={value ? toggleOn : toggleOff} alt="Toggle Switch" />
     </div>
   );

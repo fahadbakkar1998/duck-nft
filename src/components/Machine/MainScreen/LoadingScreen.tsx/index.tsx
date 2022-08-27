@@ -29,11 +29,11 @@ const LoadingScreen: FC<LoadingScreenProps> = ({ switchModes }) => {
     switchModes('next');
   };
 
-  useEffect(() => {
-    if (!isLoading) {
-      (new Audio(successSound)).play();
-    }
-  }, [isLoading]);
+  // useEffect(() => {
+  //   if (!isLoading) {
+  //     (new Audio(successSound)).play();
+  //   }
+  // }, [isLoading]);
 
   return (
     <div className="inner-shadow LoadingScreen">

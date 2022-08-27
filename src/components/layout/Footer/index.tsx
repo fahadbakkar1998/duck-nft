@@ -13,7 +13,7 @@ const Footer = () => {
             onClick={() => setShowOverlay(!showOverlay)}
             className="pixel-font footer-link cursor-pointer text-2xl lg:text-4xl"
           >
-            HOW?
+            WTF?
           </div>
         )}
         {/* <div className="pixel-font footer-link cursor-pointer text-4xl">DOCS</div> */}
