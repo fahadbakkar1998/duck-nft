@@ -13,7 +13,9 @@ const DuckCard: FC<DuckData> = (data) => {
     setCurrentDuckId(data.id);
   };
 
-  const showSoldOverlay = data.owner && showAvailabilityOnDuckCards && data.id < 200;
+  const unsoldCollabs = [200, 202, 203, 204, 205, 206, 207, 208, 209];
+
+  const showSoldOverlay = data.owner && showAvailabilityOnDuckCards && !unsoldCollabs.includes(data.id);
 
   return (
     <div
