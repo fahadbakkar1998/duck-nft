@@ -90,8 +90,10 @@ const getMintsCount = async () => {
 
 const fetchDucks = async () => {
   let mintedDuckIds: number[] = [];
-  const ducksMinted = await getMintedDucks() ?? [];
+  const ducksMinted = (await getMintedDucks()).filter((duck) => duck.id !== 216) ?? [];
   const formatedMintedDucks = ducksMinted.map((duck, index) => {
+    // eslint-disable-next-line no-console
+    console.log(duck.metadata);
     const { id, salePrice, isCustom, owner, webp, hatched, metadata } = duck;
     const { proof } = staticDuckData[index];
     mintedDuckIds = [...mintedDuckIds, id];
